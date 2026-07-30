@@ -25,7 +25,7 @@ export default function RegisterPage() {
     <>
       <section className="border-t-4 border-red bg-ink text-white">
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-red">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan">
             Intaleq 2026
           </p>
           <h1 className="mt-5 max-w-3xl font-display text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl">
@@ -39,7 +39,7 @@ export default function RegisterPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
-        <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted">
           Choose your path
         </p>
 

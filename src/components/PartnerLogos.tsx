@@ -3,7 +3,7 @@ import { partners } from "@/lib/data";
 export default function PartnerLogos() {
   return (
     <div>
-      <p className="text-center text-xs font-semibold uppercase tracking-widest text-neutral-400">
+      <p className="text-center text-xs font-semibold uppercase tracking-widest text-muted">
         Supported by
       </p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-x-14 gap-y-6">

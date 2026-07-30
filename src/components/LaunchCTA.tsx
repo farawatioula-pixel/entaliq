@@ -9,7 +9,7 @@ export default function LaunchCTA() {
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8">
         <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-red">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan">
               Mixed Sources Impact · 2026
             </p>
             <h2 className="mt-4 font-display text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl">
@@ -39,7 +39,7 @@ export default function LaunchCTA() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted">
               Next steps
             </p>
             <ol className="mt-4 space-y-3">
@@ -55,7 +55,7 @@ export default function LaunchCTA() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted">
               Partnership
             </p>
             <p className="mt-4 text-[15px] leading-relaxed text-neutral-300">

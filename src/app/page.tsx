@@ -12,7 +12,7 @@ export default function Home() {
       <section className="relative overflow-hidden border-b-4 border-red bg-ink text-white">
         <div className="bg-noise absolute inset-0" />
         <div className="relative mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-red">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan">
             Intaleq 2026
           </p>
           <h1 className="mt-6 max-w-4xl font-display text-5xl font-black leading-[0.95] tracking-tight sm:text-7xl">
@@ -55,7 +55,7 @@ export default function Home() {
 
       {/* Why Intaleq */}
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-        <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted">
           Why Intaleq
         </p>
         <h2 className="mt-4 max-w-2xl font-display text-4xl font-black leading-tight tracking-tight sm:text-5xl">
@@ -89,7 +89,7 @@ export default function Home() {
       {/* Promise */}
       <section className="bg-paper py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted">
             The Intaleq Promise
           </p>
           <h2 className="mt-4 max-w-2xl font-display text-4xl font-black leading-tight tracking-tight sm:text-5xl">
@@ -128,7 +128,7 @@ export default function Home() {
 
       {/* Tracks */}
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-        <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted">
           Seven tracks · Three worlds
         </p>
         <h2 className="mt-4 max-w-2xl font-display text-4xl font-black leading-tight tracking-tight sm:text-5xl">
@@ -145,7 +145,7 @@ export default function Home() {
       {/* Trainers */}
       <section className="bg-paper py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted">
             Who&apos;s leading the training
           </p>
           <h2 className="mt-4 max-w-2xl font-display text-4xl font-black leading-tight tracking-tight sm:text-5xl">

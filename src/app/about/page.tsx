@@ -14,7 +14,7 @@ export default function AboutPage() {
     <>
       <section className="border-t-4 border-red bg-ink text-white">
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-red">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan">
             About Intaleq
           </p>
           <h1 className="mt-5 max-w-3xl font-display text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl">
@@ -55,7 +55,7 @@ export default function AboutPage() {
 
       <section className="bg-paper py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted">
             The model
           </p>
           <h2 className="mt-4 max-w-2xl font-display text-4xl font-black leading-tight tracking-tight sm:text-5xl">
@@ -85,7 +85,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-        <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted">
           Where it happens
         </p>
         <div className="mt-8 grid grid-cols-1 gap-px overflow-hidden border border-line bg-line sm:grid-cols-2">
