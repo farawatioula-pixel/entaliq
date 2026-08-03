@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "Mountaleq 2026 — The Arab Summit for Digital Economy Skills",
-    "description": "Mountaleq 2026: Jordan's Digital Youth Income & Training Platform. Sell. Create. Build. An annual conference and hands-on training in Amman.",
-    "ogDescription": "Sell. Create. Build. Jordan's national platform turning youth into digital earners — one training week at a time."
+    "title": "Muntaliq 2026 — The Arab Summit for Digital Economy Skills",
+    "description": "Muntaliq 2026: The Arab Summit for Digital Economy Skills. Sell. Create. Build. An annual summit and hands-on training program in Amman.",
+    "ogDescription": "Sell. Create. Build. Hundreds of participants trained on the internet skills to start earning online, anywhere."
   },
   "nav": {
     "home": "Home",
@@ -26,7 +26,7 @@
     "BUILD": "Build"
   },
   "footer": {
-    "tagline": "Jordan's Digital Youth Income & Training Platform. Sell · Create · Build.",
+    "tagline": "The Arab Summit for Digital Economy Skills. Sell · Create · Build.",
     "platform": "Platform",
     "about": "About",
     "tracks": "Tracks",
@@ -37,68 +37,68 @@
     "applyTraining": "Apply for training",
     "partnerWithUs": "Partner with us",
     "location": "Location",
-    "locationValue": "Amman — annual conference & training",
+    "locationValue": "Amman — annual summit and training",
     "copyright": "© {year} Intaleq — Mixed Sources Impact. All rights reserved.",
     "ammanJordan": "Amman · Jordan"
   },
   "launchCta": {
     "eyebrow": "Mixed Sources Impact · 2026",
     "heading": "Ready to launch?",
-    "subheading": "Intaleq 2026",
+    "subheading": "Muntaliq 2026",
     "cta": "Lock In Your Partnership",
-    "tagline1": "Jordan's Digital Youth Income & Training Platform.",
-    "tagline2": "An annual conference and hands-on training in Amman.",
+    "tagline1": "The Arab Summit for Digital Economy Skills.",
+    "tagline2": "An annual summit and hands-on training program in Amman.",
     "sellCreateBuild": "Sell · Create · Build",
     "nextSteps": "Next steps",
     "partnership": "Partnership",
-    "partnershipBody": "Ready to partner with Intaleq 2026? Reach out to discuss sponsorship tiers and impact metrics.",
+    "partnershipBody": "Ready to partner with Muntaliq 2026? Reach out to discuss sponsorship tiers and impact metrics.",
     "partnerWithUs": "Partner With Us →"
   },
   "home": {
-    "eyebrow": "Mountaleq 2026",
-    "heroTitle": "Mountaleq 2026 — The Arab Summit for Digital Economy Skills",
-    "heroBody": "Hands-on training. A marketplace to sell into after. Sell, Create, or Build a real income — no degree, no capital required.",
+    "eyebrow": "Muntaliq 2026",
+    "heroTitle": "The Arab Summit for Digital Economy Skills",
+    "heroBody": "Two days. Four live income tracks. Hundreds of participants trained on the internet skills that let anyone start earning online, no office, no degree, no capital required.",
     "registerCta": "Register for 2026",
     "browseMarketplace": "Browse the marketplace",
-    "summitEyebrow": "The Summit",
-    "summitTitle": "Two days. One national stage.",
-    "summitBody": "The Muntaliq National Training Summit brings 100 participants to Amman for a plenary and a two-day, hands-on bootcamp across four tracks — closing with a graduation ceremony and certificates for every attendee.",
+    "summitEyebrow": "Muntaliq",
+    "summitTitle": "Two days. Real skills, real income tracks.",
+    "summitBody": "Participants go through a full rotation across four hands-on tracks led by working practitioners, not lecturers. Every participant leaves with a functioning setup in at least one track: a store, a content channel, a client pipeline, or a live AI-powered service.",
     "summitDates": "Oct 7–8",
     "summitDatesSub": "2026 · Amman",
-    "summitParticipants": "Participants, 4 groups of 25",
+    "summitParticipants": "Participants, grouped for full rotation across all tracks",
     "summitRooms": "5 rooms",
     "summitRoomsSub": "4 concurrent tracks + plenary",
     "summitDaysLabel": "2 days",
     "summitDaysSub": "Every group rotates through all 4",
     "day1": "Day 1",
-    "day1Body": "9:00 opening plenary — sponsor and government addresses — then training rotation across Affiliate, E-commerce, Vibe Coding & AI, and Sales Skills through 16:40.",
+    "day1Body": "9:00 opening plenary — sponsor and government addresses — then training rotation across Affiliate Marketing, E-commerce, AI & Vibe Coding, and Sales Skills through 16:40.",
     "day2": "Day 2",
     "day2Body": "Training rotation continues from 9:30, closing with certificate handover and sponsor recognition at the 16:00 graduation ceremony.",
-    "registerForSummit": "Register for the summit",
+    "registerForSummit": "Register for Muntaliq",
     "afterTraining": "After the training",
-    "trainersEyebrow": "Learn from practitioners",
+    "trainersEyebrow": "Learn from people who are actually doing it",
     "trainersHeading": "Practitioners, not lecturers.",
     "meetTrainers": "Meet the trainers"
   },
   "aboutPage": {
-    "metaTitle": "About — Intaleq 2026",
-    "metaDescription": "Why Intaleq exists: the economic and geographic gap it closes, and the self-sustaining model behind Jordan's Digital Youth Income & Training Platform.",
+    "metaTitle": "About — Muntaliq 2026",
+    "metaDescription": "Why Intaleq exists: the digital economy skills gap it closes, and the model behind the Arab Summit for Digital Economy Skills.",
     "eyebrow": "About Intaleq",
     "heroTitle": "A real gap. A real solution.",
-    "heroBody": "Intaleq — Arabic for \"launch\" — is Jordan's digital youth income and training platform. It exists because free content and one-off grants haven't closed the gap between Jordan's youth and the global digital economy.",
+    "heroBody": "Intaleq is the platform behind Muntaliq, the Arab Summit for Digital Economy Skills. It exists because free content and scattered one-off courses haven't actually prepared youth for the global digital economy.",
     "modelEyebrow": "The model",
     "modelTitle": "Built to outlast its own funding.",
-    "modelBody": "Traditional programs rely on a grant and stop once it runs out. Intaleq is modeled on ArabNet: a self-sustaining annual event, with an Amman plenary that funds and anchors a hands-on training week. Once the model is proven, it's built to expand to other governorates.",
+    "modelBody": "Muntaliq is modeled on ArabNet: a self-sustaining annual summit, with an Amman plenary that funds and anchors a hands-on training week. Once the model is proven, it's built to expand to other cities and governorates.",
     "waysToJoin": "Two ways to join",
     "plenary": "Plenary",
-    "plenaryBody": "The annual Intaleq plenary in Amman — panels, keynotes, and Jordan's digital economy practitioners in one room, one day.",
+    "plenaryBody": "The annual Muntaliq plenary in Amman — panels, keynotes, and digital economy practitioners in one room, one day.",
     "registerForPlenary": "Register for the plenary",
     "training": "Training",
     "trainingBody": "A hands-on training week in Amman, in partnership with Jordan Bromine Company, across seven digital income tracks.",
     "applyForTraining": "Apply for training"
   },
   "tracksPage": {
-    "metaTitle": "Tracks — Intaleq 2026",
+    "metaTitle": "Tracks — Muntaliq 2026",
     "metaDescription": "Seven digital income tracks across three worlds — Sell, Create, Build — taught hands-on in Amman.",
     "eyebrow": "Seven tracks · Three worlds",
     "heroTitle": "Every path leads to income.",
@@ -106,21 +106,21 @@
     "applyForTrack": "Apply for a track"
   },
   "trainersPage": {
-    "metaTitle": "Trainers — Intaleq 2026",
-    "metaDescription": "Meet the practitioners leading Intaleq 2026's hands-on training tracks.",
+    "metaTitle": "Trainers — Muntaliq 2026",
+    "metaDescription": "Meet the practitioners leading Muntaliq 2026's hands-on training tracks.",
     "eyebrow": "Who's leading the training",
     "heroTitle": "Practitioners, not lecturers.",
-    "heroBody": "Every trainer at Intaleq is actively working in the field they teach — not presenting theory, but the exact process they use to earn from it.",
+    "heroBody": "Every trainer at Muntaliq is actively working in the field they teach — not presenting theory, but the exact process they use to earn from it.",
     "ctaTitle": "Are you a practitioner in a digital income field?",
-    "ctaBody": "Intaleq is looking to expand its trainer bench for future cohorts.",
+    "ctaBody": "Muntaliq is looking to expand its trainer bench for future cohorts.",
     "getInTouch": "Get in touch"
   },
   "partnersPage": {
-    "metaTitle": "Partners — Intaleq 2026",
-    "metaDescription": "Partner with Intaleq 2026 — Jordan's Digital Youth Income & Training Platform. Sponsorship tiers and measurable impact.",
+    "metaTitle": "Partners — Muntaliq 2026",
+    "metaDescription": "Partner with Muntaliq 2026 — the Arab Summit for Digital Economy Skills. Sponsorship tiers and measurable impact.",
     "eyebrow": "Partners",
-    "heroTitle": "Tie your name to youth economic empowerment.",
-    "heroBody": "A national annual platform with measurable impact: number of trainees, income generated, projects actually launched.",
+    "heroTitle": "Tie your name to the region's biggest digital economy skills gathering.",
+    "heroBody": "An annual Arab summit with measurable impact: number of participants trained, income generated, projects actually launched.",
     "tiers": [
       {
         "name": "Anchor Partner",
@@ -128,11 +128,11 @@
       },
       {
         "name": "Track Sponsor",
-        "body": "Your name attached to one of the seven digital income tracks, with trainee outcomes reported back for that track specifically."
+        "body": "Your name attached to one of the seven digital income tracks, with participant outcomes reported back for that track specifically."
       },
       {
         "name": "In-Kind Partner",
-        "body": "Provide space, equipment, logistics, or trainer time in exchange for recognition across all Intaleq 2026 materials."
+        "body": "Provide space, equipment, logistics, or trainer time in exchange for recognition across all Muntaliq 2026 materials."
       }
     ],
     "partnerWithUs": "Partner with us",
@@ -140,15 +140,15 @@
     "formBody": "Tell us a little about your organisation and what you'd like to support — we'll follow up with sponsorship tiers and impact metrics."
   },
   "registerPage": {
-    "eyebrow": "Intaleq 2026",
+    "eyebrow": "Muntaliq 2026",
     "heroTitle": "Register for the Movement",
-    "heroBody": "Whether you're joining as a conference attendee or a hands-on trainee, your spot starts here.",
+    "heroBody": "Whether you're joining as a summit attendee or a hands-on trainee, your spot starts here.",
     "chooseYourPath": "Choose your path",
     "option01": "Option 01",
     "plenarySession": "Plenary Session",
-    "plenaryBody": "Attend the annual Intaleq conference in Amman. Panels, keynotes, and Jordan's digital economy practitioners — one room, one day, the full picture.",
+    "plenaryBody": "Attend the annual Muntaliq summit in Amman. Panels, keynotes, and digital economy practitioners — one room, one day, the full picture.",
     "plenaryPoints": [
-      "Conference in Amman",
+      "Summit in Amman",
       "Speakers & panel discussions",
       "Networking with practitioners",
       "Open to all backgrounds"
@@ -184,7 +184,7 @@
       "background": "Select a background."
     },
     "successTitle": "You're in.",
-    "successPlenary": "Your spot for the Intaleq 2026 plenary in Amman is confirmed. We'll email the schedule closer to the date.",
+    "successPlenary": "Your spot for the Muntaliq 2026 plenary in Amman is confirmed. We'll email the schedule closer to the date.",
     "successTraining": "Your application for the training program has been received. We'll follow up by email with next steps.",
     "done": "Done",
     "fullName": "Full name",
@@ -207,7 +207,7 @@
       "organisation": "Tell us your organisation."
     },
     "successTitle": "Message sent.",
-    "successBody": "Thanks for reaching out about Intaleq 2026. Our team will follow up on sponsorship tiers and impact metrics shortly.",
+    "successBody": "Thanks for reaching out about Muntaliq 2026. Our team will follow up on sponsorship tiers and impact metrics shortly.",
     "fullName": "Full name",
     "organisation": "Organisation",
     "emailAddress": "Email address",
