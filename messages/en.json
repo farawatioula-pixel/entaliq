@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Muntaliq 2026 — The Arab Summit for Digital Economy Skills",
+    "title": "Muntaliq 2026, The Arab Summit for Digital Economy Skills",
     "description": "Muntaliq 2026: The Arab Summit for Digital Economy Skills. Sell. Create. Build. An annual summit and hands-on training program in Amman.",
     "ogDescription": "Sell. Create. Build. Hundreds of participants trained on the internet skills to start earning online, anywhere."
   },
@@ -17,7 +17,7 @@
   },
   "common": {
     "close": "Close",
-    "supportedBy": "Supported by"
+    "supportedBy": "Powered By"
   },
   "categories": {
     "category": "Category",
@@ -26,7 +26,7 @@
     "BUILD": "Build"
   },
   "footer": {
-    "tagline": "The Arab Summit for Digital Economy Skills. Sell · Create · Build.",
+    "tagline": "The Arab Summit for Digital Economy Skills. Digital skills, freelance opportunities.",
     "platform": "Platform",
     "about": "About",
     "tracks": "Tracks",
@@ -37,8 +37,8 @@
     "applyTraining": "Apply for training",
     "partnerWithUs": "Partner with us",
     "location": "Location",
-    "locationValue": "Amman — annual summit and training",
-    "copyright": "© {year} Intaleq — Mixed Sources Impact. All rights reserved.",
+    "locationValue": "Amman, annual summit and training",
+    "copyright": "© {year} Muntaliq, Mixed Sources Impact. All rights reserved.",
     "ammanJordan": "Amman · Jordan"
   },
   "launchCta": {
@@ -48,7 +48,7 @@
     "cta": "Lock In Your Partnership",
     "tagline1": "The Arab Summit for Digital Economy Skills.",
     "tagline2": "An annual summit and hands-on training program in Amman.",
-    "sellCreateBuild": "Sell · Create · Build",
+    "sellCreateBuild": "Digital skills, freelance opportunities.",
     "nextSteps": "Next steps",
     "partnership": "Partnership",
     "partnershipBody": "Ready to partner with Muntaliq 2026? Reach out to discuss sponsorship tiers and impact metrics.",
@@ -62,7 +62,7 @@
     "browseMarketplace": "Browse the marketplace",
     "summitEyebrow": "Muntaliq",
     "summitTitle": "Two days. Real skills, real income tracks.",
-    "summitBody": "Participants go through a full rotation across four hands-on tracks led by working practitioners, not lecturers. Every participant leaves with a functioning setup in at least one track: a store, a content channel, a client pipeline, or a live AI-powered service.",
+    "summitBody": "Participants go through a full rotation across four hands-on tracks, led by specialists actively working in these fields. Every participant leaves with something ready to work with in at least one track: a store, a content channel, a client pipeline, or a live AI-powered service.",
     "summitDates": "Oct 7–8",
     "summitDatesSub": "2026 · Amman",
     "summitParticipants": "Participants, grouped for full rotation across all tracks",
@@ -71,53 +71,53 @@
     "summitDaysLabel": "2 days",
     "summitDaysSub": "Every group rotates through all 4",
     "day1": "Day 1",
-    "day1Body": "9:00 opening plenary — sponsor and government addresses — then training rotation across Affiliate Marketing, E-commerce, AI & Vibe Coding, and Sales Skills through 16:40.",
+    "day1Body": "9:00 opening plenary, sponsor and government addresses, then training rotation across Affiliate Marketing, E-commerce, AI & Vibe Coding, and Sales Skills through 16:40.",
     "day2": "Day 2",
     "day2Body": "Training rotation continues from 9:30, closing with certificate handover and sponsor recognition at the 16:00 graduation ceremony.",
     "registerForSummit": "Register for Muntaliq",
     "afterTraining": "After the training",
-    "trainersEyebrow": "Learn from people who are actually doing it",
-    "trainersHeading": "Practitioners, not lecturers.",
+    "trainersEyebrow": "Learn the skills the market needs today",
+    "trainersHeading": "Expertise that's actively working in the market.",
     "meetTrainers": "Meet the trainers"
   },
   "aboutPage": {
-    "metaTitle": "About — Muntaliq 2026",
-    "metaDescription": "Why Intaleq exists: the digital economy skills gap it closes, and the model behind the Arab Summit for Digital Economy Skills.",
-    "eyebrow": "About Intaleq",
-    "heroTitle": "A real gap. A real solution.",
-    "heroBody": "Intaleq is the platform behind Muntaliq, the Arab Summit for Digital Economy Skills. It exists because free content and scattered one-off courses haven't actually prepared youth for the global digital economy.",
+    "metaTitle": "About, Muntaliq 2026",
+    "metaDescription": "Why Muntaliq exists: the digital economy skills gap it closes, and the model behind the Arab Summit for Digital Economy Skills.",
+    "eyebrow": "About Muntaliq",
+    "heroTitle": "A real opportunity. A real skill.",
+    "heroBody": "Muntaliq is the Arab Summit for Digital Economy Skills. Training that creates direct job opportunities, and a platform to showcase skills and take on freelance work. It exists because the internet has become a source of work in its own right, and because free content and scattered courses aren't enough to turn that opportunity into actual income.",
     "modelEyebrow": "The model",
     "modelTitle": "Built to outlast its own funding.",
-    "modelBody": "Muntaliq is modeled on ArabNet: a self-sustaining annual summit, with an Amman plenary that funds and anchors a hands-on training week. Once the model is proven, it's built to expand to other cities and governorates.",
+    "modelBody": "Muntaliq is a self-sustaining annual summit, with an Amman plenary that funds and anchors a hands-on training week. Once the model is proven, it's built to expand to other cities and governorates.",
     "waysToJoin": "Two ways to join",
     "plenary": "Plenary",
-    "plenaryBody": "The annual Muntaliq plenary in Amman — panels, keynotes, and digital economy practitioners in one room, one day.",
+    "plenaryBody": "The annual Muntaliq plenary in Amman, panels, keynotes, and digital economy practitioners in one room, one day.",
     "registerForPlenary": "Register for the plenary",
     "training": "Training",
     "trainingBody": "A hands-on training week in Amman, in partnership with Jordan Bromine Company, across seven digital income tracks.",
     "applyForTraining": "Apply for training"
   },
   "tracksPage": {
-    "metaTitle": "Tracks — Muntaliq 2026",
-    "metaDescription": "Seven digital income tracks across three worlds — Sell, Create, Build — taught hands-on in Amman.",
+    "metaTitle": "Tracks, Muntaliq 2026",
+    "metaDescription": "Seven digital income tracks across three worlds, Sell, Create, Build, taught hands-on in Amman.",
     "eyebrow": "Seven tracks · Three worlds",
     "heroTitle": "Every path leads to income.",
     "heroBody": "Pick one track. Spend a week building the skill, the product, and the first client or sale that makes it real.",
     "applyForTrack": "Apply for a track"
   },
   "trainersPage": {
-    "metaTitle": "Trainers — Muntaliq 2026",
+    "metaTitle": "Trainers, Muntaliq 2026",
     "metaDescription": "Meet the practitioners leading Muntaliq 2026's hands-on training tracks.",
     "eyebrow": "Who's leading the training",
-    "heroTitle": "Practitioners, not lecturers.",
-    "heroBody": "Every trainer at Muntaliq is actively working in the field they teach — not presenting theory, but the exact process they use to earn from it.",
+    "heroTitle": "Expertise that's actively working in the market.",
+    "heroBody": "Every trainer at Muntaliq is working in the field they teach, and shares the exact process they use to earn their own income from it.",
     "ctaTitle": "Are you a practitioner in a digital income field?",
     "ctaBody": "Muntaliq is looking to expand its trainer bench for future cohorts.",
     "getInTouch": "Get in touch"
   },
   "partnersPage": {
-    "metaTitle": "Partners — Muntaliq 2026",
-    "metaDescription": "Partner with Muntaliq 2026 — the Arab Summit for Digital Economy Skills. Sponsorship tiers and measurable impact.",
+    "metaTitle": "Partners, Muntaliq 2026",
+    "metaDescription": "Partner with Muntaliq 2026, the Arab Summit for Digital Economy Skills. Sponsorship tiers and measurable impact.",
     "eyebrow": "Partners",
     "heroTitle": "Tie your name to the region's biggest digital economy skills gathering.",
     "heroBody": "An annual Arab summit with measurable impact: number of participants trained, income generated, projects actually launched.",
@@ -137,7 +137,7 @@
     ],
     "partnerWithUs": "Partner with us",
     "formTitle": "Ready to lock in your partnership?",
-    "formBody": "Tell us a little about your organisation and what you'd like to support — we'll follow up with sponsorship tiers and impact metrics."
+    "formBody": "Tell us a little about your organisation and what you'd like to support, we'll follow up with sponsorship tiers and impact metrics."
   },
   "registerPage": {
     "eyebrow": "Muntaliq 2026",
@@ -146,7 +146,7 @@
     "chooseYourPath": "Choose your path",
     "option01": "Option 01",
     "plenarySession": "Plenary Session",
-    "plenaryBody": "Attend the annual Muntaliq summit in Amman. Panels, keynotes, and digital economy practitioners — one room, one day, the full picture.",
+    "plenaryBody": "Attend the annual Muntaliq summit in Amman. Panels, keynotes, and digital economy practitioners, one room, one day, the full picture.",
     "plenaryPoints": [
       "Summit in Amman",
       "Speakers & panel discussions",
@@ -158,7 +158,7 @@
     "registerForPlenary": "Register for Plenary",
     "option02": "Option 02",
     "trainingProgram": "Training Program",
-    "trainingBody": "Apply for the hands-on training program in Amman. A real skill, a real project, and a launchable income source — by the end of the week.",
+    "trainingBody": "Apply for the hands-on training program in Amman. A real skill, a real project, and a launchable income source, by the end of the week.",
     "trainingPoints": [
       "In partnership with Jordan Bromine Company",
       "Seven digital income tracks",
@@ -220,7 +220,7 @@
   "directoryPage": {
     "eyebrow": "Marketplace",
     "heroTitle": "Hire the people who trained here",
-    "heroBody": "Every seller below came up through Intaleq — trained, active, and taking on work across Sell, Create, and Build.",
+    "heroBody": "Every seller below came up through Muntaliq, trained, active, and taking on work across Sell, Create, and Build.",
     "becomeSeller": "Become a seller",
     "findWork": "Find work to hire out",
     "allSellers": "All sellers",
@@ -260,7 +260,7 @@
     "goToLogin": "Go to login",
     "eyebrow": "Become a seller",
     "title": "Create your account",
-    "body": "Set up a seller profile and list the services you offer — clients find you in the marketplace.",
+    "body": "Set up a seller profile and list the services you offer, clients find you in the marketplace.",
     "fullName": "Full name",
     "email": "Email",
     "password": "Password",
@@ -277,9 +277,9 @@
     "marketplace": "marketplace"
   },
   "profileForm": {
-    "categorySell": "Sell — e-commerce & affiliate marketing",
-    "categoryCreate": "Create — content, freelancing, digital products",
-    "categoryBuild": "Build — vibe coding & AI services",
+    "categorySell": "Sell, e-commerce & affiliate marketing",
+    "categoryCreate": "Create, content, freelancing, digital products",
+    "categoryBuild": "Build, vibe coding & AI services",
     "fullName": "Full name",
     "headline": "Headline",
     "headlinePlaceholder": "e.g. Social media manager & content creator",
