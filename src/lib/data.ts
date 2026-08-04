@@ -16,8 +16,8 @@ export const tracks: Track[] = [
       ar: "التجارة الإلكترونية والبيع عبر الإنترنت",
     },
     description: {
-      en: "Build and run an online store from scratch — products, logistics, and cash-on-delivery.",
-      ar: "أنشئ وأدر متجرًا إلكترونيًا من الصفر — المنتجات، الخدمات اللوجستية، والدفع عند الاستلام.",
+      en: "Build and run an online store from scratch, products, logistics, and cash-on-delivery.",
+      ar: "أنشئ وأدر متجرًا إلكترونيًا من الصفر, المنتجات، الخدمات اللوجستية، والدفع عند الاستلام.",
     },
     detail: {
       en: "Trainees set up a real storefront, source or list products, and learn the cash-on-delivery logistics that make or break online selling in Jordan. By the end of the week, the store is live.",
@@ -28,8 +28,8 @@ export const tracks: Track[] = [
     category: "SELL",
     title: { en: "Affiliate Marketing", ar: "التسويق بالعمولة" },
     description: {
-      en: "Earn commissions promoting products you don't own — no inventory, no upfront cost.",
-      ar: "اربح عمولات من الترويج لمنتجات لا تملكها — دون مخزون ودون تكلفة مسبقة.",
+      en: "Earn commissions promoting products you don't own, no inventory, no upfront cost.",
+      ar: "اربح عمولات من الترويج لمنتجات لا تملكها, دون مخزون ودون تكلفة مسبقة.",
     },
     detail: {
       en: "No inventory, no upfront capital. Trainees learn to pick offers, build an audience, and track commissions across platforms that pay out in Jordan.",
@@ -55,8 +55,8 @@ export const tracks: Track[] = [
     category: "CREATE",
     title: { en: "Freelancing & Remote Services", ar: "العمل الحر والخدمات عن بُعد" },
     description: {
-      en: "Sell your skills to clients worldwide — design, writing, translation, and more.",
-      ar: "بِع مهاراتك لعملاء حول العالم — تصميم، كتابة، ترجمة، وغيرها.",
+      en: "Sell your skills to clients worldwide, design, writing, translation, and more.",
+      ar: "بِع مهاراتك لعملاء حول العالم, تصميم، كتابة، ترجمة، وغيرها.",
     },
     detail: {
       en: "Trainees build a portfolio, set up a profile on global freelance platforms, and land their pricing and pitch for design, writing, translation, and other in-demand remote services.",
@@ -67,8 +67,8 @@ export const tracks: Track[] = [
     category: "CREATE",
     title: { en: "Digital Products", ar: "المنتجات الرقمية" },
     description: {
-      en: "Create once, sell forever — templates, guides, courses, and downloadable assets.",
-      ar: "أنشئ مرة واحدة وبِع إلى الأبد — قوالب، أدلة، دورات، وملفات قابلة للتحميل.",
+      en: "Create once, sell forever, templates, guides, courses, and downloadable assets.",
+      ar: "أنشئ مرة واحدة وبِع إلى الأبد, قوالب، أدلة، دورات، وملفات قابلة للتحميل.",
     },
     detail: {
       en: "One product, sold indefinitely. Trainees design and package a template, guide, or mini-course and set up the storefront to sell it without ongoing labor.",
@@ -82,8 +82,8 @@ export const tracks: Track[] = [
       ar: "البرمجة بالذكاء الاصطناعي (فايب كودينغ / بدون كود)",
     },
     description: {
-      en: "Build real apps and tools using AI — no coding background required.",
-      ar: "ابنِ تطبيقات وأدوات حقيقية باستخدام الذكاء الاصطناعي — دون خلفية برمجية.",
+      en: "Build real apps and tools using AI, no coding background required.",
+      ar: "ابنِ تطبيقات وأدوات حقيقية باستخدام الذكاء الاصطناعي, دون خلفية برمجية.",
     },
     detail: {
       en: "No computer science degree required. Trainees use AI-assisted and no-code tools to ship a working app or automation by the end of the training.",
@@ -94,12 +94,12 @@ export const tracks: Track[] = [
     category: "BUILD",
     title: { en: "Paid AI Services", ar: "خدمات الذكاء الاصطناعي مدفوعة الأجر" },
     description: {
-      en: "Offer AI-powered services to local businesses — automation, content, and more.",
-      ar: "قدّم خدمات مدعومة بالذكاء الاصطناعي للشركات المحلية — أتمتة، محتوى، وغيرها.",
+      en: "Offer AI-powered services to local businesses, automation, content, and more.",
+      ar: "قدّم خدمات مدعومة بالذكاء الاصطناعي للشركات المحلية, أتمتة، محتوى، وغيرها.",
     },
     detail: {
-      en: "Trainees learn to package AI capabilities — automation, content generation, chat support — into services they can pitch and sell to local businesses.",
-      ar: "يتعلم المتدربون تحويل إمكانات الذكاء الاصطناعي — الأتمتة، توليد المحتوى، دعم المحادثات — إلى خدمات يمكن عرضها وبيعها للشركات المحلية.",
+      en: "Trainees learn to package AI capabilities, automation, content generation, chat support, into services they can pitch and sell to local businesses.",
+      ar: "يتعلم المتدربون تحويل إمكانات الذكاء الاصطناعي, الأتمتة، توليد المحتوى، دعم المحادثات, إلى خدمات يمكن عرضها وبيعها للشركات المحلية.",
     },
   },
 ];
@@ -132,20 +132,20 @@ export const trainers: Trainer[] = [
   },
   {
     number: "03",
-    name: "Hala Abu Shalbak",
+    name: "Karam Judeh",
     focus: {
       en: "Vibe Coding & AI Business Automation",
       ar: "فايب كودينغ وأتمتة الأعمال بالذكاء الاصطناعي",
     },
     bio: {
       en: "Shows trainees how to use AI tools to build real software and automate business processes with no coding background.",
-      ar: "تُري المتدربين كيفية استخدام أدوات الذكاء الاصطناعي لبناء برمجيات حقيقية وأتمتة العمليات دون خلفية برمجية.",
+      ar: "يُري المتدربين كيفية استخدام أدوات الذكاء الاصطناعي لبناء برمجيات حقيقية وأتمتة العمليات دون خلفية برمجية.",
     },
   },
   {
     number: "04",
     name: "Diaa Abu Shamlah",
-    focus: { en: "E-commerce — eBay & Amazon", ar: "التجارة الإلكترونية — إيباي وأمازون" },
+    focus: { en: "E-commerce, eBay & Amazon", ar: "التجارة الإلكترونية, إيباي وأمازون" },
     bio: {
       en: "Runs cross-border e-commerce operations and trains sellers on sourcing, listing, and logistics for global marketplaces.",
       ar: "يدير عمليات تجارة إلكترونية عابرة للحدود، ويدرّب البائعين على التوريد والعرض والخدمات اللوجستية للأسواق العالمية.",
@@ -153,62 +153,48 @@ export const trainers: Trainer[] = [
   },
 ];
 
-export const partners = ["Orange Jordan", "Bromine", "JBC", "Talabat Jordan"];
+export const partners = ["Bromine Jordan"];
 
 export const stats: { value: string; label: LocalizedText }[] = [
   {
-    value: "46%",
+    value: "4",
     label: {
-      en: "Youth unemployment rate in Jordan — one of the highest in the region",
-      ar: "معدل بطالة الشباب في الأردن — من أعلى المعدلات في المنطقة",
+      en: "Live income tracks: Sell, Create, Build, and Market",
+      ar: "مسارات دخل مباشرة: بيع، إنشاء، بناء، وتسويق",
     },
   },
   {
     value: "7",
     label: {
-      en: "Digital economy sectors requiring zero capital, no degree, no connections",
-      ar: "قطاعات في الاقتصاد الرقمي لا تتطلب رأس مال أو شهادة أو علاقات",
+      en: "Digital economy sectors, from affiliate marketing to AI-powered services",
+      ar: "قطاعات في الاقتصاد الرقمي، من التسويق بالعمولة إلى خدمات الذكاء الاصطناعي",
     },
   },
   {
-    value: "80%",
+    value: "100+",
     label: {
-      en: "Of Jordan's youth opportunities concentrated in Amman — leaving the governorates behind",
-      ar: "من فرص الشباب في الأردن تتركز في عمّان — ما يترك المحافظات خلفها",
+      en: "Participants trained per cohort",
+      ar: "مشارك في كل دفعة",
     },
   },
 ];
 
 export const gaps: { title: LocalizedText; body: LocalizedText }[] = [
   {
-    title: { en: "A Real Economic Gap", ar: "فجوة اقتصادية حقيقية" },
+    title: { en: "The Internet Is the Employer", ar: "الإنترنت هو صاحب العمل" },
     body: {
-      en: "The global digital economy — freelancing, e-commerce, affiliate marketing, AI services — requires no degree, no connections, and no large capital. Just a skill, a phone, and an internet connection.",
-      ar: "الاقتصاد الرقمي العالمي — العمل الحر، التجارة الإلكترونية، التسويق بالعمولة، خدمات الذكاء الاصطناعي — لا يتطلب شهادة أو علاقات أو رأس مال كبير. فقط مهارة وهاتف واتصال بالإنترنت.",
-    },
-  },
-  {
-    title: { en: "Free Content Isn't Enough", ar: "المحتوى المجاني لا يكفي" },
-    body: {
-      en: "What's available online is theoretical and scattered, and doesn't address Jordan's market specifically: cash-on-delivery logistics, the difficulty of building complex websites, and a beginner's limited starting capital.",
-      ar: "ما هو متاح على الإنترنت نظري ومتناثر، ولا يعالج خصوصية السوق الأردني: خدمات الدفع عند الاستلام، وصعوبة بناء مواقع معقدة، ورأس المال المحدود للمبتدئين.",
-    },
-  },
-  {
-    title: { en: "The Geographic Gap", ar: "الفجوة الجغرافية" },
-    body: {
-      en: "Training and job opportunities are concentrated in Amman; youth in the governorates and rural areas are geographically distant from them, even though digital work requires no relocation at all.",
-      ar: "تتركز فرص التدريب والعمل في عمّان؛ فيما يبعد شباب المحافظات والمناطق الريفية جغرافيًا عنها، رغم أن العمل الرقمي لا يتطلب أي انتقال.",
+      en: "The global digital economy, from freelancing to e-commerce, affiliate marketing, and AI-powered services, doesn't require a degree, connections, or significant capital. Just a skill, a phone, and an internet connection.",
+      ar: "الاقتصاد الرقمي العالمي، من العمل الحر إلى التجارة الإلكترونية والتسويق بالعمولة وخدمات الذكاء الاصطناعي، لا يشترط شهادة أو علاقات أو رأس مال كبير. فقط مهارة، وهاتف، واتصال بالإنترنت.",
     },
   },
   {
     title: {
-      en: "A Model That Doesn't End With the Funding",
-      ar: "نموذج لا ينتهي بانتهاء التمويل",
+      en: "Free Content Is a Starting Point, Not a Plan",
+      ar: "المحتوى المجاني نقطة بداية، لا خطة عمل",
     },
     body: {
-      en: "Traditional initiatives rely on a grant or temporary funding and stop once it runs out. Intaleq is designed as a self-sustaining event — modeled on ArabNet — so the platform continues beyond any initial support.",
-      ar: "تعتمد المبادرات التقليدية على منحة أو تمويل مؤقت وتتوقف بمجرد نفاده. صُمم انطلق كفعالية ذاتية الاستدامة — على غرار ArabNet — لتستمر المنصة بعد أي دعم أولي.",
+      en: "What's available for free online is theoretical and scattered. Muntaliq takes participants from theoretical knowledge to a sellable skill, and a product or service ready for the market.",
+      ar: "ما هو متاح مجاناً على الإنترنت نظري ومتناثر. منطلق يأخذ المشارك من المعرفة النظرية إلى مهارة قابلة للبيع، ومنتج أو خدمة جاهزة للسوق.",
     },
   },
 ];
@@ -217,29 +203,22 @@ export const promise: { title: LocalizedText; body: LocalizedText }[] = [
   {
     title: { en: "For the Trainee", ar: "للمتدرب" },
     body: {
-      en: "A marketable skill within days, not months — and a real product or project ready to sell by the end of training, not just a certificate of attendance.",
-      ar: "مهارة قابلة للتسويق خلال أيام لا أشهر — ومنتج أو مشروع حقيقي جاهز للبيع بنهاية التدريب، لا مجرد شهادة حضور.",
-    },
-  },
-  {
-    title: { en: "For the Local Community", ar: "للمجتمع المحلي" },
-    body: {
-      en: "A new income source that grows from within it — its crafts, products, and services — instead of full dependence on aid or migrating elsewhere for work.",
-      ar: "مصدر دخل جديد ينمو من داخل المجتمع نفسه — حرفه ومنتجاته وخدماته — بدلاً من الاعتماد الكامل على المساعدات أو الهجرة للعمل.",
+      en: "A marketable skill within days, not months, and a real product or project ready to sell by the end of training. After training, every participant moves directly into the Muntaliq marketplace to start working and taking on their first clients.",
+      ar: "مهارة قابلة للتسويق خلال أيام لا أشهر، ومنتج أو مشروع حقيقي جاهز للبيع بنهاية التدريب. بعد التدريب، ينتقل كل مشارك مباشرة إلى سوق منطلق ليبدأ العمل واستقبال أول عملائه.",
     },
   },
   {
     title: { en: "For Partners & Sponsors", ar: "للشركاء والرعاة" },
     body: {
-      en: "A national annual platform that directly ties your name to youth economic empowerment, with measurable impact: number of trainees, income generated, projects actually launched.",
-      ar: "منصة وطنية سنوية تربط اسمك مباشرة بالتمكين الاقتصادي للشباب، بأثر قابل للقياس: عدد المتدربين، الدخل المُحقق، والمشاريع المُطلقة فعليًا.",
+      en: "An annual Arab platform that ties your name directly to a new generation of digital economy workers, with measurable impact: number of participants trained, income generated, projects actually launched.",
+      ar: "منصة عربية سنوية تربط اسمك مباشرة بجيل جديد من العاملين في الاقتصاد الرقمي، بأثر قابل للقياس: عدد المتدربين، الدخل المُحقق، والمشاريع المُطلقة فعلياً.",
     },
   },
   {
     title: { en: "For the Sector", ar: "للقطاع" },
     body: {
-      en: "A tested, replicable model that can be expanded to other governorates once its success is proven.",
-      ar: "نموذج مُختبَر وقابل للتكرار يمكن توسيعه إلى محافظات أخرى بعد إثبات نجاحه.",
+      en: "A tested, repeatable model that can be expanded to other cities and governorates once proven.",
+      ar: "نموذج مُختبَر وقابل للتكرار، يمكن توسيعه إلى مدن ومحافظات أخرى بعد إثبات نجاحه.",
     },
   },
 ];
