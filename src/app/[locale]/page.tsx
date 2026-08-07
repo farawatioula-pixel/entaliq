@@ -10,19 +10,6 @@ export default function Home() {
 
   return (
     <>
-      {/* Logo banner */}
-      <section className="border-b border-line bg-ink">
-        <video
-          className="h-32 w-full object-cover sm:h-40 lg:h-48"
-          src="/media/logo-banner.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden="true"
-        />
-      </section>
-
       {/* Hero */}
       <section className="border-b-4 border-red bg-paper">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-32">
@@ -44,6 +31,18 @@ export default function Home() {
             </Link>
           </div>
         </div>
+
+        <video
+          className="h-32 w-full border-t border-line object-cover sm:h-40 lg:h-48"
+          src="/media/logo-banner.mp4"
+          poster="/media/logo-banner-poster.png"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+        />
       </section>
 
       {/* Trust strip */}
