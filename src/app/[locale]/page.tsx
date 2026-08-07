@@ -29,12 +29,6 @@ export default function Home() {
             >
               {t("registerCta")}
             </Link>
-            <Link
-              href="/directory"
-              className="inline-flex items-center rounded-sm border border-line px-7 py-3.5 text-[15px] font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
-            >
-              {t("browseMarketplace")}
-            </Link>
           </div>
         </div>
       </section>
@@ -111,26 +105,6 @@ export default function Home() {
             className="inline-flex items-center rounded-sm bg-red px-7 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-red-dark"
           >
             {t("registerForSummit")}
-          </Link>
-        </div>
-      </section>
-
-      {/* Trainers */}
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:py-24 sm:px-8">
-        <div className="flex flex-col items-start justify-between gap-8 rounded-sm border border-line bg-violet/10 px-8 py-14 sm:flex-row sm:items-center sm:px-14">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-violet-deep">
-              {t("trainersEyebrow")}
-            </p>
-            <h2 className="mt-3 max-w-md font-display text-3xl font-bold leading-tight tracking-tight text-fg sm:text-4xl">
-              {t("trainersHeading")}
-            </h2>
-          </div>
-          <Link
-            href="/trainers"
-            className="inline-flex shrink-0 items-center rounded-sm bg-red px-7 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-red-dark"
-          >
-            {t("meetTrainers")}
           </Link>
         </div>
       </section>

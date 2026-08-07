@@ -59,7 +59,14 @@
     "heroTitle": "The Arab Summit for Digital Economy Skills",
     "heroBody": "Two days. Four live income tracks. Hundreds of participants trained on the internet skills that let anyone start earning online, no office, no degree, no capital required.",
     "registerCta": "Register for 2026",
-    "browseMarketplace": "Browse the marketplace",
+    "stat1Value": "4",
+    "stat1Label": "Direct income tracks: sell, create, build, and market",
+    "stat2Value": "24+",
+    "stat2Label": "Hours of hands-on training led by working specialists",
+    "stat3Value": "100+",
+    "stat3Label": "Participants per cohort",
+    "stat4Value": "7",
+    "stat4Label": "Sectors in the digital economy, from affiliate marketing to paid AI services",
     "summitEyebrow": "Muntaliq",
     "summitTitle": "Two days. Real skills, real income tracks.",
     "summitBody": "Participants go through a full rotation across four hands-on tracks, led by specialists actively working in these fields. Every participant leaves with something ready to work with in at least one track: a store, a content channel, a client pipeline, or a live AI-powered service.",
@@ -75,10 +82,7 @@
     "day2": "Day 2",
     "day2Body": "Training rotation continues from 9:30, closing with certificate handover and sponsor recognition at the 16:00 graduation ceremony.",
     "registerForSummit": "Register for Muntaliq",
-    "afterTraining": "After the training",
-    "trainersEyebrow": "Learn the skills the market needs today",
-    "trainersHeading": "Expertise that's actively working in the market.",
-    "meetTrainers": "Meet the trainers"
+    "afterTraining": "After the training"
   },
   "aboutPage": {
     "metaTitle": "About, Muntaliq 2026",
@@ -86,9 +90,27 @@
     "eyebrow": "About Muntaliq",
     "heroTitle": "A real opportunity. A real skill.",
     "heroBody": "Muntaliq is the Arab Summit for Digital Economy Skills. Training that creates direct job opportunities, and a platform to showcase skills and take on freelance work. It exists because the internet has become a source of work in its own right, and because free content and scattered courses aren't enough to turn that opportunity into actual income.",
+    "stat1Value": "4",
+    "stat1Label": "Direct income tracks: sell, create, build, and market",
+    "stat2Value": "7",
+    "stat2Label": "Sectors in the digital economy, from affiliate marketing to paid AI services",
+    "stat3Value": "100+",
+    "stat3Label": "Participants per cohort",
+    "stat4Value": "24+",
+    "stat4Label": "Hours of hands-on training led by working specialists",
+    "internetEmployerTitle": "The internet is the employer",
+    "internetEmployerBody": "The global digital economy, from freelancing to e-commerce, affiliate marketing, and paid AI services, doesn't require a degree, connections, or major capital. Just a skill, a phone, and an internet connection.",
+    "freeContentTitle": "Free content is a starting point, not a business plan",
+    "freeContentBody": "What's freely available online is theoretical and scattered. Muntaliq takes each participant from theoretical knowledge to a sellable skill, and a product or service ready for the market.",
     "modelEyebrow": "The model",
     "modelTitle": "Built to outlast its own funding.",
     "modelBody": "Muntaliq is a self-sustaining annual summit, with an Amman plenary that funds and anchors a hands-on training week. Once the model is proven, it's built to expand to other cities and governorates.",
+    "forTraineeTitle": "For the trainee",
+    "forTraineeBody": "A marketable skill in days, not months, and a real product or project ready to sell by the end of training. After training, every participant moves directly into the Muntaliq marketplace to start working and land their first clients.",
+    "forPartnersTitle": "For partners and sponsors",
+    "forPartnersBody": "An annual Arab platform that links your name directly to a new generation of digital economy workers, with measurable impact: number of trainees, income generated, and projects actually launched.",
+    "forSectorTitle": "For the sector",
+    "forSectorBody": "A tested, repeatable model that can be scaled to other cities and governorates once proven.",
     "waysToJoin": "Two ways to join",
     "plenary": "Plenary",
     "plenaryBody": "The annual Muntaliq plenary in Amman, panels, keynotes, and digital economy practitioners in one room, one day.",
@@ -103,7 +125,44 @@
     "eyebrow": "Seven tracks · Three worlds",
     "heroTitle": "Every path leads to income.",
     "heroBody": "Pick one track. Spend a week building the skill, the product, and the first client or sale that makes it real.",
-    "applyForTrack": "Apply for a track"
+    "applyForTrack": "Apply for a track",
+    "tracksData": [
+      {
+        "category": "SELL",
+        "title": "E-commerce & Online Selling",
+        "body": "Trainees set up a real store, source or list products, and learn the cash-on-delivery workflows that make or break online selling in Jordan. By the end of the week, the store is ready to trade."
+      },
+      {
+        "category": "SELL",
+        "title": "Affiliate Marketing",
+        "body": "No inventory and no upfront capital. Trainees learn to pick offers, build an audience, and track commissions through platforms that actually pay out in Jordan."
+      },
+      {
+        "category": "CREATE",
+        "title": "Content Creation & Monetization",
+        "body": "From short-form video to written content, trainees learn how each platform pays, and leave with a content system they can keep running after the week ends."
+      },
+      {
+        "category": "CREATE",
+        "title": "Freelancing & Remote Services",
+        "body": "Trainees build a portfolio, set up a profile on global freelance platforms, and set their pricing and offer in design, writing, translation, and other in-demand remote services."
+      },
+      {
+        "category": "CREATE",
+        "title": "Digital Products",
+        "body": "One product, sold endlessly. Trainees design and prepare a template, guide, or mini-course, and build a storefront to sell it without repeated effort."
+      },
+      {
+        "category": "BUILD",
+        "title": "AI-Assisted Coding (Vibe Coding / No-Code)",
+        "body": "No computer science degree required. Trainees use AI tools and no-code platforms to ship a real app or automation by the end of training."
+      },
+      {
+        "category": "BUILD",
+        "title": "Paid AI Services",
+        "body": "Trainees learn to turn AI capabilities, automation, content generation, and conversational support, into services they can pitch and sell to local businesses."
+      }
+    ]
   },
   "trainersPage": {
     "metaTitle": "Trainers, Muntaliq 2026",
@@ -113,7 +172,33 @@
     "heroBody": "Every trainer at Muntaliq is working in the field they teach, and shares the exact process they use to earn their own income from it.",
     "ctaTitle": "Are you a practitioner in a digital income field?",
     "ctaBody": "Muntaliq is looking to expand its trainer bench for future cohorts.",
-    "getInTouch": "Get in touch"
+    "getInTouch": "Get in touch",
+    "trainersData": [
+      {
+        "order": "01",
+        "name": "Abdullah Battah",
+        "title": "Marketing & Sales Strategy",
+        "body": "Guides trainees through positioning, pricing, and the sales conversations that turn a new digital skill into actual clients."
+      },
+      {
+        "order": "02",
+        "name": "Osama Hattou",
+        "title": "Affiliate Marketing",
+        "body": "A working affiliate marketer who teaches trainees how to pick offers and build an audience that converts to sales."
+      },
+      {
+        "order": "03",
+        "name": "Karam Jouda",
+        "title": "Vibe Coding & AI Business Automation",
+        "body": "Shows trainees how to use AI tools to build real software and automate processes with no coding background."
+      },
+      {
+        "order": "04",
+        "name": "Diya Abu Shamleh",
+        "title": "E-commerce, eBay & Amazon",
+        "body": "Runs cross-border e-commerce operations and trains sellers on sourcing, listing, and logistics for global marketplaces."
+      }
+    ]
   },
   "partnersPage": {
     "metaTitle": "Partners, Muntaliq 2026",
@@ -229,9 +314,18 @@
     "beFirst": "Be the first.",
     "servicesListed": "{count, plural, one {# service listed} other {# services listed}}",
     "categoryLabels": {
-      "SELL": { "label": "Sell", "desc": "E-commerce & affiliate marketing" },
-      "CREATE": { "label": "Create", "desc": "Content, freelancing, digital products" },
-      "BUILD": { "label": "Build", "desc": "Vibe coding & AI services" }
+      "SELL": {
+        "label": "Sell",
+        "desc": "E-commerce & affiliate marketing"
+      },
+      "CREATE": {
+        "label": "Create",
+        "desc": "Content, freelancing, digital products"
+      },
+      "BUILD": {
+        "label": "Build",
+        "desc": "Vibe coding & AI services"
+      }
     }
   },
   "directoryProfilePage": {
