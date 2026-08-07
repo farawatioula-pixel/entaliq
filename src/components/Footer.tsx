@@ -11,9 +11,9 @@ export default function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-2">
-              <Logo className="h-7 w-7" />
+              <Logo className="h-10 w-10" />
               <span className="font-arabic text-base font-extrabold text-white">
-                انطلق
+                منطلق
               </span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed">{t("tagline")}</p>

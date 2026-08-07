@@ -10,6 +10,7 @@
     "tracks": "Tracks",
     "trainers": "Trainers",
     "register": "Register",
+    "findServices": "Find services",
     "login": "Log in",
     "registerCta": "Register 2026",
     "openMenu": "Open menu",
@@ -68,7 +69,7 @@
     "stat4Value": "7",
     "stat4Label": "Sectors in the digital economy, from affiliate marketing to paid AI services",
     "summitEyebrow": "Muntaliq",
-    "summitTitle": "Two days. Real skills, real income tracks.",
+    "summitTitle": "Hands-on training in modern internet skills",
     "summitBody": "Participants go through a full rotation across four hands-on tracks, led by specialists actively working in these fields. Every participant leaves with something ready to work with in at least one track: a store, a content channel, a client pipeline, or a live AI-powered service.",
     "summitDates": "Oct 7–8",
     "summitDatesSub": "2026 · Amman",
@@ -125,7 +126,7 @@
     "eyebrow": "Seven tracks · Three worlds",
     "heroTitle": "Every path leads to income.",
     "heroBody": "Pick one track. Spend a week building the skill, the product, and the first client or sale that makes it real.",
-    "applyForTrack": "Apply for a track",
+    "applyForTrack": "Register",
     "tracksData": [
       {
         "category": "SELL",
@@ -168,8 +169,8 @@
     "metaTitle": "Trainers, Muntaliq 2026",
     "metaDescription": "Meet the practitioners leading Muntaliq 2026's hands-on training tracks.",
     "eyebrow": "Who's leading the training",
-    "heroTitle": "Expertise that's actively working in the market.",
-    "heroBody": "Every trainer at Muntaliq is working in the field they teach, and shares the exact process they use to earn their own income from it.",
+    "heroTitle": "Trainers:",
+    "heroBody": "Hands-on experience at an international level",
     "ctaTitle": "Are you a practitioner in a digital income field?",
     "ctaBody": "Muntaliq is looking to expand its trainer bench for future cohorts.",
     "getInTouch": "Get in touch",
@@ -178,25 +179,25 @@
         "order": "01",
         "name": "Abdullah Battah",
         "title": "Marketing & Sales Strategy",
-        "body": "Guides trainees through positioning, pricing, and the sales conversations that turn a new digital skill into actual clients."
+        "body": "Training on pricing and selling, and turning digital skills into projects or paid work for clients."
       },
       {
         "order": "02",
-        "name": "Osama Hattou",
+        "name": "Osman Hattou",
         "title": "Affiliate Marketing",
-        "body": "A working affiliate marketer who teaches trainees how to pick offers and build an audience that converts to sales."
+        "body": "Commission-based marketing, training on how to pick offers and build an audience that converts to sales."
       },
       {
         "order": "03",
         "name": "Karam Jouda",
         "title": "Vibe Coding & AI Business Automation",
-        "body": "Shows trainees how to use AI tools to build real software and automate processes with no coding background."
+        "body": "Using AI tools to build real software and automate processes with no coding background."
       },
       {
         "order": "04",
-        "name": "Diya Abu Shamleh",
+        "name": "Diya Abu Shamaleh",
         "title": "E-commerce, eBay & Amazon",
-        "body": "Runs cross-border e-commerce operations and trains sellers on sourcing, listing, and logistics for global marketplaces."
+        "body": "Managing e-commerce operations and training on sourcing, listing, and logistics skills for global marketplaces."
       }
     ]
   },
@@ -226,7 +227,7 @@
   },
   "registerPage": {
     "eyebrow": "Muntaliq 2026",
-    "heroTitle": "Register for the Movement",
+    "heroTitle": "Join Muntaliq 2026",
     "heroBody": "Whether you're joining as a summit attendee or a hands-on trainee, your spot starts here.",
     "chooseYourPath": "Choose your path",
     "option01": "Option 01",

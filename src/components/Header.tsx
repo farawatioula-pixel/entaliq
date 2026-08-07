@@ -27,10 +27,10 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
-        <Link href="/" className="flex items-center gap-2" aria-label="Intaleq home">
-          <Logo className="h-8 w-8" />
-          <span className="font-arabic text-lg font-extrabold tracking-tight text-fg">
-            انطلق<span className="sr-only"> Intaleq</span>
+        <Link href="/" className="flex items-center gap-3" aria-label="Muntaliq home">
+          <Logo className="h-11 w-11" />
+          <span className="font-arabic text-xl font-extrabold tracking-tight text-fg">
+            منطلق<span className="sr-only"> Muntaliq</span>
           </span>
         </Link>
 
@@ -54,6 +54,12 @@ export default function Header() {
 
         <div className="hidden items-center gap-4 lg:flex">
           <LocaleSwitcher />
+          <Link
+            href="/directory"
+            className="inline-flex items-center rounded-sm border border-line px-6 py-2.5 text-[15px] font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
+          >
+            {t("findServices")}
+          </Link>
           <Link
             href="/login"
             className="text-[15px] font-medium text-neutral-600 transition-colors hover:text-fg"
@@ -116,6 +122,14 @@ export default function Header() {
                 </li>
               );
             })}
+            <li>
+              <Link
+                href="/directory"
+                className="block rounded-sm px-2 py-3 text-center text-base font-medium text-neutral-600"
+              >
+                {t("findServices")}
+              </Link>
+            </li>
             <li>
               <Link
                 href="/login"

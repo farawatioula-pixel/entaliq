@@ -31,7 +31,7 @@ export default function LaunchCTA() {
 
         <div className="mt-16 grid grid-cols-1 gap-10 border-t border-white/10 pt-12 sm:grid-cols-3">
           <div>
-            <Logo className="h-8 w-8" />
+            <Logo className="h-10 w-10" />
             <p className="mt-4 text-[15px] leading-relaxed text-neutral-300">
               {t("tagline1")}
               <br />

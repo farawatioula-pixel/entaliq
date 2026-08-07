@@ -30,13 +30,12 @@ export default function TracksGrid({ showDetail = false }: { showDetail?: boolea
     <div className="space-y-px">
       {categories.map((category) => {
         const items = tracks.filter((tr) => tr.category === category);
-        const cols = Math.min(items.length, 3);
         const accent = categoryColor[category];
         const accentOnDark = categoryColorOnDark[category];
 
         return (
           <div key={category} className="border border-line">
-            <div className={`grid ${gridColsClass[cols]}`}>
+            <div className={`grid ${gridColsClass[2]}`}>
               <div className="flex flex-col justify-end border-b border-line bg-ink px-6 py-8 text-white sm:border-b-0 sm:border-e sm:px-8 sm:py-10">
                 <p className={`text-xs font-semibold uppercase tracking-widest ${accentOnDark}`}>
                   {t("category")}
