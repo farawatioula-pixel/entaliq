@@ -31,10 +31,10 @@ export default function Home() {
               {t("registerCta")}
             </Link>
           </div>
-        </div>
 
-        <div className="pb-16 sm:pb-24">
-          <LogoBanner />
+          <div className="mt-14">
+            <LogoBanner />
+          </div>
         </div>
       </section>
 

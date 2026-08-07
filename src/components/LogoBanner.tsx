@@ -1,37 +1,15 @@
-"use client";
-
-import { useEffect, useRef } from "react";
+import Logo from "./Logo";
 
 export default function LogoBanner() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.muted = true;
-    video.defaultMuted = true;
-    const playPromise = video.play();
-    if (playPromise) {
-      playPromise.catch(() => {
-        // Autoplay was blocked; the poster frame stays visible instead.
-      });
-    }
-  }, []);
-
   return (
-    <div className="mx-auto max-w-7xl border-t border-line px-5 pt-10 sm:px-8">
-      <video
-        ref={videoRef}
-        className="mx-auto h-auto w-full max-w-[1280px]"
-        src="/media/logo-banner.mp4"
-        poster="/media/logo-banner-poster.png"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-hidden="true"
-      />
+    <div
+      className="relative mx-auto h-14 w-full max-w-sm sm:h-16 sm:max-w-md"
+      aria-hidden="true"
+    >
+      <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-cyan to-transparent" />
+      <div className="logo-travel-icon h-10 w-10 rounded-[22%] bg-ink shadow-[0_0_18px_2px_rgba(34,211,238,0.45)] sm:h-11 sm:w-11">
+        <Logo className="h-full w-full" />
+      </div>
     </div>
   );
 }
