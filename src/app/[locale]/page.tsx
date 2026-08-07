@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { stats, type Locale } from "@/lib/data";
 import PartnerLogos from "@/components/PartnerLogos";
 import LaunchCTA from "@/components/LaunchCTA";
+import LogoBanner from "@/components/LogoBanner";
 
 export default function Home() {
   const t = useTranslations("home");
@@ -32,17 +33,9 @@ export default function Home() {
           </div>
         </div>
 
-        <video
-          className="h-32 w-full border-t border-line object-cover sm:h-40 lg:h-48"
-          src="/media/logo-banner.mp4"
-          poster="/media/logo-banner-poster.png"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-        />
+        <div className="pb-16 sm:pb-24">
+          <LogoBanner />
+        </div>
       </section>
 
       {/* Trust strip */}
