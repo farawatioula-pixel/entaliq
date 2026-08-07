@@ -36,6 +36,8 @@ export default async function ProfilePage({
     location: "",
     contact: user.email ?? "",
     category: "SELL",
+    avatar_url: "",
+    portfolio_images: [],
     services: [],
     updated_at: new Date().toISOString(),
   };

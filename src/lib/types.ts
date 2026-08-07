@@ -12,6 +12,8 @@ export type Profile = {
   location: string;
   contact: string;
   category: "SELL" | "CREATE" | "BUILD";
+  avatar_url: string;
+  portfolio_images: string[];
   services: Service[];
   updated_at: string;
 };

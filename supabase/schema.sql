@@ -9,9 +9,16 @@ create table if not exists public.profiles (
   location text not null default '',
   contact text not null default '',
   category text not null default 'SELL' check (category in ('SELL', 'CREATE', 'BUILD')),
+  avatar_url text not null default '',
+  portfolio_images jsonb not null default '[]'::jsonb,
   services jsonb not null default '[]'::jsonb,
   updated_at timestamptz not null default now()
 );
+
+-- If you already created this table before avatar_url/portfolio_images existed,
+-- these add the missing columns without touching your existing data.
+alter table public.profiles add column if not exists avatar_url text not null default '';
+alter table public.profiles add column if not exists portfolio_images jsonb not null default '[]'::jsonb;
 
 alter table public.profiles enable row level security;
 

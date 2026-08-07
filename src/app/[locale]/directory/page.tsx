@@ -9,6 +9,12 @@ const categoryColor: Record<Profile["category"], string> = {
   BUILD: "text-red-dark",
 };
 
+const categoryBg: Record<Profile["category"], string> = {
+  SELL: "bg-cyan/10",
+  CREATE: "bg-violet/10",
+  BUILD: "bg-red/10",
+};
+
 const categories: Profile["category"][] = ["SELL", "CREATE", "BUILD"];
 
 export const revalidate = 0;
@@ -110,31 +116,54 @@ export default async function DirectoryPage({
             </div>
           ) : (
             <div className="mt-10 grid gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-              {list.map((profile) => (
-                <Link
-                  key={profile.id}
-                  href={`/directory/${profile.id}`}
-                  className="flex flex-col gap-3 bg-surface px-6 py-7 transition-colors hover:bg-paper"
-                >
-                  <p
-                    className={`text-xs font-semibold uppercase tracking-widest ${categoryColor[profile.category]}`}
+              {list.map((profile) => {
+                const initial = profile.name.trim().charAt(0).toUpperCase() || "?";
+                return (
+                  <Link
+                    key={profile.id}
+                    href={`/directory/${profile.id}`}
+                    className="flex flex-col gap-3 bg-surface px-6 py-7 transition-colors hover:bg-paper"
                   >
-                    {categoryLabels[profile.category].label}
-                  </p>
-                  <h2 className="font-display text-xl font-bold text-fg">{profile.name}</h2>
-                  {profile.headline && (
-                    <p className="text-[15px] text-neutral-600">{profile.headline}</p>
-                  )}
-                  {profile.services.length > 0 && (
-                    <p className="text-sm text-neutral-600">
-                      {t("servicesListed", { count: profile.services.length })}
-                    </p>
-                  )}
-                  {profile.location && (
-                    <p className="mt-auto text-xs text-neutral-600">{profile.location}</p>
-                  )}
-                </Link>
-              ))}
+                    <div className="flex items-center gap-3">
+                      <div
+                        className={`flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border border-line ${categoryBg[profile.category]}`}
+                      >
+                        {profile.avatar_url ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={profile.avatar_url}
+                            alt={profile.name}
+                            className="h-full w-full object-cover"
+                          />
+                        ) : (
+                          <span
+                            className={`font-display text-base font-bold ${categoryColor[profile.category]}`}
+                          >
+                            {initial}
+                          </span>
+                        )}
+                      </div>
+                      <p
+                        className={`text-xs font-semibold uppercase tracking-widest ${categoryColor[profile.category]}`}
+                      >
+                        {categoryLabels[profile.category].label}
+                      </p>
+                    </div>
+                    <h2 className="font-display text-xl font-bold text-fg">{profile.name}</h2>
+                    {profile.headline && (
+                      <p className="text-[15px] text-neutral-600">{profile.headline}</p>
+                    )}
+                    {profile.services.length > 0 && (
+                      <p className="text-sm text-neutral-600">
+                        {t("servicesListed", { count: profile.services.length })}
+                      </p>
+                    )}
+                    {profile.location && (
+                      <p className="mt-auto text-xs text-neutral-600">{profile.location}</p>
+                    )}
+                  </Link>
+                );
+              })}
             </div>
           )}
         </div>

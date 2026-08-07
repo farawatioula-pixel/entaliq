@@ -18,6 +18,10 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
   const [bio, setBio] = useState(profile.bio);
   const [location, setLocation] = useState(profile.location);
   const [contact, setContact] = useState(profile.contact);
+  const [avatarUrl, setAvatarUrl] = useState(profile.avatar_url);
+  const [portfolioImages, setPortfolioImages] = useState<string[]>(
+    profile.portfolio_images.length ? profile.portfolio_images : [""]
+  );
   const [category, setCategory] = useState<Profile["category"]>(profile.category);
   const [services, setServices] = useState<Service[]>(
     profile.services.length ? profile.services : [emptyService]
@@ -46,6 +50,18 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
     setServices((prev) => prev.filter((_, i) => i !== index));
   }
 
+  function updatePortfolioImage(index: number, value: string) {
+    setPortfolioImages((prev) => prev.map((url, i) => (i === index ? value : url)));
+  }
+
+  function addPortfolioImage() {
+    setPortfolioImages((prev) => [...prev, ""]);
+  }
+
+  function removePortfolioImage(index: number) {
+    setPortfolioImages((prev) => prev.filter((_, i) => i !== index));
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
@@ -55,6 +71,8 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
     const cleanedServices = services
       .map((s) => ({ ...s, title: s.title.trim(), description: s.description.trim(), price: s.price.trim() }))
       .filter((s) => s.title.length > 0);
+
+    const cleanedPortfolioImages = portfolioImages.map((url) => url.trim()).filter(Boolean);
 
     const supabase = createClient();
     const { error: updateError } = await supabase
@@ -66,6 +84,8 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
         location,
         contact,
         category,
+        avatar_url: avatarUrl.trim(),
+        portfolio_images: cleanedPortfolioImages,
         services: cleanedServices,
         updated_at: new Date().toISOString(),
       })
@@ -139,6 +159,18 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
             className="w-full rounded-sm border border-line bg-surface px-4 py-3 text-[15px] text-fg focus:border-red focus:outline-none"
           />
         </div>
+
+        <div className="sm:col-span-2">
+          <label className="mb-1.5 block text-sm font-medium text-neutral-600">
+            {t("avatarUrl")}
+          </label>
+          <input
+            placeholder={t("avatarUrlPlaceholder")}
+            value={avatarUrl}
+            onChange={(e) => setAvatarUrl(e.target.value)}
+            className="w-full rounded-sm border border-line bg-surface px-4 py-3 text-[15px] text-fg focus:border-red focus:outline-none"
+          />
+        </div>
       </div>
 
       <div>
@@ -170,6 +202,43 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
             >
               {categoryLabel[c]}
             </button>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <div className="flex items-center justify-between">
+          <label className="block text-sm font-medium text-neutral-600">
+            {t("portfolioImages")}
+          </label>
+          <button
+            type="button"
+            onClick={addPortfolioImage}
+            className="text-sm font-semibold text-cyan-deep hover:underline"
+          >
+            {t("addImage")}
+          </button>
+        </div>
+
+        <div className="mt-3 space-y-3">
+          {portfolioImages.map((url, i) => (
+            <div key={i} className="flex items-center gap-3">
+              <input
+                placeholder={t("imageUrlPlaceholder")}
+                value={url}
+                onChange={(e) => updatePortfolioImage(i, e.target.value)}
+                className="w-full rounded-sm border border-line bg-surface px-4 py-3 text-[15px] text-fg focus:border-red focus:outline-none"
+              />
+              {portfolioImages.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => removePortfolioImage(i)}
+                  className="shrink-0 text-xs font-semibold text-neutral-600 hover:text-red-dark"
+                >
+                  {t("removeImage")}
+                </button>
+              )}
+            </div>
           ))}
         </div>
       </div>
