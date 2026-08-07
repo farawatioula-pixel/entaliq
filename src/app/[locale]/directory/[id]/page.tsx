@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
+import PortfolioGallery from "@/components/PortfolioGallery";
+import ServicePackages from "@/components/ServicePackages";
 import type { Profile } from "@/lib/types";
 
 const categoryColor: Record<Profile["category"], string> = {
@@ -84,23 +86,8 @@ export default async function DirectoryProfilePage({
           <div>
             {portfolioImages.length > 0 && (
               <div className="mb-10">
-                <h2 className="font-display text-xl font-bold text-fg">{t("portfolio")}</h2>
-                <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                  {portfolioImages.map((url, i) => (
-                    <div
-                      key={i}
-                      className="aspect-square overflow-hidden rounded-sm border border-line bg-surface"
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={url}
-                        alt=""
-                        loading="lazy"
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
+                <h2 className="mb-4 font-display text-xl font-bold text-fg">{t("portfolio")}</h2>
+                <PortfolioGallery images={portfolioImages} />
               </div>
             )}
 
@@ -115,45 +102,13 @@ export default async function DirectoryProfilePage({
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-5 lg:sticky lg:top-24 lg:self-start">
-            {p.contact && (
-              <div className="rounded-sm border border-line bg-surface px-6 py-5">
-                <p className="text-xs font-semibold uppercase tracking-widest text-muted">
-                  {t("contact")}
-                </p>
-                <p className="mt-1.5 text-[15px] font-semibold text-fg">{p.contact}</p>
-              </div>
-            )}
-
-            {p.services.length > 0 && (
-              <div>
-                <h2 className="mb-3 font-display text-lg font-bold text-fg">{t("services")}</h2>
-                <div className="space-y-3">
-                  {p.services.map((service, i) => (
-                    <div
-                      key={i}
-                      className="rounded-sm border border-line bg-surface px-6 py-5"
-                    >
-                      <div className="flex items-baseline justify-between gap-3">
-                        <h3 className="font-display text-base font-bold text-fg">
-                          {service.title}
-                        </h3>
-                        {service.price && (
-                          <p className="shrink-0 font-display text-lg font-bold text-red-dark">
-                            {service.price}
-                          </p>
-                        )}
-                      </div>
-                      {service.description && (
-                        <p className="mt-2 text-sm leading-relaxed text-neutral-600">
-                          {service.description}
-                        </p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+          <div className="lg:sticky lg:top-24 lg:self-start">
+            <ServicePackages
+              services={p.services}
+              contact={p.contact}
+              servicesLabel={t("services")}
+              contactLabel={t("contact")}
+            />
           </div>
         </div>
       </div>
