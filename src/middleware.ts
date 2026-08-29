@@ -1,48 +1,53 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
+
 import { routing } from "@/i18n/routing";
 
 const intlMiddleware = createMiddleware(routing);
 
 export async function middleware(request: NextRequest) {
-  // Locale detection / redirect / rewrite first.
-  let response = intlMiddleware(request);
+  // Let next-intl create the response first.
+  const response = intlMiddleware(request);
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!supabaseUrl || !supabaseAnonKey) {
-    // Supabase isn't configured yet — skip session handling rather than crash.
     return response;
   }
 
-  const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
-    cookies: {
-      getAll() {
-        return request.cookies.getAll();
-      },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
-        response = intlMiddleware(request);
-        cookiesToSet.forEach(({ name, value, options }) =>
-          response.cookies.set(name, value, options)
-        );
-      },
-    },
-  });
+  const supabase = createServerClient(
+    supabaseUrl,
+    supabaseAnonKey,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
 
-  // Refresh the session if it's expired. This calls out to Supabase over the
-  // network — if that call hangs or fails (flaky connection, brief outage),
-  // don't let it take the whole page down with it. Time it out and continue
-  // rendering the page in a logged-out state rather than failing entirely.
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) => {
+            request.cookies.set(name, value);
+          });
+
+          cookiesToSet.forEach(({ name, value, options }) => {
+            response.cookies.set(name, value, options);
+          });
+        },
+      },
+    }
+  );
+
   try {
     await Promise.race([
       supabase.auth.getUser(),
-      new Promise((_, reject) => setTimeout(() => reject(new Error("auth timeout")), 3000)),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("auth timeout")), 3000)
+      ),
     ]);
   } catch {
-    // Session refresh failed or timed out — proceed without blocking the page.
+    // Continue as logged out if Supabase is unavailable.
   }
 
   return response;
