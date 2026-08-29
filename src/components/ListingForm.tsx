@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { ListingImagesUpload } from "@/components/ListingImagesUpload";
 import type { Category, Listing, ListingPackage, FaqItem, PackageTier } from "@/lib/marketplace-types";
 
 const emptyPackage = (tier: PackageTier): Omit<ListingPackage, "id" | "listing_id"> => ({
@@ -47,16 +48,6 @@ export default function ListingForm({
   const [error, setError] = useState<string | null>(null);
 
   const subcategories = categoryId ? categories.filter((c) => c.parent_id === categoryId) : [];
-
-  function updateImage(i: number, value: string) {
-    setImages((prev) => prev.map((v, idx) => (idx === i ? value : v)));
-  }
-  function addImage() {
-    setImages((prev) => [...prev, ""]);
-  }
-  function removeImage(i: number) {
-    setImages((prev) => prev.filter((_, idx) => idx !== i));
-  }
 
   function updateFaq(i: number, field: keyof FaqItem, value: string) {
     setFaq((prev) => prev.map((f, idx) => (idx === i ? { ...f, [field]: value } : f)));
@@ -243,36 +234,7 @@ export default function ListingForm({
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-fg">Images (URLs)</label>
-        <div className="mt-2 space-y-2">
-          {images.map((img, i) => (
-            <div key={i} className="flex gap-2">
-              <input
-                type="text"
-                value={img}
-                onChange={(e) => updateImage(i, e.target.value)}
-                placeholder="https://..."
-                className="flex-1 rounded-sm border border-line bg-surface px-4 py-2.5 text-sm text-fg focus:border-cyan-deep focus:outline-none"
-              />
-              {images.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => removeImage(i)}
-                  className="rounded-sm border border-line px-3 text-sm text-neutral-600 hover:border-red-dark hover:text-red-dark"
-                >
-                  Remove
-                </button>
-              )}
-            </div>
-          ))}
-          <button
-            type="button"
-            onClick={addImage}
-            className="text-sm font-semibold text-cyan-deep hover:underline"
-          >
-            + Add image
-          </button>
-        </div>
+        <ListingImagesUpload sellerId={sellerId} images={images} onChange={setImages} />
       </div>
 
       <div>
