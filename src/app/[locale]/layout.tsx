@@ -7,6 +7,7 @@ import "./globals.css";
 import { routing } from "@/i18n/routing";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
@@ -74,6 +75,7 @@ export default async function LocaleLayout({
         }`}
       >
         <NextIntlClientProvider>
+          <ServiceWorkerRegister />
           <Header />
           <main>{children}</main>
           <Footer />
