@@ -32,7 +32,6 @@ export default function LoginPage() {
     }
 
     router.push("/profile");
-    router.refresh();
   }
 
   return (
