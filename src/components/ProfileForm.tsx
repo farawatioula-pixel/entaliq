@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { AvatarUpload } from "@/components/AvatarUpload";
 import type { Profile, Service } from "@/lib/types";
 
 const categories: Profile["category"][] = ["SELL", "CREATE", "BUILD"];
@@ -161,15 +162,7 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
         </div>
 
         <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-sm font-medium text-neutral-600">
-            {t("avatarUrl")}
-          </label>
-          <input
-            placeholder={t("avatarUrlPlaceholder")}
-            value={avatarUrl}
-            onChange={(e) => setAvatarUrl(e.target.value)}
-            className="w-full rounded-sm border border-line bg-surface px-4 py-3 text-[15px] text-fg focus:border-red focus:outline-none"
-          />
+          <AvatarUpload userId={profile.id} value={avatarUrl} onChange={setAvatarUrl} />
         </div>
       </div>
 
