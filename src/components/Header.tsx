@@ -6,12 +6,14 @@ import { Link, usePathname } from "@/i18n/navigation";
 import Logo from "./Logo";
 import LocaleSwitcher from "./LocaleSwitcher";
 import { NotificationBell } from "./NotificationBell";
+import { createClient } from "@/lib/supabase/client";
 
 export default function Header() {
   const t = useTranslations("nav");
   const locale = useLocale();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [userId, setUserId] = useState<string | null | undefined>(undefined);
 
   const links = [
     { href: "/", label: t("home") },
@@ -25,6 +27,30 @@ export default function Header() {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUserId(user?.id ?? null);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUserId(session?.user?.id ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  async function handleSignOut() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    window.location.href = `/${locale}`;
+  }
+
+  const isLoggedIn = !!userId;
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur">
@@ -55,26 +81,41 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <NotificationBell />
+          {isLoggedIn && <NotificationBell />}
           <LocaleSwitcher />
-          <Link
-            href="/directory"
-            className="inline-flex items-center rounded-sm border border-line px-6 py-2.5 text-[15px] font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
-          >
-            {t("findServices")}
-          </Link>
-          <Link
-            href="/login"
-            className="text-[15px] font-medium text-neutral-600 transition-colors hover:text-fg"
-          >
-            {t("login")}
-          </Link>
-          <Link
-            href="/register"
-            className="inline-flex items-center rounded-sm bg-red px-6 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-red-dark"
-          >
-            {t("registerCta")}
-          </Link>
+
+          {userId === undefined ? null : isLoggedIn ? (
+            <>
+              <Link
+                href="/profile"
+                className="inline-flex items-center rounded-sm border border-line px-6 py-2.5 text-[15px] font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
+              >
+                My Profile
+              </Link>
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="text-[15px] font-medium text-neutral-600 transition-colors hover:text-fg"
+              >
+                Sign out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="text-[15px] font-medium text-neutral-600 transition-colors hover:text-fg"
+              >
+                {t("login")}
+              </Link>
+              <Link
+                href="/register"
+                className="inline-flex items-center rounded-sm bg-red px-6 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-red-dark"
+              >
+                {t("registerCta")}
+              </Link>
+            </>
+          )}
         </div>
 
         <button
@@ -125,30 +166,48 @@ export default function Header() {
                 </li>
               );
             })}
-            <li>
-              <Link
-                href="/directory"
-                className="block rounded-sm px-2 py-3 text-center text-base font-medium text-neutral-600"
-              >
-                {t("findServices")}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/login"
-                className="block rounded-sm px-2 py-3 text-center text-base font-medium text-neutral-600"
-              >
-                {t("login")}
-              </Link>
-            </li>
-            <li className="pt-2">
-              <Link
-                href="/register"
-                className="block rounded-sm bg-red px-4 py-3 text-center text-base font-semibold text-white"
-              >
-                {t("registerCta")}
-              </Link>
-            </li>
+
+            {userId !== undefined && isLoggedIn ? (
+              <>
+                <li>
+                  <Link
+                    href="/profile"
+                    className="block rounded-sm px-2 py-3 text-center text-base font-medium text-neutral-600"
+                  >
+                    My Profile
+                  </Link>
+                </li>
+                <li className="pt-2">
+                  <button
+                    type="button"
+                    onClick={handleSignOut}
+                    className="block w-full rounded-sm bg-red px-4 py-3 text-center text-base font-semibold text-white"
+                  >
+                    Sign out
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    href="/login"
+                    className="block rounded-sm px-2 py-3 text-center text-base font-medium text-neutral-600"
+                  >
+                    {t("login")}
+                  </Link>
+                </li>
+                <li className="pt-2">
+                  <Link
+                    href="/register"
+                    className="block rounded-sm bg-red px-4 py-3 text-center text-base font-semibold text-white"
+                  >
+                    {t("registerCta")}
+                  </Link>
+                </li>
+              </>
+            )}
+
             <li className="pt-3">
               <LocaleSwitcher fullWidth locale={locale} />
             </li>
