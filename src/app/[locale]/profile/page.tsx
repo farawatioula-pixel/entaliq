@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter, Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { withTimeout } from "@/lib/with-timeout";
 import ProfileForm from "@/components/ProfileForm";
 import type { Profile } from "@/lib/types";
 
@@ -20,7 +21,7 @@ export default function ProfilePage() {
     async function load() {
       const {
         data: { user },
-      } = await supabase.auth.getUser();
+      } = await withTimeout(supabase.auth.getUser(), 8000);
 
       if (!active) return;
 
@@ -29,11 +30,10 @@ export default function ProfilePage() {
         return;
       }
 
-      const { data } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", user.id)
-        .single();
+      const { data } = await withTimeout(
+        supabase.from("profiles").select("*").eq("id", user.id).single(),
+        8000
+      );
 
       if (!active) return;
 
