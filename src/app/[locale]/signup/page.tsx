@@ -2,13 +2,12 @@
 
 import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { Link, useRouter } from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 export default function SignupPage() {
   const t = useTranslations("signupPage");
   const locale = useLocale();
-  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,8 +38,7 @@ export default function SignupPage() {
     }
 
     if (data.session) {
-      router.push("/profile");
-      router.refresh();
+      window.location.href = `/${locale}/profile`;
     } else {
       // Email confirmation is required before a session exists.
       setDone(true);
