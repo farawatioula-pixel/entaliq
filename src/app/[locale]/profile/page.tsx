@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { redirect, Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { withTimeout } from "@/lib/with-timeout";
 import ProfileForm from "@/components/ProfileForm";
 import type { Profile } from "@/lib/types";
 
@@ -13,20 +14,34 @@ export default async function ProfilePage({
   const t = await getTranslations("profilePage");
   const supabase = await createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  let user: Awaited<ReturnType<typeof supabase.auth.getUser>>["data"]["user"] = null;
+  try {
+    const {
+      data: { user: fetchedUser },
+    } = await withTimeout(supabase.auth.getUser());
+    user = fetchedUser;
+  } catch {
+    // Supabase didn't respond in time — treat as logged out rather than
+    // hanging the page indefinitely.
+    redirect({ href: "/login", locale });
+    return;
+  }
 
   if (!user) {
     redirect({ href: "/login", locale });
     return;
   }
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", user.id)
-    .single();
+  let profile: Profile | null = null;
+  try {
+    const { data } = await withTimeout(
+      supabase.from("profiles").select("*").eq("id", user.id).single()
+    );
+    profile = data as Profile | null;
+  } catch {
+    // Profile fetch timed out — fall back to an empty profile shape below
+    // rather than failing the whole page.
+  }
 
   const initialProfile: Profile = profile ?? {
     id: user.id,
