@@ -1,71 +1,68 @@
-import { getTranslations } from "next-intl/server";
+"use client";
 
-import { redirect, Link } from "@/i18n/navigation";
-
-import { createClient } from "@/lib/supabase/server";
-
-import { withTimeout } from "@/lib/with-timeout";
-
+import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { useRouter, Link } from "@/i18n/navigation";
+import { createClient } from "@/lib/supabase/client";
 import ProfileForm from "@/components/ProfileForm";
-
 import type { Profile } from "@/lib/types";
 
-export default async function ProfilePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
+export default function ProfilePage() {
+  const t = useTranslations("profilePage");
+  const router = useRouter();
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [status, setStatus] = useState<"loading" | "error" | "ready">("loading");
 
-  const t = await getTranslations("profilePage");
+  useEffect(() => {
+    let active = true;
+    const supabase = createClient();
 
-  const supabase = await createClient();
+    async function load() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
-  // Get the currently authenticated user.
-  // The Supabase session should now be refreshed by src/proxy.ts.
-  const {
-    data: { user },
-    error: authError,
-  } = await supabase.auth.getUser();
+      if (!active) return;
 
-  if (authError || !user) {
-    redirect({ href: "/login", locale });
-    return;
-  }
+      if (!user) {
+        router.push("/login");
+        return;
+      }
 
-  // Fetch the user's profile.
-  // Keep the timeout here for now so a database problem
-  // doesn't make the entire page hang.
-  let profile: Profile | null = null;
-
-  try {
-    const { data } = await withTimeout(
-      supabase
+      const { data } = await supabase
         .from("profiles")
         .select("*")
         .eq("id", user.id)
-        .single()
-    );
+        .single();
 
-    profile = data as Profile | null;
-  } catch {
-    // Profile fetch timed out or failed.
-    // Fall back to an empty profile shape below.
-  }
+      if (!active) return;
 
-  const initialProfile: Profile = profile ?? {
-    id: user.id,
-    name: "",
-    headline: "",
-    bio: "",
-    location: "",
-    contact: user.email ?? "",
-    category: "SELL",
-    avatar_url: "",
-    portfolio_images: [],
-    services: [],
-    updated_at: new Date().toISOString(),
-  };
+      setProfile(
+        (data as Profile | null) ?? {
+          id: user.id,
+          name: "",
+          headline: "",
+          bio: "",
+          location: "",
+          contact: user.email ?? "",
+          category: "SELL",
+          avatar_url: "",
+          portfolio_images: [],
+          services: [],
+          updated_at: new Date().toISOString(),
+        }
+      );
+      setStatus("ready");
+    }
+
+    load().catch(() => {
+      if (active) setStatus("error");
+    });
+
+    return () => {
+      active = false;
+    };
+  }, [router]);
 
   return (
     <main className="border-t-4 border-cyan bg-paper px-5 py-16 sm:px-8">
@@ -73,53 +70,70 @@ export default async function ProfilePage({
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">
           {t("eyebrow")}
         </p>
-
         <h1 className="mt-3 font-display text-3xl font-bold text-fg sm:text-4xl">
           {t("title")}
         </h1>
-
         <p className="mt-2 text-[15px] text-neutral-600">
           {t("body")}{" "}
-          <Link
-            href="/directory"
-            className="text-cyan-deep hover:underline"
-          >
+          <Link href="/directory" className="text-cyan-deep hover:underline">
             {t("marketplace")}
           </Link>
           .
         </p>
 
-        <div className="mt-4 flex flex-wrap gap-3">
-          <Link
-            href="/dashboard"
-            className="inline-flex items-center rounded-sm border border-line px-5 py-2.5 text-sm font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
-          >
-            Seller dashboard
-          </Link>
+        {status === "loading" && (
+          <div className="mt-10 rounded-sm border border-line bg-surface px-8 py-16 text-center">
+            <p className="text-[15px] text-neutral-600">Loading your profile…</p>
+          </div>
+        )}
 
-          <Link
-            href="/orders"
-            className="inline-flex items-center rounded-sm border border-line px-5 py-2.5 text-sm font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
-          >
-            My orders
-          </Link>
+        {status === "error" && (
+          <div className="mt-10 rounded-sm border border-line bg-surface px-8 py-16 text-center">
+            <p className="text-[15px] text-neutral-600">
+              Couldn&apos;t load your profile.{" "}
+              <button
+                type="button"
+                onClick={() => window.location.reload()}
+                className="text-cyan-deep hover:underline"
+              >
+                Try again
+              </button>
+            </p>
+          </div>
+        )}
 
-          <Link
-            href="/messages"
-            className="inline-flex items-center rounded-sm border border-line px-5 py-2.5 text-sm font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
-          >
-            Messages
-          </Link>
+        {status === "ready" && (
+          <>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center rounded-sm border border-line px-5 py-2.5 text-sm font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
+              >
+                Seller dashboard
+              </Link>
+              <Link
+                href="/orders"
+                className="inline-flex items-center rounded-sm border border-line px-5 py-2.5 text-sm font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
+              >
+                My orders
+              </Link>
+              <Link
+                href="/messages"
+                className="inline-flex items-center rounded-sm border border-line px-5 py-2.5 text-sm font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
+              >
+                Messages
+              </Link>
+              <Link
+                href="/favorites"
+                className="inline-flex items-center rounded-sm border border-line px-5 py-2.5 text-sm font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
+              >
+                Favorites
+              </Link>
+            </div>
 
-          <Link
-            href="/favorites"
-            className="inline-flex items-center rounded-sm border border-line px-5 py-2.5 text-sm font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
-          >
-            Favorites
-          </Link>
-        </div>
-
-        <ProfileForm profile={initialProfile} />
+            <ProfileForm profile={profile!} />
+          </>
+        )}
       </div>
     </main>
   );
