@@ -32,8 +32,18 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  // Refresh the session if it's expired.
-  await supabase.auth.getUser();
+  // Refresh the session if it's expired. This calls out to Supabase over the
+  // network — if that call hangs or fails (flaky connection, brief outage),
+  // don't let it take the whole page down with it. Time it out and continue
+  // rendering the page in a logged-out state rather than failing entirely.
+  try {
+    await Promise.race([
+      supabase.auth.getUser(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error("auth timeout")), 3000)),
+    ]);
+  } catch {
+    // Session refresh failed or timed out — proceed without blocking the page.
+  }
 
   return response;
 }
