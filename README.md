@@ -1,4 +1,4 @@
-# Intaleq 2026
+# Mountaliq 2026
 
 Jordan's Digital Youth Income & Training Platform. Built with Next.js (App
 Router), TypeScript, and Tailwind CSS.
@@ -7,8 +7,8 @@ Router), TypeScript, and Tailwind CSS.
 
 | Route        | What's there |
 |--------------|--------------|
-| `/`          | Home — hero, the gap Intaleq closes, the promise, tracks preview, trainers, partner logos, closing CTA |
-| `/about`     | The full case for Intaleq and its self-sustaining model |
+| `/`          | Home — hero, the gap Mountaliq closes, the promise, tracks preview, trainers, partner logos, closing CTA |
+| `/about`     | The full case for Mountaliq and its self-sustaining model |
 | `/tracks`    | All seven income tracks in detail |
 | `/trainers`  | Trainer bios |
 | `/partners`  | Sponsorship tiers, partner logos, and a working "Partner With Us" form |
@@ -102,15 +102,15 @@ same two values.
    ```bash
    git init
    git add .
-   git commit -m "Initial commit: Intaleq 2026 site"
+   git commit -m "Initial commit: Mountaliq 2026 site"
    git branch -M main
-   git remote add origin https://github.com/<your-username>/intaleq.git
+   git remote add origin https://github.com/<your-username>/mountaliq.git
    git push -u origin main
    ```
 
 2. **Deploy on Vercel**
    - Go to [vercel.com/new](https://vercel.com/new) and sign in with GitHub.
-   - Import the `intaleq` repository.
+   - Import the `mountaliq` repository.
    - Framework preset: Vercel auto-detects **Next.js** — leave build settings
      as default (`next build`).
    - Add the `FORM_ENDPOINT` environment variable now if you have one (see
@@ -119,7 +119,7 @@ same two values.
 
 3. **Custom domain (optional)**
    - In the Vercel project, go to **Settings → Domains** and add your domain
-     (e.g. `intaleq.jo`), then follow the DNS instructions Vercel shows you.
+     (e.g. `mountaliq.jo`), then follow the DNS instructions Vercel shows you.
 
 Every future `git push` to `main` automatically redeploys the live site.
 

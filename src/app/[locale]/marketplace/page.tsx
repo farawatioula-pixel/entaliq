@@ -43,7 +43,7 @@ export default async function MarketplacePage({
             Marketplace
           </p>
           <h1 className="mt-3 max-w-2xl font-display text-3xl font-bold text-fg sm:text-4xl">
-            Hire real services from real Intaleq sellers
+            Hire real services from real Mountaliq sellers
           </h1>
           <p className="mt-3 max-w-xl text-[15px] text-neutral-600">
             Browse listings, compare packages, and order directly. Every seller trained here.

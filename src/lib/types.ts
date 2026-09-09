@@ -4,6 +4,16 @@ export type Service = {
   price: string;
 };
 
+export type ProfileCategory =
+  | "graphics-design"
+  | "programming-tech"
+  | "digital-marketing"
+  | "writing-translation"
+  | "video-animation"
+  | "ai-services"
+  | "business-consulting"
+  | "ecommerce";
+
 export type Profile = {
   id: string;
   name: string;
@@ -11,7 +21,7 @@ export type Profile = {
   bio: string;
   location: string;
   contact: string;
-  category: "SELL" | "CREATE" | "BUILD";
+  category: ProfileCategory;
   avatar_url: string;
   portfolio_images: string[];
   services: Service[];

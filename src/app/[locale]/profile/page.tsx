@@ -45,7 +45,7 @@ export default function ProfilePage() {
           bio: "",
           location: "",
           contact: user.email ?? "",
-          category: "SELL",
+          category: "graphics-design",
           avatar_url: "",
           portfolio_images: [],
           services: [],

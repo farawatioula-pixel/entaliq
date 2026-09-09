@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
 
   // Log every submission server-side so it always shows up in Vercel's
   // function logs, even if no external form endpoint is configured.
-  console.log("[intaleq:register]", JSON.stringify(body));
+  console.log("[mountaliq:register]", JSON.stringify(body));
 
   // Optional: forward to an external form service (Formspree, Getform, etc.)
   // so submissions land in an inbox instead of only Vercel logs.
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
         body: JSON.stringify(body),
       });
     } catch (err) {
-      console.error("[intaleq:register] forwarding failed", err);
+      console.error("[mountaliq:register] forwarding failed", err);
       // Submission is still accepted — logged above — even if forwarding fails.
     }
   }

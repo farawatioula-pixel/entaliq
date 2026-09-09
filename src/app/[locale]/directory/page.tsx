@@ -4,18 +4,37 @@ import { createClient } from "@/lib/supabase/server";
 import type { Profile } from "@/lib/types";
 
 const categoryColor: Record<Profile["category"], string> = {
-  SELL: "text-cyan-deep",
-  CREATE: "text-violet-deep",
-  BUILD: "text-red-dark",
+  "graphics-design": "text-violet-deep",
+  "programming-tech": "text-cyan-deep",
+  "digital-marketing": "text-red-dark",
+  "writing-translation": "text-violet-deep",
+  "video-animation": "text-red-dark",
+  "ai-services": "text-cyan-deep",
+  "business-consulting": "text-violet-deep",
+  ecommerce: "text-cyan-deep",
 };
 
 const categoryBg: Record<Profile["category"], string> = {
-  SELL: "bg-cyan/10",
-  CREATE: "bg-violet/10",
-  BUILD: "bg-red/10",
+  "graphics-design": "bg-violet/10",
+  "programming-tech": "bg-cyan/10",
+  "digital-marketing": "bg-red/10",
+  "writing-translation": "bg-violet/10",
+  "video-animation": "bg-red/10",
+  "ai-services": "bg-cyan/10",
+  "business-consulting": "bg-violet/10",
+  ecommerce: "bg-cyan/10",
 };
 
-const categories: Profile["category"][] = ["SELL", "CREATE", "BUILD"];
+const categories: Profile["category"][] = [
+  "graphics-design",
+  "programming-tech",
+  "digital-marketing",
+  "writing-translation",
+  "video-animation",
+  "ai-services",
+  "business-consulting",
+  "ecommerce",
+];
 
 export const revalidate = 0;
 
@@ -79,7 +98,7 @@ export default async function DirectoryPage({
 
       <section id="browse" className="border-t border-line px-5 py-16 sm:px-8">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-3">
+          <div className="grid gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-3 lg:grid-cols-5">
             <Link
               href="/directory"
               className={`px-6 py-6 transition-colors ${

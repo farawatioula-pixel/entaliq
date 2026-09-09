@@ -7,15 +7,25 @@ import ServicePackages from "@/components/ServicePackages";
 import type { Profile } from "@/lib/types";
 
 const categoryColor: Record<Profile["category"], string> = {
-  SELL: "text-cyan-deep",
-  CREATE: "text-violet-deep",
-  BUILD: "text-red-dark",
+  "graphics-design": "text-violet-deep",
+  "programming-tech": "text-cyan-deep",
+  "digital-marketing": "text-red-dark",
+  "writing-translation": "text-violet-deep",
+  "video-animation": "text-red-dark",
+  "ai-services": "text-cyan-deep",
+  "business-consulting": "text-violet-deep",
+  ecommerce: "text-cyan-deep",
 };
 
 const categoryBg: Record<Profile["category"], string> = {
-  SELL: "bg-cyan/10",
-  CREATE: "bg-violet/10",
-  BUILD: "bg-red/10",
+  "graphics-design": "bg-violet/10",
+  "programming-tech": "bg-cyan/10",
+  "digital-marketing": "bg-red/10",
+  "writing-translation": "bg-violet/10",
+  "video-animation": "bg-red/10",
+  "ai-services": "bg-cyan/10",
+  "business-consulting": "bg-violet/10",
+  ecommerce: "bg-cyan/10",
 };
 
 export default async function DirectoryProfilePage({

@@ -1,8 +1,10 @@
+import type { ProfileCategory } from "@/lib/types";
+
 export type Locale = "en" | "ar";
 export type LocalizedText = { en: string; ar: string };
 
 export type Track = {
-  category: "SELL" | "CREATE" | "BUILD";
+  category: ProfileCategory;
   title: LocalizedText;
   description: LocalizedText;
   detail: LocalizedText;
@@ -10,7 +12,7 @@ export type Track = {
 
 export const tracks: Track[] = [
   {
-    category: "SELL",
+    category: "ecommerce",
     title: {
       en: "E-commerce & Online Selling",
       ar: "التجارة الإلكترونية والبيع عبر الإنترنت",
@@ -25,7 +27,7 @@ export const tracks: Track[] = [
     },
   },
   {
-    category: "SELL",
+    category: "digital-marketing",
     title: { en: "Affiliate Marketing", ar: "التسويق بالعمولة" },
     description: {
       en: "Earn commissions promoting products you don't own, no inventory, no upfront cost.",
@@ -37,7 +39,7 @@ export const tracks: Track[] = [
     },
   },
   {
-    category: "CREATE",
+    category: "video-animation",
     title: {
       en: "Content Creation & Monetization",
       ar: "صناعة المحتوى وتحقيق الدخل منه",
@@ -52,7 +54,7 @@ export const tracks: Track[] = [
     },
   },
   {
-    category: "CREATE",
+    category: "writing-translation",
     title: { en: "Freelancing & Remote Services", ar: "العمل الحر والخدمات عن بُعد" },
     description: {
       en: "Sell your skills to clients worldwide, design, writing, translation, and more.",
@@ -64,7 +66,7 @@ export const tracks: Track[] = [
     },
   },
   {
-    category: "CREATE",
+    category: "business-consulting",
     title: { en: "Digital Products", ar: "المنتجات الرقمية" },
     description: {
       en: "Create once, sell forever, templates, guides, courses, and downloadable assets.",
@@ -76,7 +78,7 @@ export const tracks: Track[] = [
     },
   },
   {
-    category: "BUILD",
+    category: "programming-tech",
     title: {
       en: "AI-Powered Coding (Vibe Coding / No-Code)",
       ar: "البرمجة بالذكاء الاصطناعي (فايب كودينغ / بدون كود)",
@@ -91,7 +93,7 @@ export const tracks: Track[] = [
     },
   },
   {
-    category: "BUILD",
+    category: "ai-services",
     title: { en: "Paid AI Services", ar: "خدمات الذكاء الاصطناعي مدفوعة الأجر" },
     description: {
       en: "Offer AI-powered services to local businesses, automation, content, and more.",
@@ -159,8 +161,8 @@ export const stats: { value: string; label: LocalizedText }[] = [
   {
     value: "4",
     label: {
-      en: "Live income tracks: Sell, Create, Build, and Market",
-      ar: "مسارات دخل مباشرة: بيع، إنشاء، بناء، وتسويق",
+      en: "Hands-on training tracks across e-commerce, marketing, content, and tech",
+      ar: "مسارات تدريب عملية عبر التجارة الإلكترونية والتسويق والمحتوى والتقنية",
     },
   },
   {
@@ -193,7 +195,7 @@ export const gaps: { title: LocalizedText; body: LocalizedText }[] = [
       ar: "المحتوى المجاني نقطة بداية، لا خطة عمل",
     },
     body: {
-      en: "What's available for free online is theoretical and scattered. Muntaliq takes participants from theoretical knowledge to a sellable skill, and a product or service ready for the market.",
+      en: "What's available for free online is theoretical and scattered. Mountaliq takes participants from theoretical knowledge to a sellable skill, and a product or service ready for the market.",
       ar: "ما هو متاح مجاناً على الإنترنت نظري ومتناثر. منطلق يأخذ المشارك من المعرفة النظرية إلى مهارة قابلة للبيع، ومنتج أو خدمة جاهزة للسوق.",
     },
   },
@@ -203,7 +205,7 @@ export const promise: { title: LocalizedText; body: LocalizedText }[] = [
   {
     title: { en: "For the Trainee", ar: "للمتدرب" },
     body: {
-      en: "A marketable skill within days, not months, and a real product or project ready to sell by the end of training. After training, every participant moves directly into the Muntaliq marketplace to start working and taking on their first clients.",
+      en: "A marketable skill within days, not months, and a real product or project ready to sell by the end of training. After training, every participant moves directly into the Mountaliq marketplace to start working and taking on their first clients.",
       ar: "مهارة قابلة للتسويق خلال أيام لا أشهر، ومنتج أو مشروع حقيقي جاهز للبيع بنهاية التدريب. بعد التدريب، ينتقل كل مشارك مباشرة إلى سوق منطلق ليبدأ العمل واستقبال أول عملائه.",
     },
   },

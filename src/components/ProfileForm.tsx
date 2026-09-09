@@ -7,7 +7,16 @@ import { createClient } from "@/lib/supabase/client";
 import { AvatarUpload } from "@/components/AvatarUpload";
 import type { Profile, Service } from "@/lib/types";
 
-const categories: Profile["category"][] = ["SELL", "CREATE", "BUILD"];
+const categories: Profile["category"][] = [
+  "graphics-design",
+  "programming-tech",
+  "digital-marketing",
+  "writing-translation",
+  "video-animation",
+  "ai-services",
+  "business-consulting",
+  "ecommerce",
+];
 
 const emptyService: Service = { title: "", description: "", price: "" };
 
@@ -32,9 +41,14 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
   const [saved, setSaved] = useState(false);
 
   const categoryLabel: Record<Profile["category"], string> = {
-    SELL: t("categorySell"),
-    CREATE: t("categoryCreate"),
-    BUILD: t("categoryBuild"),
+    "graphics-design": t("categoryGraphicsDesign"),
+    "programming-tech": t("categoryProgrammingTech"),
+    "digital-marketing": t("categoryDigitalMarketing"),
+    "writing-translation": t("categoryWritingTranslation"),
+    "video-animation": t("categoryVideoAnimation"),
+    "ai-services": t("categoryAiServices"),
+    "business-consulting": t("categoryBusinessConsulting"),
+    ecommerce: t("categoryEcommerce"),
   };
 
   function updateService(index: number, field: keyof Service, value: string) {
@@ -180,8 +194,8 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-neutral-600">{t("track")}</label>
-        <div className="grid gap-3 sm:grid-cols-3">
+        <label className="mb-2 block text-sm font-medium text-neutral-600">{t("category")}</label>
+        <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
           {categories.map((c) => (
             <button
               type="button"
