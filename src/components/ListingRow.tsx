@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Link } from "@/i18n/navigation";
@@ -13,8 +14,15 @@ const statusColor: Record<Listing["status"], string> = {
 };
 
 export function ListingRow({ listing }: { listing: Listing }) {
+  const t = useTranslations("listingRow");
   const router = useRouter();
   const [busy, setBusy] = useState(false);
+
+  const statusLabel: Record<Listing["status"], string> = {
+    draft: t("statusDraft"),
+    published: t("statusPublished"),
+    unpublished: t("statusUnpublished"),
+  };
 
   async function setStatus(status: Listing["status"]) {
     setBusy(true);
@@ -25,7 +33,7 @@ export function ListingRow({ listing }: { listing: Listing }) {
   }
 
   async function remove() {
-    if (!confirm(`Delete "${listing.title}"? This cannot be undone.`)) return;
+    if (!confirm(t("deleteConfirm", { title: listing.title }))) return;
     setBusy(true);
     const supabase = createClient();
     await supabase.from("listings").delete().eq("id", listing.id);
@@ -36,9 +44,9 @@ export function ListingRow({ listing }: { listing: Listing }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 rounded-sm border border-line bg-surface px-5 py-4">
       <div>
-        <p className="font-display text-base font-bold text-fg">{listing.title || "Untitled"}</p>
+        <p className="font-display text-base font-bold text-fg">{listing.title || t("untitled")}</p>
         <p className={`mt-1 text-xs font-semibold uppercase tracking-widest ${statusColor[listing.status]}`}>
-          {listing.status}
+          {statusLabel[listing.status]}
         </p>
       </div>
 
@@ -48,14 +56,14 @@ export function ListingRow({ listing }: { listing: Listing }) {
             href={`/marketplace/${listing.id}`}
             className="rounded-sm border border-line px-3 py-1.5 text-xs font-semibold text-fg hover:border-cyan-deep hover:text-cyan-deep"
           >
-            View
+            {t("view")}
           </Link>
         )}
         <Link
           href={`/dashboard/listings/${listing.id}/edit`}
           className="rounded-sm border border-line px-3 py-1.5 text-xs font-semibold text-fg hover:border-cyan-deep hover:text-cyan-deep"
         >
-          Edit
+          {t("edit")}
         </Link>
         {listing.status === "published" ? (
           <button
@@ -64,7 +72,7 @@ export function ListingRow({ listing }: { listing: Listing }) {
             onClick={() => setStatus("unpublished")}
             className="rounded-sm border border-line px-3 py-1.5 text-xs font-semibold text-neutral-600 hover:border-red-dark hover:text-red-dark disabled:opacity-50"
           >
-            Unpublish
+            {t("unpublish")}
           </button>
         ) : (
           <button
@@ -73,7 +81,7 @@ export function ListingRow({ listing }: { listing: Listing }) {
             onClick={() => setStatus("published")}
             className="rounded-sm border border-line px-3 py-1.5 text-xs font-semibold text-neutral-600 hover:border-cyan-deep hover:text-cyan-deep disabled:opacity-50"
           >
-            Publish
+            {t("publish")}
           </button>
         )}
         <button
@@ -82,7 +90,7 @@ export function ListingRow({ listing }: { listing: Listing }) {
           onClick={remove}
           className="rounded-sm border border-line px-3 py-1.5 text-xs font-semibold text-neutral-600 hover:border-red-dark hover:text-red-dark disabled:opacity-50"
         >
-          Delete
+          {t("delete")}
         </button>
       </div>
     </div>

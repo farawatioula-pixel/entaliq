@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { redirect, Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import type { Listing } from "@/lib/marketplace-types";
@@ -11,6 +12,7 @@ export default async function DashboardListingsPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations("dashboardListingsPage");
   const supabase = await createClient();
 
   const {
@@ -36,24 +38,24 @@ export default async function DashboardListingsPage({
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">
-              Dashboard
+              {t("eyebrow")}
             </p>
             <h1 className="mt-3 font-display text-3xl font-bold text-fg sm:text-4xl">
-              My listings
+              {t("title")}
             </h1>
           </div>
           <Link
             href="/dashboard/listings/new"
             className="rounded-sm bg-red px-5 py-2.5 text-sm font-semibold text-white hover:bg-red-dark"
           >
-            Create listing
+            {t("createListing")}
           </Link>
         </div>
 
         {list.length === 0 ? (
           <div className="mt-10 rounded-sm border border-line bg-surface px-8 py-16 text-center">
             <p className="text-[15px] text-neutral-600">
-              You have not created any listings yet.
+              {t("noListings")}
             </p>
           </div>
         ) : (

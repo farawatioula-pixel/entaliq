@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 
 export function ListingImagesUpload({
@@ -12,6 +13,7 @@ export function ListingImagesUpload({
   images: string[];
   onChange: (images: string[]) => void;
 }) {
+  const t = useTranslations("listingImages");
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -24,11 +26,11 @@ export function ListingImagesUpload({
 
     for (const file of files) {
       if (!file.type.startsWith("image/")) {
-        setError("Please choose image files only.");
+        setError(t("imagesOnly"));
         continue;
       }
       if (file.size > 5 * 1024 * 1024) {
-        setError("Each image must be under 5MB.");
+        setError(t("sizeLimit"));
         continue;
       }
 
@@ -64,7 +66,7 @@ export function ListingImagesUpload({
 
   return (
     <div>
-      <label className="block text-sm font-semibold text-fg">Images</label>
+      <label className="block text-sm font-semibold text-fg">{t("label")}</label>
 
       <div className="mt-2 flex flex-wrap gap-3">
         {images.filter(Boolean).map((img, i) => (
@@ -79,7 +81,7 @@ export function ListingImagesUpload({
               type="button"
               onClick={() => removeImage(i)}
               className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-line bg-surface text-xs text-red-dark hover:border-red-dark"
-              aria-label="Remove image"
+              aria-label={t("removeImage")}
             >
               ✕
             </button>
@@ -92,7 +94,7 @@ export function ListingImagesUpload({
           disabled={uploading}
           className="flex h-24 w-24 flex-col items-center justify-center rounded-sm border border-dashed border-line text-xs font-semibold text-neutral-600 hover:border-cyan-deep hover:text-cyan-deep disabled:opacity-60"
         >
-          {uploading ? "Uploading…" : "+ Add photo"}
+          {uploading ? t("uploading") : t("addPhoto")}
         </button>
         <input
           ref={inputRef}

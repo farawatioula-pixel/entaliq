@@ -10,6 +10,7 @@ import { createClient } from "@/lib/supabase/client";
 
 export default function Header() {
   const t = useTranslations("nav");
+  const tAria = useTranslations("headerAria");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -63,7 +64,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur">
       {/* Row 1: brand, search, account */}
       <div className="mx-auto flex max-w-7xl items-center gap-4 px-5 py-4 sm:px-8">
-        <Link href="/" className="flex shrink-0 items-center gap-3" aria-label="Mountaliq home">
+        <Link href="/" className="flex shrink-0 items-center gap-3" aria-label={tAria("homeLink")}>
           <Logo className="h-11 w-11" />
           <span className="font-arabic text-xl font-extrabold tracking-tight text-fg">
             منطلق<span className="sr-only"> Mountaliq</span>
@@ -167,7 +168,7 @@ export default function Header() {
       <div className="hidden border-t border-line md:block">
         <nav
           className="mx-auto flex max-w-7xl items-center gap-7 px-5 py-2.5 sm:px-8"
-          aria-label="Primary"
+          aria-label={tAria("primaryNav")}
         >
           {browseLinks.map((link) => {
             const active = pathname === link.href;
@@ -190,7 +191,7 @@ export default function Header() {
       {open && (
         <nav
           className="border-t border-line bg-surface px-5 py-4 md:hidden"
-          aria-label="Mobile"
+          aria-label={tAria("mobileNav")}
         >
           <form onSubmit={handleSearchSubmit} role="search" className="mb-4">
             <div className="relative">

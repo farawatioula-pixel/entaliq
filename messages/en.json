@@ -408,7 +408,7 @@
   },
   "profilePage": {
     "eyebrow": "Your seller profile",
-    "title": "Edit your listing",
+    "title": "List your services",
     "body": "This is what clients see in the",
     "marketplace": "marketplace"
   },
@@ -450,5 +450,211 @@
     "categoryBusinessConsulting": "Business & Consulting",
     "categoryEcommerce": "E-commerce",
     "category": "Category"
+  },
+  "notifications": {
+    "ariaLabel": "Notifications",
+    "empty": "No notifications yet.",
+    "newOrder": "You received a new order",
+    "orderStatusChanged": "Order status changed to {status}",
+    "newMessage": "New message",
+    "generic": "Notification"
+  },
+  "orderStatusLabels": {
+    "pending": "Pending",
+    "accepted": "Accepted",
+    "in_progress": "In progress",
+    "delivered": "Delivered",
+    "revision_requested": "Revision requested",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "orderActions": {
+    "acceptOrder": "Accept order",
+    "startWork": "Start work",
+    "markDelivered": "Mark as delivered",
+    "cancelOrder": "Cancel order",
+    "acceptDelivery": "Accept delivery",
+    "requestRevision": "Request revision",
+    "leaveReview": "Leave a review",
+    "rating": "Rating",
+    "comment": "Comment",
+    "submitting": "Submitting...",
+    "submitReview": "Submit review",
+    "orderNotFound": "Order not found."
+  },
+  "listingForm": {
+    "titleLabel": "Title",
+    "titlePlaceholder": "I will design a modern logo for your brand",
+    "category": "Category",
+    "selectCategory": "Select category",
+    "subcategory": "Subcategory",
+    "none": "None",
+    "description": "Description",
+    "tags": "Tags (comma separated)",
+    "tagsPlaceholder": "logo, branding, minimalist",
+    "whatYouNeed": "What you need from the buyer",
+    "packages": "Packages",
+    "remove": "Remove",
+    "packageNamePlaceholder": "Package name",
+    "pricePlaceholder": "Price (JOD)",
+    "deliveryDaysPlaceholder": "Delivery days",
+    "revisionsPlaceholder": "Revisions",
+    "whatsIncludedPlaceholder": "What's included",
+    "featuresPlaceholder": "Features, comma separated",
+    "faq": "FAQ",
+    "addQuestion": "+ Add question",
+    "questionPlaceholder": "Question",
+    "answerPlaceholder": "Answer",
+    "savingDraft": "Saving...",
+    "saveDraft": "Save draft",
+    "publishing": "Publishing...",
+    "publish": "Publish",
+    "titleRequired": "Title is required.",
+    "descriptionRequired": "Description is required.",
+    "chooseCategory": "Choose a category.",
+    "atLeastOnePackage": "At least one package is required.",
+    "everyPackageNeedsPrice": "Every package needs a price.",
+    "couldNotCreateListing": "Could not create listing."
+  },
+  "listingImages": {
+    "label": "Images",
+    "removeImage": "Remove image",
+    "uploading": "Uploading…",
+    "addPhoto": "+ Add photo",
+    "imagesOnly": "Please choose image files only.",
+    "sizeLimit": "Each image must be under 5MB."
+  },
+  "ordersPage": {
+    "eyebrow": "Orders",
+    "title": "Your orders",
+    "asBuyer": "As buyer",
+    "asSeller": "As seller",
+    "noOrders": "No orders yet.",
+    "listingRemoved": "Listing removed"
+  },
+  "orderDetailPage": {
+    "ordersBreadcrumb": "Orders",
+    "listingRemoved": "Listing removed",
+    "seller": "Seller",
+    "buyer": "Buyer",
+    "price": "Price",
+    "orderCancelled": "Order cancelled",
+    "requirements": "Requirements",
+    "files": "Files",
+    "deliveredFile": "Delivered file",
+    "requirementFile": "Requirement file",
+    "reviewSubmitted": "{rating} review submitted"
+  },
+  "marketplaceListingPage": {
+    "marketplaceBreadcrumb": "Marketplace",
+    "aboutThisService": "About this service",
+    "faq": "FAQ",
+    "reviewsCount": "Reviews ({count})",
+    "noReviews": "No reviews yet.",
+    "buyerFallback": "Buyer",
+    "relatedServices": "Related services",
+    "reviewsInline": "{count, plural, one {# review} other {# reviews}}"
+  },
+  "dashboardPage": {
+    "eyebrow": "Dashboard",
+    "title": "Your seller overview",
+    "myListings": "My listings",
+    "createListing": "Create listing",
+    "orders": "Orders",
+    "totalEarnings": "Total earnings",
+    "activeOrders": "Active orders",
+    "completedOrders": "Completed orders",
+    "publishedListings": "Published listings",
+    "listingViews": "Listing views",
+    "averageRating": "Average rating"
+  },
+  "dashboardListingsPage": {
+    "eyebrow": "Dashboard",
+    "title": "My listings",
+    "createListing": "Create listing",
+    "noListings": "You have not created any listings yet."
+  },
+  "listingRow": {
+    "untitled": "Untitled",
+    "view": "View",
+    "edit": "Edit",
+    "unpublish": "Unpublish",
+    "publish": "Publish",
+    "delete": "Delete",
+    "deleteConfirm": "Delete \"{title}\"? This cannot be undone.",
+    "statusDraft": "Draft",
+    "statusPublished": "Published",
+    "statusUnpublished": "Unpublished"
+  },
+  "newListingPage": {
+    "eyebrow": "Dashboard",
+    "title": "Create a listing",
+    "subtitle": "Save as a draft any time, or publish when it's ready to go live."
+  },
+  "editListingPage": {
+    "eyebrow": "Dashboard",
+    "title": "Edit listing"
+  },
+  "packageSelector": {
+    "tierBasic": "Basic",
+    "tierStandard": "Standard",
+    "tierPremium": "Premium",
+    "dayDelivery": "{days}-day delivery",
+    "revision": "{count, plural, one {# revision} other {# revisions}}",
+    "placingOrder": "Placing order...",
+    "continueCta": "Continue",
+    "couldNotPlaceOrder": "Could not place order",
+    "somethingWentWrong": "Something went wrong"
+  },
+  "contactSellerButton": {
+    "cannotMessageSelf": "You cannot message yourself.",
+    "couldNotStartConversation": "Could not start conversation.",
+    "opening": "Opening...",
+    "contactSeller": "Contact seller"
+  },
+  "favoriteButton": {
+    "removeFromFavorites": "Remove from favorites",
+    "addToFavorites": "Add to favorites"
+  },
+  "listingCard": {
+    "from": "From",
+    "seller": "Seller",
+    "dayDelivery": "{days}d delivery"
+  },
+  "marketplacePage": {
+    "eyebrow": "Marketplace",
+    "heroTitle": "Hire real services from real Mountaliq sellers",
+    "heroBody": "Browse listings, compare packages, and order directly. Every seller trained here.",
+    "searchPlaceholder": "Search services...",
+    "search": "Search",
+    "allCategories": "All categories",
+    "all": "All",
+    "sortNewest": "Newest",
+    "sortPriceLow": "Price: Low to High",
+    "sortPriceHigh": "Price: High to Low",
+    "sortTopRated": "Top Rated",
+    "serviceCount": "{count, plural, one {# service} other {# services}}",
+    "noServicesMatch": "No services match yet.",
+    "listFirstOne": "List the first one."
+  },
+  "messagesPage": {
+    "eyebrow": "Messages",
+    "title": "Your conversations",
+    "noConversations": "No conversations yet. Message a seller from a listing to start one.",
+    "reListing": "Re: {title}"
+  },
+  "conversationPage": {
+    "messagesBreadcrumb": "Messages",
+    "reListing": "Re: {title}"
+  },
+  "messageThread": {
+    "sayHello": "Say hello to start the conversation.",
+    "writeMessage": "Write a message...",
+    "send": "Send"
+  },
+  "headerAria": {
+    "homeLink": "Mountaliq home",
+    "primaryNav": "Primary",
+    "mobileNav": "Mobile"
   }
 }

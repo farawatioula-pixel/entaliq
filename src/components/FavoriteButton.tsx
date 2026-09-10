@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 
 export function FavoriteButton({
@@ -10,6 +11,7 @@ export function FavoriteButton({
   listingId: string;
   size?: "sm" | "md";
 }) {
+  const t = useTranslations("favoriteButton");
   const [userId, setUserId] = useState<string | null>(null);
   const [favorited, setFavorited] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -68,7 +70,7 @@ export function FavoriteButton({
       onClick={toggle}
       disabled={loading}
       aria-pressed={favorited}
-      aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
+      aria-label={favorited ? t("removeFromFavorites") : t("addToFavorites")}
       className={`flex ${dimension} items-center justify-center rounded-full border border-line bg-surface transition-colors hover:border-red disabled:opacity-60`}
     >
       <span className={favorited ? "text-red" : "text-neutral-400"}>{favorited ? "♥" : "♡"}</span>

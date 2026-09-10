@@ -1,13 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import type { ListingPackage } from "@/lib/marketplace-types";
-
-const tierLabel: Record<ListingPackage["tier"], string> = {
-  basic: "Basic",
-  standard: "Standard",
-  premium: "Premium",
-};
 
 export function PackageSelector({
   packages,
@@ -18,6 +13,12 @@ export function PackageSelector({
   listingId: string;
   currency?: string;
 }) {
+  const t = useTranslations("packageSelector");
+  const tierLabel: Record<ListingPackage["tier"], string> = {
+    basic: t("tierBasic"),
+    standard: t("tierStandard"),
+    premium: t("tierPremium"),
+  };
   const [active, setActive] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -36,12 +37,12 @@ export function PackageSelector({
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        throw new Error(body.error ?? "Could not place order");
+        throw new Error(body.error ?? t("couldNotPlaceOrder"));
       }
       const { order } = await res.json();
       window.location.href = `/orders/${order.id}`;
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Something went wrong");
+      setError(e instanceof Error ? e.message : t("somethingWentWrong"));
       setSubmitting(false);
     }
   }
@@ -82,10 +83,8 @@ export function PackageSelector({
         )}
 
         <div className="mt-4 flex gap-4 text-xs text-neutral-600">
-          <span>{current.delivery_days}-day delivery</span>
-          <span>
-            {current.revisions} revision{current.revisions === 1 ? "" : "s"}
-          </span>
+          <span>{t("dayDelivery", { days: current.delivery_days })}</span>
+          <span>{t("revision", { count: current.revisions })}</span>
         </div>
 
         {current.features.length > 0 && (
@@ -105,7 +104,7 @@ export function PackageSelector({
           disabled={submitting}
           className="mt-6 w-full rounded-sm bg-red px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-dark disabled:opacity-60"
         >
-          {submitting ? "Placing order..." : "Continue"}
+          {submitting ? t("placingOrder") : t("continueCta")}
         </button>
 
         {error && <p className="mt-2 text-xs text-red-dark">{error}</p>}

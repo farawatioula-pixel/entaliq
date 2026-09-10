@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { redirect, Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getOrderById } from "@/lib/orders";
 import { OrderStatusActions } from "@/components/OrderStatusActions";
+import type { OrderStatus } from "@/lib/marketplace-types";
 
 export const revalidate = 0;
 
@@ -14,6 +16,8 @@ export default async function OrderDetailPage({
   params: Promise<{ locale: string; id: string }>;
 }) {
   const { locale, id } = await params;
+  const t = await getTranslations("orderDetailPage");
+  const tStatus = await getTranslations("orderStatusLabels");
   const supabase = await createClient();
 
   const {
@@ -41,19 +45,19 @@ export default async function OrderDetailPage({
       <div className="mx-auto max-w-3xl">
         <nav className="text-xs text-neutral-600">
           <Link href="/orders" className="hover:text-cyan-deep">
-            Orders
+            {t("ordersBreadcrumb")}
           </Link>{" "}
           / <span className="text-fg">#{order.id.slice(0, 8)}</span>
         </nav>
 
         <h1 className="mt-3 font-display text-2xl font-bold text-fg sm:text-3xl">
-          {order.listing?.title ?? "Listing removed"}
+          {order.listing?.title ?? t("listingRemoved")}
         </h1>
 
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div className="rounded-sm border border-line bg-surface px-5 py-4">
             <p className="text-xs font-semibold uppercase tracking-widest text-neutral-600">
-              {isBuyer ? "Seller" : "Buyer"}
+              {isBuyer ? t("seller") : t("buyer")}
             </p>
             <p className="mt-1 text-sm font-semibold text-fg">
               {isBuyer ? order.seller?.name : order.buyer?.name}
@@ -61,7 +65,7 @@ export default async function OrderDetailPage({
           </div>
           <div className="rounded-sm border border-line bg-surface px-5 py-4">
             <p className="text-xs font-semibold uppercase tracking-widest text-neutral-600">
-              Price
+              {t("price")}
             </p>
             <p className="mt-1 text-sm font-semibold text-fg">JOD {order.price.toFixed(0)}</p>
           </div>
@@ -91,16 +95,16 @@ export default async function OrderDetailPage({
         )}
         {order.status !== "cancelled" && (
           <p className="mt-2 text-center text-xs font-semibold uppercase tracking-widest text-neutral-600">
-            {order.status.replace("_", " ")}
+            {tStatus(order.status as OrderStatus)}
           </p>
         )}
         {order.status === "cancelled" && (
-          <p className="mt-6 text-center text-sm font-semibold text-red-dark">Order cancelled</p>
+          <p className="mt-6 text-center text-sm font-semibold text-red-dark">{t("orderCancelled")}</p>
         )}
 
         {order.requirements && (
           <div className="mt-8">
-            <h2 className="font-display text-lg font-bold text-fg">Requirements</h2>
+            <h2 className="font-display text-lg font-bold text-fg">{t("requirements")}</h2>
             <p className="mt-2 whitespace-pre-line text-sm text-neutral-700">
               {order.requirements}
             </p>
@@ -109,7 +113,7 @@ export default async function OrderDetailPage({
 
         {files.length > 0 && (
           <div className="mt-8">
-            <h2 className="font-display text-lg font-bold text-fg">Files</h2>
+            <h2 className="font-display text-lg font-bold text-fg">{t("files")}</h2>
             <ul className="mt-2 space-y-1">
               {files.map((f) => (
                 <li key={f.id}>
@@ -119,7 +123,7 @@ export default async function OrderDetailPage({
                     rel="noreferrer"
                     className="text-sm text-cyan-deep hover:underline"
                   >
-                    {f.file_type === "delivery" ? "Delivered file" : "Requirement file"}
+                    {f.file_type === "delivery" ? t("deliveredFile") : t("requirementFile")}
                   </a>
                 </li>
               ))}
@@ -129,7 +133,9 @@ export default async function OrderDetailPage({
 
         {review && (
           <div className="mt-8 rounded-sm border border-line bg-surface px-5 py-4">
-            <p className="text-sm font-semibold text-fg">★ {review.rating} review submitted</p>
+            <p className="text-sm font-semibold text-fg">
+              {t("reviewSubmitted", { rating: `★ ${review.rating}` })}
+            </p>
             {review.comment && <p className="mt-1 text-sm text-neutral-600">{review.comment}</p>}
           </div>
         )}

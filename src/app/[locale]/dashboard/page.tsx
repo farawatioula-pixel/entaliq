@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { redirect, Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getSellerStats } from "@/lib/orders";
@@ -10,6 +11,7 @@ export default async function DashboardPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations("dashboardPage");
   const supabase = await createClient();
 
   const {
@@ -24,22 +26,22 @@ export default async function DashboardPage({
   const stats = await getSellerStats(user.id);
 
   const cards = [
-    { label: "Total earnings", value: `JOD ${stats.totalEarnings.toFixed(0)}` },
-    { label: "Active orders", value: stats.activeOrders },
-    { label: "Completed orders", value: stats.completedOrders },
-    { label: "Published listings", value: `${stats.publishedListings}/${stats.totalListings}` },
-    { label: "Listing views", value: stats.totalViews },
-    { label: "Average rating", value: stats.avgRating > 0 ? stats.avgRating.toFixed(1) : "—" },
+    { label: t("totalEarnings"), value: `JOD ${stats.totalEarnings.toFixed(0)}` },
+    { label: t("activeOrders"), value: stats.activeOrders },
+    { label: t("completedOrders"), value: stats.completedOrders },
+    { label: t("publishedListings"), value: `${stats.publishedListings}/${stats.totalListings}` },
+    { label: t("listingViews"), value: stats.totalViews },
+    { label: t("averageRating"), value: stats.avgRating > 0 ? stats.avgRating.toFixed(1) : "—" },
   ];
 
   return (
     <main className="border-t-4 border-cyan bg-paper px-5 py-16 sm:px-8">
       <div className="mx-auto max-w-5xl">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">
-          Dashboard
+          {t("eyebrow")}
         </p>
         <h1 className="mt-3 font-display text-3xl font-bold text-fg sm:text-4xl">
-          Your seller overview
+          {t("title")}
         </h1>
 
         <div className="mt-8 flex flex-wrap gap-3">
@@ -47,19 +49,19 @@ export default async function DashboardPage({
             href="/dashboard/listings"
             className="rounded-sm border border-line px-5 py-2.5 text-sm font-semibold text-fg hover:border-cyan-deep hover:text-cyan-deep"
           >
-            My listings
+            {t("myListings")}
           </Link>
           <Link
             href="/dashboard/listings/new"
             className="rounded-sm bg-red px-5 py-2.5 text-sm font-semibold text-white hover:bg-red-dark"
           >
-            Create listing
+            {t("createListing")}
           </Link>
           <Link
             href="/orders"
             className="rounded-sm border border-line px-5 py-2.5 text-sm font-semibold text-fg hover:border-cyan-deep hover:text-cyan-deep"
           >
-            Orders
+            {t("orders")}
           </Link>
         </div>
 

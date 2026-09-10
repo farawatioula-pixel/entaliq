@@ -408,7 +408,7 @@
   },
   "profilePage": {
     "eyebrow": "ملف البائع الخاص بك",
-    "title": "عدّل عرضك",
+    "title": "أدرج خدماتك",
     "body": "هذا ما يراه العملاء في",
     "marketplace": "السوق"
   },
@@ -450,5 +450,211 @@
     "categoryBusinessConsulting": "أعمال واستشارات",
     "categoryEcommerce": "تجارة إلكترونية",
     "category": "الفئة"
+  },
+  "notifications": {
+    "ariaLabel": "الإشعارات",
+    "empty": "لا توجد إشعارات بعد.",
+    "newOrder": "لقد تلقيت طلبًا جديدًا",
+    "orderStatusChanged": "تغيرت حالة الطلب إلى {status}",
+    "newMessage": "رسالة جديدة",
+    "generic": "إشعار"
+  },
+  "orderStatusLabels": {
+    "pending": "قيد الانتظار",
+    "accepted": "مقبول",
+    "in_progress": "قيد التنفيذ",
+    "delivered": "تم التسليم",
+    "revision_requested": "طلب تعديل",
+    "completed": "مكتمل",
+    "cancelled": "ملغى"
+  },
+  "orderActions": {
+    "acceptOrder": "قبول الطلب",
+    "startWork": "بدء العمل",
+    "markDelivered": "وضع علامة تم التسليم",
+    "cancelOrder": "إلغاء الطلب",
+    "acceptDelivery": "قبول التسليم",
+    "requestRevision": "طلب تعديل",
+    "leaveReview": "إضافة تقييم",
+    "rating": "التقييم",
+    "comment": "تعليق",
+    "submitting": "جارٍ الإرسال...",
+    "submitReview": "إرسال التقييم",
+    "orderNotFound": "الطلب غير موجود."
+  },
+  "listingForm": {
+    "titleLabel": "العنوان",
+    "titlePlaceholder": "سأصمم شعارًا عصريًا لعلامتك التجارية",
+    "category": "الفئة",
+    "selectCategory": "اختر الفئة",
+    "subcategory": "الفئة الفرعية",
+    "none": "لا شيء",
+    "description": "الوصف",
+    "tags": "الوسوم (مفصولة بفاصلة)",
+    "tagsPlaceholder": "شعار، هوية تجارية، بسيط",
+    "whatYouNeed": "ما تحتاجه من العميل",
+    "packages": "الباقات",
+    "remove": "إزالة",
+    "packageNamePlaceholder": "اسم الباقة",
+    "pricePlaceholder": "السعر (دينار)",
+    "deliveryDaysPlaceholder": "أيام التسليم",
+    "revisionsPlaceholder": "عدد التعديلات",
+    "whatsIncludedPlaceholder": "ما الذي يشمله",
+    "featuresPlaceholder": "الميزات، مفصولة بفاصلة",
+    "faq": "الأسئلة الشائعة",
+    "addQuestion": "+ إضافة سؤال",
+    "questionPlaceholder": "السؤال",
+    "answerPlaceholder": "الإجابة",
+    "savingDraft": "جارٍ الحفظ...",
+    "saveDraft": "حفظ كمسودة",
+    "publishing": "جارٍ النشر...",
+    "publish": "نشر",
+    "titleRequired": "العنوان مطلوب.",
+    "descriptionRequired": "الوصف مطلوب.",
+    "chooseCategory": "اختر فئة.",
+    "atLeastOnePackage": "مطلوب باقة واحدة على الأقل.",
+    "everyPackageNeedsPrice": "كل باقة تحتاج إلى سعر.",
+    "couldNotCreateListing": "تعذّر إنشاء العرض."
+  },
+  "listingImages": {
+    "label": "الصور",
+    "removeImage": "إزالة الصورة",
+    "uploading": "جارٍ الرفع…",
+    "addPhoto": "+ إضافة صورة",
+    "imagesOnly": "الرجاء اختيار ملفات صور فقط.",
+    "sizeLimit": "يجب ألا يتجاوز حجم كل صورة 5 ميغابايت."
+  },
+  "ordersPage": {
+    "eyebrow": "الطلبات",
+    "title": "طلباتك",
+    "asBuyer": "كمشترٍ",
+    "asSeller": "كبائع",
+    "noOrders": "لا توجد طلبات بعد.",
+    "listingRemoved": "تمت إزالة العرض"
+  },
+  "orderDetailPage": {
+    "ordersBreadcrumb": "الطلبات",
+    "listingRemoved": "تمت إزالة العرض",
+    "seller": "البائع",
+    "buyer": "المشتري",
+    "price": "السعر",
+    "orderCancelled": "تم إلغاء الطلب",
+    "requirements": "المتطلبات",
+    "files": "الملفات",
+    "deliveredFile": "ملف تم تسليمه",
+    "requirementFile": "ملف متطلبات",
+    "reviewSubmitted": "تم إرسال تقييم {rating}"
+  },
+  "marketplaceListingPage": {
+    "marketplaceBreadcrumb": "السوق",
+    "aboutThisService": "عن هذه الخدمة",
+    "faq": "الأسئلة الشائعة",
+    "reviewsCount": "التقييمات ({count})",
+    "noReviews": "لا توجد تقييمات بعد.",
+    "buyerFallback": "مشترٍ",
+    "relatedServices": "خدمات ذات صلة",
+    "reviewsInline": "{count, plural, one {# تقييم} other {# تقييمات}}"
+  },
+  "dashboardPage": {
+    "eyebrow": "لوحة التحكم",
+    "title": "نظرة عامة على أعمالك كبائع",
+    "myListings": "عروضي",
+    "createListing": "إنشاء عرض",
+    "orders": "الطلبات",
+    "totalEarnings": "إجمالي الأرباح",
+    "activeOrders": "الطلبات النشطة",
+    "completedOrders": "الطلبات المكتملة",
+    "publishedListings": "العروض المنشورة",
+    "listingViews": "مشاهدات العروض",
+    "averageRating": "متوسط التقييم"
+  },
+  "dashboardListingsPage": {
+    "eyebrow": "لوحة التحكم",
+    "title": "عروضي",
+    "createListing": "إنشاء عرض",
+    "noListings": "لم تقم بإنشاء أي عروض بعد."
+  },
+  "listingRow": {
+    "untitled": "بدون عنوان",
+    "view": "عرض",
+    "edit": "تعديل",
+    "unpublish": "إلغاء النشر",
+    "publish": "نشر",
+    "delete": "حذف",
+    "deleteConfirm": "حذف \"{title}\"؟ لا يمكن التراجع عن هذا الإجراء.",
+    "statusDraft": "مسودة",
+    "statusPublished": "منشور",
+    "statusUnpublished": "غير منشور"
+  },
+  "newListingPage": {
+    "eyebrow": "لوحة التحكم",
+    "title": "إنشاء عرض",
+    "subtitle": "احفظه كمسودة في أي وقت، أو انشره عندما يصبح جاهزًا."
+  },
+  "editListingPage": {
+    "eyebrow": "لوحة التحكم",
+    "title": "تعديل العرض"
+  },
+  "packageSelector": {
+    "tierBasic": "أساسي",
+    "tierStandard": "قياسي",
+    "tierPremium": "مميز",
+    "dayDelivery": "تسليم خلال {days} يوم",
+    "revision": "{count, plural, one {# تعديل} other {# تعديلات}}",
+    "placingOrder": "جارٍ تنفيذ الطلب...",
+    "continueCta": "متابعة",
+    "couldNotPlaceOrder": "تعذّر تنفيذ الطلب",
+    "somethingWentWrong": "حدث خطأ ما"
+  },
+  "contactSellerButton": {
+    "cannotMessageSelf": "لا يمكنك مراسلة نفسك.",
+    "couldNotStartConversation": "تعذّر بدء المحادثة.",
+    "opening": "جارٍ الفتح...",
+    "contactSeller": "تواصل مع البائع"
+  },
+  "favoriteButton": {
+    "removeFromFavorites": "إزالة من المفضلة",
+    "addToFavorites": "إضافة إلى المفضلة"
+  },
+  "listingCard": {
+    "from": "ابتداءً من",
+    "seller": "بائع",
+    "dayDelivery": "تسليم خلال {days} يوم"
+  },
+  "marketplacePage": {
+    "eyebrow": "السوق",
+    "heroTitle": "استعن بخدمات حقيقية من بائعين حقيقيين في منطلق",
+    "heroBody": "تصفّح العروض، قارن الباقات، واطلب مباشرة. كل بائع تدرّب هنا.",
+    "searchPlaceholder": "ابحث عن خدمات...",
+    "search": "بحث",
+    "allCategories": "كل الفئات",
+    "all": "الكل",
+    "sortNewest": "الأحدث",
+    "sortPriceLow": "السعر: من الأقل إلى الأعلى",
+    "sortPriceHigh": "السعر: من الأعلى إلى الأقل",
+    "sortTopRated": "الأعلى تقييمًا",
+    "serviceCount": "{count, plural, one {# خدمة} other {# خدمات}}",
+    "noServicesMatch": "لا توجد خدمات مطابقة بعد.",
+    "listFirstOne": "أضف أول واحدة."
+  },
+  "messagesPage": {
+    "eyebrow": "الرسائل",
+    "title": "محادثاتك",
+    "noConversations": "لا توجد محادثات بعد. راسل بائعًا من أحد العروض لبدء محادثة.",
+    "reListing": "بخصوص: {title}"
+  },
+  "conversationPage": {
+    "messagesBreadcrumb": "الرسائل",
+    "reListing": "بخصوص: {title}"
+  },
+  "messageThread": {
+    "sayHello": "ابدأ المحادثة بإلقاء التحية.",
+    "writeMessage": "اكتب رسالة...",
+    "send": "إرسال"
+  },
+  "headerAria": {
+    "homeLink": "الصفحة الرئيسية لمنطلق",
+    "primaryNav": "التنقل الرئيسي",
+    "mobileNav": "قائمة الجوال"
   }
 }

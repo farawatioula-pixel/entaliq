@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import type { Message } from "@/lib/marketplace-types";
 
@@ -15,6 +16,7 @@ export function MessageThread({
   currentUserId: string;
   initialMessages: Message[];
 }) {
+  const t = useTranslations("messageThread");
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [text, setText] = useState("");
   const [sending, setSending] = useState(false);
@@ -73,7 +75,7 @@ export function MessageThread({
       <div className="flex-1 space-y-3 overflow-y-auto px-5 py-4">
         {messages.length === 0 && (
           <p className="text-center text-sm text-neutral-500">
-            Say hello to start the conversation.
+            {t("sayHello")}
           </p>
         )}
         {messages.map((m) => {
@@ -104,7 +106,7 @@ export function MessageThread({
               send();
             }
           }}
-          placeholder="Write a message..."
+          placeholder={t("writeMessage")}
           className="flex-1 rounded-sm border border-line bg-surface px-4 py-2.5 text-sm text-fg focus:border-cyan-deep focus:outline-none"
         />
         <button
@@ -113,7 +115,7 @@ export function MessageThread({
           disabled={sending || !text.trim()}
           className="rounded-sm bg-red px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-red-dark disabled:opacity-50"
         >
-          Send
+          {t("send")}
         </button>
       </div>
     </div>

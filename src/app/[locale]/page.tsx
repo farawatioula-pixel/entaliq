@@ -20,6 +20,7 @@ export default async function Home({
   const locale = rawLocale as Locale;
   const t = await getTranslations("home");
   const tCat = await getTranslations("categories");
+  const tCard = await getTranslations("listingCard");
 
   const listings = (await getListings({ sort: "newest" })).slice(0, 6);
 
@@ -108,7 +109,13 @@ export default async function Home({
 
             <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {listings.map((listing) => (
-                <ListingCard key={listing.id} listing={listing} />
+                <ListingCard
+                  key={listing.id}
+                  listing={listing}
+                  fromLabel={tCard("from")}
+                  sellerFallbackLabel={tCard("seller")}
+                  dayDeliveryLabel={tCard("dayDelivery", { days: listing.delivery_days })}
+                />
               ))}
             </div>
           </div>

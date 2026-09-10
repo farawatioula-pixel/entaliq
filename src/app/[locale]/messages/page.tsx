@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { redirect, Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getConversationsForUser } from "@/lib/messaging";
@@ -10,6 +11,7 @@ export default async function MessagesPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations("messagesPage");
   const supabase = await createClient();
 
   const {
@@ -27,16 +29,16 @@ export default async function MessagesPage({
     <main className="border-t-4 border-cyan bg-paper px-5 py-16 sm:px-8">
       <div className="mx-auto max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">
-          Messages
+          {t("eyebrow")}
         </p>
         <h1 className="mt-3 font-display text-3xl font-bold text-fg sm:text-4xl">
-          Your conversations
+          {t("title")}
         </h1>
 
         {conversations.length === 0 ? (
           <div className="mt-10 rounded-sm border border-line bg-surface px-8 py-16 text-center">
             <p className="text-[15px] text-neutral-600">
-              No conversations yet. Message a seller from a listing to start one.
+              {t("noConversations")}
             </p>
           </div>
         ) : (
@@ -53,7 +55,7 @@ export default async function MessagesPage({
                   <div>
                     <p className="font-display text-base font-bold text-fg">{other?.name}</p>
                     {c.listing && (
-                      <p className="text-xs text-neutral-600">Re: {c.listing.title}</p>
+                      <p className="text-xs text-neutral-600">{t("reListing", { title: c.listing.title })}</p>
                     )}
                     {c.last_message && (
                       <p className="mt-1 line-clamp-1 text-sm text-neutral-600">

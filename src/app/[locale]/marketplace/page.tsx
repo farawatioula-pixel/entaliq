@@ -1,15 +1,9 @@
+import { getTranslations } from "next-intl/server";
 import { getCategories, getListings, type ListingFilters } from "@/lib/marketplace";
 import { ListingCard } from "@/components/ListingCard";
 import { Link } from "@/i18n/navigation";
 
 export const revalidate = 0;
-
-const sortOptions: { value: NonNullable<ListingFilters["sort"]>; label: string }[] = [
-  { value: "newest", label: "Newest" },
-  { value: "price_low", label: "Price: Low to High" },
-  { value: "price_high", label: "Price: High to Low" },
-  { value: "rating", label: "Top Rated" },
-];
 
 export default async function MarketplacePage({
   searchParams,
@@ -22,6 +16,15 @@ export default async function MarketplacePage({
   }>;
 }) {
   const { category, subcategory, q, sort } = await searchParams;
+  const t = await getTranslations("marketplacePage");
+  const tCard = await getTranslations("listingCard");
+
+  const sortOptions: { value: NonNullable<ListingFilters["sort"]>; label: string }[] = [
+    { value: "newest", label: t("sortNewest") },
+    { value: "price_low", label: t("sortPriceLow") },
+    { value: "price_high", label: t("sortPriceHigh") },
+    { value: "rating", label: t("sortTopRated") },
+  ];
 
   const categories = await getCategories();
   const topLevel = categories.filter((c) => !c.parent_id);
@@ -40,14 +43,12 @@ export default async function MarketplacePage({
       <section className="border-t-4 border-cyan px-5 py-16 sm:px-8">
         <div className="mx-auto max-w-6xl">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">
-            Marketplace
+            {t("eyebrow")}
           </p>
           <h1 className="mt-3 max-w-2xl font-display text-3xl font-bold text-fg sm:text-4xl">
-            Hire real services from real Mountaliq sellers
+            {t("heroTitle")}
           </h1>
-          <p className="mt-3 max-w-xl text-[15px] text-neutral-600">
-            Browse listings, compare packages, and order directly. Every seller trained here.
-          </p>
+          <p className="mt-3 max-w-xl text-[15px] text-neutral-600">{t("heroBody")}</p>
 
           <form action="/marketplace" method="get" className="mt-8 flex max-w-xl gap-2">
             {category && <input type="hidden" name="category" value={category} />}
@@ -55,14 +56,14 @@ export default async function MarketplacePage({
               type="text"
               name="q"
               defaultValue={q}
-              placeholder="Search services..."
+              placeholder={t("searchPlaceholder")}
               className="flex-1 rounded-sm border border-line bg-surface px-4 py-3 text-sm text-fg placeholder:text-neutral-400 focus:border-cyan-deep focus:outline-none"
             />
             <button
               type="submit"
               className="rounded-sm bg-red px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-dark"
             >
-              Search
+              {t("search")}
             </button>
           </form>
         </div>
@@ -75,7 +76,7 @@ export default async function MarketplacePage({
               href="/marketplace"
               className={`px-5 py-5 transition-colors ${!category ? "bg-paper" : "bg-surface hover:bg-paper"}`}
             >
-              <p className="font-display text-base font-bold text-fg">All categories</p>
+              <p className="font-display text-base font-bold text-fg">{t("allCategories")}</p>
             </Link>
             {topLevel.map((c) => (
               <Link
@@ -100,7 +101,7 @@ export default async function MarketplacePage({
                     : "border-line text-neutral-600 hover:border-cyan-deep"
                 }`}
               >
-                All
+                {t("all")}
               </Link>
               {subcategories.map((sc) => (
                 <Link
@@ -119,9 +120,7 @@ export default async function MarketplacePage({
           )}
 
           <div className="mt-6 flex items-center justify-between">
-            <p className="text-sm text-neutral-600">
-              {listings.length} service{listings.length === 1 ? "" : "s"}
-            </p>
+            <p className="text-sm text-neutral-600">{t("serviceCount", { count: listings.length })}</p>
             <div className="flex gap-1">
               {sortOptions.map((opt) => {
                 const params = new URLSearchParams();
@@ -148,16 +147,22 @@ export default async function MarketplacePage({
           {listings.length === 0 ? (
             <div className="mt-10 rounded-sm border border-line bg-surface px-8 py-16 text-center">
               <p className="text-[15px] text-neutral-600">
-                No services match yet.{" "}
+                {t("noServicesMatch")}{" "}
                 <Link href="/profile" className="text-cyan-deep hover:underline">
-                  List the first one.
+                  {t("listFirstOne")}
                 </Link>
               </p>
             </div>
           ) : (
             <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {listings.map((listing) => (
-                <ListingCard key={listing.id} listing={listing} />
+                <ListingCard
+                  key={listing.id}
+                  listing={listing}
+                  fromLabel={tCard("from")}
+                  sellerFallbackLabel={tCard("seller")}
+                  dayDeliveryLabel={tCard("dayDelivery", { days: listing.delivery_days })}
+                />
               ))}
             </div>
           )}
