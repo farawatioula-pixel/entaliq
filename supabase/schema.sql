@@ -8,7 +8,11 @@ create table if not exists public.profiles (
   bio text not null default '',
   location text not null default '',
   contact text not null default '',
-  category text not null default 'SELL' check (category in ('SELL', 'CREATE', 'BUILD')),
+  category text not null default 'graphics-design' check (category in (
+    'graphics-design', 'programming-tech', 'digital-marketing',
+    'writing-translation', 'video-animation', 'ai-services',
+    'business-consulting', 'ecommerce'
+  )),
   avatar_url text not null default '',
   portfolio_images jsonb not null default '[]'::jsonb,
   services jsonb not null default '[]'::jsonb,

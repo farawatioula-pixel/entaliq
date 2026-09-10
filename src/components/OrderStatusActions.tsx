@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { OrderStatus } from "@/lib/marketplace-types";
@@ -18,6 +19,7 @@ export function OrderStatusActions({
   isBuyer: boolean;
   hasReview: boolean;
 }) {
+  const t = useTranslations("orderActions");
   const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -54,7 +56,7 @@ export function OrderStatusActions({
 
     if (!order) {
       setBusy(false);
-      setError("Order not found.");
+      setError(t("orderNotFound"));
       return;
     }
 
@@ -79,18 +81,18 @@ export function OrderStatusActions({
   const actions: { label: string; next: OrderStatus; primary?: boolean }[] = [];
 
   if (isSeller) {
-    if (status === "pending") actions.push({ label: "Accept order", next: "accepted", primary: true });
-    if (status === "accepted") actions.push({ label: "Start work", next: "in_progress", primary: true });
+    if (status === "pending") actions.push({ label: t("acceptOrder"), next: "accepted", primary: true });
+    if (status === "accepted") actions.push({ label: t("startWork"), next: "in_progress", primary: true });
     if (status === "in_progress" || status === "revision_requested")
-      actions.push({ label: "Mark as delivered", next: "delivered", primary: true });
+      actions.push({ label: t("markDelivered"), next: "delivered", primary: true });
     if (["pending", "accepted"].includes(status))
-      actions.push({ label: "Cancel order", next: "cancelled" });
+      actions.push({ label: t("cancelOrder"), next: "cancelled" });
   }
 
   if (isBuyer) {
     if (status === "delivered") {
-      actions.push({ label: "Accept delivery", next: "completed", primary: true });
-      actions.push({ label: "Request revision", next: "revision_requested" });
+      actions.push({ label: t("acceptDelivery"), next: "completed", primary: true });
+      actions.push({ label: t("requestRevision"), next: "revision_requested" });
     }
   }
 
@@ -128,13 +130,13 @@ export function OrderStatusActions({
           onClick={() => setShowReview(true)}
           className="rounded-sm bg-red px-5 py-2.5 text-sm font-semibold text-white hover:bg-red-dark"
         >
-          Leave a review
+          {t("leaveReview")}
         </button>
       )}
 
       {showReview && (
         <div className="mt-4 rounded-sm border border-line bg-surface p-5">
-          <label className="block text-sm font-semibold text-fg">Rating</label>
+          <label className="block text-sm font-semibold text-fg">{t("rating")}</label>
           <div className="mt-2 flex gap-1">
             {[1, 2, 3, 4, 5].map((n) => (
               <button
@@ -147,7 +149,7 @@ export function OrderStatusActions({
               </button>
             ))}
           </div>
-          <label className="mt-4 block text-sm font-semibold text-fg">Comment</label>
+          <label className="mt-4 block text-sm font-semibold text-fg">{t("comment")}</label>
           <textarea
             value={comment}
             onChange={(e) => setComment(e.target.value)}
@@ -160,7 +162,7 @@ export function OrderStatusActions({
             onClick={submitReview}
             className="mt-3 rounded-sm bg-red px-5 py-2.5 text-sm font-semibold text-white hover:bg-red-dark disabled:opacity-60"
           >
-            {busy ? "Submitting..." : "Submit review"}
+            {busy ? t("submitting") : t("submitReview")}
           </button>
         </div>
       )}

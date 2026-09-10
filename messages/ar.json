@@ -23,9 +23,14 @@
   },
   "categories": {
     "category": "الفئة",
-    "SELL": "البيع على الإنترنت",
-    "CREATE": "الإنشاء",
-    "BUILD": "البرمجة والبناء"
+    "graphics-design": "تصميم وجرافيك",
+    "programming-tech": "برمجة وتقنية",
+    "digital-marketing": "تسويق رقمي",
+    "writing-translation": "كتابة وترجمة",
+    "video-animation": "فيديو وأنيميشن",
+    "ai-services": "خدمات الذكاء الاصطناعي",
+    "business-consulting": "أعمال واستشارات",
+    "ecommerce": "تجارة إلكترونية"
   },
   "footer": {
     "tagline": "القمة العربية لمهارات الاقتصاد الرقمي. مهارات رقمية، فرص عمل حر.",
@@ -62,7 +67,7 @@
     "heroBody": "يومان. أربعة مسارات لدخل حقيقي. تدريب مباشر على المهارات التي يتطلبها الإنترنت اليوم، لتأسيس عمل رقمي بلا مكتب وبلا شهادة وبلا رأس مال.",
     "registerCta": "سجّل لعام 2026",
     "stat1Value": "4",
-    "stat1Label": "مسارات دخل مباشرة: بيع، إنشاء، بناء، وتسويق",
+    "stat1Label": "مسارات تدريب عملية عبر التجارة الإلكترونية والتسويق والمحتوى والتقنية",
     "stat2Value": "24+",
     "stat2Label": "ساعة تدريب عملي بإشراف متخصصين يعملون في مجالهم فعلياً",
     "stat3Value": "100+",
@@ -84,7 +89,15 @@
     "day2": "اليوم الثاني",
     "day2Body": "تتواصل الجولات التدريبية من الساعة 9:30، وتُختتم بتسليم الشهادات وتكريم الرعاة في حفل التخرج الساعة 16:00.",
     "registerForSummit": "سجّل في منطلق",
-    "afterTraining": "بعد التدريب"
+    "afterTraining": "بعد التدريب",
+    "heroSearchPlaceholder": "جرّب \"تصميم شعار\" أو \"مونتاج فيديو\"",
+    "heroSearchCta": "بحث",
+    "browseEyebrow": "تصفّح حسب الفئة",
+    "browseTitle": "ابحث عن المهارة التي تحتاجها",
+    "browseBody": "كل فئة أدناه يعمل فيها أشخاص تدرّبوا عبر منطلق.",
+    "popularEyebrow": "جديد على منطلق",
+    "popularTitle": "الخدمات الأكثر طلبًا",
+    "popularCta": "عرض كل الخدمات"
   },
   "aboutPage": {
     "metaTitle": "عن منطلق، منطلق 2026",
@@ -93,7 +106,7 @@
     "heroTitle": "فرصة حقيقية. مهارة حقيقية.",
     "heroBody": "منطلق هي القمة العربية لمهارات الاقتصاد الرقمي. تدريب يصنع فرص عمل مباشرة، ومنصة لعرض المهارات واستقبال فرص العمل الحر. وُجدت لأن الإنترنت اليوم صار مصدر عمل قائم بذاته، ولأن المحتوى المجاني والدورات المتفرقة لا تكفي لتحويل هذه الفرصة إلى دخل فعلي.",
     "stat1Value": "4",
-    "stat1Label": "مسارات دخل مباشرة: بيع، إنشاء، بناء، وتسويق",
+    "stat1Label": "مسارات تدريب عملية عبر التجارة الإلكترونية والتسويق والمحتوى والتقنية",
     "stat2Value": "7",
     "stat2Label": "قطاعات في الاقتصاد الرقمي، من التسويق بالعمولة إلى خدمات الذكاء الاصطناعي",
     "stat3Value": "100+",
@@ -123,44 +136,44 @@
   },
   "tracksPage": {
     "metaTitle": "المسارات، منطلق 2026",
-    "metaDescription": "سبعة مسارات للدخل الرقمي عبر ثلاثة عوالم، البيع، الإنشاء، والبناء، تُدرَّس عملياً في عمّان.",
-    "eyebrow": "سبعة مسارات · ثلاثة عوالم",
+    "metaDescription": "سبعة مسارات دخل رقمي عبر التجارة الإلكترونية والتسويق والمحتوى والتقنية، تُدرَّس عمليًا في عمّان.",
+    "eyebrow": "سبعة مسارات",
     "heroTitle": "كل طريق يؤدي إلى دخل.",
     "heroBody": "اختر مساراً واحداً. اقضِ أسبوعاً في بناء المهارة والمنتج وأول عميل أو عملية بيع تجعله واقعياً.",
     "applyForTrack": "تسجيل",
     "tracksData": [
       {
-        "category": "SELL",
+        "category": "ecommerce",
         "title": "التجارة الإلكترونية والبيع عبر الإنترنت",
         "body": "ينشئ المتدربون متجراً حقيقياً، ويوفّرون أو يعرضون المنتجات، ويتعلمون خدمات الدفع عند الاستلام التي تحدد نجاح البيع الإلكتروني في الأردن. بنهاية الأسبوع، يكون المتجر جاهزاً للعمل."
       },
       {
-        "category": "SELL",
+        "category": "digital-marketing",
         "title": "التسويق بالعمولة",
         "body": "دون مخزون ودون رأس مال مسبق. يتعلم المتدربون اختيار العروض، وبناء جمهور، وتتبع العمولات عبر منصات تدفع في الأردن."
       },
       {
-        "category": "CREATE",
+        "category": "video-animation",
         "title": "صناعة المحتوى وتحقيق الدخل منه",
         "body": "من الفيديوهات القصيرة إلى المحتوى المكتوب، يتعلم المتدربون آليات تحقيق الدخل في كل منصة، ويخرجون بنظام محتوى يمكنهم الاستمرار به بعد انتهاء الأسبوع."
       },
       {
-        "category": "CREATE",
+        "category": "writing-translation",
         "title": "العمل الحر والخدمات عن بُعد",
         "body": "يبني المتدربون معرض أعمال، وينشئون ملفاً شخصياً على منصات العمل الحر العالمية، ويحددون تسعيرهم وعرضهم في التصميم والكتابة والترجمة وخدمات أخرى مطلوبة عن بُعد."
       },
       {
-        "category": "CREATE",
+        "category": "business-consulting",
         "title": "المنتجات الرقمية",
         "body": "منتج واحد يُباع إلى ما لا نهاية. يصمم المتدربون ويجهزون قالباً أو دليلاً أو دورة مصغّرة، وينشئون واجهة لبيعه دون جهد متكرر."
       },
       {
-        "category": "BUILD",
+        "category": "programming-tech",
         "title": "البرمجة بالذكاء الاصطناعي (فايب كودينغ / بدون كود)",
         "body": "دون الحاجة لشهادة في علوم الحاسوب. يستخدم المتدربون أدوات الذكاء الاصطناعي وأدوات بدون كود لإطلاق تطبيق أو أتمتة فعلية بنهاية التدريب."
       },
       {
-        "category": "BUILD",
+        "category": "ai-services",
         "title": "خدمات الذكاء الاصطناعي مدفوعة الأجر",
         "body": "يتعلم المتدربون تحويل إمكانات الذكاء الاصطناعي، الأتمتة، وتوليد المحتوى، ودعم المحادثات، إلى خدمات يمكن عرضها وبيعها للشركات المحلية."
       }
@@ -307,7 +320,7 @@
   "directoryPage": {
     "eyebrow": "السوق",
     "heroTitle": "وظّف من تدرّب هنا",
-    "heroBody": "كل بائع أدناه تدرّب عبر منطلق، مدرّب، نشط، ويستقبل أعمالاً عبر البيع والإنشاء والبناء.",
+    "heroBody": "كل بائع أدناه تدرّب عبر منطلق، مدرّب، نشط، ويستقبل أعمالاً في كل الفئات.",
     "becomeSeller": "كن بائعاً",
     "findWork": "ابحث عن عمل لتوظيفه",
     "allSellers": "كل البائعين",
@@ -316,17 +329,37 @@
     "beFirst": "كن أول من ينضم.",
     "servicesListed": "{count, plural, one {# خدمة معروضة} other {# خدمات معروضة}}",
     "categoryLabels": {
-      "SELL": {
-        "label": "البيع على الإنترنت",
-        "desc": "التجارة الإلكترونية والتسويق بالعمولة"
+      "graphics-design": {
+        "label": "تصميم وجرافيك",
+        "desc": "شعارات، هوية بصرية، رسوم توضيحية"
       },
-      "CREATE": {
-        "label": "الإنشاء",
-        "desc": "المحتوى، العمل الحر، المنتجات الرقمية"
+      "programming-tech": {
+        "label": "برمجة وتقنية",
+        "desc": "مواقع، تطبيقات، أتمتة"
       },
-      "BUILD": {
-        "label": "البرمجة والبناء",
-        "desc": "البرمجة بالذكاء الاصطناعي"
+      "digital-marketing": {
+        "label": "تسويق رقمي",
+        "desc": "وسائل التواصل، تحسين محركات البحث، الإعلانات"
+      },
+      "writing-translation": {
+        "label": "كتابة وترجمة",
+        "desc": "كتابة محتوى، ترجمة، تدقيق"
+      },
+      "video-animation": {
+        "label": "فيديو وأنيميشن",
+        "desc": "مونتاج، فيديوهات قصيرة، رسوم متحركة"
+      },
+      "ai-services": {
+        "label": "خدمات الذكاء الاصطناعي",
+        "desc": "أدوات وأتمتة مدعومة بالذكاء الاصطناعي"
+      },
+      "business-consulting": {
+        "label": "أعمال واستشارات",
+        "desc": "استراتيجية، تخطيط، مساعدة افتراضية"
+      },
+      "ecommerce": {
+        "label": "تجارة إلكترونية",
+        "desc": "متاجر إلكترونية ودروبشيبنغ"
       }
     }
   },
@@ -337,9 +370,14 @@
     "about": "نبذة",
     "portfolio": "أعمال سابقة",
     "categoryLabels": {
-      "SELL": "البيع على الإنترنت",
-      "CREATE": "الإنشاء",
-      "BUILD": "البرمجة والبناء"
+      "graphics-design": "تصميم وجرافيك",
+      "programming-tech": "برمجة وتقنية",
+      "digital-marketing": "تسويق رقمي",
+      "writing-translation": "كتابة وترجمة",
+      "video-animation": "فيديو وأنيميشن",
+      "ai-services": "خدمات الذكاء الاصطناعي",
+      "business-consulting": "أعمال واستشارات",
+      "ecommerce": "تجارة إلكترونية"
     }
   },
   "loginPage": {
@@ -370,14 +408,11 @@
   },
   "profilePage": {
     "eyebrow": "ملف البائع الخاص بك",
-    "title": "عدّل عرضك",
+    "title": "أدرج خدماتك",
     "body": "هذا ما يراه العملاء في",
     "marketplace": "السوق"
   },
   "profileForm": {
-    "categorySell": "البيع على الإنترنت، التجارة الإلكترونية والتسويق بالعمولة",
-    "categoryCreate": "الإنشاء، المحتوى، العمل الحر، المنتجات الرقمية",
-    "categoryBuild": "البرمجة والبناء، البرمجة بالذكاء الاصطناعي",
     "fullName": "الاسم الكامل",
     "headline": "العنوان",
     "headlinePlaceholder": "مثال: مدير وسائل تواصل اجتماعي وصانع محتوى",
@@ -393,7 +428,6 @@
     "removeImage": "احذف هذه الصورة",
     "aboutYou": "عنك",
     "aboutYouPlaceholder": "جملتان عن ما تقوم به.",
-    "track": "المسار",
     "yourServices": "خدماتك",
     "addService": "+ أضف خدمة",
     "serviceTitle": "عنوان الخدمة",
@@ -406,6 +440,221 @@
     "saved": "تم الحفظ.",
     "saving": "جارٍ الحفظ…",
     "saveProfile": "احفظ الملف",
-    "signOut": "تسجيل الخروج"
+    "signOut": "تسجيل الخروج",
+    "categoryGraphicsDesign": "تصميم وجرافيك",
+    "categoryProgrammingTech": "برمجة وتقنية",
+    "categoryDigitalMarketing": "تسويق رقمي",
+    "categoryWritingTranslation": "كتابة وترجمة",
+    "categoryVideoAnimation": "فيديو وأنيميشن",
+    "categoryAiServices": "خدمات الذكاء الاصطناعي",
+    "categoryBusinessConsulting": "أعمال واستشارات",
+    "categoryEcommerce": "تجارة إلكترونية",
+    "category": "الفئة"
+  },
+  "notifications": {
+    "ariaLabel": "الإشعارات",
+    "empty": "لا توجد إشعارات بعد.",
+    "newOrder": "لقد تلقيت طلبًا جديدًا",
+    "orderStatusChanged": "تغيرت حالة الطلب إلى {status}",
+    "newMessage": "رسالة جديدة",
+    "generic": "إشعار"
+  },
+  "orderStatusLabels": {
+    "pending": "قيد الانتظار",
+    "accepted": "مقبول",
+    "in_progress": "قيد التنفيذ",
+    "delivered": "تم التسليم",
+    "revision_requested": "طلب تعديل",
+    "completed": "مكتمل",
+    "cancelled": "ملغى"
+  },
+  "orderActions": {
+    "acceptOrder": "قبول الطلب",
+    "startWork": "بدء العمل",
+    "markDelivered": "وضع علامة تم التسليم",
+    "cancelOrder": "إلغاء الطلب",
+    "acceptDelivery": "قبول التسليم",
+    "requestRevision": "طلب تعديل",
+    "leaveReview": "إضافة تقييم",
+    "rating": "التقييم",
+    "comment": "تعليق",
+    "submitting": "جارٍ الإرسال...",
+    "submitReview": "إرسال التقييم",
+    "orderNotFound": "الطلب غير موجود."
+  },
+  "listingForm": {
+    "titleLabel": "العنوان",
+    "titlePlaceholder": "سأصمم شعارًا عصريًا لعلامتك التجارية",
+    "category": "الفئة",
+    "selectCategory": "اختر الفئة",
+    "subcategory": "الفئة الفرعية",
+    "none": "لا شيء",
+    "description": "الوصف",
+    "tags": "الوسوم (مفصولة بفاصلة)",
+    "tagsPlaceholder": "شعار، هوية تجارية، بسيط",
+    "whatYouNeed": "ما تحتاجه من العميل",
+    "packages": "الباقات",
+    "remove": "إزالة",
+    "packageNamePlaceholder": "اسم الباقة",
+    "pricePlaceholder": "السعر (دينار)",
+    "deliveryDaysPlaceholder": "أيام التسليم",
+    "revisionsPlaceholder": "عدد التعديلات",
+    "whatsIncludedPlaceholder": "ما الذي يشمله",
+    "featuresPlaceholder": "الميزات، مفصولة بفاصلة",
+    "faq": "الأسئلة الشائعة",
+    "addQuestion": "+ إضافة سؤال",
+    "questionPlaceholder": "السؤال",
+    "answerPlaceholder": "الإجابة",
+    "savingDraft": "جارٍ الحفظ...",
+    "saveDraft": "حفظ كمسودة",
+    "publishing": "جارٍ النشر...",
+    "publish": "نشر",
+    "titleRequired": "العنوان مطلوب.",
+    "descriptionRequired": "الوصف مطلوب.",
+    "chooseCategory": "اختر فئة.",
+    "atLeastOnePackage": "مطلوب باقة واحدة على الأقل.",
+    "everyPackageNeedsPrice": "كل باقة تحتاج إلى سعر.",
+    "couldNotCreateListing": "تعذّر إنشاء العرض."
+  },
+  "listingImages": {
+    "label": "الصور",
+    "removeImage": "إزالة الصورة",
+    "uploading": "جارٍ الرفع…",
+    "addPhoto": "+ إضافة صورة",
+    "imagesOnly": "الرجاء اختيار ملفات صور فقط.",
+    "sizeLimit": "يجب ألا يتجاوز حجم كل صورة 5 ميغابايت."
+  },
+  "ordersPage": {
+    "eyebrow": "الطلبات",
+    "title": "طلباتك",
+    "asBuyer": "كمشترٍ",
+    "asSeller": "كبائع",
+    "noOrders": "لا توجد طلبات بعد.",
+    "listingRemoved": "تمت إزالة العرض"
+  },
+  "orderDetailPage": {
+    "ordersBreadcrumb": "الطلبات",
+    "listingRemoved": "تمت إزالة العرض",
+    "seller": "البائع",
+    "buyer": "المشتري",
+    "price": "السعر",
+    "orderCancelled": "تم إلغاء الطلب",
+    "requirements": "المتطلبات",
+    "files": "الملفات",
+    "deliveredFile": "ملف تم تسليمه",
+    "requirementFile": "ملف متطلبات",
+    "reviewSubmitted": "تم إرسال تقييم {rating}"
+  },
+  "marketplaceListingPage": {
+    "marketplaceBreadcrumb": "السوق",
+    "aboutThisService": "عن هذه الخدمة",
+    "faq": "الأسئلة الشائعة",
+    "reviewsCount": "التقييمات ({count})",
+    "noReviews": "لا توجد تقييمات بعد.",
+    "buyerFallback": "مشترٍ",
+    "relatedServices": "خدمات ذات صلة",
+    "reviewsInline": "{count, plural, one {# تقييم} other {# تقييمات}}"
+  },
+  "dashboardPage": {
+    "eyebrow": "لوحة التحكم",
+    "title": "نظرة عامة على أعمالك كبائع",
+    "myListings": "عروضي",
+    "createListing": "إنشاء عرض",
+    "orders": "الطلبات",
+    "totalEarnings": "إجمالي الأرباح",
+    "activeOrders": "الطلبات النشطة",
+    "completedOrders": "الطلبات المكتملة",
+    "publishedListings": "العروض المنشورة",
+    "listingViews": "مشاهدات العروض",
+    "averageRating": "متوسط التقييم"
+  },
+  "dashboardListingsPage": {
+    "eyebrow": "لوحة التحكم",
+    "title": "عروضي",
+    "createListing": "إنشاء عرض",
+    "noListings": "لم تقم بإنشاء أي عروض بعد."
+  },
+  "listingRow": {
+    "untitled": "بدون عنوان",
+    "view": "عرض",
+    "edit": "تعديل",
+    "unpublish": "إلغاء النشر",
+    "publish": "نشر",
+    "delete": "حذف",
+    "deleteConfirm": "حذف \"{title}\"؟ لا يمكن التراجع عن هذا الإجراء.",
+    "statusDraft": "مسودة",
+    "statusPublished": "منشور",
+    "statusUnpublished": "غير منشور"
+  },
+  "newListingPage": {
+    "eyebrow": "لوحة التحكم",
+    "title": "إنشاء عرض",
+    "subtitle": "احفظه كمسودة في أي وقت، أو انشره عندما يصبح جاهزًا."
+  },
+  "editListingPage": {
+    "eyebrow": "لوحة التحكم",
+    "title": "تعديل العرض"
+  },
+  "packageSelector": {
+    "tierBasic": "أساسي",
+    "tierStandard": "قياسي",
+    "tierPremium": "مميز",
+    "dayDelivery": "تسليم خلال {days} يوم",
+    "revision": "{count, plural, one {# تعديل} other {# تعديلات}}",
+    "placingOrder": "جارٍ تنفيذ الطلب...",
+    "continueCta": "متابعة",
+    "couldNotPlaceOrder": "تعذّر تنفيذ الطلب",
+    "somethingWentWrong": "حدث خطأ ما"
+  },
+  "contactSellerButton": {
+    "cannotMessageSelf": "لا يمكنك مراسلة نفسك.",
+    "couldNotStartConversation": "تعذّر بدء المحادثة.",
+    "opening": "جارٍ الفتح...",
+    "contactSeller": "تواصل مع البائع"
+  },
+  "favoriteButton": {
+    "removeFromFavorites": "إزالة من المفضلة",
+    "addToFavorites": "إضافة إلى المفضلة"
+  },
+  "listingCard": {
+    "from": "ابتداءً من",
+    "seller": "بائع",
+    "dayDelivery": "تسليم خلال {days} يوم"
+  },
+  "marketplacePage": {
+    "eyebrow": "السوق",
+    "heroTitle": "استعن بخدمات حقيقية من بائعين حقيقيين في منطلق",
+    "heroBody": "تصفّح العروض، قارن الباقات، واطلب مباشرة. كل بائع تدرّب هنا.",
+    "searchPlaceholder": "ابحث عن خدمات...",
+    "search": "بحث",
+    "allCategories": "كل الفئات",
+    "all": "الكل",
+    "sortNewest": "الأحدث",
+    "sortPriceLow": "السعر: من الأقل إلى الأعلى",
+    "sortPriceHigh": "السعر: من الأعلى إلى الأقل",
+    "sortTopRated": "الأعلى تقييمًا",
+    "serviceCount": "{count, plural, one {# خدمة} other {# خدمات}}",
+    "noServicesMatch": "لا توجد خدمات مطابقة بعد.",
+    "listFirstOne": "أضف أول واحدة."
+  },
+  "messagesPage": {
+    "eyebrow": "الرسائل",
+    "title": "محادثاتك",
+    "noConversations": "لا توجد محادثات بعد. راسل بائعًا من أحد العروض لبدء محادثة.",
+    "reListing": "بخصوص: {title}"
+  },
+  "conversationPage": {
+    "messagesBreadcrumb": "الرسائل",
+    "reListing": "بخصوص: {title}"
+  },
+  "messageThread": {
+    "sayHello": "ابدأ المحادثة بإلقاء التحية.",
+    "writeMessage": "اكتب رسالة...",
+    "send": "إرسال"
+  },
+  "headerAria": {
+    "homeLink": "الصفحة الرئيسية لمنطلق",
+    "primaryNav": "التنقل الرئيسي",
+    "mobileNav": "قائمة الجوال"
   }
 }

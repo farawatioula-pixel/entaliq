@@ -1,6 +1,8 @@
+import { getTranslations } from "next-intl/server";
 import { redirect, Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getOrdersForUser } from "@/lib/orders";
+import type { OrderStatus } from "@/lib/marketplace-types";
 
 export const revalidate = 0;
 
@@ -25,6 +27,9 @@ export default async function OrdersPage({
   const { as } = await searchParams;
   const role = as === "seller" ? "seller" : "buyer";
 
+  const t = await getTranslations("ordersPage");
+  const tStatus = await getTranslations("orderStatusLabels");
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -40,8 +45,8 @@ export default async function OrdersPage({
   return (
     <main className="border-t-4 border-cyan bg-paper px-5 py-16 sm:px-8">
       <div className="mx-auto max-w-4xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">Orders</p>
-        <h1 className="mt-3 font-display text-3xl font-bold text-fg sm:text-4xl">Your orders</h1>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">{t("eyebrow")}</p>
+        <h1 className="mt-3 font-display text-3xl font-bold text-fg sm:text-4xl">{t("title")}</h1>
 
         <div className="mt-6 flex gap-2">
           <Link
@@ -50,7 +55,7 @@ export default async function OrdersPage({
               role === "buyer" ? "bg-fg text-white" : "border border-line text-neutral-600"
             }`}
           >
-            As buyer
+            {t("asBuyer")}
           </Link>
           <Link
             href="/orders?as=seller"
@@ -58,13 +63,13 @@ export default async function OrdersPage({
               role === "seller" ? "bg-fg text-white" : "border border-line text-neutral-600"
             }`}
           >
-            As seller
+            {t("asSeller")}
           </Link>
         </div>
 
         {orders.length === 0 ? (
           <div className="mt-10 rounded-sm border border-line bg-surface px-8 py-16 text-center">
-            <p className="text-[15px] text-neutral-600">No orders yet.</p>
+            <p className="text-[15px] text-neutral-600">{t("noOrders")}</p>
           </div>
         ) : (
           <div className="mt-8 space-y-3">
@@ -76,7 +81,7 @@ export default async function OrdersPage({
               >
                 <div>
                   <p className="font-display text-base font-bold text-fg">
-                    {order.listing?.title ?? "Listing removed"}
+                    {order.listing?.title ?? t("listingRemoved")}
                   </p>
                   <p className="mt-1 text-xs text-neutral-600">
                     {role === "buyer" ? order.seller?.name : order.buyer?.name} · JOD{" "}
@@ -84,7 +89,7 @@ export default async function OrdersPage({
                   </p>
                 </div>
                 <p className={`text-xs font-semibold uppercase tracking-widest ${statusColor[order.status]}`}>
-                  {order.status.replace("_", " ")}
+                  {tStatus(order.status as OrderStatus)}
                 </p>
               </Link>
             ))}

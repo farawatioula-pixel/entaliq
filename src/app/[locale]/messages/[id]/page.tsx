@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { redirect, Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getConversationWithMessages } from "@/lib/messaging";
@@ -12,6 +13,7 @@ export default async function ConversationPage({
   params: Promise<{ locale: string; id: string }>;
 }) {
   const { locale, id } = await params;
+  const t = await getTranslations("conversationPage");
   const supabase = await createClient();
 
   const {
@@ -37,7 +39,7 @@ export default async function ConversationPage({
       <div className="mx-auto max-w-3xl">
         <nav className="text-xs text-neutral-600">
           <Link href="/messages" className="hover:text-cyan-deep">
-            Messages
+            {t("messagesBreadcrumb")}
           </Link>{" "}
           / <span className="text-fg">{other?.name}</span>
         </nav>
@@ -46,7 +48,7 @@ export default async function ConversationPage({
           {other?.name}
         </h1>
         {conversation.listing && (
-          <p className="mt-1 text-sm text-neutral-600">Re: {conversation.listing.title}</p>
+          <p className="mt-1 text-sm text-neutral-600">{t("reListing", { title: conversation.listing.title })}</p>
         )}
 
         <div className="mt-6">

@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getListingById, trackListingView } from "@/lib/marketplace";
 import { PackageSelector } from "@/components/PackageSelector";
@@ -13,6 +14,9 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
   const result = await getListingById(id);
 
   if (!result) notFound();
+
+  const t = await getTranslations("marketplaceListingPage");
+  const tCard = await getTranslations("listingCard");
 
   const { listing, packages, reviews, related } = result;
   const seller = listing.seller as unknown as {
@@ -34,7 +38,7 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
           <div>
             <nav className="text-xs text-neutral-600">
               <Link href="/marketplace" className="hover:text-cyan-deep">
-                Marketplace
+                {t("marketplaceBreadcrumb")}
               </Link>{" "}
               /{" "}
               <span className="text-fg">{listing.title}</span>
@@ -63,7 +67,7 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
                   <p className="text-sm font-semibold text-fg">{seller?.name}</p>
                   {listing.review_count > 0 && (
                     <p className="text-xs text-neutral-600">
-                      ★ {listing.rating.toFixed(1)} ({listing.review_count} reviews)
+                      ★ {listing.rating.toFixed(1)} ({t("reviewsInline", { count: listing.review_count })})
                     </p>
                   )}
                 </div>
@@ -79,7 +83,7 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
             )}
 
             <div className="mt-8">
-              <h2 className="font-display text-lg font-bold text-fg">About this service</h2>
+              <h2 className="font-display text-lg font-bold text-fg">{t("aboutThisService")}</h2>
               <p className="mt-3 whitespace-pre-line text-[15px] leading-relaxed text-neutral-700">
                 {listing.description}
               </p>
@@ -87,7 +91,7 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
 
             {listing.faq.length > 0 && (
               <div className="mt-8">
-                <h2 className="font-display text-lg font-bold text-fg">FAQ</h2>
+                <h2 className="font-display text-lg font-bold text-fg">{t("faq")}</h2>
                 <div className="mt-3 divide-y divide-line rounded-sm border border-line bg-surface">
                   {listing.faq.map((item, i) => (
                     <div key={i} className="px-5 py-4">
@@ -101,10 +105,10 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
 
             <div className="mt-8">
               <h2 className="font-display text-lg font-bold text-fg">
-                Reviews ({listing.review_count})
+                {t("reviewsCount", { count: listing.review_count })}
               </h2>
               {reviews.length === 0 ? (
-                <p className="mt-3 text-sm text-neutral-600">No reviews yet.</p>
+                <p className="mt-3 text-sm text-neutral-600">{t("noReviews")}</p>
               ) : (
                 <div className="mt-3 space-y-4">
                   {reviews.map((r) => {
@@ -112,7 +116,7 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
                     return (
                       <div key={r.id} className="rounded-sm border border-line bg-surface px-5 py-4">
                         <div className="flex items-center justify-between">
-                          <p className="text-sm font-semibold text-fg">{buyer?.name ?? "Buyer"}</p>
+                          <p className="text-sm font-semibold text-fg">{buyer?.name ?? t("buyerFallback")}</p>
                           <p className="text-sm font-semibold text-fg">★ {r.rating}</p>
                         </div>
                         {r.comment && (
@@ -136,10 +140,16 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
       {related.length > 0 && (
         <section className="border-t border-line px-5 py-12 sm:px-8">
           <div className="mx-auto max-w-6xl">
-            <h2 className="font-display text-lg font-bold text-fg">Related services</h2>
+            <h2 className="font-display text-lg font-bold text-fg">{t("relatedServices")}</h2>
             <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((l) => (
-                <ListingCard key={l.id} listing={l} />
+                <ListingCard
+                  key={l.id}
+                  listing={l}
+                  fromLabel={tCard("from")}
+                  sellerFallbackLabel={tCard("seller")}
+                  dayDeliveryLabel={tCard("dayDelivery", { days: l.delivery_days })}
+                />
               ))}
             </div>
           </div>

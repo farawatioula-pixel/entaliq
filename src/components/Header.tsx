@@ -2,7 +2,7 @@
 
 import { useTranslations, useLocale } from "next-intl";
 import { useEffect, useState } from "react";
-import { Link, usePathname } from "@/i18n/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import Logo from "./Logo";
 import LocaleSwitcher from "./LocaleSwitcher";
 import { NotificationBell } from "./NotificationBell";
@@ -10,18 +10,20 @@ import { createClient } from "@/lib/supabase/client";
 
 export default function Header() {
   const t = useTranslations("nav");
+  const tAria = useTranslations("headerAria");
   const locale = useLocale();
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
   const [userId, setUserId] = useState<string | null | undefined>(undefined);
 
-  const links = [
+  const browseLinks = [
     { href: "/", label: t("home") },
     { href: "/about", label: t("about") },
     { href: "/tracks", label: t("tracks") },
     { href: "/trainers", label: t("trainers") },
     { href: "/marketplace", label: t("marketplace") },
-    { href: "/register", label: t("register") },
   ];
 
   useEffect(() => {
@@ -50,37 +52,54 @@ export default function Header() {
     window.location.href = `/${locale}`;
   }
 
+  function handleSearchSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const trimmed = query.trim();
+    router.push(trimmed ? `/marketplace?q=${encodeURIComponent(trimmed)}` : "/marketplace");
+  }
+
   const isLoggedIn = !!userId;
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
-        <Link href="/" className="flex items-center gap-3" aria-label="Muntaliq home">
+      {/* Row 1: brand, search, account */}
+      <div className="mx-auto flex max-w-7xl items-center gap-4 px-5 py-4 sm:px-8">
+        <Link href="/" className="flex shrink-0 items-center gap-3" aria-label={tAria("homeLink")}>
           <Logo className="h-11 w-11" />
           <span className="font-arabic text-xl font-extrabold tracking-tight text-fg">
-            منطلق<span className="sr-only"> Muntaliq</span>
+            منطلق<span className="sr-only"> Mountaliq</span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
-          {links.map((link) => {
-            const active = pathname === link.href;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-[15px] font-medium transition-colors hover:text-fg ${
-                  active ? "text-fg font-semibold" : "text-neutral-600"
-                }`}
-                aria-current={active ? "page" : undefined}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </nav>
+        <form
+          onSubmit={handleSearchSubmit}
+          role="search"
+          className="hidden flex-1 items-center md:flex"
+        >
+          <div className="relative w-full max-w-md">
+            <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="7" cy="7" r="5.25" stroke="currentColor" strokeWidth="1.5" />
+                <path
+                  d="M11 11L14.5 14.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={t("findServices")}
+              aria-label={t("findServices")}
+              className="w-full rounded-sm border border-line bg-surface py-2.5 pl-10 pr-4 text-sm text-fg placeholder:text-neutral-400 transition-colors focus:border-cyan-deep focus:outline-none"
+            />
+          </div>
+        </form>
 
-        <div className="hidden items-center gap-4 lg:flex">
+        <div className="ml-auto hidden items-center gap-4 md:flex">
           {isLoggedIn && <NotificationBell />}
           <LocaleSwitcher />
 
@@ -120,7 +139,7 @@ export default function Header() {
 
         <button
           type="button"
-          className="flex h-10 w-10 items-center justify-center lg:hidden"
+          className="ml-auto flex h-10 w-10 items-center justify-center md:hidden"
           aria-label={open ? t("closeMenu") : t("openMenu")}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -145,13 +164,61 @@ export default function Header() {
         </button>
       </div>
 
+      {/* Row 2: browse strip, desktop only */}
+      <div className="hidden border-t border-line md:block">
+        <nav
+          className="mx-auto flex max-w-7xl items-center gap-7 px-5 py-2.5 sm:px-8"
+          aria-label={tAria("primaryNav")}
+        >
+          {browseLinks.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-[14px] font-medium transition-colors hover:text-fg ${
+                  active ? "text-fg font-semibold" : "text-neutral-600"
+                }`}
+                aria-current={active ? "page" : undefined}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
+
       {open && (
         <nav
-          className="border-t border-line bg-surface px-5 py-4 lg:hidden"
-          aria-label="Mobile"
+          className="border-t border-line bg-surface px-5 py-4 md:hidden"
+          aria-label={tAria("mobileNav")}
         >
+          <form onSubmit={handleSearchSubmit} role="search" className="mb-4">
+            <div className="relative">
+              <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <circle cx="7" cy="7" r="5.25" stroke="currentColor" strokeWidth="1.5" />
+                  <path
+                    d="M11 11L14.5 14.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={t("findServices")}
+                aria-label={t("findServices")}
+                className="w-full rounded-sm border border-line bg-paper py-2.5 pl-10 pr-4 text-sm text-fg placeholder:text-neutral-400 focus:border-cyan-deep focus:outline-none"
+              />
+            </div>
+          </form>
+
           <ul className="flex flex-col gap-1">
-            {links.map((link) => {
+            {browseLinks.map((link) => {
               const active = pathname === link.href;
               return (
                 <li key={link.href}>

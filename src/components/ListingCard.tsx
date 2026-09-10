@@ -3,28 +3,42 @@ import type { ListingWithSeller } from "@/lib/marketplace";
 import { FavoriteButton } from "@/components/FavoriteButton";
 
 const categoryColor: Record<string, string> = {
-  SELL: "text-cyan-deep",
-  CREATE: "text-violet-deep",
-  BUILD: "text-red-dark",
+  "graphics-design": "text-violet-deep",
+  "programming-tech": "text-cyan-deep",
+  "digital-marketing": "text-red-dark",
+  "writing-translation": "text-violet-deep",
+  "video-animation": "text-red-dark",
+  "ai-services": "text-cyan-deep",
+  "business-consulting": "text-violet-deep",
+  ecommerce: "text-cyan-deep",
 };
 
 const categoryBg: Record<string, string> = {
-  SELL: "bg-cyan/10",
-  CREATE: "bg-violet/10",
-  BUILD: "bg-red/10",
+  "graphics-design": "bg-violet/10",
+  "programming-tech": "bg-cyan/10",
+  "digital-marketing": "bg-red/10",
+  "writing-translation": "bg-violet/10",
+  "video-animation": "bg-red/10",
+  "ai-services": "bg-cyan/10",
+  "business-consulting": "bg-violet/10",
+  ecommerce: "bg-cyan/10",
 };
 
 export function ListingCard({
   listing,
   currency = "JOD",
   fromLabel = "From",
+  sellerFallbackLabel = "Seller",
+  dayDeliveryLabel,
 }: {
   listing: ListingWithSeller;
   currency?: string;
   fromLabel?: string;
+  sellerFallbackLabel?: string;
+  dayDeliveryLabel?: string;
 }) {
   const seller = listing.seller;
-  const sellerCategory = seller?.category ?? "SELL";
+  const sellerCategory = seller?.category ?? "graphics-design";
   const cover = listing.images?.[0];
   const initial = (seller?.name ?? "?").trim().charAt(0).toUpperCase() || "?";
 
@@ -65,7 +79,7 @@ export function ListingCard({
               <span className={`text-[10px] font-bold ${categoryColor[sellerCategory]}`}>{initial}</span>
             )}
           </div>
-          <p className="text-xs font-semibold text-neutral-600">{seller?.name ?? "Seller"}</p>
+          <p className="text-xs font-semibold text-neutral-600">{seller?.name ?? sellerFallbackLabel}</p>
         </div>
 
         <h3 className="font-display text-base font-bold leading-snug text-fg line-clamp-2">
@@ -80,7 +94,9 @@ export function ListingCard({
         )}
 
         <div className="mt-auto flex items-center justify-between border-t border-line pt-3">
-          <span className="text-xs text-neutral-600">{listing.delivery_days}d delivery</span>
+          <span className="text-xs text-neutral-600">
+            {dayDeliveryLabel ?? `${listing.delivery_days}d delivery`}
+          </span>
           <p className="text-sm font-semibold text-fg">
             {fromLabel} {currency} {listing.starting_price.toFixed(0)}
           </p>

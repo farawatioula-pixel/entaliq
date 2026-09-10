@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 
@@ -11,6 +12,7 @@ export function ContactSellerButton({
   sellerId: string;
   listingId: string;
 }) {
+  const t = useTranslations("contactSellerButton");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -30,7 +32,7 @@ export function ContactSellerButton({
     }
 
     if (user.id === sellerId) {
-      setError("You cannot message yourself.");
+      setError(t("cannotMessageSelf"));
       setLoading(false);
       return;
     }
@@ -53,7 +55,7 @@ export function ContactSellerButton({
         .single();
 
       if (createError || !created) {
-        setError(createError?.message ?? "Could not start conversation.");
+        setError(createError?.message ?? t("couldNotStartConversation"));
         setLoading(false);
         return;
       }
@@ -71,7 +73,7 @@ export function ContactSellerButton({
         disabled={loading}
         className="w-full rounded-sm border border-line px-6 py-3 text-sm font-semibold text-fg transition-colors hover:border-cyan-deep hover:text-cyan-deep disabled:opacity-60"
       >
-        {loading ? "Opening..." : "Contact seller"}
+        {loading ? t("opening") : t("contactSeller")}
       </button>
       {error && <p className="mt-2 text-xs text-red-dark">{error}</p>}
     </div>

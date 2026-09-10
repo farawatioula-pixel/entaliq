@@ -1,5 +1,5 @@
 -- ============================================================================
--- INTALEQ MARKETPLACE SCHEMA (Phase 1)
+-- MOUNTALIQ MARKETPLACE SCHEMA (Phase 1)
 -- Run this in Supabase SQL Editor AFTER schema.sql.
 -- Adds Fiverr-style marketplace tables on top of the existing `profiles`
 -- table. Does not modify or drop anything that already exists.
@@ -387,28 +387,45 @@ create trigger on_message_created
   for each row execute function public.handle_new_message();
 
 -- ---------------------------------------------------------------------------
--- SEED CATEGORIES (matches the SELL / CREATE / BUILD tracks already used
--- on profiles, broken into Fiverr-style subcategories)
+-- SEED CATEGORIES (Fiverr-style top-level categories, matching the profile
+-- category system)
 -- ---------------------------------------------------------------------------
 insert into public.categories (name, slug, icon, sort_order) values
-  ('Sell', 'sell', 'shopping-bag', 1),
-  ('Create', 'create', 'palette', 2),
-  ('Build', 'build', 'code', 3)
+  ('Graphics & Design', 'graphics-design', 'palette', 1),
+  ('Programming & Tech', 'programming-tech', 'code', 2),
+  ('Digital Marketing', 'digital-marketing', 'megaphone', 3),
+  ('Writing & Translation', 'writing-translation', 'pen', 4),
+  ('Video & Animation', 'video-animation', 'video', 5),
+  ('AI Services', 'ai-services', 'sparkles', 6),
+  ('Business & Consulting', 'business-consulting', 'briefcase', 7),
+  ('E-commerce', 'ecommerce', 'shopping-bag', 8)
 on conflict (slug) do nothing;
 
 insert into public.categories (name, slug, parent_id, sort_order)
 select sub.name, sub.slug, c.id, sub.sort_order
 from (values
-  ('Copywriting', 'copywriting', 'sell', 1),
-  ('Social Media Management', 'social-media-management', 'sell', 2),
-  ('Translation', 'translation', 'sell', 3),
-  ('Graphic Design', 'graphic-design', 'create', 1),
-  ('Video Editing', 'video-editing', 'create', 2),
-  ('Photography', 'photography', 'create', 3),
-  ('3D Modeling', '3d-modeling', 'create', 4),
-  ('Web Development', 'web-development', 'build', 1),
-  ('UI/UX Design', 'ui-ux-design', 'build', 2),
-  ('Mobile Apps', 'mobile-apps', 'build', 3)
+  ('Logo Design', 'logo-design', 'graphics-design', 1),
+  ('Social Media Graphics', 'social-media-graphics', 'graphics-design', 2),
+  ('Illustration', 'illustration', 'graphics-design', 3),
+  ('Website Development', 'website-development', 'programming-tech', 1),
+  ('App Development', 'app-development', 'programming-tech', 2),
+  ('Automation & No-Code', 'automation-no-code', 'programming-tech', 3),
+  ('Social Media Marketing', 'social-media-marketing', 'digital-marketing', 1),
+  ('SEO', 'seo', 'digital-marketing', 2),
+  ('Affiliate Marketing', 'affiliate-marketing', 'digital-marketing', 3),
+  ('Content Writing', 'content-writing', 'writing-translation', 1),
+  ('Translation', 'translation', 'writing-translation', 2),
+  ('Proofreading & Editing', 'proofreading-editing', 'writing-translation', 3),
+  ('Video Editing', 'video-editing', 'video-animation', 1),
+  ('Short-Form Video', 'short-form-video', 'video-animation', 2),
+  ('Motion Graphics', 'motion-graphics', 'video-animation', 3),
+  ('AI Automation', 'ai-automation', 'ai-services', 1),
+  ('AI Content Generation', 'ai-content-generation', 'ai-services', 2),
+  ('AI Chat Support Setup', 'ai-chat-support', 'ai-services', 3),
+  ('Virtual Assistance', 'virtual-assistance', 'business-consulting', 1),
+  ('Business Planning', 'business-planning', 'business-consulting', 2),
+  ('Online Store Setup', 'online-store-setup', 'ecommerce', 1),
+  ('Dropshipping', 'dropshipping', 'ecommerce', 2)
 ) as sub(name, slug, parent_slug, sort_order)
 join public.categories c on c.slug = sub.parent_slug
 on conflict (slug) do nothing;

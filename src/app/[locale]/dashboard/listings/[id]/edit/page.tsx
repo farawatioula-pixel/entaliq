@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getCategories } from "@/lib/marketplace";
@@ -11,6 +12,7 @@ export default async function EditListingPage({
   params: Promise<{ locale: string; id: string }>;
 }) {
   const { locale, id } = await params;
+  const t = await getTranslations("editListingPage");
   const supabase = await createClient();
 
   const {
@@ -39,9 +41,9 @@ export default async function EditListingPage({
     <main className="border-t-4 border-cyan bg-paper px-5 py-16 sm:px-8">
       <div className="mx-auto max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">
-          Dashboard
+          {t("eyebrow")}
         </p>
-        <h1 className="mt-3 font-display text-3xl font-bold text-fg sm:text-4xl">Edit listing</h1>
+        <h1 className="mt-3 font-display text-3xl font-bold text-fg sm:text-4xl">{t("title")}</h1>
 
         <div className="mt-10">
           <ListingForm

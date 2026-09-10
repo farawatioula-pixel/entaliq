@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { ListingImagesUpload } from "@/components/ListingImagesUpload";
@@ -27,6 +28,7 @@ export default function ListingForm({
   listing?: Listing;
   existingPackages?: ListingPackage[];
 }) {
+  const t = useTranslations("listingForm");
   const router = useRouter();
   const topLevel = categories.filter((c) => !c.parent_id);
 
@@ -75,11 +77,11 @@ export default function ListingForm({
   }
 
   function validate(): string | null {
-    if (!title.trim()) return "Title is required.";
-    if (!description.trim()) return "Description is required.";
-    if (!categoryId) return "Choose a category.";
-    if (packages.length === 0) return "At least one package is required.";
-    if (packages.some((p) => !p.price || p.price <= 0)) return "Every package needs a price.";
+    if (!title.trim()) return t("titleRequired");
+    if (!description.trim()) return t("descriptionRequired");
+    if (!categoryId) return t("chooseCategory");
+    if (packages.length === 0) return t("atLeastOnePackage");
+    if (packages.some((p) => !p.price || p.price <= 0)) return t("everyPackageNeedsPrice");
     return null;
   }
 
@@ -132,7 +134,7 @@ export default function ListingForm({
         .select()
         .single();
       if (insertError || !inserted) {
-        setError(insertError?.message ?? "Could not create listing.");
+        setError(insertError?.message ?? t("couldNotCreateListing"));
         setSaving(null);
         return;
       }
@@ -165,19 +167,19 @@ export default function ListingForm({
       )}
 
       <div>
-        <label className="block text-sm font-semibold text-fg">Title</label>
+        <label className="block text-sm font-semibold text-fg">{t("titleLabel")}</label>
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="I will design a modern logo for your brand"
+          placeholder={t("titlePlaceholder")}
           className="mt-2 w-full rounded-sm border border-line bg-surface px-4 py-3 text-sm text-fg focus:border-cyan-deep focus:outline-none"
         />
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label className="block text-sm font-semibold text-fg">Category</label>
+          <label className="block text-sm font-semibold text-fg">{t("category")}</label>
           <select
             value={categoryId}
             onChange={(e) => {
@@ -186,7 +188,7 @@ export default function ListingForm({
             }}
             className="mt-2 w-full rounded-sm border border-line bg-surface px-4 py-3 text-sm text-fg focus:border-cyan-deep focus:outline-none"
           >
-            <option value="">Select category</option>
+            <option value="">{t("selectCategory")}</option>
             {topLevel.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.name}
@@ -195,14 +197,14 @@ export default function ListingForm({
           </select>
         </div>
         <div>
-          <label className="block text-sm font-semibold text-fg">Subcategory</label>
+          <label className="block text-sm font-semibold text-fg">{t("subcategory")}</label>
           <select
             value={subcategoryId}
             onChange={(e) => setSubcategoryId(e.target.value)}
             disabled={!categoryId}
             className="mt-2 w-full rounded-sm border border-line bg-surface px-4 py-3 text-sm text-fg focus:border-cyan-deep focus:outline-none disabled:opacity-50"
           >
-            <option value="">None</option>
+            <option value="">{t("none")}</option>
             {subcategories.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.name}
@@ -213,7 +215,7 @@ export default function ListingForm({
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-fg">Description</label>
+        <label className="block text-sm font-semibold text-fg">{t("description")}</label>
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -223,12 +225,12 @@ export default function ListingForm({
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-fg">Tags (comma separated)</label>
+        <label className="block text-sm font-semibold text-fg">{t("tags")}</label>
         <input
           type="text"
           value={tags}
           onChange={(e) => setTags(e.target.value)}
-          placeholder="logo, branding, minimalist"
+          placeholder={t("tagsPlaceholder")}
           className="mt-2 w-full rounded-sm border border-line bg-surface px-4 py-3 text-sm text-fg focus:border-cyan-deep focus:outline-none"
         />
       </div>
@@ -239,7 +241,7 @@ export default function ListingForm({
 
       <div>
         <label className="block text-sm font-semibold text-fg">
-          What you need from the buyer
+          {t("whatYouNeed")}
         </label>
         <textarea
           value={requirements}
@@ -251,7 +253,7 @@ export default function ListingForm({
 
       <div>
         <div className="flex items-center justify-between">
-          <label className="block text-sm font-semibold text-fg">Packages</label>
+          <label className="block text-sm font-semibold text-fg">{t("packages")}</label>
           <div className="flex gap-2">
             {(["basic", "standard", "premium"] as PackageTier[])
               .filter((tier) => !packages.some((p) => p.tier === tier))
@@ -279,7 +281,7 @@ export default function ListingForm({
                     onClick={() => removePackage(i)}
                     className="text-xs font-semibold text-red-dark hover:underline"
                   >
-                    Remove
+                    {t("remove")}
                   </button>
                 )}
               </div>
@@ -289,28 +291,28 @@ export default function ListingForm({
                   type="text"
                   value={pkg.name}
                   onChange={(e) => updatePackage(i, "name", e.target.value)}
-                  placeholder="Package name"
+                  placeholder={t("packageNamePlaceholder")}
                   className="rounded-sm border border-line px-3 py-2 text-sm focus:border-cyan-deep focus:outline-none"
                 />
                 <input
                   type="number"
                   value={pkg.price || ""}
                   onChange={(e) => updatePackage(i, "price", Number(e.target.value))}
-                  placeholder="Price (JOD)"
+                  placeholder={t("pricePlaceholder")}
                   className="rounded-sm border border-line px-3 py-2 text-sm focus:border-cyan-deep focus:outline-none"
                 />
                 <input
                   type="number"
                   value={pkg.delivery_days || ""}
                   onChange={(e) => updatePackage(i, "delivery_days", Number(e.target.value))}
-                  placeholder="Delivery days"
+                  placeholder={t("deliveryDaysPlaceholder")}
                   className="rounded-sm border border-line px-3 py-2 text-sm focus:border-cyan-deep focus:outline-none"
                 />
                 <input
                   type="number"
                   value={pkg.revisions || ""}
                   onChange={(e) => updatePackage(i, "revisions", Number(e.target.value))}
-                  placeholder="Revisions"
+                  placeholder={t("revisionsPlaceholder")}
                   className="rounded-sm border border-line px-3 py-2 text-sm focus:border-cyan-deep focus:outline-none"
                 />
               </div>
@@ -318,7 +320,7 @@ export default function ListingForm({
               <textarea
                 value={pkg.description}
                 onChange={(e) => updatePackage(i, "description", e.target.value)}
-                placeholder="What's included"
+                placeholder={t("whatsIncludedPlaceholder")}
                 rows={2}
                 className="mt-3 w-full rounded-sm border border-line px-3 py-2 text-sm focus:border-cyan-deep focus:outline-none"
               />
@@ -333,7 +335,7 @@ export default function ListingForm({
                     e.target.value.split(",").map((f) => f.trim()).filter(Boolean)
                   )
                 }
-                placeholder="Features, comma separated"
+                placeholder={t("featuresPlaceholder")}
                 className="mt-3 w-full rounded-sm border border-line px-3 py-2 text-sm focus:border-cyan-deep focus:outline-none"
               />
             </div>
@@ -343,13 +345,13 @@ export default function ListingForm({
 
       <div>
         <div className="flex items-center justify-between">
-          <label className="block text-sm font-semibold text-fg">FAQ</label>
+          <label className="block text-sm font-semibold text-fg">{t("faq")}</label>
           <button
             type="button"
             onClick={addFaq}
             className="text-sm font-semibold text-cyan-deep hover:underline"
           >
-            + Add question
+            {t("addQuestion")}
           </button>
         </div>
         <div className="mt-3 space-y-3">
@@ -360,7 +362,7 @@ export default function ListingForm({
                   type="text"
                   value={item.question}
                   onChange={(e) => updateFaq(i, "question", e.target.value)}
-                  placeholder="Question"
+                  placeholder={t("questionPlaceholder")}
                   className="flex-1 rounded-sm border border-line px-3 py-2 text-sm focus:border-cyan-deep focus:outline-none"
                 />
                 <button
@@ -368,13 +370,13 @@ export default function ListingForm({
                   onClick={() => removeFaq(i)}
                   className="ml-2 text-xs font-semibold text-red-dark hover:underline"
                 >
-                  Remove
+                  {t("remove")}
                 </button>
               </div>
               <textarea
                 value={item.answer}
                 onChange={(e) => updateFaq(i, "answer", e.target.value)}
-                placeholder="Answer"
+                placeholder={t("answerPlaceholder")}
                 rows={2}
                 className="mt-2 w-full rounded-sm border border-line px-3 py-2 text-sm focus:border-cyan-deep focus:outline-none"
               />
@@ -390,7 +392,7 @@ export default function ListingForm({
           disabled={saving !== null}
           className="rounded-sm border border-line px-6 py-3 text-sm font-semibold text-fg transition-colors hover:border-cyan-deep hover:text-cyan-deep disabled:opacity-60"
         >
-          {saving === "draft" ? "Saving..." : "Save draft"}
+          {saving === "draft" ? t("savingDraft") : t("saveDraft")}
         </button>
         <button
           type="button"
@@ -398,7 +400,7 @@ export default function ListingForm({
           disabled={saving !== null}
           className="rounded-sm bg-red px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-dark disabled:opacity-60"
         >
-          {saving === "publish" ? "Publishing..." : "Publish"}
+          {saving === "publish" ? t("publishing") : t("publish")}
         </button>
       </div>
     </div>
