@@ -1,5 +1,5 @@
 -- ============================================================================
--- INTALEQ MARKETPLACE SCHEMA (Phase 1)
+-- MOUNTALIQ MARKETPLACE SCHEMA (Phase 1)
 -- Run this in Supabase SQL Editor AFTER schema.sql.
 -- Adds Fiverr-style marketplace tables on top of the existing `profiles`
 -- table. Does not modify or drop anything that already exists.
