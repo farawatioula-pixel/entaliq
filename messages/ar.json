@@ -410,7 +410,14 @@
     "eyebrow": "ملف البائع الخاص بك",
     "title": "أدرج خدماتك",
     "body": "هذا ما يراه العملاء في",
-    "marketplace": "السوق"
+    "marketplace": "السوق",
+    "loading": "جارٍ تحميل ملفك الشخصي…",
+    "loadError": "تعذّر تحميل ملفك الشخصي.",
+    "tryAgain": "حاول مرة أخرى",
+    "sellerDashboard": "لوحة تحكم البائع",
+    "myOrders": "طلباتي",
+    "messages": "الرسائل",
+    "favorites": "المفضلة"
   },
   "profileForm": {
     "fullName": "الاسم الكامل",
@@ -656,5 +663,18 @@
     "homeLink": "الصفحة الرئيسية لمنطلق",
     "primaryNav": "التنقل الرئيسي",
     "mobileNav": "قائمة الجوال"
+  },
+  "favoritesPage": {
+    "eyebrow": "المفضلة",
+    "title": "خدماتك المحفوظة",
+    "empty": "اضغط على القلب في أي عرض لحفظه هنا."
+  },
+  "avatarUpload": {
+    "imageOnly": "الرجاء اختيار ملف صورة.",
+    "sizeLimit": "يجب ألا يتجاوز حجم الصورة 5 ميغابايت.",
+    "uploading": "جارٍ الرفع…",
+    "changePhoto": "تغيير الصورة",
+    "uploadPhoto": "رفع صورة",
+    "profilePhoto": "صورة الملف الشخصي"
   }
 }

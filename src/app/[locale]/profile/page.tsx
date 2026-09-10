@@ -83,20 +83,20 @@ export default function ProfilePage() {
 
         {status === "loading" && (
           <div className="mt-10 rounded-sm border border-line bg-surface px-8 py-16 text-center">
-            <p className="text-[15px] text-neutral-600">Loading your profile…</p>
+            <p className="text-[15px] text-neutral-600">{t("loading")}</p>
           </div>
         )}
 
         {status === "error" && (
           <div className="mt-10 rounded-sm border border-line bg-surface px-8 py-16 text-center">
             <p className="text-[15px] text-neutral-600">
-              Couldn&apos;t load your profile.{" "}
+              {t("loadError")}{" "}
               <button
                 type="button"
                 onClick={() => window.location.reload()}
                 className="text-cyan-deep hover:underline"
               >
-                Try again
+                {t("tryAgain")}
               </button>
             </p>
           </div>
@@ -109,25 +109,25 @@ export default function ProfilePage() {
                 href="/dashboard"
                 className="inline-flex items-center rounded-sm border border-line px-5 py-2.5 text-sm font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
               >
-                Seller dashboard
+                {t("sellerDashboard")}
               </Link>
               <Link
                 href="/orders"
                 className="inline-flex items-center rounded-sm border border-line px-5 py-2.5 text-sm font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
               >
-                My orders
+                {t("myOrders")}
               </Link>
               <Link
                 href="/messages"
                 className="inline-flex items-center rounded-sm border border-line px-5 py-2.5 text-sm font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
               >
-                Messages
+                {t("messages")}
               </Link>
               <Link
                 href="/favorites"
                 className="inline-flex items-center rounded-sm border border-line px-5 py-2.5 text-sm font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep"
               >
-                Favorites
+                {t("favorites")}
               </Link>
             </div>
 

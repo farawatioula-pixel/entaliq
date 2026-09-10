@@ -410,7 +410,14 @@
     "eyebrow": "Your seller profile",
     "title": "List your services",
     "body": "This is what clients see in the",
-    "marketplace": "marketplace"
+    "marketplace": "marketplace",
+    "loading": "Loading your profile…",
+    "loadError": "Couldn't load your profile.",
+    "tryAgain": "Try again",
+    "sellerDashboard": "Seller dashboard",
+    "myOrders": "My orders",
+    "messages": "Messages",
+    "favorites": "Favorites"
   },
   "profileForm": {
     "fullName": "Full name",
@@ -656,5 +663,18 @@
     "homeLink": "Mountaliq home",
     "primaryNav": "Primary",
     "mobileNav": "Mobile"
+  },
+  "favoritesPage": {
+    "eyebrow": "Favorites",
+    "title": "Your saved services",
+    "empty": "Tap the heart on any listing to save it here."
+  },
+  "avatarUpload": {
+    "imageOnly": "Please choose an image file.",
+    "sizeLimit": "Image must be under 5MB.",
+    "uploading": "Uploading…",
+    "changePhoto": "Change photo",
+    "uploadPhoto": "Upload photo",
+    "profilePhoto": "Profile photo"
   }
 }

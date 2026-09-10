@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 
 export function AvatarUpload({
@@ -12,6 +13,7 @@ export function AvatarUpload({
   value: string;
   onChange: (url: string) => void;
 }) {
+  const t = useTranslations("avatarUpload");
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -21,11 +23,11 @@ export function AvatarUpload({
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      setError("Please choose an image file.");
+      setError(t("imageOnly"));
       return;
     }
     if (file.size > 5 * 1024 * 1024) {
-      setError("Image must be under 5MB.");
+      setError(t("sizeLimit"));
       return;
     }
 
@@ -61,7 +63,7 @@ export function AvatarUpload({
   return (
     <div>
       <label className="mb-1.5 block text-sm font-medium text-neutral-600">
-        Profile photo
+        {t("profilePhoto")}
       </label>
 
       <div className="flex items-center gap-4">
@@ -81,7 +83,7 @@ export function AvatarUpload({
             disabled={uploading}
             className="rounded-sm border border-line px-4 py-2 text-sm font-semibold text-fg transition-colors hover:border-cyan hover:text-cyan-deep disabled:opacity-60"
           >
-            {uploading ? "Uploading…" : value ? "Change photo" : "Upload photo"}
+            {uploading ? t("uploading") : value ? t("changePhoto") : t("uploadPhoto")}
           </button>
           <input
             ref={inputRef}

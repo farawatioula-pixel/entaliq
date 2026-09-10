@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { ListingCard } from "@/components/ListingCard";
@@ -11,6 +12,8 @@ export default async function FavoritesPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations("favoritesPage");
+  const tCard = await getTranslations("listingCard");
   const supabase = await createClient();
 
   const {
@@ -36,22 +39,28 @@ export default async function FavoritesPage({
     <main className="border-t-4 border-cyan bg-paper px-5 py-16 sm:px-8">
       <div className="mx-auto max-w-6xl">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">
-          Favorites
+          {t("eyebrow")}
         </p>
         <h1 className="mt-3 font-display text-3xl font-bold text-fg sm:text-4xl">
-          Your saved services
+          {t("title")}
         </h1>
 
         {listings.length === 0 ? (
           <div className="mt-10 rounded-sm border border-line bg-surface px-8 py-16 text-center">
             <p className="text-[15px] text-neutral-600">
-              Tap the heart on any listing to save it here.
+              {t("empty")}
             </p>
           </div>
         ) : (
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {listings.map((listing) => (
-              <ListingCard key={listing.id} listing={listing} />
+              <ListingCard
+                key={listing.id}
+                listing={listing}
+                fromLabel={tCard("from")}
+                sellerFallbackLabel={tCard("seller")}
+                dayDeliveryLabel={tCard("dayDelivery", { days: listing.delivery_days })}
+              />
             ))}
           </div>
         )}
