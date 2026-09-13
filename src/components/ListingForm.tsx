@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { ListingImagesUpload } from "@/components/ListingImagesUpload";
@@ -29,6 +29,8 @@ export default function ListingForm({
   existingPackages?: ListingPackage[];
 }) {
   const t = useTranslations("listingForm");
+  const locale = useLocale();
+  const categoryName = (c: Category) => (locale === "ar" && c.name_ar ? c.name_ar : c.name);
   const router = useRouter();
   const topLevel = categories.filter((c) => !c.parent_id);
 
@@ -191,7 +193,7 @@ export default function ListingForm({
             <option value="">{t("selectCategory")}</option>
             {topLevel.map((c) => (
               <option key={c.id} value={c.id}>
-                {c.name}
+                {categoryName(c)}
               </option>
             ))}
           </select>
@@ -207,7 +209,7 @@ export default function ListingForm({
             <option value="">{t("none")}</option>
             {subcategories.map((c) => (
               <option key={c.id} value={c.id}>
-                {c.name}
+                {categoryName(c)}
               </option>
             ))}
           </select>

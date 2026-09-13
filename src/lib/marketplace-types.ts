@@ -1,6 +1,7 @@
 export type Category = {
   id: string;
   name: string;
+  name_ar: string | null;
   slug: string;
   parent_id: string | null;
   icon: string;

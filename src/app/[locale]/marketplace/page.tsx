@@ -1,5 +1,6 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { getCategories, getListings, type ListingFilters } from "@/lib/marketplace";
+import type { Category } from "@/lib/marketplace-types";
 import { ListingCard } from "@/components/ListingCard";
 import { Link } from "@/i18n/navigation";
 
@@ -18,6 +19,8 @@ export default async function MarketplacePage({
   const { category, subcategory, q, sort } = await searchParams;
   const t = await getTranslations("marketplacePage");
   const tCard = await getTranslations("listingCard");
+  const locale = await getLocale();
+  const categoryName = (c: Category) => (locale === "ar" && c.name_ar ? c.name_ar : c.name);
 
   const sortOptions: { value: NonNullable<ListingFilters["sort"]>; label: string }[] = [
     { value: "newest", label: t("sortNewest") },
@@ -86,7 +89,7 @@ export default async function MarketplacePage({
                   category === c.slug ? "bg-paper" : "bg-surface hover:bg-paper"
                 }`}
               >
-                <p className="font-display text-base font-bold text-fg">{c.name}</p>
+                <p className="font-display text-base font-bold text-fg">{categoryName(c)}</p>
               </Link>
             ))}
           </div>
@@ -113,7 +116,7 @@ export default async function MarketplacePage({
                       : "border-line text-neutral-600 hover:border-cyan-deep"
                   }`}
                 >
-                  {sc.name}
+                  {categoryName(sc)}
                 </Link>
               ))}
             </div>
