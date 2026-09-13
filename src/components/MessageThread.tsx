@@ -20,7 +20,7 @@ export function MessageThread({
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [text, setText] = useState("");
   const [sending, setSending] = useState(false);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const supabase = createClient();
@@ -50,7 +50,8 @@ export function MessageThread({
   }, [conversationId, currentUserId]);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = containerRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [messages.length]);
 
   async function send() {
@@ -72,7 +73,7 @@ export function MessageThread({
 
   return (
     <div className="flex h-[60vh] flex-col rounded-sm border border-line bg-surface">
-      <div className="flex-1 space-y-3 overflow-y-auto px-5 py-4">
+      <div ref={containerRef} className="flex-1 space-y-3 overflow-y-auto px-5 py-4">
         {messages.length === 0 && (
           <p className="text-center text-sm text-neutral-500">
             {t("sayHello")}
@@ -92,7 +93,6 @@ export function MessageThread({
             </div>
           );
         })}
-        <div ref={bottomRef} />
       </div>
 
       <div className="flex gap-2 border-t border-line px-4 py-3">
