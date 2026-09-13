@@ -24,6 +24,7 @@ export default function Header() {
     { href: "/tracks", label: t("tracks") },
     { href: "/trainers", label: t("trainers") },
     { href: "/marketplace", label: t("marketplace") },
+    { href: "/guides", label: t("guides") },
   ];
 
   useEffect(() => {

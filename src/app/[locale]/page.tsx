@@ -1,6 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { stats, type Locale } from "@/lib/data";
+import { guides } from "@/lib/guides";
+import { GuideCard } from "@/components/GuideCard";
 import PartnerLogos from "@/components/PartnerLogos";
 import LaunchCTA from "@/components/LaunchCTA";
 import LogoBanner from "@/components/LogoBanner";
@@ -23,6 +25,7 @@ export default async function Home({
   const tCard = await getTranslations("listingCard");
 
   const listings = (await getListings({ sort: "newest" })).slice(0, 6);
+  const featuredGuides = guides.slice(0, 3);
 
   return (
     <>
@@ -121,6 +124,39 @@ export default async function Home({
           </div>
         </section>
       )}
+
+      {/* Guides */}
+      <section className="border-b border-line bg-paper py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted">
+                {t("guidesEyebrow")}
+              </p>
+              <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-fg sm:text-4xl">
+                {t("guidesTitle")}
+              </h2>
+            </div>
+            <Link
+              href="/guides"
+              className="text-sm font-semibold text-cyan-deep hover:underline"
+            >
+              {t("guidesCta")}
+            </Link>
+          </div>
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredGuides.map((guide) => (
+              <GuideCard
+                key={guide.slug}
+                guide={guide}
+                locale={locale}
+                categoryLabel={tCat(guide.category)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Trust strip */}
       <section className="border-b border-line bg-surface py-10">

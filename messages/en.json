@@ -15,7 +15,8 @@
     "registerCta": "Register 2026",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "marketplace": "Marketplace"
+    "marketplace": "Marketplace",
+    "guides": "Guides"
   },
   "common": {
     "close": "Close",
@@ -97,7 +98,10 @@
     "browseBody": "Every category below is staffed by people trained through Mountaliq.",
     "popularEyebrow": "Fresh on Mountaliq",
     "popularTitle": "Popular services",
-    "popularCta": "See all services"
+    "popularCta": "See all services",
+    "guidesEyebrow": "Guides",
+    "guidesTitle": "Guides to help you grow",
+    "guidesCta": "See all guides"
   },
   "aboutPage": {
     "metaTitle": "About, Mountaliq 2026",
@@ -676,5 +680,15 @@
     "changePhoto": "Change photo",
     "uploadPhoto": "Upload photo",
     "profilePhoto": "Profile photo"
+  },
+  "guidesPage": {
+    "eyebrow": "Guides",
+    "title": "Guides to help you grow",
+    "body": "Practical resources covering everything you need to know about e-commerce, digital marketing, programming, writing, AI services, and running a business.",
+    "chooseTopic": "Choose your topic",
+    "allTopics": "All topics",
+    "empty": "No guides in this topic yet.",
+    "backToGuides": "Back to guides",
+    "moreGuides": "More guides"
   }
 }
