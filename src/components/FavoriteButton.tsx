@@ -73,7 +73,18 @@ export function FavoriteButton({
       aria-label={favorited ? t("removeFromFavorites") : t("addToFavorites")}
       className={`flex ${dimension} items-center justify-center rounded-full border border-line bg-surface transition-colors hover:border-red disabled:opacity-60`}
     >
-      <span className={favorited ? "text-red" : "text-neutral-400"}>{favorited ? "♥" : "♡"}</span>
+      <svg
+        viewBox="0 0 24 24"
+        fill={favorited ? "currentColor" : "none"}
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={favorited ? "h-[1em] w-[1em] text-red" : "h-[1em] w-[1em] text-neutral-400"}
+        aria-hidden="true"
+      >
+        <path d="M19.5 5.5a5 5 0 0 0-7.5 0 5 5 0 0 0-7.5 0c-2 2-2 5 0 7.5L12 21l7.5-8c2-2.5 2-5.5 0-7.5Z" />
+      </svg>
     </button>
   );
 }
