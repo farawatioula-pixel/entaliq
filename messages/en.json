@@ -399,8 +399,8 @@
   },
   "profilePage": {
     "eyebrow": "Your seller profile",
-    "title": "List your services",
-    "body": "This is what clients see in the",
+    "title": "Your seller profile",
+    "body": "This is your public profile, your name, bio, and portfolio that buyers see. It doesn't list a service on its own. Manage what you're actually selling from your",
     "marketplace": "marketplace",
     "loading": "Loading your profile…",
     "loadError": "Couldn't load your profile.",
@@ -408,7 +408,8 @@
     "sellerDashboard": "Seller dashboard",
     "myOrders": "My orders",
     "messages": "Messages",
-    "favorites": "Favorites"
+    "favorites": "Favorites",
+    "dashboardLink": "seller dashboard"
   },
   "profileForm": {
     "fullName": "Full name",
@@ -447,7 +448,10 @@
     "categoryAiServices": "AI Services",
     "categoryBusinessConsulting": "Business & Consulting",
     "categoryEcommerce": "E-commerce",
-    "category": "Category"
+    "category": "Category",
+    "listingsPointerTitle": "Ready to sell something specific?",
+    "listingsPointerBody": "Your profile is what buyers see when they check you out, it isn't a listing on its own. To actually appear in search and get orders, create a listing with pricing and packages.",
+    "listingsPointerCta": "Create a listing"
   },
   "notifications": {
     "ariaLabel": "Notifications",

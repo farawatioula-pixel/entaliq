@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@/i18n/navigation";
+import { useRouter, Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { AvatarUpload } from "@/components/AvatarUpload";
-import type { Profile, Service } from "@/lib/types";
+import type { Profile } from "@/lib/types";
 
 const categories: Profile["category"][] = [
   "graphics-design",
@@ -17,8 +17,6 @@ const categories: Profile["category"][] = [
   "business-consulting",
   "ecommerce",
 ];
-
-const emptyService: Service = { title: "", description: "", price: "" };
 
 export default function ProfileForm({ profile }: { profile: Profile }) {
   const t = useTranslations("profileForm");
@@ -33,9 +31,6 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
     profile.portfolio_images.length ? profile.portfolio_images : [""]
   );
   const [category, setCategory] = useState<Profile["category"]>(profile.category);
-  const [services, setServices] = useState<Service[]>(
-    profile.services.length ? profile.services : [emptyService]
-  );
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
@@ -50,20 +45,6 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
     "business-consulting": t("categoryBusinessConsulting"),
     ecommerce: t("categoryEcommerce"),
   };
-
-  function updateService(index: number, field: keyof Service, value: string) {
-    setServices((prev) =>
-      prev.map((s, i) => (i === index ? { ...s, [field]: value } : s))
-    );
-  }
-
-  function addService() {
-    setServices((prev) => [...prev, { ...emptyService }]);
-  }
-
-  function removeService(index: number) {
-    setServices((prev) => prev.filter((_, i) => i !== index));
-  }
 
   function updatePortfolioImage(index: number, value: string) {
     setPortfolioImages((prev) => prev.map((url, i) => (i === index ? value : url)));
@@ -83,10 +64,6 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
     setError(null);
     setSaved(false);
 
-    const cleanedServices = services
-      .map((s) => ({ ...s, title: s.title.trim(), description: s.description.trim(), price: s.price.trim() }))
-      .filter((s) => s.title.length > 0);
-
     const cleanedPortfolioImages = portfolioImages.map((url) => url.trim()).filter(Boolean);
 
     const supabase = createClient();
@@ -101,7 +78,6 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
         category,
         avatar_url: avatarUrl.trim(),
         portfolio_images: cleanedPortfolioImages,
-        services: cleanedServices,
         updated_at: new Date().toISOString(),
       })
       .eq("id", profile.id);
@@ -250,71 +226,17 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
         </div>
       </div>
 
-      <div>
-        <div className="flex items-center justify-between">
-          <label className="block text-sm font-medium text-neutral-600">
-            {t("yourServices")}
-          </label>
-          <button
-            type="button"
-            onClick={addService}
-            className="text-sm font-semibold text-cyan-deep hover:underline"
-          >
-            {t("addService")}
-          </button>
-        </div>
-
-        <div className="mt-3 space-y-4">
-          {services.map((service, i) => (
-            <div key={i} className="rounded-sm border border-line bg-surface p-5">
-              <div className="grid gap-4 sm:grid-cols-[2fr_1fr]">
-                <div>
-                  <label className="mb-1.5 block text-xs font-medium text-neutral-600">
-                    {t("serviceTitle")}
-                  </label>
-                  <input
-                    placeholder={t("serviceTitlePlaceholder")}
-                    value={service.title}
-                    onChange={(e) => updateService(i, "title", e.target.value)}
-                    className="w-full rounded-sm border border-line bg-paper px-3 py-2.5 text-[15px] text-fg focus:border-red focus:outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="mb-1.5 block text-xs font-medium text-neutral-600">
-                    {t("price")}
-                  </label>
-                  <input
-                    placeholder={t("pricePlaceholder")}
-                    value={service.price}
-                    onChange={(e) => updateService(i, "price", e.target.value)}
-                    className="w-full rounded-sm border border-line bg-paper px-3 py-2.5 text-[15px] text-fg focus:border-red focus:outline-none"
-                  />
-                </div>
-              </div>
-              <div className="mt-4">
-                <label className="mb-1.5 block text-xs font-medium text-neutral-600">
-                  {t("description")}
-                </label>
-                <textarea
-                  rows={2}
-                  placeholder={t("descriptionPlaceholder")}
-                  value={service.description}
-                  onChange={(e) => updateService(i, "description", e.target.value)}
-                  className="w-full rounded-sm border border-line bg-paper px-3 py-2.5 text-[15px] text-fg focus:border-red focus:outline-none"
-                />
-              </div>
-              {services.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => removeService(i)}
-                  className="mt-3 text-xs font-semibold text-neutral-600 hover:text-red-dark"
-                >
-                  {t("removeService")}
-                </button>
-              )}
-            </div>
-          ))}
-        </div>
+      <div className="rounded-sm border border-cyan bg-cyan/5 p-6">
+        <p className="font-display text-base font-bold text-fg">{t("listingsPointerTitle")}</p>
+        <p className="mt-2 text-[15px] leading-relaxed text-neutral-600">
+          {t("listingsPointerBody")}
+        </p>
+        <Link
+          href="/dashboard/listings/new"
+          className="mt-4 inline-flex items-center rounded-sm bg-red px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-red-dark"
+        >
+          {t("listingsPointerCta")}
+        </Link>
       </div>
 
       {error && <p className="text-sm text-red-dark">{error}</p>}
