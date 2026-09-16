@@ -130,10 +130,10 @@ export default function Header() {
                 {t("login")}
               </Link>
               <Link
-                href="/register"
+                href="/signup"
                 className="inline-flex items-center rounded-sm bg-red px-6 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-red-dark"
               >
-                {t("registerCta")}
+                {t("signUpCta")}
               </Link>
             </>
           )}
@@ -268,10 +268,10 @@ export default function Header() {
                 </li>
                 <li className="pt-2">
                   <Link
-                    href="/register"
+                    href="/signup"
                     className="block rounded-sm bg-red px-4 py-3 text-center text-base font-semibold text-white"
                   >
-                    {t("registerCta")}
+                    {t("signUpCta")}
                   </Link>
                 </li>
               </>
