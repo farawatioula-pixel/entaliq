@@ -53,7 +53,7 @@ export default async function Home({
 
           <HeroSearch placeholder={t("heroSearchPlaceholder")} ctaLabel={t("heroSearchCta")} />
 
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-6 hidden flex-wrap gap-3 sm:flex">
             {heroPillCategories.map((category) => (
               <Link
                 key={category}
