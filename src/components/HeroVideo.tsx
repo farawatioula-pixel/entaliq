@@ -1,10 +1,28 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useSyncExternalStore } from "react";
+
+function subscribe(callback: () => void) {
+  const mql = window.matchMedia("(min-width: 640px)");
+  mql.addEventListener("change", callback);
+  return () => mql.removeEventListener("change", callback);
+}
+
+function getSnapshot() {
+  return window.matchMedia("(min-width: 640px)").matches;
+}
+
+function getServerSnapshot() {
+  return false;
+}
 
 export default function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(true);
+  // Only render <video> at all on tablet/desktop widths, so phones never
+  // fetch the video file in the first place (matches Fiverr: no video on
+  // mobile, since autoplaying video over cellular data is expensive).
+  const showVideo = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   function toggle() {
     const video = videoRef.current;
@@ -16,6 +34,11 @@ export default function HeroVideo() {
       video.pause();
       setPlaying(false);
     }
+  }
+
+  if (!showVideo) {
+    // Mobile fallback: flat gradient, matches the brand palette.
+    return <div className="absolute inset-0 bg-gradient-to-br from-ink via-violet-deep/40 to-ink" />;
   }
 
   return (
