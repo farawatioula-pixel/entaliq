@@ -16,7 +16,8 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "marketplace": "Marketplace",
-    "guides": "Guides"
+    "guides": "Guides",
+    "summit": "Summit"
   },
   "common": {
     "close": "Close",
@@ -63,10 +64,10 @@
     "partnerWithUs": "Partner With Us →"
   },
   "home": {
-    "eyebrow": "Mountaliq 2026",
-    "heroTitle": "The Arab Summit for Digital Economy Skills",
-    "heroBody": "Two days. Four live income tracks. Hundreds of participants trained on the internet skills that let anyone start earning online, no office, no degree, no capital required.",
-    "registerCta": "Register for 2026",
+    "heroHeadline": "Our graduates will take it from here",
+    "heroTagline": "Real services from real people trained through Mountaliq.",
+    "summitBadge": "Mountaliq 2026 · Oct 7–8, Amman",
+    "summitBadgeCta": "About the Summit",
     "stat1Value": "4",
     "stat1Label": "Hands-on training tracks across e-commerce, marketing, content, and tech",
     "stat2Value": "24+",
@@ -75,21 +76,6 @@
     "stat3Label": "Participants per cohort",
     "stat4Value": "7",
     "stat4Label": "Sectors in the digital economy, from affiliate marketing to paid AI services",
-    "summitEyebrow": "Mountaliq",
-    "summitTitle": "Hands-on training in modern internet skills",
-    "summitBody": "Participants go through a full rotation across four hands-on tracks, led by specialists actively working in these fields. Every participant leaves with something ready to work with in at least one track: a store, a content channel, a client pipeline, or a live AI-powered service.",
-    "summitDates": "Oct 7–8",
-    "summitDatesSub": "2026 · Amman",
-    "summitParticipants": "Participants, grouped for full rotation across all tracks",
-    "summitRooms": "5 rooms",
-    "summitRoomsSub": "4 concurrent tracks + plenary",
-    "summitDaysLabel": "2 days",
-    "summitDaysSub": "Every group rotates through all 4",
-    "day1": "Day 1",
-    "day1Body": "9:00 opening plenary, sponsor and government addresses, then training rotation across Affiliate Marketing, E-commerce, AI & Vibe Coding, and Sales Skills through 16:40.",
-    "day2": "Day 2",
-    "day2Body": "Training rotation continues from 9:30, closing with certificate handover and sponsor recognition at the 16:00 graduation ceremony.",
-    "registerForSummit": "Register for Mountaliq",
     "afterTraining": "After the training",
     "heroSearchPlaceholder": "Try \"logo design\" or \"video editing\"",
     "heroSearchCta": "Search",
@@ -690,5 +676,24 @@
     "empty": "No guides in this topic yet.",
     "backToGuides": "Back to guides",
     "moreGuides": "More guides"
+  },
+  "summitPage": {
+    "eyebrow": "Mountaliq 2026",
+    "title": "The Arab Summit for Digital Economy Skills",
+    "subtitle": "Hands-on training in modern internet skills",
+    "body": "Participants go through a full rotation across four hands-on tracks, led by specialists actively working in these fields. Every participant leaves with something ready to work with in at least one track: a store, a content channel, a client pipeline, or a live AI-powered service.",
+    "dates": "Oct 7–8",
+    "datesSub": "2026 · Amman",
+    "participantsValue": "100",
+    "participantsSub": "Participants, grouped for full rotation across all tracks",
+    "rooms": "5 rooms",
+    "roomsSub": "4 concurrent tracks + plenary",
+    "daysLabel": "2 days",
+    "daysSub": "Every group rotates through all 4",
+    "day1": "Day 1",
+    "day1Body": "9:00 opening plenary, sponsor and government addresses, then training rotation across Affiliate Marketing, E-commerce, AI & Vibe Coding, and Sales Skills through 16:40.",
+    "day2": "Day 2",
+    "day2Body": "Training rotation continues from 9:30, closing with certificate handover and sponsor recognition at the 16:00 graduation ceremony.",
+    "registerCta": "Register for Mountaliq"
   }
 }
