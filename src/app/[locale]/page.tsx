@@ -5,7 +5,7 @@ import { guides } from "@/lib/guides";
 import { GuideCard } from "@/components/GuideCard";
 import PartnerLogos from "@/components/PartnerLogos";
 import LaunchCTA from "@/components/LaunchCTA";
-import LogoBanner from "@/components/LogoBanner";
+import HeroVideo from "@/components/HeroVideo";
 import HeroSearch from "@/components/HeroSearch";
 import { CategoryIcon, categoryOrder, categoryAccent } from "@/components/CategoryIcon";
 import { getListings } from "@/lib/marketplace";
@@ -31,16 +31,7 @@ export default async function Home({
     <>
       {/* Hero */}
       <section className="relative overflow-hidden border-b-4 border-red bg-ink">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/mountaliq-hero.jpg"
-          className="absolute inset-0 h-full w-full object-cover opacity-50"
-        >
-          <source src="/mountaliq-hero.mp4" type="video/mp4" />
-        </video>
+        <HeroVideo />
         <div className="absolute inset-0 bg-ink/60" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-32">
@@ -59,10 +50,6 @@ export default async function Home({
           </p>
 
           <HeroSearch placeholder={t("heroSearchPlaceholder")} ctaLabel={t("heroSearchCta")} />
-
-          <div className="mt-14">
-            <LogoBanner />
-          </div>
         </div>
       </section>
 
