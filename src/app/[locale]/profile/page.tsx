@@ -75,8 +75,8 @@ export default function ProfilePage() {
         </h1>
         <p className="mt-2 text-[15px] text-neutral-600">
           {t("body")}{" "}
-          <Link href="/directory" className="text-cyan-deep hover:underline">
-            {t("marketplace")}
+          <Link href="/dashboard" className="text-cyan-deep hover:underline">
+            {t("dashboardLink")}
           </Link>
           .
         </p>
