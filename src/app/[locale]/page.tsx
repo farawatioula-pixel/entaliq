@@ -30,25 +30,33 @@ export default async function Home({
   return (
     <>
       {/* Hero */}
-      <section className="border-b-4 border-red bg-paper">
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-32">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">
-            {t("eyebrow")}
-          </p>
-          <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-fg sm:text-5xl sm:leading-[0.98] lg:text-6xl">
-            {t("heroTitle")}
+      <section className="relative overflow-hidden border-b-4 border-red bg-ink">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/mountaliq-hero.jpg"
+          className="absolute inset-0 h-full w-full object-cover opacity-50"
+        >
+          <source src="/mountaliq-hero.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-ink/60" />
+
+        <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-32">
+          <Link
+            href="/summit"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur transition-colors hover:bg-white/20"
+          >
+            {t("summitBadge")} · {t("summitBadgeCta")} →
+          </Link>
+
+          <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl sm:leading-[0.98] lg:text-6xl">
+            {t("heroHeadline")}
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-neutral-600">
-            {t("heroBody")}
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-neutral-300">
+            {t("heroTagline")}
           </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link
-              href="/register"
-              className="inline-flex items-center rounded-sm bg-red px-7 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-red-dark"
-            >
-              {t("registerCta")}
-            </Link>
-          </div>
 
           <HeroSearch placeholder={t("heroSearchPlaceholder")} ctaLabel={t("heroSearchCta")} />
 
@@ -171,66 +179,6 @@ export default async function Home({
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Summit */}
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:py-24 sm:px-8">
-        <p className="text-xs font-semibold uppercase tracking-widest text-muted">
-          {t("summitEyebrow")}
-        </p>
-        <h2 className="mt-4 max-w-xl font-display text-4xl font-bold leading-tight tracking-tight text-fg sm:text-5xl">
-          {t("summitTitle")}
-        </h2>
-        <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-neutral-600">
-          {t("summitBody")}
-        </p>
-
-        <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-4">
-          <div className="bg-surface px-6 py-6">
-            <p className="font-display text-2xl font-bold text-fg">{t("summitDates")}</p>
-            <p className="mt-1 text-sm text-neutral-600">{t("summitDatesSub")}</p>
-          </div>
-          <div className="bg-surface px-6 py-6">
-            <p className="font-display text-2xl font-bold text-fg">100</p>
-            <p className="mt-1 text-sm text-neutral-600">{t("summitParticipants")}</p>
-          </div>
-          <div className="bg-surface px-6 py-6">
-            <p className="font-display text-2xl font-bold text-fg">{t("summitRooms")}</p>
-            <p className="mt-1 text-sm text-neutral-600">{t("summitRoomsSub")}</p>
-          </div>
-          <div className="bg-surface px-6 py-6">
-            <p className="font-display text-2xl font-bold text-fg">{t("summitDaysLabel")}</p>
-            <p className="mt-1 text-sm text-neutral-600">{t("summitDaysSub")}</p>
-          </div>
-        </div>
-
-        <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <div className="rounded-sm border border-line bg-surface px-8 py-8">
-            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-deep">
-              {t("day1")}
-            </p>
-            <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
-              {t("day1Body")}
-            </p>
-          </div>
-          <div className="rounded-sm border border-line bg-surface px-8 py-8">
-            <p className="text-xs font-semibold uppercase tracking-widest text-red-dark">
-              {t("day2")}
-            </p>
-            <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
-              {t("day2Body")}
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-10">
-          <Link
-            href="/register"
-            className="inline-flex items-center rounded-sm bg-red px-7 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-red-dark"
-          >
-            {t("registerForSummit")}
-          </Link>
         </div>
       </section>
 

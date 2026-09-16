@@ -20,6 +20,7 @@ export default function Header() {
 
   const browseLinks = [
     { href: "/", label: t("home") },
+    { href: "/summit", label: t("summit") },
     { href: "/about", label: t("about") },
     { href: "/tracks", label: t("tracks") },
     { href: "/trainers", label: t("trainers") },
