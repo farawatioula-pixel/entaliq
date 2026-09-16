@@ -8,10 +8,19 @@ import LaunchCTA from "@/components/LaunchCTA";
 import HeroVideo from "@/components/HeroVideo";
 import HeroSearch from "@/components/HeroSearch";
 import { CategoryIcon, categoryOrder, categoryAccent } from "@/components/CategoryIcon";
+import type { ProfileCategory } from "@/lib/types";
 import { getListings } from "@/lib/marketplace";
 import { ListingCard } from "@/components/ListingCard";
 
 export const revalidate = 0;
+
+const heroPillCategories: ProfileCategory[] = [
+  "programming-tech",
+  "graphics-design",
+  "digital-marketing",
+  "video-animation",
+  "ai-services",
+];
 
 export default async function Home({
   params,
@@ -35,14 +44,7 @@ export default async function Home({
         <div className="absolute inset-0 bg-ink/60" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-32">
-          <Link
-            href="/summit"
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur transition-colors hover:bg-white/20"
-          >
-            {t("summitBadge")} · {t("summitBadgeCta")} →
-          </Link>
-
-          <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl sm:leading-[0.98] lg:text-6xl">
+          <h1 className="max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl sm:leading-[0.98] lg:text-6xl">
             {t("heroHeadline")}
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-neutral-300">
@@ -50,6 +52,19 @@ export default async function Home({
           </p>
 
           <HeroSearch placeholder={t("heroSearchPlaceholder")} ctaLabel={t("heroSearchCta")} />
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            {heroPillCategories.map((category) => (
+              <Link
+                key={category}
+                href={`/marketplace?category=${category}`}
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10"
+              >
+                {tCat(category)}
+                <span aria-hidden>→</span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
