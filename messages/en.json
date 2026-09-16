@@ -378,7 +378,8 @@
     "password": "Password",
     "loggingIn": "Logging in…",
     "noAccount": "Don't have an account?",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+    "forgotPassword": "Forgot password?"
   },
   "signupPage": {
     "checkEmail": "Check your email",
@@ -700,5 +701,32 @@
     "day2": "Day 2",
     "day2Body": "Training rotation continues from 9:30, closing with certificate handover and sponsor recognition at the 16:00 graduation ceremony.",
     "registerCta": "Register for Mountaliq"
+  },
+  "forgotPasswordPage": {
+    "eyebrow": "Reset your password",
+    "title": "Forgot password",
+    "body": "Enter the email on your account and we'll send you a link to reset your password.",
+    "email": "Email",
+    "sending": "Sending...",
+    "sendResetLink": "Send reset link",
+    "checkEmailTitle": "Check your email",
+    "checkEmailBody1": "We sent a password reset link to",
+    "checkEmailBody2": "Click the link to choose a new password.",
+    "backToLogin": "Back to log in"
+  },
+  "resetPasswordPage": {
+    "eyebrow": "Reset your password",
+    "title": "Choose a new password",
+    "newPassword": "New password",
+    "passwordHint": "At least 6 characters.",
+    "confirmPassword": "Confirm password",
+    "passwordsDontMatch": "Passwords don't match.",
+    "saving": "Saving...",
+    "savePassword": "Save new password",
+    "invalidLink": "This reset link is invalid or has expired.",
+    "requestNewLink": "Request a new link",
+    "successTitle": "Password updated",
+    "successBody": "Your password has been changed. You can now log in with your new password.",
+    "goToLogin": "Go to log in"
   }
 }
