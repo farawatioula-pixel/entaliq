@@ -17,6 +17,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [userId, setUserId] = useState<string | null | undefined>(undefined);
+  const [scrolled, setScrolled] = useState(false);
 
   const browseLinks = [
     { href: "/", label: t("home") },
@@ -31,6 +32,15 @@ export default function Header() {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    function handleScroll() {
+      setScrolled(window.scrollY > 80);
+    }
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const supabase = createClient();
@@ -64,8 +74,8 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur">
-      {/* Row 1: brand, search, account */}
-      <div className="mx-auto flex max-w-7xl items-center gap-4 px-5 py-4 sm:px-8">
+      {/* Row 1 (desktop/tablet): brand, search, account */}
+      <div className="mx-auto hidden max-w-7xl items-center gap-4 px-5 py-4 sm:px-8 md:flex">
         <Link href="/" className="flex shrink-0 items-center gap-3" aria-label={tAria("homeLink")}>
           <Logo className="h-11 w-11" />
           <span className="font-arabic text-xl font-extrabold tracking-tight text-fg">
@@ -73,11 +83,7 @@ export default function Header() {
           </span>
         </Link>
 
-        <form
-          onSubmit={handleSearchSubmit}
-          role="search"
-          className="hidden flex-1 items-center md:flex"
-        >
+        <form onSubmit={handleSearchSubmit} role="search" className="flex flex-1 items-center">
           <div className="relative w-full max-w-md">
             <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -101,7 +107,7 @@ export default function Header() {
           </div>
         </form>
 
-        <div className="ml-auto hidden items-center gap-4 md:flex">
+        <div className="ml-auto flex items-center gap-4">
           {isLoggedIn && <NotificationBell />}
           <LocaleSwitcher />
 
@@ -138,10 +144,13 @@ export default function Header() {
             </>
           )}
         </div>
+      </div>
 
+      {/* Row 1 (mobile): hamburger left, logo (or search once scrolled) center, Join/bell right */}
+      <div className="flex items-center gap-3 px-5 py-4 md:hidden">
         <button
           type="button"
-          className="ml-auto flex h-10 w-10 items-center justify-center md:hidden"
+          className="flex h-10 w-10 shrink-0 items-center justify-center"
           aria-label={open ? t("closeMenu") : t("openMenu")}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -164,6 +173,54 @@ export default function Header() {
             />
           </span>
         </button>
+
+        {scrolled ? (
+          <form onSubmit={handleSearchSubmit} role="search" className="flex flex-1 items-center">
+            <div className="relative w-full">
+              <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <circle cx="7" cy="7" r="5.25" stroke="currentColor" strokeWidth="1.5" />
+                  <path
+                    d="M11 11L14.5 14.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={t("findServices")}
+                aria-label={t("findServices")}
+                className="w-full rounded-sm border border-line bg-surface py-2 pl-10 pr-4 text-sm text-fg placeholder:text-neutral-400 focus:border-cyan-deep focus:outline-none"
+              />
+            </div>
+          </form>
+        ) : (
+          <Link
+            href="/"
+            className="flex flex-1 items-center gap-2"
+            aria-label={tAria("homeLink")}
+          >
+            <Logo className="h-9 w-9" />
+            <span className="font-arabic text-lg font-extrabold tracking-tight text-fg">
+              منطلق<span className="sr-only"> Mountaliq</span>
+            </span>
+          </Link>
+        )}
+
+        {userId === undefined ? null : isLoggedIn ? (
+          <NotificationBell />
+        ) : (
+          <Link
+            href="/signup"
+            className="shrink-0 rounded-sm bg-fg px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-black"
+          >
+            {t("joinCta")}
+          </Link>
+        )}
       </div>
 
       {/* Row 2: browse strip, desktop only */}

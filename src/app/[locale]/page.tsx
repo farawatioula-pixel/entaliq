@@ -47,9 +47,6 @@ export default async function Home({
           <h1 className="max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl sm:leading-[0.98] lg:text-6xl">
             {t("heroHeadline")}
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-neutral-300">
-            {t("heroTagline")}
-          </p>
 
           <HeroSearch placeholder={t("heroSearchPlaceholder")} ctaLabel={t("heroSearchCta")} />
 
