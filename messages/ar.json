@@ -18,7 +18,8 @@
     "marketplace": "المتجر",
     "guides": "الأدلة",
     "summit": "القمة",
-    "signUpCta": "إنشاء حساب"
+    "signUpCta": "إنشاء حساب",
+    "joinCta": "انضم"
   },
   "common": {
     "close": "إغلاق",
@@ -65,8 +66,7 @@
     "partnerWithUs": "كن شريكاً"
   },
   "home": {
-    "heroHeadline": "استعن بمستقلين، واحصل على أفضل الخدمات",
-    "heroTagline": "خدمات حقيقية من أشخاص حقيقيين",
+    "heroHeadline": "وظف خدمات محترفين لتحويل أفكارك إلى واقع وتنفيذ المهام عن بعد",
     "summitBadge": "منطلق 2026 · 7-8 أكتوبر، عمّان",
     "summitBadgeCta": "عن القمة",
     "stat1Value": "4",

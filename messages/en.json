@@ -18,7 +18,8 @@
     "marketplace": "Marketplace",
     "guides": "Guides",
     "summit": "Summit",
-    "signUpCta": "Sign up"
+    "signUpCta": "Sign up",
+    "joinCta": "Join"
   },
   "common": {
     "close": "Close",
@@ -66,7 +67,6 @@
   },
   "home": {
     "heroHeadline": "Hire freelancers, get the best services",
-    "heroTagline": "Real services from real people",
     "summitBadge": "Mountaliq 2026 · Oct 7–8, Amman",
     "summitBadgeCta": "About the Summit",
     "stat1Value": "4",
