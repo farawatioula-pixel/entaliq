@@ -146,8 +146,8 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Row 1 (mobile): hamburger left, logo (or search once scrolled) center, Join/bell right */}
-      <div className="flex items-center gap-3 px-5 py-4 md:hidden">
+      {/* Row 1 (mobile): hamburger left, logo (or search once scrolled) truly centered, Join/bell right */}
+      <div className="relative flex items-center gap-3 px-5 py-4 md:hidden">
         <button
           type="button"
           className="flex h-10 w-10 shrink-0 items-center justify-center"
@@ -201,7 +201,7 @@ export default function Header() {
         ) : (
           <Link
             href="/"
-            className="flex flex-1 items-center gap-2"
+            className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2"
             aria-label={tAria("homeLink")}
           >
             <Logo className="h-9 w-9" />
@@ -216,7 +216,7 @@ export default function Header() {
         ) : (
           <Link
             href="/signup"
-            className="shrink-0 rounded-sm bg-fg px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-black"
+            className="ms-auto shrink-0 rounded-sm bg-red px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-dark"
           >
             {t("joinCta")}
           </Link>
