@@ -107,6 +107,21 @@ export default function Header() {
           </div>
         </form>
 
+        <div className="flex items-center gap-2">
+          <Link
+            href="/marketplace"
+            className="rounded-full border border-cyan-deep px-4 py-1.5 text-sm font-semibold text-cyan-deep transition-colors hover:bg-cyan/10"
+          >
+            {t("buyCta")}
+          </Link>
+          <Link
+            href="/profile"
+            className="rounded-full border border-red px-4 py-1.5 text-sm font-semibold text-red-dark transition-colors hover:bg-red/10"
+          >
+            {t("sellCta")}
+          </Link>
+        </div>
+
         <div className="ml-auto flex items-center gap-4">
           {isLoggedIn && <NotificationBell />}
           <LocaleSwitcher />
@@ -221,6 +236,22 @@ export default function Header() {
             {t("joinCta")}
           </Link>
         )}
+      </div>
+
+      {/* Buy/Sell row: mobile only, always visible */}
+      <div className="grid grid-cols-2 gap-2 border-t border-line px-5 pb-3 pt-1 md:hidden">
+        <Link
+          href="/marketplace"
+          className="rounded-full border border-cyan-deep py-1.5 text-center text-sm font-semibold text-cyan-deep transition-colors hover:bg-cyan/10"
+        >
+          {t("buyCta")}
+        </Link>
+        <Link
+          href="/profile"
+          className="rounded-full border border-red py-1.5 text-center text-sm font-semibold text-red-dark transition-colors hover:bg-red/10"
+        >
+          {t("sellCta")}
+        </Link>
       </div>
 
       {/* Row 2: browse strip, desktop only */}
