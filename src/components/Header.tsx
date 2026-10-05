@@ -73,6 +73,8 @@ export default function Header() {
   const isLoggedIn = !!userId;
   const buyHref = isLoggedIn ? "/marketplace" : "/signup?next=/marketplace";
   const sellHref = isLoggedIn ? "/dashboard" : "/signup?next=/profile";
+  const registerHref = isLoggedIn ? "/register" : "/signup?next=/register";
+  const isSummitPage = pathname === "/summit";
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur">
@@ -110,18 +112,29 @@ export default function Header() {
         </form>
 
         <div className="flex items-center gap-2">
-          <Link
-            href={buyHref}
-            className="rounded-full border border-cyan-deep px-4 py-1.5 text-sm font-semibold text-cyan-deep transition-colors hover:bg-cyan/10"
-          >
-            {t("buyCta")}
-          </Link>
-          <Link
-            href={sellHref}
-            className="rounded-full border border-red px-4 py-1.5 text-sm font-semibold text-red-dark transition-colors hover:bg-red/10"
-          >
-            {t("sellCta")}
-          </Link>
+          {isSummitPage ? (
+            <Link
+              href={registerHref}
+              className="rounded-full bg-red px-5 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-red-dark"
+            >
+              {t("registerCta")}
+            </Link>
+          ) : (
+            <>
+              <Link
+                href={buyHref}
+                className="rounded-full border border-cyan-deep px-4 py-1.5 text-sm font-semibold text-cyan-deep transition-colors hover:bg-cyan/10"
+              >
+                {t("buyCta")}
+              </Link>
+              <Link
+                href={sellHref}
+                className="rounded-full border border-red px-4 py-1.5 text-sm font-semibold text-red-dark transition-colors hover:bg-red/10"
+              >
+                {t("sellCta")}
+              </Link>
+            </>
+          )}
         </div>
 
         <div className="ml-auto flex items-center gap-4">
@@ -223,20 +236,31 @@ export default function Header() {
         {isLoggedIn && <NotificationBell />}
       </div>
 
-      {/* Buy/Sell row: mobile only, always visible */}
-      <div className="grid grid-cols-2 gap-2 border-t border-line px-5 pb-3 pt-1 md:hidden">
-        <Link
-          href={buyHref}
-          className="rounded-full border border-cyan-deep py-1.5 text-center text-sm font-semibold text-cyan-deep transition-colors hover:bg-cyan/10"
-        >
-          {t("buyCta")}
-        </Link>
-        <Link
-          href={sellHref}
-          className="rounded-full border border-red py-1.5 text-center text-sm font-semibold text-red-dark transition-colors hover:bg-red/10"
-        >
-          {t("sellCta")}
-        </Link>
+      {/* Buy/Sell (or Register, on the summit page) row: mobile only, always visible */}
+      <div className="border-t border-line px-5 pb-3 pt-1 md:hidden">
+        {isSummitPage ? (
+          <Link
+            href={registerHref}
+            className="block rounded-full bg-red py-1.5 text-center text-sm font-semibold text-white transition-colors hover:bg-red-dark"
+          >
+            {t("registerCta")}
+          </Link>
+        ) : (
+          <div className="grid grid-cols-2 gap-2">
+            <Link
+              href={buyHref}
+              className="rounded-full border border-cyan-deep py-1.5 text-center text-sm font-semibold text-cyan-deep transition-colors hover:bg-cyan/10"
+            >
+              {t("buyCta")}
+            </Link>
+            <Link
+              href={sellHref}
+              className="rounded-full border border-red py-1.5 text-center text-sm font-semibold text-red-dark transition-colors hover:bg-red/10"
+            >
+              {t("sellCta")}
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Row 2: browse strip, desktop only */}

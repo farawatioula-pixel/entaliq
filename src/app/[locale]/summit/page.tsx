@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { createClient } from "@/lib/supabase/server";
 
 export async function generateMetadata() {
   const t = await getTranslations("summitPage");
@@ -8,6 +9,11 @@ export async function generateMetadata() {
 
 export default async function SummitPage() {
   const t = await getTranslations("summitPage");
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const registerHref = user ? "/register" : "/signup?next=/register";
 
   return (
     <section className="border-b-4 border-red bg-paper">
@@ -65,7 +71,7 @@ export default async function SummitPage() {
 
         <div className="mt-10">
           <Link
-            href="/register"
+            href={registerHref}
             className="inline-flex items-center rounded-sm bg-red px-7 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-red-dark"
           >
             {t("registerCta")}
