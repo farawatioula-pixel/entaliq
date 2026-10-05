@@ -1,13 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-export default function LoginPage() {
+function LoginForm() {
   const t = useTranslations("loginPage");
   const locale = useLocale();
+  const searchParams = useSearchParams();
+  const next = searchParams.get("next") || "/profile";
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -31,7 +35,7 @@ export default function LoginPage() {
       return;
     }
 
-    window.location.href = `/${locale}/profile`;
+    window.location.href = `/${locale}${next}`;
   }
 
   return (
@@ -95,5 +99,13 @@ export default function LoginPage() {
         </p>
       </div>
     </main>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginForm />
+    </Suspense>
   );
 }

@@ -71,6 +71,8 @@ export default function Header() {
   }
 
   const isLoggedIn = !!userId;
+  const buyHref = isLoggedIn ? "/marketplace" : "/signup?next=/marketplace";
+  const sellHref = isLoggedIn ? "/dashboard" : "/signup?next=/profile";
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur">
@@ -109,13 +111,13 @@ export default function Header() {
 
         <div className="flex items-center gap-2">
           <Link
-            href="/marketplace"
+            href={buyHref}
             className="rounded-full border border-cyan-deep px-4 py-1.5 text-sm font-semibold text-cyan-deep transition-colors hover:bg-cyan/10"
           >
             {t("buyCta")}
           </Link>
           <Link
-            href="/profile"
+            href={sellHref}
             className="rounded-full border border-red px-4 py-1.5 text-sm font-semibold text-red-dark transition-colors hover:bg-red/10"
           >
             {t("sellCta")}
@@ -143,20 +145,12 @@ export default function Header() {
               </button>
             </>
           ) : (
-            <>
-              <Link
-                href="/login"
-                className="text-[15px] font-medium text-neutral-600 transition-colors hover:text-fg"
-              >
-                {t("login")}
-              </Link>
-              <Link
-                href="/signup"
-                className="inline-flex items-center rounded-sm bg-red px-6 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-red-dark"
-              >
-                {t("signUpCta")}
-              </Link>
-            </>
+            <Link
+              href="/login"
+              className="text-[15px] font-medium text-neutral-600 transition-colors hover:text-fg"
+            >
+              {t("login")}
+            </Link>
           )}
         </div>
       </div>
@@ -226,28 +220,19 @@ export default function Header() {
           </Link>
         )}
 
-        {userId === undefined ? null : isLoggedIn ? (
-          <NotificationBell />
-        ) : (
-          <Link
-            href="/signup"
-            className="ms-auto shrink-0 rounded-sm bg-red px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-dark"
-          >
-            {t("joinCta")}
-          </Link>
-        )}
+        {isLoggedIn && <NotificationBell />}
       </div>
 
       {/* Buy/Sell row: mobile only, always visible */}
       <div className="grid grid-cols-2 gap-2 border-t border-line px-5 pb-3 pt-1 md:hidden">
         <Link
-          href="/marketplace"
+          href={buyHref}
           className="rounded-full border border-cyan-deep py-1.5 text-center text-sm font-semibold text-cyan-deep transition-colors hover:bg-cyan/10"
         >
           {t("buyCta")}
         </Link>
         <Link
-          href="/profile"
+          href={sellHref}
           className="rounded-full border border-red py-1.5 text-center text-sm font-semibold text-red-dark transition-colors hover:bg-red/10"
         >
           {t("sellCta")}
@@ -345,24 +330,14 @@ export default function Header() {
                 </li>
               </>
             ) : (
-              <>
-                <li>
-                  <Link
-                    href="/login"
-                    className="block rounded-sm px-2 py-3 text-center text-base font-medium text-neutral-600"
-                  >
-                    {t("login")}
-                  </Link>
-                </li>
-                <li className="pt-2">
-                  <Link
-                    href="/signup"
-                    className="block rounded-sm bg-red px-4 py-3 text-center text-base font-semibold text-white"
-                  >
-                    {t("signUpCta")}
-                  </Link>
-                </li>
-              </>
+              <li>
+                <Link
+                  href="/login"
+                  className="block rounded-sm px-2 py-3 text-center text-base font-medium text-neutral-600"
+                >
+                  {t("login")}
+                </Link>
+              </li>
             )}
 
             <li className="pt-3">
