@@ -1,13 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-export default function SignupPage() {
+function SignupForm() {
   const t = useTranslations("signupPage");
   const locale = useLocale();
+  const searchParams = useSearchParams();
+  const next = searchParams.get("next") || "/profile";
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +30,7 @@ export default function SignupPage() {
       password,
       options: {
         data: { name },
-        emailRedirectTo: `${window.location.origin}/${locale}/login`,
+        emailRedirectTo: `${window.location.origin}/${locale}/login?next=${encodeURIComponent(next)}`,
       },
     });
 
@@ -38,7 +42,7 @@ export default function SignupPage() {
     }
 
     if (data.session) {
-      window.location.href = `/${locale}/profile`;
+      window.location.href = `/${locale}${next}`;
     } else {
       // Email confirmation is required before a session exists.
       setDone(true);
@@ -138,5 +142,13 @@ export default function SignupPage() {
         </p>
       </div>
     </main>
+  );
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={null}>
+      <SignupForm />
+    </Suspense>
   );
 }
