@@ -19,7 +19,9 @@
     "guides": "Guides",
     "summit": "Summit",
     "signUpCta": "Sign up",
-    "joinCta": "Join"
+    "joinCta": "Join",
+    "buyCta": "Buy",
+    "sellCta": "Sell"
   },
   "common": {
     "close": "Close",
