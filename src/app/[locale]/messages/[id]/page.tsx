@@ -28,11 +28,23 @@ export default async function ConversationPage({
   const result = await getConversationWithMessages(id);
   if (!result) notFound();
 
-  const { conversation, messages } = result;
+  const { conversation, messages, offers } = result;
   const isParticipant = conversation.buyer_id === user.id || conversation.seller_id === user.id;
   if (!isParticipant) notFound();
 
+  const isSeller = conversation.seller_id === user.id;
   const other = conversation.buyer_id === user.id ? conversation.seller : conversation.buyer;
+
+  let sellerListings: { id: string; title: string }[] = [];
+  if (isSeller) {
+    const { data } = await supabase
+      .from("listings")
+      .select("id, title")
+      .eq("seller_id", user.id)
+      .eq("status", "published")
+      .order("title", { ascending: true });
+    sellerListings = data ?? [];
+  }
 
   return (
     <main className="border-t-4 border-cyan bg-paper px-5 py-16 sm:px-8">
@@ -56,6 +68,10 @@ export default async function ConversationPage({
             conversationId={conversation.id}
             currentUserId={user.id}
             initialMessages={messages}
+            initialOffers={offers}
+            isSeller={isSeller}
+            sellerListings={sellerListings}
+            defaultListingId={conversation.listing_id}
           />
         </div>
       </div>

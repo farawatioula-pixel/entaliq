@@ -548,7 +548,12 @@
     "files": "Files",
     "deliveredFile": "Delivered file",
     "requirementFile": "Requirement file",
-    "reviewSubmitted": "{rating} review submitted"
+    "reviewSubmitted": "{rating} review submitted",
+    "paymentRequired": "Payment required",
+    "paymentRequiredBody": "This order won't start until payment is sent and confirmed.",
+    "payNow": "Pay now",
+    "paymentSubmitted": "Payment submitted",
+    "paymentSubmittedBody": "We're confirming your payment. This usually doesn't take long."
   },
   "marketplaceListingPage": {
     "marketplaceBreadcrumb": "Marketplace",
@@ -655,7 +660,29 @@
   "messageThread": {
     "sayHello": "Say hello to start the conversation.",
     "writeMessage": "Write a message...",
-    "send": "Send"
+    "send": "Send",
+    "customOffer": "Custom Offer",
+    "deliveryDays": "{days}-day delivery",
+    "acceptOffer": "Accept offer",
+    "declineOffer": "Decline",
+    "waitingOnBuyer": "Waiting for the buyer to respond.",
+    "offerAccepted": "Offer accepted",
+    "offerDeclined": "Offer declined",
+    "payNow": "Pay now",
+    "sendOffer": "Send offer",
+    "sendOfferTitle": "Send a custom offer",
+    "listingLabel": "Listing",
+    "offerTitlePlaceholder": "Offer title",
+    "offerDescriptionPlaceholder": "What's included",
+    "offerPricePlaceholder": "Price (JOD)",
+    "offerDeliveryPlaceholder": "Delivery days",
+    "sendOfferSubmit": "Send offer",
+    "sendingOffer": "Sending...",
+    "cancel": "Cancel",
+    "needListing": "Choose a listing for this offer.",
+    "offerValidation": "Add a title and a price.",
+    "noListingsForOffer": "You need a published listing before you can send a custom offer.",
+    "somethingWentWrong": "Something went wrong"
   },
   "headerAria": {
     "homeLink": "Mountaliq home",
@@ -730,5 +757,36 @@
     "successTitle": "Password updated",
     "successBody": "Your password has been changed. You can now log in with your new password.",
     "goToLogin": "Go to log in"
+  },
+  "payOrderPage": {
+    "eyebrow": "Payment",
+    "title": "Complete your payment",
+    "listingRemoved": "Listing removed",
+    "amountDue": "Amount due",
+    "alreadyConfirmed": "Payment already confirmed for this order.",
+    "viewOrder": "View order",
+    "alreadySubmitted": "Payment already submitted",
+    "alreadySubmittedBody": "We're confirming it now, check back shortly.",
+    "howToPay": "How to pay via CliQ",
+    "step1": "Open your bank's app and start a CliQ transfer.",
+    "step2": "Send to this CliQ alias:",
+    "step3": "Enter the exact amount:",
+    "step4": "Come back here and confirm you've sent it.",
+    "referenceLabel": "Reference (optional)",
+    "referencePlaceholder": "e.g. the name on your CliQ transfer",
+    "referenceHint": "This helps us match your payment faster.",
+    "submitting": "Submitting...",
+    "confirmSent": "I've sent the payment"
+  },
+  "adminPaymentsPage": {
+    "eyebrow": "Admin",
+    "title": "Pending payment confirmations",
+    "noPending": "No payments waiting on confirmation.",
+    "buyerLabel": "Buyer",
+    "sellerLabel": "Seller",
+    "referenceLabel": "Reference",
+    "listingRemoved": "Listing removed",
+    "confirmPayment": "Confirm payment",
+    "confirming": "Confirming..."
   }
 }

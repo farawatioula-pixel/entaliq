@@ -71,6 +71,27 @@ export default async function OrderDetailPage({
           </div>
         </div>
 
+        {order.status !== "cancelled" && order.payment_status === "unpaid" && (
+          <div className="mt-6 rounded-sm border border-red bg-red/5 px-5 py-4">
+            <p className="text-sm font-semibold text-red-dark">{t("paymentRequired")}</p>
+            <p className="mt-1 text-sm text-neutral-600">{t("paymentRequiredBody")}</p>
+            {isBuyer && (
+              <Link
+                href={`/orders/${order.id}/pay`}
+                className="mt-3 inline-flex items-center rounded-sm bg-red px-5 py-2 text-sm font-semibold text-white hover:bg-red-dark"
+              >
+                {t("payNow")}
+              </Link>
+            )}
+          </div>
+        )}
+        {order.status !== "cancelled" && order.payment_status === "submitted" && (
+          <div className="mt-6 rounded-sm border border-cyan-deep bg-cyan/5 px-5 py-4">
+            <p className="text-sm font-semibold text-cyan-deep">{t("paymentSubmitted")}</p>
+            <p className="mt-1 text-sm text-neutral-600">{t("paymentSubmittedBody")}</p>
+          </div>
+        )}
+
         {order.status !== "cancelled" && (
           <div className="mt-8 flex items-center justify-between">
             {statusSteps.map((step, i) => (
@@ -143,6 +164,7 @@ export default async function OrderDetailPage({
         <OrderStatusActions
           orderId={order.id}
           status={order.status}
+          paymentStatus={order.payment_status}
           isSeller={isSeller}
           isBuyer={isBuyer}
           hasReview={!!review}

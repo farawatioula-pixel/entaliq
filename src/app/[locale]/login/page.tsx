@@ -1,14 +1,14 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 function LoginForm() {
   const t = useTranslations("loginPage");
-  const locale = useLocale();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get("next") || "/profile";
 
@@ -35,7 +35,8 @@ function LoginForm() {
       return;
     }
 
-    window.location.href = `/${locale}${next}`;
+    router.push(next);
+    router.refresh();
   }
 
   return (

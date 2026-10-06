@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import type { Conversation, Message } from "@/lib/marketplace-types";
+import type { Conversation, Message, Offer } from "@/lib/marketplace-types";
 
 export type ConversationWithParties = Conversation & {
   buyer: { id: string; name: string; avatar_url: string } | null;
@@ -78,14 +78,22 @@ export async function getConversationWithMessages(conversationId: string) {
 
   if (!conversation) return null;
 
-  const { data: messages } = await supabase
-    .from("messages")
-    .select("*")
-    .eq("conversation_id", conversationId)
-    .order("created_at", { ascending: true });
+  const [{ data: messages }, { data: offers }] = await Promise.all([
+    supabase
+      .from("messages")
+      .select("*")
+      .eq("conversation_id", conversationId)
+      .order("created_at", { ascending: true }),
+    supabase
+      .from("offers")
+      .select("*")
+      .eq("conversation_id", conversationId)
+      .order("created_at", { ascending: true }),
+  ]);
 
   return {
     conversation: conversation as unknown as ConversationWithParties,
     messages: (messages ?? []) as Message[],
+    offers: (offers ?? []) as Offer[],
   };
 }

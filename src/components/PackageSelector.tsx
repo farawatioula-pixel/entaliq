@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 import type { ListingPackage } from "@/lib/marketplace-types";
 
 export function PackageSelector({
@@ -14,6 +15,7 @@ export function PackageSelector({
   currency?: string;
 }) {
   const t = useTranslations("packageSelector");
+  const router = useRouter();
   const tierLabel: Record<ListingPackage["tier"], string> = {
     basic: t("tierBasic"),
     standard: t("tierStandard"),
@@ -40,7 +42,7 @@ export function PackageSelector({
         throw new Error(body.error ?? t("couldNotPlaceOrder"));
       }
       const { order } = await res.json();
-      window.location.href = `/orders/${order.id}`;
+      router.push(`/orders/${order.id}/pay`);
     } catch (e) {
       setError(e instanceof Error ? e.message : t("somethingWentWrong"));
       setSubmitting(false);
