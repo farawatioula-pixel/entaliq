@@ -25,5 +25,6 @@ export type Profile = {
   avatar_url: string;
   portfolio_images: string[];
   services: Service[];
+  is_admin: boolean;
   updated_at: string;
 };

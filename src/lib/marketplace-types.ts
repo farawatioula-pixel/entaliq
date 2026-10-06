@@ -58,6 +58,8 @@ export type OrderStatus =
   | "completed"
   | "cancelled";
 
+export type PaymentStatus = "unpaid" | "submitted" | "confirmed" | "refunded";
+
 export type Order = {
   id: string;
   listing_id: string;
@@ -68,8 +70,30 @@ export type Order = {
   status: OrderStatus;
   requirements: string;
   delivery_deadline: string | null;
+  payment_status: PaymentStatus;
+  payment_reference: string | null;
+  payment_submitted_at: string | null;
+  payment_confirmed_at: string | null;
+  payment_confirmed_by: string | null;
   created_at: string;
   updated_at: string;
+};
+
+export type OfferStatus = "pending" | "accepted" | "declined" | "expired";
+
+export type Offer = {
+  id: string;
+  conversation_id: string;
+  seller_id: string;
+  buyer_id: string;
+  listing_id: string | null;
+  title: string;
+  description: string;
+  price: number;
+  delivery_days: number;
+  status: OfferStatus;
+  order_id: string | null;
+  created_at: string;
 };
 
 export type OrderFile = {

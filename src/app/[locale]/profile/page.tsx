@@ -48,6 +48,7 @@ export default function ProfilePage() {
           category: "graphics-design",
           avatar_url: "",
           portfolio_images: [],
+          is_admin: false,
           services: [],
           updated_at: new Date().toISOString(),
         }

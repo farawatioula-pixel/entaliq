@@ -4,17 +4,19 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
-import type { OrderStatus } from "@/lib/marketplace-types";
+import type { OrderStatus, PaymentStatus } from "@/lib/marketplace-types";
 
 export function OrderStatusActions({
   orderId,
   status,
+  paymentStatus,
   isSeller,
   isBuyer,
   hasReview,
 }: {
   orderId: string;
   status: OrderStatus;
+  paymentStatus: PaymentStatus;
   isSeller: boolean;
   isBuyer: boolean;
   hasReview: boolean;
@@ -80,8 +82,11 @@ export function OrderStatusActions({
 
   const actions: { label: string; next: OrderStatus; primary?: boolean }[] = [];
 
+  const paymentConfirmed = paymentStatus === "confirmed";
+
   if (isSeller) {
-    if (status === "pending") actions.push({ label: t("acceptOrder"), next: "accepted", primary: true });
+    if (status === "pending" && paymentConfirmed)
+      actions.push({ label: t("acceptOrder"), next: "accepted", primary: true });
     if (status === "accepted") actions.push({ label: t("startWork"), next: "in_progress", primary: true });
     if (status === "in_progress" || status === "revision_requested")
       actions.push({ label: t("markDelivered"), next: "delivered", primary: true });

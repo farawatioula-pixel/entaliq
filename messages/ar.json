@@ -548,7 +548,12 @@
     "files": "الملفات",
     "deliveredFile": "ملف تم تسليمه",
     "requirementFile": "ملف متطلبات",
-    "reviewSubmitted": "تم إرسال تقييم {rating}"
+    "reviewSubmitted": "تم إرسال تقييم {rating}",
+    "paymentRequired": "الدفع مطلوب",
+    "paymentRequiredBody": "لن يبدأ هذا الطلب حتى يتم إرسال الدفعة وتأكيدها.",
+    "payNow": "ادفع الآن",
+    "paymentSubmitted": "تم إرسال الدفعة",
+    "paymentSubmittedBody": "نقوم بتأكيد دفعتك. عادةً لا يستغرق هذا وقتًا طويلاً."
   },
   "marketplaceListingPage": {
     "marketplaceBreadcrumb": "السوق",
@@ -655,7 +660,29 @@
   "messageThread": {
     "sayHello": "ابدأ المحادثة بإلقاء التحية.",
     "writeMessage": "اكتب رسالة...",
-    "send": "إرسال"
+    "send": "إرسال",
+    "customOffer": "عرض مخصص",
+    "deliveryDays": "تسليم خلال {days} يوم",
+    "acceptOffer": "قبول العرض",
+    "declineOffer": "رفض",
+    "waitingOnBuyer": "بانتظار رد المشتري.",
+    "offerAccepted": "تم قبول العرض",
+    "offerDeclined": "تم رفض العرض",
+    "payNow": "ادفع الآن",
+    "sendOffer": "إرسال عرض",
+    "sendOfferTitle": "إرسال عرض مخصص",
+    "listingLabel": "العرض",
+    "offerTitlePlaceholder": "عنوان العرض",
+    "offerDescriptionPlaceholder": "ما الذي يشمله",
+    "offerPricePlaceholder": "السعر (دينار)",
+    "offerDeliveryPlaceholder": "أيام التسليم",
+    "sendOfferSubmit": "إرسال العرض",
+    "sendingOffer": "جارٍ الإرسال...",
+    "cancel": "إلغاء",
+    "needListing": "اختر عرضًا لهذا العرض المخصص.",
+    "offerValidation": "أضف عنوانًا وسعرًا.",
+    "noListingsForOffer": "تحتاج إلى عرض منشور قبل أن تتمكن من إرسال عرض مخصص.",
+    "somethingWentWrong": "حدث خطأ ما"
   },
   "headerAria": {
     "homeLink": "الصفحة الرئيسية لمنطلق",
@@ -730,5 +757,36 @@
     "successTitle": "تم تحديث كلمة المرور",
     "successBody": "تم تغيير كلمة المرور. يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة.",
     "goToLogin": "الذهاب لتسجيل الدخول"
+  },
+  "payOrderPage": {
+    "eyebrow": "الدفع",
+    "title": "أكمل عملية الدفع",
+    "listingRemoved": "تمت إزالة العرض",
+    "amountDue": "المبلغ المستحق",
+    "alreadyConfirmed": "تم تأكيد الدفع لهذا الطلب بالفعل.",
+    "viewOrder": "عرض الطلب",
+    "alreadySubmitted": "تم إرسال الدفعة بالفعل",
+    "alreadySubmittedBody": "نقوم بتأكيدها الآن، تحقق مجددًا بعد قليل.",
+    "howToPay": "كيفية الدفع عبر كليك (CliQ)",
+    "step1": "افتح تطبيق البنك الخاص بك وابدأ تحويل CliQ.",
+    "step2": "أرسل إلى اسم الحساب على CliQ:",
+    "step3": "أدخل المبلغ بالضبط:",
+    "step4": "عد إلى هنا وأكّد أنك أرسلت المبلغ.",
+    "referenceLabel": "الرقم المرجعي (اختياري)",
+    "referencePlaceholder": "مثال: الاسم الظاهر في تحويل CliQ",
+    "referenceHint": "هذا يساعدنا على مطابقة دفعتك بشكل أسرع.",
+    "submitting": "جارٍ الإرسال...",
+    "confirmSent": "لقد أرسلت الدفعة"
+  },
+  "adminPaymentsPage": {
+    "eyebrow": "الإدارة",
+    "title": "تأكيدات الدفع المعلّقة",
+    "noPending": "لا توجد دفعات بانتظار التأكيد.",
+    "buyerLabel": "المشتري",
+    "sellerLabel": "البائع",
+    "referenceLabel": "الرقم المرجعي",
+    "listingRemoved": "تمت إزالة العرض",
+    "confirmPayment": "تأكيد الدفع",
+    "confirming": "جارٍ التأكيد..."
   }
 }
