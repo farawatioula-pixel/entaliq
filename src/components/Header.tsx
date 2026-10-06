@@ -61,7 +61,8 @@ export default function Header() {
   async function handleSignOut() {
     const supabase = createClient();
     await supabase.auth.signOut();
-    window.location.href = `/${locale}`;
+    router.push("/");
+    router.refresh();
   }
 
   function handleSearchSubmit(e: React.FormEvent) {
