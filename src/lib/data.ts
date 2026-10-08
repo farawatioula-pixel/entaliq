@@ -155,7 +155,7 @@ export const trainers: Trainer[] = [
   },
 ];
 
-export const partners = ["Bromine Jordan"];
+export const partners = [{ name: "Bromine Jordan", logo: "/partners/bromine-jordan.png" }];
 
 export const stats: { value: string; label: LocalizedText }[] = [
   {
