@@ -19,6 +19,7 @@ export async function POST(req: NextRequest) {
     description?: string;
     price?: number;
     delivery_days?: number;
+    request_id?: string;
   };
   try {
     body = await req.json();
@@ -26,7 +27,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const { conversation_id, listing_id, title, description, price, delivery_days } = body;
+  const { conversation_id, listing_id, title, description, price, delivery_days, request_id } = body;
 
   if (!conversation_id || !listing_id || !title || !price || !delivery_days) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -53,6 +54,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Listing not found" }, { status: 404 });
   }
 
+  let requestId: string | null = null;
+  if (request_id) {
+    const { data: requestRow } = await supabase
+      .from("requests")
+      .select("id, conversation_id, seller_id, status")
+      .eq("id", request_id)
+      .single();
+
+    if (!requestRow || requestRow.conversation_id !== conversation_id || requestRow.seller_id !== user.id) {
+      return NextResponse.json({ error: "Request not found" }, { status: 404 });
+    }
+    requestId = requestRow.id;
+  }
+
   const { data: offer, error } = await supabase
     .from("offers")
     .insert({
@@ -60,6 +75,7 @@ export async function POST(req: NextRequest) {
       seller_id: user.id,
       buyer_id: conversation.buyer_id,
       listing_id,
+      request_id: requestId,
       title,
       description: description ?? "",
       price,
@@ -70,6 +86,10 @@ export async function POST(req: NextRequest) {
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  if (requestId) {
+    await supabase.from("requests").update({ status: "quoted", offer_id: offer.id }).eq("id", requestId);
   }
 
   return NextResponse.json({ offer });

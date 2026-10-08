@@ -553,7 +553,8 @@
     "paymentRequiredBody": "This order won't start until payment is sent and confirmed.",
     "payNow": "Pay now",
     "paymentSubmitted": "Payment submitted",
-    "paymentSubmittedBody": "We're confirming your payment. This usually doesn't take long."
+    "paymentSubmittedBody": "We're confirming your payment. This usually doesn't take long.",
+    "totalPaidWithFee": "Total paid (incl. Mountaliq Percentage): JOD {total}"
   },
   "marketplaceListingPage": {
     "marketplaceBreadcrumb": "Marketplace",
@@ -682,7 +683,18 @@
     "needListing": "Choose a listing for this offer.",
     "offerValidation": "Add a title and a price.",
     "noListingsForOffer": "You need a published listing before you can send a custom offer.",
-    "somethingWentWrong": "Something went wrong"
+    "somethingWentWrong": "Something went wrong",
+    "requirementsLabel": "Requirements",
+    "sendRequirements": "Send requirements",
+    "requirementsFormTitle": "Describe what you need",
+    "requirementsDescriptionPlaceholder": "Explain what you need done, any details the seller should know...",
+    "requirementsSubmit": "Send requirements",
+    "sendingRequirements": "Sending...",
+    "requirementsValidation": "Please describe what you need.",
+    "requirementsSentWaiting": "Waiting for a price quote from the seller.",
+    "requirementsQuoted": "Quote sent — see below.",
+    "sendQuote": "Send quote",
+    "attachPhotos": "Attach photos (optional)"
   },
   "headerAria": {
     "homeLink": "Mountaliq home",
@@ -776,7 +788,9 @@
     "referencePlaceholder": "e.g. the name on your CliQ transfer",
     "referenceHint": "This helps us match your payment faster.",
     "submitting": "Submitting...",
-    "confirmSent": "I've sent the payment"
+    "confirmSent": "I've sent the payment",
+    "servicePrice": "Service price",
+    "mountaliqPercentage": "Mountaliq Percentage ({percent}%)"
   },
   "adminPaymentsPage": {
     "eyebrow": "Admin",
@@ -787,6 +801,7 @@
     "referenceLabel": "Reference",
     "listingRemoved": "Listing removed",
     "confirmPayment": "Confirm payment",
-    "confirming": "Confirming..."
+    "confirming": "Confirming...",
+    "priceBreakdown": "Service JOD {price} + Mountaliq Percentage JOD {fee}"
   }
 }

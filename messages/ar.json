@@ -553,7 +553,8 @@
     "paymentRequiredBody": "لن يبدأ هذا الطلب حتى يتم إرسال الدفعة وتأكيدها.",
     "payNow": "ادفع الآن",
     "paymentSubmitted": "تم إرسال الدفعة",
-    "paymentSubmittedBody": "نقوم بتأكيد دفعتك. عادةً لا يستغرق هذا وقتًا طويلاً."
+    "paymentSubmittedBody": "نقوم بتأكيد دفعتك. عادةً لا يستغرق هذا وقتًا طويلاً.",
+    "totalPaidWithFee": "إجمالي المدفوع (شامل نسبة مونتاليك): {total} دينار"
   },
   "marketplaceListingPage": {
     "marketplaceBreadcrumb": "السوق",
@@ -682,7 +683,18 @@
     "needListing": "اختر عرضًا لهذا العرض المخصص.",
     "offerValidation": "أضف عنوانًا وسعرًا.",
     "noListingsForOffer": "تحتاج إلى عرض منشور قبل أن تتمكن من إرسال عرض مخصص.",
-    "somethingWentWrong": "حدث خطأ ما"
+    "somethingWentWrong": "حدث خطأ ما",
+    "requirementsLabel": "المتطلبات",
+    "sendRequirements": "إرسال المتطلبات",
+    "requirementsFormTitle": "اشرح ما تحتاجه",
+    "requirementsDescriptionPlaceholder": "اشرح ما تحتاج إنجازه، وأي تفاصيل يجب أن يعرفها البائع...",
+    "requirementsSubmit": "إرسال المتطلبات",
+    "sendingRequirements": "جارٍ الإرسال...",
+    "requirementsValidation": "يرجى وصف ما تحتاجه.",
+    "requirementsSentWaiting": "في انتظار عرض سعر من البائع.",
+    "requirementsQuoted": "تم إرسال عرض السعر — انظر أدناه.",
+    "sendQuote": "إرسال عرض السعر",
+    "attachPhotos": "إرفاق صور (اختياري)"
   },
   "headerAria": {
     "homeLink": "الصفحة الرئيسية لمنطلق",
@@ -776,7 +788,9 @@
     "referencePlaceholder": "مثال: الاسم الظاهر في تحويل CliQ",
     "referenceHint": "هذا يساعدنا على مطابقة دفعتك بشكل أسرع.",
     "submitting": "جارٍ الإرسال...",
-    "confirmSent": "لقد أرسلت الدفعة"
+    "confirmSent": "لقد أرسلت الدفعة",
+    "servicePrice": "سعر الخدمة",
+    "mountaliqPercentage": "نسبة مونتاليك ({percent}%)"
   },
   "adminPaymentsPage": {
     "eyebrow": "الإدارة",
@@ -787,6 +801,7 @@
     "referenceLabel": "الرقم المرجعي",
     "listingRemoved": "تمت إزالة العرض",
     "confirmPayment": "تأكيد الدفع",
-    "confirming": "جارٍ التأكيد..."
+    "confirming": "جارٍ التأكيد...",
+    "priceBreakdown": "الخدمة {price} دينار + نسبة مونتاليك {fee} دينار"
   }
 }

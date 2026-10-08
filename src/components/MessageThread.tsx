@@ -4,18 +4,21 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
-import type { Message, Offer } from "@/lib/marketplace-types";
+import { RequestImagesUpload } from "@/components/RequestImagesUpload";
+import type { BuyerRequest, Message, Offer } from "@/lib/marketplace-types";
 
 const POLL_MS = 4000;
 
 type FeedItem =
   | { kind: "message"; at: string; data: Message }
-  | { kind: "offer"; at: string; data: Offer };
+  | { kind: "offer"; at: string; data: Offer }
+  | { kind: "request"; at: string; data: BuyerRequest };
 
-function mergeFeed(messages: Message[], offers: Offer[]): FeedItem[] {
+function mergeFeed(messages: Message[], offers: Offer[], requests: BuyerRequest[]): FeedItem[] {
   const items: FeedItem[] = [
     ...messages.map((m) => ({ kind: "message" as const, at: m.created_at, data: m })),
     ...offers.map((o) => ({ kind: "offer" as const, at: o.created_at, data: o })),
+    ...requests.map((r) => ({ kind: "request" as const, at: r.created_at, data: r })),
   ];
   return items.sort((a, b) => new Date(a.at).getTime() - new Date(b.at).getTime());
 }
@@ -25,6 +28,7 @@ export function MessageThread({
   currentUserId,
   initialMessages,
   initialOffers,
+  initialRequests,
   isSeller,
   sellerListings,
   defaultListingId,
@@ -33,6 +37,7 @@ export function MessageThread({
   currentUserId: string;
   initialMessages: Message[];
   initialOffers: Offer[];
+  initialRequests: BuyerRequest[];
   isSeller: boolean;
   sellerListings: { id: string; title: string }[];
   defaultListingId: string | null;
@@ -41,16 +46,19 @@ export function MessageThread({
   const router = useRouter();
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [offers, setOffers] = useState<Offer[]>(initialOffers);
+  const [requests, setRequests] = useState<BuyerRequest[]>(initialRequests);
   const [text, setText] = useState("");
   const [sending, setSending] = useState(false);
   const [showOfferForm, setShowOfferForm] = useState(false);
+  const [showRequestForm, setShowRequestForm] = useState(false);
+  const [quotingRequestId, setQuotingRequestId] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const supabase = createClient();
 
     async function poll() {
-      const [{ data: msgs }, { data: offs }] = await Promise.all([
+      const [{ data: msgs }, { data: offs }, { data: reqs }] = await Promise.all([
         supabase
           .from("messages")
           .select("*")
@@ -61,9 +69,15 @@ export function MessageThread({
           .select("*")
           .eq("conversation_id", conversationId)
           .order("created_at", { ascending: true }),
+        supabase
+          .from("requests")
+          .select("*")
+          .eq("conversation_id", conversationId)
+          .order("created_at", { ascending: true }),
       ]);
       if (msgs) setMessages(msgs as Message[]);
       if (offs) setOffers(offs as Offer[]);
+      if (reqs) setRequests(reqs as BuyerRequest[]);
     }
 
     async function markRead() {
@@ -84,7 +98,7 @@ export function MessageThread({
   useEffect(() => {
     const el = containerRef.current;
     if (el) el.scrollTop = el.scrollHeight;
-  }, [messages.length, offers.length]);
+  }, [messages.length, offers.length, requests.length]);
 
   async function send() {
     const content = text.trim();
@@ -121,7 +135,7 @@ export function MessageThread({
     }
   }
 
-  const feed = mergeFeed(messages, offers);
+  const feed = mergeFeed(messages, offers, requests);
 
   return (
     <div className="flex h-[60vh] flex-col rounded-sm border border-line bg-surface">
@@ -142,6 +156,52 @@ export function MessageThread({
                   }`}
                 >
                   {m.content}
+                </div>
+              </div>
+            );
+          }
+
+          if (item.kind === "request") {
+            const r = item.data;
+            return (
+              <div key={`r-${r.id}`} className="flex justify-center">
+                <div className="w-full max-w-sm rounded-sm border border-line bg-paper px-5 py-4">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-neutral-600">
+                    {t("requirementsLabel")}
+                  </p>
+                  <p className="mt-2 whitespace-pre-wrap text-sm text-fg">{r.description}</p>
+                  {r.images.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {r.images.map((img, i) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          key={img + i}
+                          src={img}
+                          alt=""
+                          className="h-16 w-16 rounded-sm border border-line object-cover"
+                        />
+                      ))}
+                    </div>
+                  )}
+
+                  {r.status === "pending" && isSeller && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setQuotingRequestId(r.id);
+                        setShowOfferForm(true);
+                      }}
+                      className="mt-4 w-full rounded-sm bg-red px-4 py-2 text-sm font-semibold text-white hover:bg-red-dark"
+                    >
+                      {t("sendQuote")}
+                    </button>
+                  )}
+                  {r.status === "pending" && !isSeller && (
+                    <p className="mt-3 text-xs text-neutral-500">{t("requirementsSentWaiting")}</p>
+                  )}
+                  {r.status === "quoted" && (
+                    <p className="mt-3 text-xs font-semibold text-cyan-deep">{t("requirementsQuoted")}</p>
+                  )}
                 </div>
               </div>
             );
@@ -210,24 +270,59 @@ export function MessageThread({
         })}
       </div>
 
+      {!isSeller && showRequestForm && (
+        <RequestComposer
+          conversationId={conversationId}
+          onClose={() => setShowRequestForm(false)}
+          onCreated={(request) => {
+            setRequests((prev) => [...prev, request]);
+            setShowRequestForm(false);
+          }}
+        />
+      )}
+
       {isSeller && showOfferForm && (
         <OfferComposer
           conversationId={conversationId}
           sellerListings={sellerListings}
           defaultListingId={defaultListingId}
-          onClose={() => setShowOfferForm(false)}
+          requestId={quotingRequestId}
+          onClose={() => {
+            setShowOfferForm(false);
+            setQuotingRequestId(null);
+          }}
           onCreated={(offer) => {
             setOffers((prev) => [...prev, offer]);
+            if (quotingRequestId) {
+              setRequests((prev) =>
+                prev.map((r) =>
+                  r.id === quotingRequestId ? { ...r, status: "quoted", offer_id: offer.id } : r
+                )
+              );
+            }
             setShowOfferForm(false);
+            setQuotingRequestId(null);
           }}
         />
       )}
 
       <div className="flex gap-2 border-t border-line px-4 py-3">
+        {!isSeller && (
+          <button
+            type="button"
+            onClick={() => setShowRequestForm((v) => !v)}
+            className="shrink-0 rounded-sm border border-cyan-deep px-4 py-2.5 text-sm font-semibold text-cyan-deep transition-colors hover:bg-cyan/10"
+          >
+            {t("sendRequirements")}
+          </button>
+        )}
         {isSeller && (
           <button
             type="button"
-            onClick={() => setShowOfferForm((v) => !v)}
+            onClick={() => {
+              setQuotingRequestId(null);
+              setShowOfferForm((v) => !v);
+            }}
             className="shrink-0 rounded-sm border border-cyan-deep px-4 py-2.5 text-sm font-semibold text-cyan-deep transition-colors hover:bg-cyan/10"
           >
             {t("sendOffer")}
@@ -259,16 +354,112 @@ export function MessageThread({
   );
 }
 
+function RequestComposer({
+  conversationId,
+  onClose,
+  onCreated,
+}: {
+  conversationId: string;
+  onClose: () => void;
+  onCreated: (request: BuyerRequest) => void;
+}) {
+  const t = useTranslations("messageThread");
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [description, setDescription] = useState("");
+  const [images, setImages] = useState<string[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) setCurrentUserId(data.user.id);
+    });
+  }, []);
+
+  async function submit() {
+    setError(null);
+    if (!description.trim()) {
+      setError(t("requirementsValidation"));
+      return;
+    }
+
+    setSubmitting(true);
+    const res = await fetch("/api/requests", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        conversation_id: conversationId,
+        description: description.trim(),
+        images,
+      }),
+    });
+    const body = await res.json();
+    setSubmitting(false);
+
+    if (!res.ok) {
+      setError(body.error ?? t("somethingWentWrong"));
+      return;
+    }
+    onCreated(body.request as BuyerRequest);
+  }
+
+  return (
+    <div className="space-y-3 border-t border-line bg-paper px-5 py-4">
+      <p className="font-display text-sm font-bold text-fg">{t("requirementsFormTitle")}</p>
+
+      <textarea
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder={t("requirementsDescriptionPlaceholder")}
+        rows={3}
+        className="w-full rounded-sm border border-line bg-surface px-3 py-2 text-sm focus:border-cyan-deep focus:outline-none"
+      />
+
+      <div>
+        <label className="mb-1.5 block text-xs font-medium text-neutral-600">
+          {t("attachPhotos")}
+        </label>
+        {currentUserId && (
+          <RequestImagesUpload buyerId={currentUserId} images={images} onChange={setImages} />
+        )}
+      </div>
+
+      {error && <p className="text-xs text-red-dark">{error}</p>}
+
+      <div className="flex gap-2">
+        <button
+          type="button"
+          onClick={submit}
+          disabled={submitting}
+          className="flex-1 rounded-sm bg-red px-4 py-2 text-sm font-semibold text-white hover:bg-red-dark disabled:opacity-60"
+        >
+          {submitting ? t("sendingRequirements") : t("requirementsSubmit")}
+        </button>
+        <button
+          type="button"
+          onClick={onClose}
+          className="rounded-sm border border-line px-4 py-2 text-sm font-semibold text-neutral-600 hover:border-red-dark hover:text-red-dark"
+        >
+          {t("cancel")}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function OfferComposer({
   conversationId,
   sellerListings,
   defaultListingId,
+  requestId,
   onClose,
   onCreated,
 }: {
   conversationId: string;
   sellerListings: { id: string; title: string }[];
   defaultListingId: string | null;
+  requestId: string | null;
   onClose: () => void;
   onCreated: (offer: Offer) => void;
 }) {
@@ -307,6 +498,7 @@ function OfferComposer({
         description: description.trim(),
         price: Number(price),
         delivery_days: Number(deliveryDays) || 1,
+        request_id: requestId,
       }),
     });
     const body = await res.json();

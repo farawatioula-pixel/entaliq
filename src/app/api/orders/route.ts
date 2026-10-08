@@ -58,6 +58,10 @@ export async function POST(req: NextRequest) {
   const deadline = new Date();
   deadline.setDate(deadline.getDate() + deliveryDays);
 
+  const platformFeePercent = 5;
+  const platformFeeAmount = Math.round(price * (platformFeePercent / 100) * 100) / 100;
+  const totalAmount = Math.round((price + platformFeeAmount) * 100) / 100;
+
   const { data: order, error } = await supabase
     .from("orders")
     .insert({
@@ -68,6 +72,9 @@ export async function POST(req: NextRequest) {
       price,
       status: "pending",
       delivery_deadline: deadline.toISOString(),
+      platform_fee_percent: platformFeePercent,
+      platform_fee_amount: platformFeeAmount,
+      total_amount: totalAmount,
     })
     .select()
     .single();

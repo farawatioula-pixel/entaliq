@@ -28,7 +28,7 @@ export default async function ConversationPage({
   const result = await getConversationWithMessages(id);
   if (!result) notFound();
 
-  const { conversation, messages, offers } = result;
+  const { conversation, messages, offers, requests } = result;
   const isParticipant = conversation.buyer_id === user.id || conversation.seller_id === user.id;
   if (!isParticipant) notFound();
 
@@ -69,6 +69,7 @@ export default async function ConversationPage({
             currentUserId={user.id}
             initialMessages={messages}
             initialOffers={offers}
+            initialRequests={requests}
             isSeller={isSeller}
             sellerListings={sellerListings}
             defaultListingId={conversation.listing_id}

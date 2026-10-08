@@ -42,6 +42,10 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   const deadline = new Date();
   deadline.setDate(deadline.getDate() + offer.delivery_days);
 
+  const platformFeePercent = 5;
+  const platformFeeAmount = Math.round(offer.price * (platformFeePercent / 100) * 100) / 100;
+  const totalAmount = Math.round((offer.price + platformFeeAmount) * 100) / 100;
+
   const { data: order, error: orderError } = await supabase
     .from("orders")
     .insert({
@@ -52,6 +56,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       price: offer.price,
       status: "pending",
       delivery_deadline: deadline.toISOString(),
+      platform_fee_percent: platformFeePercent,
+      platform_fee_amount: platformFeeAmount,
+      total_amount: totalAmount,
     })
     .select()
     .single();
@@ -61,6 +68,34 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   }
 
   await supabase.from("offers").update({ status: "accepted", order_id: order.id }).eq("id", id);
+
+  // Carry the buyer's original requirements (text + images) over to the order.
+  if (offer.request_id) {
+    const { data: requestRow } = await supabase
+      .from("requests")
+      .select("description, images")
+      .eq("id", offer.request_id)
+      .single();
+
+    if (requestRow) {
+      await supabase
+        .from("orders")
+        .update({ requirements: requestRow.description })
+        .eq("id", order.id);
+
+      const images: string[] = requestRow.images ?? [];
+      if (images.length > 0) {
+        await supabase.from("order_files").insert(
+          images.map((url) => ({
+            order_id: order.id,
+            uploader_id: offer.buyer_id,
+            file_url: url,
+            file_type: "requirement" as const,
+          }))
+        );
+      }
+    }
+  }
 
   return NextResponse.json({ order });
 }

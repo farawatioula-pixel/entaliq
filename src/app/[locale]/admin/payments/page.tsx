@@ -74,7 +74,13 @@ export default async function AdminPaymentsPage({
                     </p>
                   )}
                   <p className="mt-1 font-display text-lg font-bold text-fg">
-                    JOD {Number(order.price).toFixed(0)}
+                    JOD {Number(order.total_amount).toFixed(2)}
+                  </p>
+                  <p className="text-xs text-neutral-500">
+                    {t("priceBreakdown", {
+                      price: Number(order.price).toFixed(2),
+                      fee: Number(order.platform_fee_amount).toFixed(2),
+                    })}
                   </p>
                 </div>
                 <ConfirmPaymentButton orderId={order.id} />

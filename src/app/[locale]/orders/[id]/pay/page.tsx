@@ -51,12 +51,22 @@ export default async function PayOrderPage({
         </p>
 
         <div className="mt-6 rounded-sm border border-line bg-surface px-5 py-4">
-          <p className="text-xs font-semibold uppercase tracking-widest text-neutral-600">
-            {t("amountDue")}
-          </p>
-          <p className="mt-1 font-display text-2xl font-bold text-fg">
-            JOD {order.price.toFixed(0)}
-          </p>
+          <div className="flex items-center justify-between text-sm text-neutral-600">
+            <span>{t("servicePrice")}</span>
+            <span className="text-fg">JOD {order.price.toFixed(2)}</span>
+          </div>
+          <div className="mt-1.5 flex items-center justify-between text-sm text-neutral-600">
+            <span>{t("mountaliqPercentage", { percent: order.platform_fee_percent })}</span>
+            <span className="text-fg">JOD {order.platform_fee_amount.toFixed(2)}</span>
+          </div>
+          <div className="mt-3 flex items-center justify-between border-t border-line pt-3">
+            <p className="text-xs font-semibold uppercase tracking-widest text-neutral-600">
+              {t("amountDue")}
+            </p>
+            <p className="font-display text-2xl font-bold text-fg">
+              JOD {order.total_amount.toFixed(2)}
+            </p>
+          </div>
         </div>
 
         {order.payment_status === "confirmed" ? (
@@ -92,7 +102,8 @@ export default async function PayOrderPage({
                   {CLIQ_BANK !== "TBD" && <> ({CLIQ_BANK})</>}
                 </li>
                 <li>
-                  {t("step3")} <span className="font-semibold text-fg">JOD {order.price.toFixed(0)}</span>
+                  {t("step3")}{" "}
+                  <span className="font-semibold text-fg">JOD {order.total_amount.toFixed(2)}</span>
                 </li>
                 <li>{t("step4")}</li>
               </ol>
