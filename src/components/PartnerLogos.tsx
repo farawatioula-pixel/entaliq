@@ -9,14 +9,14 @@ export default function PartnerLogos() {
       <p className="text-center text-xs font-semibold uppercase tracking-widest text-muted">
         {t("supportedBy")}
       </p>
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-14 gap-y-6">
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-16 gap-y-10">
         {partners.map((partner) => (
-          <div key={partner.name} className="flex items-center gap-3">
+          <div key={partner.name} className="flex flex-col items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={partner.logo}
               alt={partner.name}
-              className="h-9 w-auto object-contain"
+              className="h-24 w-auto object-contain sm:h-32"
             />
             <span className="font-display text-2xl font-bold text-neutral-500 transition-colors hover:text-fg">
               {partner.name}
