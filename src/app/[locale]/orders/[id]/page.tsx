@@ -67,7 +67,12 @@ export default async function OrderDetailPage({
             <p className="text-xs font-semibold uppercase tracking-widest text-neutral-600">
               {t("price")}
             </p>
-            <p className="mt-1 text-sm font-semibold text-fg">JOD {order.price.toFixed(0)}</p>
+            <p className="mt-1 text-sm font-semibold text-fg">JOD {order.price.toFixed(2)}</p>
+            {isBuyer && (
+              <p className="mt-1 text-xs text-neutral-500">
+                {t("totalPaidWithFee", { total: order.total_amount.toFixed(2) })}
+              </p>
+            )}
           </div>
         </div>
 

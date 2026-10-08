@@ -75,6 +75,9 @@ export type Order = {
   payment_submitted_at: string | null;
   payment_confirmed_at: string | null;
   payment_confirmed_by: string | null;
+  platform_fee_percent: number;
+  platform_fee_amount: number;
+  total_amount: number;
   created_at: string;
   updated_at: string;
 };
@@ -87,12 +90,28 @@ export type Offer = {
   seller_id: string;
   buyer_id: string;
   listing_id: string | null;
+  request_id: string | null;
   title: string;
   description: string;
   price: number;
   delivery_days: number;
   status: OfferStatus;
   order_id: string | null;
+  created_at: string;
+};
+
+export type RequestStatus = "pending" | "quoted" | "closed";
+
+export type BuyerRequest = {
+  id: string;
+  conversation_id: string;
+  buyer_id: string;
+  seller_id: string;
+  listing_id: string | null;
+  description: string;
+  images: string[];
+  status: RequestStatus;
+  offer_id: string | null;
   created_at: string;
 };
 
