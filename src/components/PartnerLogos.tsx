@@ -10,13 +10,18 @@ export default function PartnerLogos() {
         {t("supportedBy")}
       </p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-x-14 gap-y-6">
-        {partners.map((name) => (
-          <span
-            key={name}
-            className="font-display text-2xl font-bold text-neutral-500 transition-colors hover:text-fg"
-          >
-            {name}
-          </span>
+        {partners.map((partner) => (
+          <div key={partner.name} className="flex items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={partner.logo}
+              alt={partner.name}
+              className="h-9 w-auto object-contain"
+            />
+            <span className="font-display text-2xl font-bold text-neutral-500 transition-colors hover:text-fg">
+              {partner.name}
+            </span>
+          </div>
         ))}
       </div>
     </div>
