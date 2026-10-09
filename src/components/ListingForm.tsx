@@ -82,6 +82,7 @@ export default function ListingForm({
     if (!title.trim()) return t("titleRequired");
     if (!description.trim()) return t("descriptionRequired");
     if (!categoryId) return t("chooseCategory");
+    if (images.map((i) => i.trim()).filter(Boolean).length === 0) return t("imageRequired");
     if (packages.length === 0) return t("atLeastOnePackage");
     if (packages.some((p) => !p.price || p.price <= 0)) return t("everyPackageNeedsPrice");
     return null;

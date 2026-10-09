@@ -520,7 +520,8 @@
     "chooseCategory": "Choose a category.",
     "atLeastOnePackage": "At least one package is required.",
     "everyPackageNeedsPrice": "Every package needs a price.",
-    "couldNotCreateListing": "Could not create listing."
+    "couldNotCreateListing": "Could not create listing.",
+    "imageRequired": "Add at least one photo."
   },
   "listingImages": {
     "label": "Images",
