@@ -19,14 +19,20 @@ export default function Header() {
   const [userId, setUserId] = useState<string | null | undefined>(undefined);
   const [scrolled, setScrolled] = useState(false);
 
-  const browseLinks = [
-    { href: "/", label: t("home") },
-    { href: "/summit", label: t("summit") },
-    { href: "/about", label: t("about") },
-    { href: "/tracks", label: t("tracks") },
-    { href: "/trainers", label: t("trainers") },
-    { href: "/marketplace", label: t("marketplace") },
-    { href: "/guides", label: t("guides") },
+  const navGroups = [
+    {
+      href: "/summit",
+      label: t("summit"),
+      children: [
+        { href: "/tracks", label: t("tracks") },
+        { href: "/trainers", label: t("trainers") },
+      ],
+    },
+    {
+      href: "/marketplace",
+      label: t("marketplace"),
+      children: [{ href: "/guides", label: t("guides") }],
+    },
   ];
 
   useEffect(() => {
@@ -82,7 +88,7 @@ export default function Header() {
       {/* Row 1 (desktop/tablet): brand, search, account */}
       <div className="mx-auto hidden max-w-7xl items-center gap-4 px-5 py-4 sm:px-8 md:flex">
         <Link href="/" className="flex shrink-0 items-center gap-3" aria-label={tAria("homeLink")}>
-          <Logo className="h-11 w-11" />
+          <Logo className="h-[57px] w-[57px]" />
           <span className="font-arabic text-xl font-extrabold tracking-tight text-fg">
             منطلق<span className="sr-only"> Mountaliq</span>
           </span>
@@ -227,7 +233,7 @@ export default function Header() {
             className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2"
             aria-label={tAria("homeLink")}
           >
-            <Logo className="h-9 w-9" />
+            <Logo className="h-[47px] w-[47px]" />
             <span className="font-arabic text-lg font-extrabold tracking-tight text-fg">
               منطلق<span className="sr-only"> Mountaliq</span>
             </span>
@@ -270,19 +276,34 @@ export default function Header() {
           className="mx-auto flex max-w-7xl items-center gap-7 px-5 py-2.5 sm:px-8"
           aria-label={tAria("primaryNav")}
         >
-          {browseLinks.map((link) => {
-            const active = pathname === link.href;
+          {navGroups.map((group) => {
+            const active =
+              pathname === group.href || group.children.some((c) => c.href === pathname);
             return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-[14px] font-medium transition-colors hover:text-fg ${
-                  active ? "text-fg font-semibold" : "text-neutral-600"
-                }`}
-                aria-current={active ? "page" : undefined}
-              >
-                {link.label}
-              </Link>
+              <div key={group.href} className="group relative">
+                <Link
+                  href={group.href}
+                  className={`text-[14px] font-medium transition-colors hover:text-fg ${
+                    active ? "text-fg font-semibold" : "text-neutral-600"
+                  }`}
+                  aria-current={active ? "page" : undefined}
+                >
+                  {group.label}
+                </Link>
+                <div className="invisible absolute left-0 top-full z-10 mt-2 min-w-[160px] rounded-sm border border-line bg-surface py-1 opacity-0 shadow-lg transition-opacity group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                  {group.children.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      className={`block px-4 py-2 text-sm font-medium transition-colors hover:bg-paper hover:text-fg ${
+                        pathname === child.href ? "text-red-dark" : "text-neutral-600"
+                      }`}
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             );
           })}
         </nav>
@@ -318,18 +339,33 @@ export default function Header() {
           </form>
 
           <ul className="flex flex-col gap-1">
-            {browseLinks.map((link) => {
-              const active = pathname === link.href;
+            {navGroups.map((group) => {
+              const active =
+                pathname === group.href || group.children.some((c) => c.href === pathname);
               return (
-                <li key={link.href}>
+                <li key={group.href}>
                   <Link
-                    href={link.href}
+                    href={group.href}
                     className={`block rounded-sm px-2 py-3 text-base font-medium ${
                       active ? "text-red-dark" : "text-neutral-600"
                     }`}
                   >
-                    {link.label}
+                    {group.label}
                   </Link>
+                  <ul className="ms-4 flex flex-col gap-1 border-s border-line ps-3">
+                    {group.children.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          className={`block rounded-sm px-2 py-2 text-sm font-medium ${
+                            pathname === child.href ? "text-red-dark" : "text-neutral-500"
+                          }`}
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </li>
               );
             })}
