@@ -401,9 +401,9 @@
     "logIn": "Log in"
   },
   "profilePage": {
-    "eyebrow": "Your seller profile",
-    "title": "Your seller profile",
-    "body": "This is your public profile, your name, bio, and portfolio that buyers see. It doesn't list a service on its own. Manage what you're actually selling from your",
+    "eyebrow": "Your account",
+    "title": "Your profile",
+    "body": "Buyers see your name, bio, and portfolio here only if you choose to sell. It doesn't list a service on its own — manage what you're actually selling from your",
     "marketplace": "marketplace",
     "loading": "Loading your profile…",
     "loadError": "Couldn't load your profile.",
