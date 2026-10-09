@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { redirect, Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getOrdersForUser } from "@/lib/orders";
+import { formatPrice } from "@/lib/currency";
 import type { OrderStatus } from "@/lib/marketplace-types";
 
 export const revalidate = 0;
@@ -84,8 +85,8 @@ export default async function OrdersPage({
                     {order.listing?.title ?? t("listingRemoved")}
                   </p>
                   <p className="mt-1 text-xs text-neutral-600">
-                    {role === "buyer" ? order.seller?.name : order.buyer?.name} · JOD{" "}
-                    {order.price.toFixed(0)}
+                    {role === "buyer" ? order.seller?.name : order.buyer?.name} ·{" "}
+                    {formatPrice(order.price)}
                   </p>
                 </div>
                 <p className={`text-xs font-semibold uppercase tracking-widest ${statusColor[order.status]}`}>

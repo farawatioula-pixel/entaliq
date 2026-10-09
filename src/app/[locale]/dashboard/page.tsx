@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { redirect, Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getSellerStats } from "@/lib/orders";
+import { formatPrice } from "@/lib/currency";
 
 export const revalidate = 0;
 
@@ -26,7 +27,7 @@ export default async function DashboardPage({
   const stats = await getSellerStats(user.id);
 
   const cards = [
-    { label: t("totalEarnings"), value: `JOD ${stats.totalEarnings.toFixed(0)}` },
+    { label: t("totalEarnings"), value: formatPrice(stats.totalEarnings) },
     { label: t("activeOrders"), value: stats.activeOrders },
     { label: t("completedOrders"), value: stats.completedOrders },
     { label: t("publishedListings"), value: `${stats.publishedListings}/${stats.totalListings}` },

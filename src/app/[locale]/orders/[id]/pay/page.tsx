@@ -4,6 +4,7 @@ import { redirect, Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getOrderById } from "@/lib/orders";
 import { PaymentForm } from "@/components/PaymentForm";
+import { PaymentAmountSummary } from "@/components/PaymentAmountSummary";
 
 export const revalidate = 0;
 
@@ -50,24 +51,12 @@ export default async function PayOrderPage({
           {order.listing?.title ?? t("listingRemoved")}
         </p>
 
-        <div className="mt-6 rounded-sm border border-line bg-surface px-5 py-4">
-          <div className="flex items-center justify-between text-sm text-neutral-600">
-            <span>{t("servicePrice")}</span>
-            <span className="text-fg">JOD {order.price.toFixed(2)}</span>
-          </div>
-          <div className="mt-1.5 flex items-center justify-between text-sm text-neutral-600">
-            <span>{t("mountaliqPercentage", { percent: order.platform_fee_percent })}</span>
-            <span className="text-fg">JOD {order.platform_fee_amount.toFixed(2)}</span>
-          </div>
-          <div className="mt-3 flex items-center justify-between border-t border-line pt-3">
-            <p className="text-xs font-semibold uppercase tracking-widest text-neutral-600">
-              {t("amountDue")}
-            </p>
-            <p className="font-display text-2xl font-bold text-fg">
-              JOD {order.total_amount.toFixed(2)}
-            </p>
-          </div>
-        </div>
+        <PaymentAmountSummary
+          price={order.price}
+          platformFeePercent={order.platform_fee_percent}
+          platformFeeAmount={order.platform_fee_amount}
+          totalAmount={order.total_amount}
+        />
 
         {order.payment_status === "confirmed" ? (
           <div className="mt-6 rounded-sm border border-cyan-deep bg-cyan/5 px-5 py-4">

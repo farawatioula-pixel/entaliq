@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { ConfirmPaymentButton } from "@/components/ConfirmPaymentButton";
+import { formatPrice } from "@/lib/currency";
 
 export const revalidate = 0;
 
@@ -42,6 +43,20 @@ export default async function AdminPaymentsPage({
 
   const list = orders ?? [];
 
+  const receiptUrls = new Map<string, string>();
+  await Promise.all(
+    list
+      .filter((order) => order.payment_receipt_url)
+      .map(async (order) => {
+        const { data } = await supabase.storage
+          .from("payment-receipts")
+          .createSignedUrl(order.payment_receipt_url as string, 60 * 60);
+        if (data?.signedUrl) {
+          receiptUrls.set(order.id, data.signedUrl);
+        }
+      })
+  );
+
   return (
     <main className="border-t-4 border-cyan bg-paper px-5 py-16 sm:px-8">
       <div className="mx-auto max-w-4xl">
@@ -74,7 +89,10 @@ export default async function AdminPaymentsPage({
                     </p>
                   )}
                   <p className="mt-1 font-display text-lg font-bold text-fg">
-                    JOD {Number(order.total_amount).toFixed(2)}
+                    JOD {Number(order.total_amount).toFixed(2)}{" "}
+                    <span className="text-sm font-normal text-neutral-500">
+                      ({formatPrice(Number(order.total_amount))})
+                    </span>
                   </p>
                   <p className="text-xs text-neutral-500">
                     {t("priceBreakdown", {
@@ -82,6 +100,16 @@ export default async function AdminPaymentsPage({
                       fee: Number(order.platform_fee_amount).toFixed(2),
                     })}
                   </p>
+                  {receiptUrls.has(order.id) && (
+                    <a
+                      href={receiptUrls.get(order.id)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-1 inline-block text-xs font-semibold text-cyan-deep hover:underline"
+                    >
+                      {t("viewReceipt")}
+                    </a>
+                  )}
                 </div>
                 <ConfirmPaymentButton orderId={order.id} />
               </div>

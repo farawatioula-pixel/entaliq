@@ -502,7 +502,7 @@
     "packages": "الباقات",
     "remove": "إزالة",
     "packageNamePlaceholder": "اسم الباقة",
-    "pricePlaceholder": "السعر (دينار)",
+    "pricePlaceholder": "السعر (دولار)",
     "deliveryDaysPlaceholder": "أيام التسليم",
     "revisionsPlaceholder": "عدد التعديلات",
     "whatsIncludedPlaceholder": "ما الذي يشمله",
@@ -556,7 +556,7 @@
     "payNow": "ادفع الآن",
     "paymentSubmitted": "تم إرسال الدفعة",
     "paymentSubmittedBody": "نقوم بتأكيد دفعتك. عادةً لا يستغرق هذا وقتًا طويلاً.",
-    "totalPaidWithFee": "إجمالي المدفوع (شامل نسبة مونتاليك): {total} دينار"
+    "totalPaidWithFee": "إجمالي المدفوع (شامل نسبة مونتاليك): {total}"
   },
   "marketplaceListingPage": {
     "marketplaceBreadcrumb": "السوق",
@@ -623,7 +623,25 @@
     "cannotMessageSelf": "لا يمكنك مراسلة نفسك.",
     "couldNotStartConversation": "تعذّر بدء المحادثة.",
     "opening": "جارٍ الفتح...",
-    "contactSeller": "تواصل مع البائع"
+    "contactSeller": "تواصل مع البائع",
+    "howCanIHelp": "كيف يمكنني المساعدة؟",
+    "getAQuote": "طلب عرض سعر",
+    "askAQuestion": "اطرح سؤالاً",
+    "requestAQuote": "طلب عرض سعر",
+    "close": "إغلاق",
+    "quoteGreeting": "مرحباً، يرجى تقديم تفاصيل طلبك أدناه وسأعاود التواصل معك.",
+    "describeService": "صف الخدمة التي ترغب بشرائها",
+    "describeServicePlaceholder": "أبحث عن...",
+    "whenDelivered": "متى تريد تسليم خدمتك؟",
+    "delivery24h": "24 ساعة",
+    "delivery3d": "3 أيام",
+    "delivery7d": "7 أيام",
+    "deliveryOther": "أخرى",
+    "customDeliveryPlaceholder": "مثال: أسبوعين",
+    "requestValidation": "يرجى وصف ما تحتاجه.",
+    "sendingRequest": "جارٍ الإرسال...",
+    "sendRequest": "إرسال الطلب",
+    "somethingWentWrong": "حدث خطأ ما."
   },
   "favoriteButton": {
     "removeFromFavorites": "إزالة من المفضلة",
@@ -677,7 +695,7 @@
     "listingLabel": "العرض",
     "offerTitlePlaceholder": "عنوان العرض",
     "offerDescriptionPlaceholder": "ما الذي يشمله",
-    "offerPricePlaceholder": "السعر (دينار)",
+    "offerPricePlaceholder": "السعر (دولار)",
     "offerDeliveryPlaceholder": "أيام التسليم",
     "sendOfferSubmit": "إرسال العرض",
     "sendingOffer": "جارٍ الإرسال...",
@@ -696,7 +714,8 @@
     "requirementsSentWaiting": "في انتظار عرض سعر من البائع.",
     "requirementsQuoted": "تم إرسال عرض السعر — انظر أدناه.",
     "sendQuote": "إرسال عرض السعر",
-    "attachPhotos": "إرفاق صور (اختياري)"
+    "attachPhotos": "إرفاق صور (اختياري)",
+    "desiredDeliveryLabel": "موعد التسليم المطلوب"
   },
   "headerAria": {
     "homeLink": "الصفحة الرئيسية لمنطلق",
@@ -792,7 +811,16 @@
     "submitting": "جارٍ الإرسال...",
     "confirmSent": "لقد أرسلت الدفعة",
     "servicePrice": "سعر الخدمة",
-    "mountaliqPercentage": "نسبة مونتاليك ({percent}%)"
+    "mountaliqPercentage": "نسبة مونتاليك ({percent}%)",
+    "usdReferenceNote": "المبالغ بالدولار الأمريكي لغرض المرجعية فقط. يجب إرسال التحويل عبر CliQ بالدينار الأردني.",
+    "receiptLabel": "إيصال الدفع / لقطة الشاشة",
+    "receiptHint": "قم بتحميل لقطة شاشة أو صورة لتأكيد تحويلك عبر CliQ (صورة أو PDF، بحد أقصى 5 ميجابايت).",
+    "removeReceipt": "إزالة",
+    "uploadReceipt": "تحميل الإيصال",
+    "uploadingReceipt": "جاري التحميل...",
+    "receiptFileTypeError": "يرجى تحميل ملف صورة أو PDF.",
+    "receiptSizeError": "حجم الملف كبير جدًا. الحد الأقصى هو 5 ميجابايت.",
+    "receiptRequired": "يرجى تحميل إيصال الدفع قبل التأكيد."
   },
   "adminPaymentsPage": {
     "eyebrow": "الإدارة",
@@ -804,6 +832,7 @@
     "listingRemoved": "تمت إزالة العرض",
     "confirmPayment": "تأكيد الدفع",
     "confirming": "جارٍ التأكيد...",
-    "priceBreakdown": "الخدمة {price} دينار + نسبة مونتاليك {fee} دينار"
+    "priceBreakdown": "الخدمة {price} دينار + نسبة مونتاليك {fee} دينار",
+    "viewReceipt": "عرض إيصال الدفع"
   }
 }

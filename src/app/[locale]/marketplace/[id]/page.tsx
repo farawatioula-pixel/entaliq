@@ -132,7 +132,9 @@ export default async function ListingPage({ params }: { params: Promise<{ id: st
 
           <aside className="space-y-4 lg:sticky lg:top-6 lg:self-start">
             <PackageSelector packages={packages} listingId={listing.id} />
-            {seller && <ContactSellerButton sellerId={seller.id} listingId={listing.id} />}
+            {seller && (
+              <ContactSellerButton sellerId={seller.id} sellerName={seller.name} listingId={listing.id} />
+            )}
           </aside>
         </div>
       </section>

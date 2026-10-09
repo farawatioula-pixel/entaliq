@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { ListingImagesUpload } from "@/components/ListingImagesUpload";
+import { jodToUsd, usdToJod } from "@/lib/currency";
 import type { Category, Listing, ListingPackage, FaqItem, PackageTier } from "@/lib/marketplace-types";
 
 const emptyPackage = (tier: PackageTier): Omit<ListingPackage, "id" | "listing_id"> => ({
@@ -299,8 +300,8 @@ export default function ListingForm({
                 />
                 <input
                   type="number"
-                  value={pkg.price || ""}
-                  onChange={(e) => updatePackage(i, "price", Number(e.target.value))}
+                  value={pkg.price ? jodToUsd(pkg.price).toFixed(2) : ""}
+                  onChange={(e) => updatePackage(i, "price", usdToJod(Number(e.target.value)))}
                   placeholder={t("pricePlaceholder")}
                   className="rounded-sm border border-line px-3 py-2 text-sm focus:border-cyan-deep focus:outline-none"
                 />

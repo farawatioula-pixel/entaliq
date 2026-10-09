@@ -4,6 +4,7 @@ import { redirect, Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getOrderById } from "@/lib/orders";
 import { OrderStatusActions } from "@/components/OrderStatusActions";
+import { formatPrice } from "@/lib/currency";
 import type { OrderStatus } from "@/lib/marketplace-types";
 
 export const revalidate = 0;
@@ -67,10 +68,10 @@ export default async function OrderDetailPage({
             <p className="text-xs font-semibold uppercase tracking-widest text-neutral-600">
               {t("price")}
             </p>
-            <p className="mt-1 text-sm font-semibold text-fg">JOD {order.price.toFixed(2)}</p>
+            <p className="mt-1 text-sm font-semibold text-fg">{formatPrice(order.price)}</p>
             {isBuyer && (
               <p className="mt-1 text-xs text-neutral-500">
-                {t("totalPaidWithFee", { total: order.total_amount.toFixed(2) })}
+                {t("totalPaidWithFee", { total: formatPrice(order.total_amount) })}
               </p>
             )}
           </div>

@@ -4,15 +4,16 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import type { ListingPackage } from "@/lib/marketplace-types";
+import { formatPrice, type DisplayCurrency } from "@/lib/currency";
 
 export function PackageSelector({
   packages,
   listingId,
-  currency = "JOD",
+  currency = "USD",
 }: {
   packages: ListingPackage[];
   listingId: string;
-  currency?: string;
+  currency?: DisplayCurrency;
 }) {
   const t = useTranslations("packageSelector");
   const router = useRouter();
@@ -76,7 +77,7 @@ export function PackageSelector({
             {current.name || tierLabel[current.tier]}
           </h3>
           <p className="font-display text-2xl font-bold text-red-dark">
-            {currency} {current.price.toFixed(0)}
+            {formatPrice(current.price, currency)}
           </p>
         </div>
 

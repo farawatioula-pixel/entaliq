@@ -1,6 +1,7 @@
 import { Link } from "@/i18n/navigation";
 import type { ListingWithSeller } from "@/lib/marketplace";
 import { FavoriteButton } from "@/components/FavoriteButton";
+import { formatPrice, type DisplayCurrency } from "@/lib/currency";
 
 const categoryColor: Record<string, string> = {
   "graphics-design": "text-violet-deep",
@@ -26,13 +27,13 @@ const categoryBg: Record<string, string> = {
 
 export function ListingCard({
   listing,
-  currency = "JOD",
+  currency = "USD",
   fromLabel = "From",
   sellerFallbackLabel = "Seller",
   dayDeliveryLabel,
 }: {
   listing: ListingWithSeller;
-  currency?: string;
+  currency?: DisplayCurrency;
   fromLabel?: string;
   sellerFallbackLabel?: string;
   dayDeliveryLabel?: string;
@@ -98,7 +99,7 @@ export function ListingCard({
             {dayDeliveryLabel ?? `${listing.delivery_days}d delivery`}
           </span>
           <p className="text-sm font-semibold text-fg">
-            {fromLabel} {currency} {listing.starting_price.toFixed(0)}
+            {fromLabel} {formatPrice(listing.starting_price, currency)}
           </p>
         </div>
       </div>
