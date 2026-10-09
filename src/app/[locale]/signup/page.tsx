@@ -12,6 +12,7 @@ function SignupForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get("next") || "/profile";
+  const isBuyerFlow = next.startsWith("/marketplace");
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -71,11 +72,15 @@ function SignupForm() {
   return (
     <main className="border-t-4 border-cyan bg-paper px-5 py-20 sm:px-8">
       <div className="mx-auto max-w-sm">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">
-          {t("eyebrow")}
-        </p>
-        <h1 className="mt-3 font-display text-3xl font-bold text-fg">{t("title")}</h1>
-        <p className="mt-2 text-[15px] text-neutral-600">{t("body")}</p>
+        {!isBuyerFlow && (
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">
+            {t("eyebrow")}
+          </p>
+        )}
+        <h1 className={`font-display text-3xl font-bold text-fg ${isBuyerFlow ? "" : "mt-3"}`}>
+          {isBuyerFlow ? t("titleBuyer") : t("title")}
+        </h1>
+        {!isBuyerFlow && <p className="mt-2 text-[15px] text-neutral-600">{t("body")}</p>}
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
           <div>
