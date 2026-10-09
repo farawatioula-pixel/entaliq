@@ -75,6 +75,7 @@ export type Order = {
   payment_submitted_at: string | null;
   payment_confirmed_at: string | null;
   payment_confirmed_by: string | null;
+  payment_receipt_url: string | null;
   platform_fee_percent: number;
   platform_fee_amount: number;
   total_amount: number;
@@ -110,6 +111,7 @@ export type BuyerRequest = {
   listing_id: string | null;
   description: string;
   images: string[];
+  desired_delivery: string | null;
   status: RequestStatus;
   offer_id: string | null;
   created_at: string;

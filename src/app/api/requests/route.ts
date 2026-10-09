@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
     conversation_id?: string;
     description?: string;
     images?: string[];
+    desired_delivery?: string;
   };
   try {
     body = await req.json();
@@ -23,7 +24,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const { conversation_id, description, images } = body;
+  const { conversation_id, description, images, desired_delivery } = body;
 
   if (!conversation_id || !description || !description.trim()) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -48,6 +49,7 @@ export async function POST(req: NextRequest) {
       listing_id: conversation.listing_id,
       description: description.trim(),
       images: (images ?? []).filter(Boolean),
+      desired_delivery: desired_delivery?.trim() || null,
     })
     .select()
     .single();

@@ -502,7 +502,7 @@
     "packages": "Packages",
     "remove": "Remove",
     "packageNamePlaceholder": "Package name",
-    "pricePlaceholder": "Price (JOD)",
+    "pricePlaceholder": "Price (USD)",
     "deliveryDaysPlaceholder": "Delivery days",
     "revisionsPlaceholder": "Revisions",
     "whatsIncludedPlaceholder": "What's included",
@@ -556,7 +556,7 @@
     "payNow": "Pay now",
     "paymentSubmitted": "Payment submitted",
     "paymentSubmittedBody": "We're confirming your payment. This usually doesn't take long.",
-    "totalPaidWithFee": "Total paid (incl. Mountaliq Percentage): JOD {total}"
+    "totalPaidWithFee": "Total paid (incl. Mountaliq Percentage): {total}"
   },
   "marketplaceListingPage": {
     "marketplaceBreadcrumb": "Marketplace",
@@ -623,7 +623,25 @@
     "cannotMessageSelf": "You cannot message yourself.",
     "couldNotStartConversation": "Could not start conversation.",
     "opening": "Opening...",
-    "contactSeller": "Contact seller"
+    "contactSeller": "Contact seller",
+    "howCanIHelp": "How can I help?",
+    "getAQuote": "Get a quote",
+    "askAQuestion": "Ask a question",
+    "requestAQuote": "Request a quote",
+    "close": "Close",
+    "quoteGreeting": "Hi, please provide your request details below and I'll get back to you.",
+    "describeService": "Describe the service you're looking to purchase",
+    "describeServicePlaceholder": "I'm looking for...",
+    "whenDelivered": "When would you like your service delivered?",
+    "delivery24h": "24 Hours",
+    "delivery3d": "3 Days",
+    "delivery7d": "7 Days",
+    "deliveryOther": "Other",
+    "customDeliveryPlaceholder": "e.g. 2 weeks",
+    "requestValidation": "Please describe what you need.",
+    "sendingRequest": "Sending...",
+    "sendRequest": "Send request",
+    "somethingWentWrong": "Something went wrong."
   },
   "favoriteButton": {
     "removeFromFavorites": "Remove from favorites",
@@ -677,7 +695,7 @@
     "listingLabel": "Listing",
     "offerTitlePlaceholder": "Offer title",
     "offerDescriptionPlaceholder": "What's included",
-    "offerPricePlaceholder": "Price (JOD)",
+    "offerPricePlaceholder": "Price (USD)",
     "offerDeliveryPlaceholder": "Delivery days",
     "sendOfferSubmit": "Send offer",
     "sendingOffer": "Sending...",
@@ -696,7 +714,8 @@
     "requirementsSentWaiting": "Waiting for a price quote from the seller.",
     "requirementsQuoted": "Quote sent — see below.",
     "sendQuote": "Send quote",
-    "attachPhotos": "Attach photos (optional)"
+    "attachPhotos": "Attach photos (optional)",
+    "desiredDeliveryLabel": "Requested delivery"
   },
   "headerAria": {
     "homeLink": "Mountaliq home",
@@ -792,7 +811,16 @@
     "submitting": "Submitting...",
     "confirmSent": "I've sent the payment",
     "servicePrice": "Service price",
-    "mountaliqPercentage": "Mountaliq Percentage ({percent}%)"
+    "mountaliqPercentage": "Mountaliq Percentage ({percent}%)",
+    "usdReferenceNote": "USD amounts are shown for reference only. The actual CliQ transfer must be sent in JOD.",
+    "receiptLabel": "Payment receipt / screenshot",
+    "receiptHint": "Upload a screenshot or photo of your CliQ transfer confirmation (image or PDF, max 5MB).",
+    "removeReceipt": "Remove",
+    "uploadReceipt": "Upload receipt",
+    "uploadingReceipt": "Uploading...",
+    "receiptFileTypeError": "Please upload an image or PDF file.",
+    "receiptSizeError": "File is too large. Maximum size is 5MB.",
+    "receiptRequired": "Please upload your payment receipt before confirming."
   },
   "adminPaymentsPage": {
     "eyebrow": "Admin",
@@ -804,6 +832,7 @@
     "listingRemoved": "Listing removed",
     "confirmPayment": "Confirm payment",
     "confirming": "Confirming...",
-    "priceBreakdown": "Service JOD {price} + Mountaliq Percentage JOD {fee}"
+    "priceBreakdown": "Service JOD {price} + Mountaliq Percentage JOD {fee}",
+    "viewReceipt": "View payment receipt"
   }
 }

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { RequestImagesUpload } from "@/components/RequestImagesUpload";
+import { formatPrice, usdToJod } from "@/lib/currency";
 import type { BuyerRequest, Message, Offer } from "@/lib/marketplace-types";
 
 const POLL_MS = 4000;
@@ -170,6 +171,11 @@ export function MessageThread({
                     {t("requirementsLabel")}
                   </p>
                   <p className="mt-2 whitespace-pre-wrap text-sm text-fg">{r.description}</p>
+                  {r.desired_delivery && (
+                    <p className="mt-1.5 text-xs text-neutral-600">
+                      {t("desiredDeliveryLabel")}: {r.desired_delivery}
+                    </p>
+                  )}
                   {r.images.length > 0 && (
                     <div className="mt-3 flex flex-wrap gap-2">
                       {r.images.map((img, i) => (
@@ -220,7 +226,7 @@ export function MessageThread({
                   <p className="mt-1 text-sm text-neutral-600">{o.description}</p>
                 )}
                 <div className="mt-3 flex items-center justify-between text-sm">
-                  <span className="font-semibold text-fg">JOD {o.price.toFixed(0)}</span>
+                  <span className="font-semibold text-fg">{formatPrice(o.price)}</span>
                   <span className="text-neutral-600">
                     {t("deliveryDays", { days: o.delivery_days })}
                   </span>
@@ -496,7 +502,7 @@ function OfferComposer({
         listing_id: listingId,
         title: title.trim(),
         description: description.trim(),
-        price: Number(price),
+        price: usdToJod(Number(price)),
         delivery_days: Number(deliveryDays) || 1,
         request_id: requestId,
       }),
