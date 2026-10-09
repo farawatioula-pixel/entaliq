@@ -1,16 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { useRouter, Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { withTimeout } from "@/lib/with-timeout";
 import ProfileForm from "@/components/ProfileForm";
 import type { Profile } from "@/lib/types";
 
-export default function ProfilePage() {
+function ProfilePageInner() {
   const t = useTranslations("profilePage");
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const next = searchParams.get("next");
   const [profile, setProfile] = useState<Profile | null>(null);
   const [status, setStatus] = useState<"loading" | "error" | "ready">("loading");
 
@@ -26,7 +29,8 @@ export default function ProfilePage() {
       if (!active) return;
 
       if (!user) {
-        router.push("/login");
+        const backTo = next ? `/profile?next=${encodeURIComponent(next)}` : "/profile";
+        router.push(`/login?next=${encodeURIComponent(backTo)}`);
         return;
       }
 
@@ -63,7 +67,7 @@ export default function ProfilePage() {
     return () => {
       active = false;
     };
-  }, [router]);
+  }, [router, next]);
 
   return (
     <main className="border-t-4 border-cyan bg-paper px-5 py-16 sm:px-8">
@@ -105,6 +109,13 @@ export default function ProfilePage() {
 
         {status === "ready" && (
           <>
+            {next && (
+              <div className="mt-6 rounded-sm border border-cyan-deep bg-cyan/5 px-5 py-4">
+                <p className="text-sm font-semibold text-cyan-deep">{t("onboardingNoticeTitle")}</p>
+                <p className="mt-1 text-sm text-neutral-700">{t("onboardingNoticeBody")}</p>
+              </div>
+            )}
+
             <div className="mt-4 flex flex-wrap gap-3">
               <Link
                 href="/dashboard"
@@ -132,10 +143,18 @@ export default function ProfilePage() {
               </Link>
             </div>
 
-            <ProfileForm profile={profile!} />
+            <ProfileForm profile={profile!} next={next} />
           </>
         )}
       </div>
     </main>
+  );
+}
+
+export default function ProfilePage() {
+  return (
+    <Suspense fallback={null}>
+      <ProfilePageInner />
+    </Suspense>
   );
 }

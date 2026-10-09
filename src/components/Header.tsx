@@ -79,7 +79,9 @@ export default function Header() {
 
   const isLoggedIn = !!userId;
   const buyHref = isLoggedIn ? "/marketplace" : "/signup?next=/marketplace";
-  const sellHref = isLoggedIn ? "/dashboard" : "/signup?next=/profile";
+  const sellHref = isLoggedIn
+    ? "/dashboard"
+    : `/signup?next=${encodeURIComponent("/profile?next=/dashboard/listings/new")}`;
   const registerHref = isLoggedIn ? "/register" : "/signup?next=/register";
   const isSummitPage = pathname === "/summit";
 

@@ -43,10 +43,11 @@ export default function ListingForm({
   const [images, setImages] = useState<string[]>(listing?.images.length ? listing.images : [""]);
   const [requirements, setRequirements] = useState(listing?.requirements ?? "");
   const [faq, setFaq] = useState<FaqItem[]>(listing?.faq.length ? listing.faq : []);
+  const allTiers: PackageTier[] = ["basic", "standard", "premium"];
   const [packages, setPackages] = useState<Omit<ListingPackage, "id" | "listing_id">[]>(
-    existingPackages?.length
-      ? existingPackages
-      : [emptyPackage("basic")]
+    allTiers.map(
+      (tier) => existingPackages?.find((p) => p.tier === tier) ?? emptyPackage(tier)
+    )
   );
 
   const [saving, setSaving] = useState<"draft" | "publish" | null>(null);
@@ -71,20 +72,15 @@ export default function ListingForm({
   ) {
     setPackages((prev) => prev.map((p, idx) => (idx === i ? { ...p, [field]: value } : p)));
   }
-  function addPackageTier(tier: PackageTier) {
-    if (packages.some((p) => p.tier === tier)) return;
-    setPackages((prev) => [...prev, emptyPackage(tier)]);
-  }
-  function removePackage(i: number) {
-    setPackages((prev) => prev.filter((_, idx) => idx !== i));
-  }
 
   function validate(): string | null {
     if (!title.trim()) return t("titleRequired");
     if (!description.trim()) return t("descriptionRequired");
     if (!categoryId) return t("chooseCategory");
     if (images.map((i) => i.trim()).filter(Boolean).length === 0) return t("imageRequired");
-    if (packages.length === 0) return t("atLeastOnePackage");
+    if (allTiers.some((tier) => !packages.some((p) => p.tier === tier)))
+      return t("allThreeTiersRequired");
+    if (packages.some((p) => !p.name.trim())) return t("everyPackageNeedsName");
     if (packages.some((p) => !p.price || p.price <= 0)) return t("everyPackageNeedsPrice");
     return null;
   }
@@ -256,39 +252,13 @@ export default function ListingForm({
       </div>
 
       <div>
-        <div className="flex items-center justify-between">
-          <label className="block text-sm font-semibold text-fg">{t("packages")}</label>
-          <div className="flex gap-2">
-            {(["basic", "standard", "premium"] as PackageTier[])
-              .filter((tier) => !packages.some((p) => p.tier === tier))
-              .map((tier) => (
-                <button
-                  key={tier}
-                  type="button"
-                  onClick={() => addPackageTier(tier)}
-                  className="rounded-sm border border-line px-3 py-1 text-xs font-semibold text-neutral-600 hover:border-cyan-deep hover:text-cyan-deep"
-                >
-                  + {tier}
-                </button>
-              ))}
-          </div>
-        </div>
+        <label className="block text-sm font-semibold text-fg">{t("packages")}</label>
+        <p className="mt-1 text-xs text-neutral-600">{t("allThreeTiersHint")}</p>
 
         <div className="mt-3 space-y-4">
           {packages.map((pkg, i) => (
             <div key={i} className="rounded-sm border border-line bg-surface p-5">
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-bold uppercase tracking-wide text-fg">{pkg.tier}</p>
-                {packages.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => removePackage(i)}
-                    className="text-xs font-semibold text-red-dark hover:underline"
-                  >
-                    {t("remove")}
-                  </button>
-                )}
-              </div>
+              <p className="text-sm font-bold uppercase tracking-wide text-fg">{pkg.tier}</p>
 
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 <input
