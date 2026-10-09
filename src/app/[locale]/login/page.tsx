@@ -10,7 +10,7 @@ function LoginForm() {
   const t = useTranslations("loginPage");
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams.get("next") || "/profile";
+  const next = searchParams.get("next") || "/marketplace";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
