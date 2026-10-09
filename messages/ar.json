@@ -520,7 +520,8 @@
     "chooseCategory": "اختر فئة.",
     "atLeastOnePackage": "مطلوب باقة واحدة على الأقل.",
     "everyPackageNeedsPrice": "كل باقة تحتاج إلى سعر.",
-    "couldNotCreateListing": "تعذّر إنشاء العرض."
+    "couldNotCreateListing": "تعذّر إنشاء العرض.",
+    "imageRequired": "أضف صورة واحدة على الأقل."
   },
   "listingImages": {
     "label": "الصور",

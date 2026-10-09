@@ -66,7 +66,9 @@ export function ListingImagesUpload({
 
   return (
     <div>
-      <label className="block text-sm font-semibold text-fg">{t("label")}</label>
+      <label className="block text-sm font-semibold text-fg">
+        {t("label")} <span className="text-red-dark">*</span>
+      </label>
 
       <div className="mt-2 flex flex-wrap gap-3">
         {images.filter(Boolean).map((img, i) => (
