@@ -26,6 +26,11 @@ export default async function DashboardPage({
 
   const stats = await getSellerStats(user.id);
 
+  if (stats.totalListings === 0) {
+    redirect({ href: "/dashboard/listings/new", locale });
+    return;
+  }
+
   const cards = [
     { label: t("totalEarnings"), value: formatPrice(stats.totalEarnings) },
     { label: t("activeOrders"), value: stats.activeOrders },

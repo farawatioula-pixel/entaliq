@@ -18,7 +18,7 @@ const categories: Profile["category"][] = [
   "ecommerce",
 ];
 
-export default function ProfileForm({ profile }: { profile: Profile }) {
+export default function ProfileForm({ profile, next }: { profile: Profile; next?: string | null }) {
   const t = useTranslations("profileForm");
   const router = useRouter();
   const [name, setName] = useState(profile.name);
@@ -90,6 +90,12 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
     }
 
     setSaved(true);
+
+    if (next) {
+      router.push(next);
+      return;
+    }
+
     router.refresh();
   }
 

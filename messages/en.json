@@ -402,9 +402,9 @@
     "titleBuyer": "Register to buy services"
   },
   "profilePage": {
-    "eyebrow": "Your seller profile",
-    "title": "Your seller profile",
-    "body": "This is your public profile, your name, bio, and portfolio that buyers see. It doesn't list a service on its own. Manage what you're actually selling from your",
+    "eyebrow": "Your account",
+    "title": "Your profile",
+    "body": "Buyers see your name, bio, and portfolio here only if you choose to sell. It doesn't list a service on its own — manage what you're actually selling from your",
     "marketplace": "marketplace",
     "loading": "Loading your profile…",
     "loadError": "Couldn't load your profile.",
@@ -413,7 +413,9 @@
     "myOrders": "My orders",
     "messages": "Messages",
     "favorites": "Favorites",
-    "dashboardLink": "seller dashboard"
+    "dashboardLink": "seller dashboard",
+    "onboardingNoticeTitle": "Almost there",
+    "onboardingNoticeBody": "Save your profile below, then you'll go straight to creating your first listing so buyers can find you."
   },
   "profileForm": {
     "fullName": "Full name",
@@ -521,7 +523,10 @@
     "atLeastOnePackage": "At least one package is required.",
     "everyPackageNeedsPrice": "Every package needs a price.",
     "couldNotCreateListing": "Could not create listing.",
-    "imageRequired": "Add at least one photo."
+    "imageRequired": "Add at least one photo.",
+    "allThreeTiersHint": "All three package tiers are required so buyers can compare options.",
+    "allThreeTiersRequired": "Basic, Standard, and Premium packages are all required.",
+    "everyPackageNeedsName": "Every package needs a name."
   },
   "listingImages": {
     "label": "Images",
