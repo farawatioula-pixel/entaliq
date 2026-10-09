@@ -170,7 +170,7 @@ export default function Header() {
       </div>
 
       {/* Row 1 (mobile): hamburger left, logo (or search once scrolled) truly centered, Join/bell right */}
-      <div className="relative flex items-center gap-3 px-5 py-4 md:hidden">
+      <div className="relative flex items-center justify-between gap-3 px-5 py-4 md:hidden">
         <button
           type="button"
           className="flex h-10 w-10 shrink-0 items-center justify-center"
