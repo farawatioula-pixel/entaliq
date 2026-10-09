@@ -398,7 +398,8 @@
     "creatingAccount": "جارٍ إنشاء الحساب…",
     "createAccount": "إنشاء حساب",
     "alreadyHaveAccount": "لديك حساب بالفعل؟",
-    "logIn": "تسجيل الدخول"
+    "logIn": "تسجيل الدخول",
+    "titleBuyer": "سجّل لشراء الخدمات"
   },
   "profilePage": {
     "eyebrow": "ملف البائع الخاص بك",
