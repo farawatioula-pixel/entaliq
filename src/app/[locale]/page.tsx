@@ -5,6 +5,7 @@ import { guides } from "@/lib/guides";
 import { GuideCard } from "@/components/GuideCard";
 import PartnerLogos from "@/components/PartnerLogos";
 import LaunchCTA from "@/components/LaunchCTA";
+import SummitBanner from "@/components/SummitBanner";
 import HeroVideo from "@/components/HeroVideo";
 import HeroSearch from "@/components/HeroSearch";
 import { CategoryIcon, categoryOrder, categoryAccent } from "@/components/CategoryIcon";
@@ -64,6 +65,9 @@ export default async function Home({
           </div>
         </div>
       </section>
+
+      {/* Summit closing ceremony registration */}
+      <SummitBanner />
 
       {/* Browse by category */}
       <section className="border-b border-line bg-paper py-16 sm:py-20">

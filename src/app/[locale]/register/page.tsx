@@ -49,6 +49,17 @@ function RegisterPageInner() {
               </div>
             ))}
           </dl>
+
+          <button
+            type="button"
+            onClick={() => setOpen("ceremony")}
+            className="mt-8 inline-flex items-center gap-2 rounded-sm bg-red px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-red-dark"
+          >
+            {t("registerForCeremony")}
+            <span aria-hidden="true" className="inline-block rtl:-scale-x-100">
+              →
+            </span>
+          </button>
         </div>
       </section>
 
