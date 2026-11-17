@@ -42,7 +42,7 @@ export async function generateMetadata({
   return {
     title: t("title"),
     description: t("description"),
-    metadataBase: new URL("https://mountaliq.example"),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://mountaliq.com"),
     openGraph: {
       title: t("title"),
       description: t("ogDescription"),

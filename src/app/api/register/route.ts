@@ -1,4 +1,25 @@
+import { randomBytes } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
+import { sendMail } from "@/lib/email";
+import { linkedInShareUrl } from "@/lib/summit";
+import {
+  ceremonyConfirmationHtml,
+  ceremonyConfirmationSubject,
+  ceremonyConfirmationText,
+} from "@/lib/emails/ceremony-confirmation";
+
+const VALID_TYPES = ["ceremony", "training", "partner"] as const;
+type RegistrationType = (typeof VALID_TYPES)[number];
+
+function isValidType(value: unknown): value is RegistrationType {
+  return typeof value === "string" && (VALID_TYPES as readonly string[]).includes(value);
+}
+
+function str(value: unknown): string | null {
+  const s = typeof value === "string" ? value.trim() : "";
+  return s.length > 0 ? s : null;
+}
 
 export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
@@ -8,32 +29,87 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const { type, name, email } = body;
-  const validTypes = ["plenary", "training", "partner"];
-  if (!name || !email || typeof type !== "string" || !validTypes.includes(type)) {
+  // "plenary" was the old name for what is now the closing ceremony; accept it
+  // so any cached page still in someone's browser keeps working.
+  const rawType = body.type === "plenary" ? "ceremony" : body.type;
+
+  const name = str(body.name);
+  const email = str(body.email);
+
+  if (!name || !email || !isValidType(rawType)) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
-  // Log every submission server-side so it always shows up in Vercel's
-  // function logs, even if no external form endpoint is configured.
-  console.log("[mountaliq:register]", JSON.stringify(body));
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
+  }
 
-  // Optional: forward to an external form service (Formspree, Getform, etc.)
-  // so submissions land in an inbox instead of only Vercel logs.
-  // Set FORM_ENDPOINT in your environment variables to enable this.
+  const type: RegistrationType = rawType;
+  const locale = str(body.locale) === "ar" ? "ar" : "en";
+  const shareToken = randomBytes(8).toString("hex");
+  const ageValue = Number(body.age);
+
+  const record = {
+    type,
+    name,
+    email,
+    organisation: str(body.organisation),
+    phone: str(body.phone),
+    age: Number.isFinite(ageValue) && ageValue > 0 ? Math.floor(ageValue) : null,
+    background: str(body.background),
+    locale,
+    share_token: shareToken,
+    referred_by: str(body.ref),
+  };
+
+  // Always log, so a submission is never lost even if the database write fails.
+  console.log("[mountaliq:register]", JSON.stringify(record));
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (supabaseUrl && supabaseKey) {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const { error } = await supabase.from("registrations").insert(record);
+    if (error) {
+      // A storage failure must not cost us the registration — it is in the logs
+      // above, and the attendee still gets their confirmation below.
+      console.error("[mountaliq:register] database insert failed", error.message);
+    }
+  } else {
+    console.error("[mountaliq:register] Supabase env vars missing — registration only logged");
+  }
+
+  let emailSent = false;
+
+  if (type === "ceremony") {
+    const result = await sendMail({
+      to: email,
+      subject: ceremonyConfirmationSubject(locale),
+      html: ceremonyConfirmationHtml({ name, shareToken, locale }),
+      text: ceremonyConfirmationText({ name, shareToken, locale }),
+      replyTo: process.env.MAIL_REPLY_TO?.trim() || undefined,
+    });
+    emailSent = result.sent;
+  }
+
+  // Optional: forward to an external form service (Formspree, Getform, etc.).
   const endpoint = process.env.FORM_ENDPOINT;
   if (endpoint) {
     try {
       await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(body),
+        body: JSON.stringify(record),
       });
     } catch (err) {
       console.error("[mountaliq:register] forwarding failed", err);
-      // Submission is still accepted — logged above — even if forwarding fails.
     }
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({
+    ok: true,
+    emailSent,
+    shareUrl: type === "ceremony" ? linkedInShareUrl(shareToken, locale) : null,
+  });
 }
