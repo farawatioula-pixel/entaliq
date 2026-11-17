@@ -108,7 +108,7 @@ export const tracks: Track[] = [
 
 export type Trainer = {
   number: string;
-  name: string;
+  name: LocalizedText;
   focus: LocalizedText;
   bio: LocalizedText;
 };
@@ -116,7 +116,7 @@ export type Trainer = {
 export const trainers: Trainer[] = [
   {
     number: "01",
-    name: "Dr. Oula Farawati",
+    name: { en: "Dr. Oula Farawati", ar: "د. علا الفرواتي" },
     focus: { en: "International Business & Sales", ar: "الأعمال الدولية والمبيعات" },
     bio: {
       en: "Mountaliq founder with 20+ years in strategy and communications, teaching trainees to spot opportunities, pitch with confidence and close their first deals.",
@@ -125,7 +125,7 @@ export const trainers: Trainer[] = [
   },
   {
     number: "02",
-    name: "Shaker Amayreh",
+    name: { en: "Shaker Amayreh", ar: "شاكر العمايرة" },
     focus: { en: "Building with AI on Replit", ar: "البناء بالذكاء الاصطناعي مع Replit" },
     bio: {
       en: "Replit Partnership Lead for MENA and co-founder of three startups, helping trainees turn ideas into working websites and products at speed with AI.",
@@ -134,7 +134,7 @@ export const trainers: Trainer[] = [
   },
   {
     number: "03",
-    name: "Abdallah Battah",
+    name: { en: "Abdallah Battah", ar: "عبدالله بطاح" },
     focus: { en: "Marketing Strategy & Sales", ar: "استراتيجية التسويق والمبيعات" },
     bio: {
       en: "Leads trainees through positioning, pricing, and the sales conversations that turn a new digital skill into paying clients.",
@@ -143,7 +143,7 @@ export const trainers: Trainer[] = [
   },
   {
     number: "04",
-    name: "Othman Hato",
+    name: { en: "Othman Hato", ar: "عثمان حتو" },
     focus: { en: "Affiliate Marketing", ar: "التسويق بالعمولة" },
     bio: {
       en: "Practitioner in commission-based marketing, teaching trainees how to choose offers and build an audience that converts.",
@@ -152,7 +152,7 @@ export const trainers: Trainer[] = [
   },
   {
     number: "05",
-    name: "Karam Judeh",
+    name: { en: "Karam Judeh", ar: "كرم جودة" },
     focus: {
       en: "Vibe Coding & AI Business Automation",
       ar: "فايب كودينغ وأتمتة الأعمال بالذكاء الاصطناعي",
@@ -164,7 +164,7 @@ export const trainers: Trainer[] = [
   },
   {
     number: "06",
-    name: "Diaa Abu Shamlah",
+    name: { en: "Diaa Abu Shamlah", ar: "ضياء أبو شملة" },
     focus: { en: "E-commerce, eBay & Amazon", ar: "التجارة الإلكترونية, إيباي وأمازون" },
     bio: {
       en: "Runs cross-border e-commerce operations and trains sellers on sourcing, listing, and logistics for global marketplaces.",
@@ -173,8 +173,13 @@ export const trainers: Trainer[] = [
   },
 ];
 
-export const partners: { name: string; logo?: string; role: LocalizedText }[] = [
-  { name: "Mixed Sources", role: { en: "Organized by", ar: "تنظيم" } },
+export const partners: { name: string; logo?: string; wide?: boolean; role: LocalizedText }[] = [
+  {
+    name: "Mixed Sources",
+    logo: "/partners/mixed-sources.png",
+    wide: true,
+    role: { en: "Organized by", ar: "تنظيم" },
+  },
   {
     name: "Jordan Bromine",
     logo: "/partners/bromine-jordan.png",

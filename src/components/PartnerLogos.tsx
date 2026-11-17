@@ -23,7 +23,11 @@ export default function PartnerLogos() {
                   src={partner.logo}
                   alt={partner.name}
                   className={`w-auto object-contain ${
-                    partner.logo.endsWith(".svg") ? "h-10 sm:h-12" : "h-full"
+                    partner.logo.endsWith(".svg")
+                      ? "h-10 sm:h-12"
+                      : partner.wide
+                        ? "h-auto max-h-full max-w-[200px]"
+                        : "h-full"
                   }`}
                 />
               ) : (

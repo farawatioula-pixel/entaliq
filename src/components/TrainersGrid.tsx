@@ -12,7 +12,7 @@ export default function TrainersGrid({ showBio = false }: { showBio?: boolean })
             {trainer.number}
           </span>
           <p className="relative font-display text-sm font-bold text-red-dark">{trainer.number}</p>
-          <h3 className="relative mt-3 font-display text-xl font-bold text-fg">{trainer.name}</h3>
+          <h3 className="relative mt-3 font-display text-xl font-bold text-fg">{trainer.name[locale]}</h3>
           <p className="relative mt-1 text-[15px] text-neutral-600">{trainer.focus[locale]}</p>
           {showBio && (
             <p className="relative mt-4 text-sm leading-relaxed text-neutral-600">
