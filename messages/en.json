@@ -184,7 +184,7 @@
     "heroBody": "Hands-on experience at an international level",
     "ctaTitle": "Are you a practitioner in a digital income field?",
     "ctaBody": "Mountaliq is looking to expand its trainer bench for future cohorts.",
-    "getInTouch": "Get in touch",
+    "getInTouch": "Apply as a trainer",
     "trainersData": [
       {
         "order": "01",
@@ -859,5 +859,31 @@
     "confirming": "Confirming...",
     "priceBreakdown": "Service JOD {price} + Mountaliq Percentage JOD {fee}",
     "viewReceipt": "View payment receipt"
+  },
+  "trainerForm": {
+    "eyebrow": "Join the trainer bench",
+    "title": "Apply to train with Mountaliq",
+    "body": "Tell us what you teach and the services you offer. We'll be in touch about future cohorts.",
+    "fullName": "Full name",
+    "emailAddress": "Email address",
+    "phoneNumber": "Phone number (WhatsApp)",
+    "field": "Field of expertise",
+    "fieldPlaceholder": "E-commerce, content creation, vibe coding…",
+    "bio": "Short bio and the services you offer",
+    "bioPlaceholder": "Your experience, what you can teach, and the services or packages you offer.",
+    "links": "LinkedIn or portfolio link",
+    "linksPlaceholder": "https://",
+    "errors": {
+      "name": "Enter your full name.",
+      "email": "Enter a valid email address.",
+      "phone": "Enter a phone number.",
+      "field": "Tell us your field.",
+      "bio": "Add a short bio."
+    },
+    "submit": "Send application",
+    "sending": "Sending…",
+    "submitError": "Something went wrong sending your application. Please try again.",
+    "successTitle": "Application received.",
+    "successBody": "Thanks for applying to train with Mountaliq. We'll contact you on WhatsApp or email."
   }
 }

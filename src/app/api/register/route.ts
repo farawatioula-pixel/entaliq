@@ -9,7 +9,7 @@ import {
   ceremonyConfirmationText,
 } from "@/lib/emails/ceremony-confirmation";
 
-const VALID_TYPES = ["ceremony", "training", "partner"] as const;
+const VALID_TYPES = ["ceremony", "training", "partner", "trainer"] as const;
 type RegistrationType = (typeof VALID_TYPES)[number];
 
 function isValidType(value: unknown): value is RegistrationType {
@@ -48,6 +48,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
+  if (
+    rawType === "trainer" &&
+    (!str(body.phone) || !str(body.background) || !str(body.message))
+  ) {
+    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+  }
+
   const type: RegistrationType = rawType;
   const locale = str(body.locale) === "ar" ? "ar" : "en";
   const shareToken = randomBytes(8).toString("hex");
@@ -64,6 +71,8 @@ export async function POST(req: NextRequest) {
     locale,
     share_token: shareToken,
     referred_by: str(body.ref),
+    message: str(body.message),
+    links: str(body.links),
   };
 
   // Always log, so a submission is never lost even if the database write fails.
