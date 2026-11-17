@@ -173,7 +173,20 @@ export const trainers: Trainer[] = [
   },
 ];
 
-export const partners = [{ name: "Bromine Jordan", logo: "/partners/bromine-jordan.png" }];
+export const partners: { name: string; logo?: string; role: LocalizedText }[] = [
+  { name: "Mixed Sources", role: { en: "Organized by", ar: "تنظيم" } },
+  {
+    name: "Jordan Bromine",
+    logo: "/partners/bromine-jordan.png",
+    role: { en: "Sponsor", ar: "راعٍ" },
+  },
+  { name: "Replit", logo: "/partners/replit.svg", role: { en: "Sponsor", ar: "راعٍ" } },
+  {
+    name: "Ministry of Digital Economy and Entrepreneurship",
+    logo: "/partners/modee.png",
+    role: { en: "Partner", ar: "شريك" },
+  },
+];
 
 export const stats: { value: string; label: LocalizedText }[] = [
   {
