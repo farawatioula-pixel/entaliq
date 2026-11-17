@@ -37,7 +37,7 @@ export default function Footer() {
             </p>
             <ul className="mt-4 space-y-2 text-sm">
               <li><Link href="/register" className="hover:text-white">{t("registerPlenary")}</Link></li>
-              <li><Link href="/register" className="hover:text-white">{t("applyTraining")}</Link></li>
+              <li><Link href="/summit" className="hover:text-white">{t("applyTraining")}</Link></li>
               <li><Link href="/partners#partner-with-us" className="hover:text-white">{t("partnerWithUs")}</Link></li>
             </ul>
           </div>

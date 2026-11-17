@@ -50,23 +50,48 @@ export default async function SummitPage() {
           </div>
         </div>
 
-        <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <div className="rounded-sm border border-line bg-surface px-8 py-8">
-            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-deep">
-              {t("programme1")}
-            </p>
-            <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
-              {t("programme1Body")}
-            </p>
-          </div>
-          <div className="rounded-sm border border-line bg-surface px-8 py-8">
-            <p className="text-xs font-semibold uppercase tracking-widest text-red-dark">
-              {t("programme2")}
-            </p>
-            <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
-              {t("programme2Body")}
-            </p>
-          </div>
+        <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-3">
+          {[
+            {
+              key: "programme1",
+              date: t("programme1Date"),
+              accent: "text-neutral-600",
+              status: t("registrationClosed"),
+              statusClass: "border-line bg-paper text-neutral-600",
+            },
+            {
+              key: "programme2",
+              date: t("programme2Date"),
+              accent: "text-neutral-600",
+              status: t("registrationClosed"),
+              statusClass: "border-line bg-paper text-neutral-600",
+            },
+            {
+              key: "programme3",
+              date: t("programme3Date"),
+              accent: "text-red-dark",
+              status: t("registrationOpen"),
+              statusClass: "border-red bg-red/5 text-red-dark",
+            },
+          ].map((item) => (
+            <div
+              key={item.key}
+              className="flex flex-col rounded-sm border border-line bg-surface px-8 py-8"
+            >
+              <p className={`text-xs font-semibold uppercase tracking-widest ${item.accent}`}>
+                {item.date}
+              </p>
+              <p className="mt-3 font-display text-xl font-bold text-fg">{t(item.key)}</p>
+              <p className="mt-3 flex-1 text-[15px] leading-relaxed text-neutral-600">
+                {t(`${item.key}Body`)}
+              </p>
+              <p
+                className={`mt-5 inline-flex self-start rounded-sm border px-3 py-1 text-xs font-semibold ${item.statusClass}`}
+              >
+                {item.status}
+              </p>
+            </div>
+          ))}
         </div>
 
         <div className="mt-10">

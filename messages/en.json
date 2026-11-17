@@ -47,10 +47,10 @@
     "partners": "Partners",
     "getInvolved": "Get involved",
     "registerPlenary": "Register for the ceremony",
-    "applyTraining": "Apply for training",
+    "applyTraining": "Training days",
     "partnerWithUs": "Partner with us",
     "location": "Location",
-    "locationValue": "Amman, annual summit and training",
+    "locationValue": "Hilton Amman Hotel, Jordan",
     "copyright": "© {year} Mountaliq, Mixed Sources Impact. All rights reserved.",
     "ammanJordan": "Amman · Jordan"
   },
@@ -69,7 +69,7 @@
   },
   "home": {
     "heroHeadline": "Hire freelancers, get the best services",
-    "summitBadge": "Mountaliq 2026 · Sun, Nov 29 · Hilton Amman",
+    "summitBadge": "Mountaliq 2026 · Nov 20, 21 & 29 · Hilton Amman",
     "summitBadgeCta": "About the Summit",
     "stat1Value": "4",
     "stat1Label": "Hands-on training tracks across e-commerce, marketing, content, and tech",
@@ -234,10 +234,10 @@
   },
   "registerPage": {
     "eyebrow": "Mountaliq 2026",
-    "heroTitle": "Join Mountaliq 2026",
+    "heroTitle": "Attend the Mountaliq 2026 closing",
     "heroBody": "The closing ceremony and national dialogue session on AI for job creation in Jordan. Reserve your seat below.",
-    "chooseYourPath": "Choose your path",
-    "option01": "Option 01",
+    "chooseYourPath": "The summit",
+    "option01": "Open now",
     "closingCeremony": "Closing Ceremony & National Dialogue",
     "ceremonyBody": "The Mountaliq 2026 closing ceremony, followed by a national dialogue session on AI for job creation in Jordan. Practitioners, government, and partners in one room.",
     "ceremonyPoints": [
@@ -249,14 +249,14 @@
     "whatYouNeed": "What you need",
     "ceremonyRequirements": "Name, email, organisation",
     "registerForCeremony": "Register for the Ceremony",
-    "option02": "Option 02",
-    "trainingProgram": "Training Program",
-    "trainingBody": "Apply for the hands-on training program in Amman. A real skill, a real project, and a launchable income source, by the end of the week.",
+    "option02": "Closed",
+    "trainingProgram": "Training days",
+    "trainingBody": "Two full days of hands-on training, seminars and activities across the digital income tracks, in partnership with Jordan Bromine Company, on Friday 20 and Saturday 21 November.",
     "trainingPoints": [
+      "Friday 20 & Saturday 21 November",
       "In partnership with Jordan Bromine Company",
       "Seven digital income tracks",
-      "Hands-on, project-based learning",
-      "Designed for youth with no prior experience"
+      "Hands-on, project-based learning"
     ],
     "trainingRequirements": "Name, email, phone, age, background",
     "applyForTraining": "Apply for Training",
@@ -264,7 +264,9 @@
     "timeLabel": "Time",
     "venueLabel": "Venue",
     "ogTitle": "Mountaliq 2026 — Closing Ceremony & National Dialogue on AI for Job Creation",
-    "ogDescription": "Sunday 29 November 2026, 10:00–13:00 at the Hilton Amman Hotel. Register to attend the Mountaliq 2026 closing ceremony and national dialogue session on AI for job creation in Jordan."
+    "ogDescription": "Sunday 29 November 2026, 10:00–13:00 at the Hilton Amman Hotel. Register to attend the Mountaliq 2026 closing ceremony and national dialogue session on AI for job creation in Jordan.",
+    "trainingClosedTitle": "Registration for the training days has closed",
+    "trainingClosedBody": "Places for 20 and 21 November are full. Those two days run as planned, and everyone is welcome to join the closing ceremony on Sunday 29 November."
   },
   "registerForm": {
     "backgrounds": [
@@ -763,19 +765,26 @@
     "title": "The Arab Summit for Digital Economy Skills",
     "subtitle": "Hands-on training in modern internet skills",
     "body": "Participants go through a full rotation across four hands-on tracks, led by specialists actively working in these fields. Every participant leaves with something ready to work with in at least one track: a store, a content channel, a client pipeline, or a live AI-powered service.",
-    "dates": "Sun, Nov 29",
+    "dates": "Nov 20, 21 & 29",
     "datesSub": "2026 · Hilton Amman",
     "participantsValue": "100",
-    "participantsSub": "Participants, grouped for full rotation across all tracks",
+    "participantsSub": "Participants across the training tracks",
     "rooms": "Hilton Amman",
-    "roomsSub": "Plenary hall, Amman, Jordan",
-    "timeValue": "10:00 – 13:00",
-    "timeSub": "Closing ceremony and national dialogue",
-    "programme1": "Closing ceremony",
-    "programme1Body": "Opening addresses from sponsors and government, recognition of the Mountaliq 2026 partners, and certificate handover to the participants who completed the training tracks.",
-    "programme2": "National dialogue",
-    "programme2Body": "A national dialogue session on AI for job creation in Jordan, bringing practitioners, government, and private sector partners into one conversation about where the jobs actually come from.",
-    "registerCta": "Register for Mountaliq"
+    "roomsSub": "Amman, Jordan",
+    "timeValue": "3 days",
+    "timeSub": "Two training days and the closing",
+    "programme1": "Training day one",
+    "programme1Body": "A full day of hands-on training, seminars and activities across the digital income tracks, led by specialists working in these fields.",
+    "programme2": "Training day two",
+    "programme2Body": "The second full day of training and seminars, with every group rotating through the remaining tracks and finishing their projects.",
+    "registerCta": "Register for the closing ceremony",
+    "programme1Date": "Friday 20 November",
+    "programme2Date": "Saturday 21 November",
+    "programme3": "Closing ceremony & national dialogue",
+    "programme3Date": "Sunday 29 November · 10:00 – 13:00",
+    "programme3Body": "The closing ceremony with certificate handover and sponsor recognition, followed by a national dialogue session on AI for job creation in Jordan.",
+    "registrationClosed": "Registration closed",
+    "registrationOpen": "Registration open"
   },
   "forgotPasswordPage": {
     "eyebrow": "Reset your password",

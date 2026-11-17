@@ -4,9 +4,30 @@
  * from here so the date and venue can never drift apart between them.
  */
 
+/**
+ * Mountaliq 2026 runs across three days:
+ *   Fri 20 + Sat 21 November — full-day training, seminars and activities.
+ *                              Registration for these has closed.
+ *   Sun 29 November          — closing ceremony and national dialogue.
+ *                              This is the one still open for registration.
+ */
 export const SUMMIT = {
+  /** The two training days, registration closed. */
+  training: {
+    startISO: "2026-11-20",
+    endISO: "2026-11-21",
+    rangeEn: "Fri 20 – Sat 21 November 2026",
+    rangeShortEn: "Nov 20 – 21",
+    rangeAr: "الجمعة ٢٠ – السبت ٢١ تشرين الثاني ٢٠٢٦",
+    rangeShortAr: "٢٠ – ٢١ تشرين الثاني",
+    day1En: "Friday 20 November",
+    day2En: "Saturday 21 November",
+    day1Ar: "الجمعة ٢٠ تشرين الثاني",
+    day2Ar: "السبت ٢١ تشرين الثاني",
+  },
+
+  /** The closing ceremony, open for registration. */
   dateISO: "2026-11-29",
-  /** Sunday 29 November 2026 */
   weekdayEn: "Sunday",
   dateEn: "29 November 2026",
   dateShortEn: "Sun, Nov 29",
@@ -17,6 +38,7 @@ export const SUMMIT = {
   endTime: "13:00",
   timeRangeEn: "10:00 – 13:00",
   timeRangeAr: "١٠:٠٠ – ١٣:٠٠",
+
   venueEn: "Hilton Amman Hotel",
   venueAr: "فندق هيلتون عمّان",
   cityEn: "Amman, Jordan",

@@ -12,7 +12,7 @@ function RegisterPageInner() {
   const isAr = locale === "ar";
   const ceremonyPoints = t.raw("ceremonyPoints") as string[];
   const trainingPoints = t.raw("trainingPoints") as string[];
-  const [open, setOpen] = useState<"ceremony" | "training" | null>(null);
+  const [open, setOpen] = useState<"ceremony" | null>(null);
 
   const eventFacts = [
     {
@@ -103,26 +103,18 @@ function RegisterPageInner() {
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-sm">
-              <span className="font-semibold">{t("whatYouNeed")}:</span> {t("trainingRequirements")}
-            </p>
-            <button
-              type="button"
-              onClick={() => setOpen("training")}
-              className="mt-8 flex w-full items-center justify-between rounded-sm border border-line bg-surface px-6 py-4 text-[15px] font-semibold text-fg transition-colors hover:bg-line"
-            >
-              {t("applyForTraining")}
-              <span aria-hidden="true" className="inline-block rtl:-scale-x-100">→</span>
-            </button>
+            <div className="mt-8 rounded-sm border border-line bg-surface px-6 py-5">
+              <p className="text-sm font-semibold text-fg">{t("trainingClosedTitle")}</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">
+                {t("trainingClosedBody")}
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {open && (
-        <Modal
-          title={open === "ceremony" ? t("registerForCeremony") : t("applyForTraining")}
-          onClose={() => setOpen(null)}
-        >
+        <Modal title={t("registerForCeremony")} onClose={() => setOpen(null)}>
           <RegisterForm type={open} onClose={() => setOpen(null)} />
         </Modal>
       )}
