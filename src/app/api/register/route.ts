@@ -2,7 +2,7 @@ import { randomBytes } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { sendMail } from "@/lib/email";
-import { linkedInShareUrl } from "@/lib/summit";
+import { linkedInShareUrl, shareCardUrl } from "@/lib/summit";
 import {
   ceremonyConfirmationHtml,
   ceremonyConfirmationSubject,
@@ -111,5 +111,6 @@ export async function POST(req: NextRequest) {
     ok: true,
     emailSent,
     shareUrl: type === "ceremony" ? linkedInShareUrl(shareToken, locale) : null,
+    cardUrl: type === "ceremony" ? shareCardUrl(shareToken, locale) : null,
   });
 }

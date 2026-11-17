@@ -1,4 +1,4 @@
-import { SUMMIT, linkedInShareUrl } from "@/lib/summit";
+import { SUMMIT, linkedInShareUrl, shareCardUrl } from "@/lib/summit";
 
 /**
  * Confirmation email sent to anyone who registers for the Mountaliq 2026
@@ -32,6 +32,7 @@ export function ceremonyConfirmationText({
   locale = "en",
 }: CeremonyEmailInput): string {
   const share = linkedInShareUrl(shareToken, locale);
+  const card = shareCardUrl(shareToken, locale);
 
   if (locale === "ar") {
     return [
@@ -45,6 +46,9 @@ export function ceremonyConfirmationText({
       "",
       "شارك حضورك على لينكدإن وادعُ شبكتك للتسجيل:",
       share,
+      "",
+      "أو نزّل بطاقتك وانشرها كصورة:",
+      card,
       "",
       "نراك هناك،",
       "فريق منطلق",
@@ -63,6 +67,9 @@ export function ceremonyConfirmationText({
     "Share that you're attending on LinkedIn and invite your network to register:",
     share,
     "",
+    "Or download your card and post it as an image:",
+    card,
+    "",
     "See you there,",
     "The Mountaliq team",
   ].join("\n");
@@ -77,6 +84,7 @@ export function ceremonyConfirmationHtml({
   const dir = isAr ? "rtl" : "ltr";
   const align = isAr ? "right" : "left";
   const share = linkedInShareUrl(shareToken, locale);
+  const card = shareCardUrl(shareToken, locale);
 
   const copy = isAr
     ? {
@@ -96,6 +104,7 @@ export function ceremonyConfirmationHtml({
         shareBody:
           "شارك حضورك على لينكدإن. سيحصل من يرى منشورك على رابط للتسجيل والانضمام إليك.",
         shareCta: "المشاركة على لينكدإن",
+        downloadCard: "تنزيل البطاقة لنشرها كصورة",
         signOff: "نراك هناك،",
         team: "فريق منطلق",
       }
@@ -116,6 +125,7 @@ export function ceremonyConfirmationHtml({
         shareBody:
           "Share that you're attending on LinkedIn. Anyone who sees your post gets a link to register and join you.",
         shareCta: "Share on LinkedIn",
+        downloadCard: "Download your card to post as an image",
         signOff: "See you there,",
         team: "The Mountaliq team",
       };
@@ -182,9 +192,10 @@ ${detailRow(copy.venueLabel, copy.venueValue)}
                 <tr>
                   <td style="padding:22px;text-align:${align};">
                     <div style="font:700 16px/1.4 Arial,Helvetica,sans-serif;color:${INK};">${copy.shareHeading}</div>
-                    <p style="margin:8px 0 18px 0;font:400 14px/1.6 Arial,Helvetica,sans-serif;color:${MUTED};">
+                    <p style="margin:8px 0 16px 0;font:400 14px/1.6 Arial,Helvetica,sans-serif;color:${MUTED};">
                       ${copy.shareBody}
                     </p>
+                    <img src="${card}" alt="" width="460" style="display:block;width:100%;max-width:460px;height:auto;border:1px solid ${LINE};border-radius:3px;margin:0 0 16px 0;">
                     <table role="presentation" cellpadding="0" cellspacing="0" border="0">
                       <tr>
                         <td style="background:#0A66C2;border-radius:3px;">
@@ -195,6 +206,9 @@ ${detailRow(copy.venueLabel, copy.venueValue)}
                         </td>
                       </tr>
                     </table>
+                    <p style="margin:14px 0 0 0;font:400 13px/1.5 Arial,Helvetica,sans-serif;">
+                      <a href="${card}" style="color:${BRAND_CYAN};text-decoration:underline;">${copy.downloadCard}</a>
+                    </p>
                   </td>
                 </tr>
               </table>

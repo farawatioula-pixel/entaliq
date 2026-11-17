@@ -51,9 +51,18 @@ export function siteUrl(): string {
   return "https://mountaliq.com";
 }
 
-/** The public registration link a sharer hands to their network. */
+/**
+ * The link a sharer hands to their network. Points at /join/<token> rather
+ * than straight at the register page, because that route carries the sharer's
+ * own personalised card as its Open Graph image.
+ */
 export function referralUrl(shareToken: string, locale: string = "en"): string {
-  return `${siteUrl()}/${locale}/register?ref=${encodeURIComponent(shareToken)}`;
+  return `${siteUrl()}/${locale}/join/${encodeURIComponent(shareToken)}`;
+}
+
+/** Direct link to a registrant's personalised card, for downloading. */
+export function shareCardUrl(shareToken: string, locale: string = "en"): string {
+  return `${siteUrl()}/api/og/${encodeURIComponent(shareToken)}?locale=${locale}`;
 }
 
 /**

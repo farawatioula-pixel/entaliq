@@ -20,6 +20,7 @@ export default function RegisterForm({
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [shareUrl, setShareUrl] = useState<string | null>(null);
+  const [cardUrl, setCardUrl] = useState<string | null>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -58,8 +59,12 @@ export default function RegisterForm({
         }),
       });
       if (!res.ok) throw new Error("Request failed");
-      const data = (await res.json().catch(() => ({}))) as { shareUrl?: string | null };
+      const data = (await res.json().catch(() => ({}))) as {
+        shareUrl?: string | null;
+        cardUrl?: string | null;
+      };
       setShareUrl(data.shareUrl ?? null);
+      setCardUrl(data.cardUrl ?? null);
       setStatus("success");
       form.reset();
     } catch {
@@ -79,6 +84,15 @@ export default function RegisterForm({
           <div className="mt-6 rounded-sm border border-cyan-deep bg-cyan/5 px-5 py-5">
             <p className="text-sm font-semibold text-fg">{t("shareHeading")}</p>
             <p className="mt-1.5 text-sm text-neutral-600">{t("shareBody")}</p>
+
+            {cardUrl && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={cardUrl}
+                alt={t("shareHeading")}
+                className="mt-4 w-full rounded-sm border border-line"
+              />
+            )}
             <a
               href={shareUrl}
               target="_blank"
@@ -95,6 +109,16 @@ export default function RegisterForm({
               </svg>
               {t("shareCta")}
             </a>
+
+            {cardUrl && (
+              <a
+                href={cardUrl}
+                download="mountaliq-2026.png"
+                className="mt-3 block text-xs font-semibold text-cyan-deep hover:underline"
+              >
+                {t("downloadCard")}
+              </a>
+            )}
           </div>
         )}
 

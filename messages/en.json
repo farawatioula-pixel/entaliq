@@ -304,7 +304,8 @@
     "cancel": "Cancel",
     "shareHeading": "Tell your network",
     "shareBody": "Share that you're attending on LinkedIn. Anyone who sees your post gets a link to register and join you.",
-    "shareCta": "Share on LinkedIn"
+    "shareCta": "Share on LinkedIn",
+    "downloadCard": "Download your card to post as an image"
   },
   "partnerForm": {
     "errors": {
@@ -859,5 +860,18 @@
     "confirming": "Confirming...",
     "priceBreakdown": "Service JOD {price} + Mountaliq Percentage JOD {fee}",
     "viewReceipt": "View payment receipt"
+  },
+  "joinPage": {
+    "eyebrow": "MOUNTALIQ 2026",
+    "headingWithName": "{name} is attending the Mountaliq 2026 closing ceremony",
+    "headingFallback": "Join the Mountaliq 2026 closing ceremony",
+    "body": "The closing ceremony and national dialogue session on AI for job creation in Jordan. Register below to join them.",
+    "dateLabel": "Date",
+    "timeLabel": "Time",
+    "venueLabel": "Venue",
+    "cta": "Register to attend",
+    "ogTitle": "{name} is attending Mountaliq 2026 — Closing Ceremony & National Dialogue",
+    "ogTitleFallback": "Mountaliq 2026 — Closing Ceremony & National Dialogue",
+    "ogDescription": "Sunday 29 November 2026, 10:00 AM – 1:00 PM at the Hilton Amman Hotel. Register to attend the closing ceremony and national dialogue session on AI for job creation in Jordan."
   }
 }
