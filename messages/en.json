@@ -46,7 +46,7 @@
     "trainers": "Trainers",
     "partners": "Partners",
     "getInvolved": "Get involved",
-    "registerPlenary": "Register for the plenary",
+    "registerPlenary": "Register for the ceremony",
     "applyTraining": "Apply for training",
     "partnerWithUs": "Partner with us",
     "location": "Location",
@@ -69,7 +69,7 @@
   },
   "home": {
     "heroHeadline": "Hire freelancers, get the best services",
-    "summitBadge": "Mountaliq 2026 · Nov 29, Amman",
+    "summitBadge": "Mountaliq 2026 · Sun, Nov 29 · Hilton Amman",
     "summitBadgeCta": "About the Summit",
     "stat1Value": "4",
     "stat1Label": "Hands-on training tracks across e-commerce, marketing, content, and tech",
@@ -120,9 +120,9 @@
     "forSectorTitle": "For the sector",
     "forSectorBody": "A tested, repeatable model that can be scaled to other cities and governorates once proven.",
     "waysToJoin": "Two ways to join",
-    "plenary": "Plenary",
-    "plenaryBody": "The annual Mountaliq plenary in Amman, panels, keynotes, and digital economy practitioners in one room, one day.",
-    "registerForPlenary": "Register for the plenary",
+    "plenary": "Closing ceremony",
+    "plenaryBody": "The Mountaliq closing ceremony in Amman, with a national dialogue session on AI for job creation in Jordan: government, sponsors, and digital economy practitioners in one room.",
+    "registerForPlenary": "Register for the ceremony",
     "training": "Training",
     "trainingBody": "A hands-on training week in Amman, in partnership with Jordan Bromine Company, across seven digital income tracks.",
     "applyForTraining": "Apply for training"
@@ -235,20 +235,20 @@
   "registerPage": {
     "eyebrow": "Mountaliq 2026",
     "heroTitle": "Join Mountaliq 2026",
-    "heroBody": "Whether you're joining as a summit attendee or a hands-on trainee, your spot starts here.",
+    "heroBody": "The closing ceremony and national dialogue session on AI for job creation in Jordan. Reserve your seat below.",
     "chooseYourPath": "Choose your path",
     "option01": "Option 01",
-    "plenarySession": "Plenary Session",
-    "plenaryBody": "Attend the annual Mountaliq summit in Amman. Panels, keynotes, and digital economy practitioners, one room, one day, the full picture.",
-    "plenaryPoints": [
-      "Summit in Amman",
-      "Speakers & panel discussions",
-      "Networking with practitioners",
+    "closingCeremony": "Closing Ceremony & National Dialogue",
+    "ceremonyBody": "The Mountaliq 2026 closing ceremony, followed by a national dialogue session on AI for job creation in Jordan. Practitioners, government, and partners in one room.",
+    "ceremonyPoints": [
+      "Closing ceremony and certificate handover",
+      "National dialogue on AI for job creation",
+      "Government, sponsors, and practitioners",
       "Open to all backgrounds"
     ],
     "whatYouNeed": "What you need",
-    "plenaryRequirements": "Name, email, organisation",
-    "registerForPlenary": "Register for Plenary",
+    "ceremonyRequirements": "Name, email, organisation",
+    "registerForCeremony": "Register for the Ceremony",
     "option02": "Option 02",
     "trainingProgram": "Training Program",
     "trainingBody": "Apply for the hands-on training program in Amman. A real skill, a real project, and a launchable income source, by the end of the week.",
@@ -259,7 +259,12 @@
       "Designed for youth with no prior experience"
     ],
     "trainingRequirements": "Name, email, phone, age, background",
-    "applyForTraining": "Apply for Training"
+    "applyForTraining": "Apply for Training",
+    "dateLabel": "Date",
+    "timeLabel": "Time",
+    "venueLabel": "Venue",
+    "ogTitle": "Mountaliq 2026 — Closing Ceremony & National Dialogue on AI for Job Creation",
+    "ogDescription": "Sunday 29 November 2026, 10:00–13:00 at the Hilton Amman Hotel. Register to attend the Mountaliq 2026 closing ceremony and national dialogue session on AI for job creation in Jordan."
   },
   "registerForm": {
     "backgrounds": [
@@ -277,7 +282,7 @@
       "background": "Select a background."
     },
     "successTitle": "You're in.",
-    "successPlenary": "Your spot for the Mountaliq 2026 plenary in Amman is confirmed. We'll email the schedule closer to the date.",
+    "successCeremony": "Your seat for the Mountaliq 2026 closing ceremony is confirmed. We've emailed you the details, check your inbox.",
     "successTraining": "Your application for the training program has been received. We'll follow up by email with next steps.",
     "done": "Done",
     "fullName": "Full name",
@@ -289,9 +294,12 @@
     "selectOne": "Select one",
     "submitError": "Something went wrong sending your submission. Please try again.",
     "submitting": "Submitting…",
-    "registerForPlenary": "Register for Plenary",
+    "registerForCeremony": "Register for the Ceremony",
     "applyForTraining": "Apply for Training",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "shareHeading": "Tell your network",
+    "shareBody": "Share that you're attending on LinkedIn. Anyone who sees your post gets a link to register and join you.",
+    "shareCta": "Share on LinkedIn"
   },
   "partnerForm": {
     "errors": {
@@ -755,18 +763,18 @@
     "title": "The Arab Summit for Digital Economy Skills",
     "subtitle": "Hands-on training in modern internet skills",
     "body": "Participants go through a full rotation across four hands-on tracks, led by specialists actively working in these fields. Every participant leaves with something ready to work with in at least one track: a store, a content channel, a client pipeline, or a live AI-powered service.",
-    "dates": "Nov 29",
-    "datesSub": "2026 · Amman",
+    "dates": "Sun, Nov 29",
+    "datesSub": "2026 · Hilton Amman",
     "participantsValue": "100",
     "participantsSub": "Participants, grouped for full rotation across all tracks",
-    "rooms": "5 rooms",
-    "roomsSub": "4 concurrent tracks + plenary",
-    "daysLabel": "2 days",
-    "daysSub": "Every group rotates through all 4",
-    "day1": "Day 1",
-    "day1Body": "9:00 opening plenary, sponsor and government addresses, then training rotation across Affiliate Marketing, E-commerce, AI & Vibe Coding, and Sales Skills through 16:40.",
-    "day2": "Day 2",
-    "day2Body": "Training rotation continues from 9:30, closing with certificate handover and sponsor recognition at the 16:00 graduation ceremony.",
+    "rooms": "Hilton Amman",
+    "roomsSub": "Plenary hall, Amman, Jordan",
+    "timeValue": "10:00 – 13:00",
+    "timeSub": "Closing ceremony and national dialogue",
+    "programme1": "Closing ceremony",
+    "programme1Body": "Opening addresses from sponsors and government, recognition of the Mountaliq 2026 partners, and certificate handover to the participants who completed the training tracks.",
+    "programme2": "National dialogue",
+    "programme2Body": "A national dialogue session on AI for job creation in Jordan, bringing practitioners, government, and private sector partners into one conversation about where the jobs actually come from.",
     "registerCta": "Register for Mountaliq"
   },
   "forgotPasswordPage": {

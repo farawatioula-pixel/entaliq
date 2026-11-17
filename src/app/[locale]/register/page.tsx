@@ -1,15 +1,29 @@
 "use client";
 
-import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { Suspense, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import Modal from "@/components/Modal";
 import RegisterForm from "@/components/RegisterForm";
+import { SUMMIT } from "@/lib/summit";
 
-export default function RegisterPage() {
+function RegisterPageInner() {
   const t = useTranslations("registerPage");
-  const plenaryPoints = t.raw("plenaryPoints") as string[];
+  const locale = useLocale();
+  const isAr = locale === "ar";
+  const ceremonyPoints = t.raw("ceremonyPoints") as string[];
   const trainingPoints = t.raw("trainingPoints") as string[];
-  const [open, setOpen] = useState<"plenary" | "training" | null>(null);
+  const [open, setOpen] = useState<"ceremony" | "training" | null>(null);
+
+  const eventFacts = [
+    {
+      label: t("dateLabel"),
+      value: isAr
+        ? `${SUMMIT.weekdayAr} ${SUMMIT.dateAr}`
+        : `${SUMMIT.weekdayEn}, ${SUMMIT.dateEn}`,
+    },
+    { label: t("timeLabel"), value: isAr ? SUMMIT.timeRangeAr : SUMMIT.timeRangeEn },
+    { label: t("venueLabel"), value: isAr ? SUMMIT.venueAr : SUMMIT.venueEn },
+  ];
 
   return (
     <>
@@ -24,6 +38,17 @@ export default function RegisterPage() {
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-neutral-600">
             {t("heroBody")}
           </p>
+
+          <dl className="mt-10 grid max-w-3xl grid-cols-1 gap-px overflow-hidden border border-line bg-line sm:grid-cols-3">
+            {eventFacts.map((fact) => (
+              <div key={fact.label} className="bg-surface px-6 py-5">
+                <dt className="text-xs font-semibold uppercase tracking-widest text-muted">
+                  {fact.label}
+                </dt>
+                <dd className="mt-2 font-display text-lg font-bold text-fg">{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
@@ -37,12 +62,12 @@ export default function RegisterPage() {
             <p className="text-xs font-semibold uppercase tracking-widest text-red-dark">
               {t("option01")}
             </p>
-            <h2 className="mt-4 font-display text-3xl font-bold">{t("plenarySession")}</h2>
+            <h2 className="mt-4 font-display text-3xl font-bold">{t("closingCeremony")}</h2>
             <p className="mt-4 text-[15px] leading-relaxed text-neutral-600">
-              {t("plenaryBody")}
+              {t("ceremonyBody")}
             </p>
             <ul className="mt-6 space-y-2">
-              {plenaryPoints.map((p) => (
+              {ceremonyPoints.map((p) => (
                 <li key={p} className="flex items-start gap-2 text-[15px]">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-red" />
                   {p}
@@ -50,14 +75,14 @@ export default function RegisterPage() {
               ))}
             </ul>
             <p className="mt-6 text-sm">
-              <span className="font-semibold">{t("whatYouNeed")}:</span> {t("plenaryRequirements")}
+              <span className="font-semibold">{t("whatYouNeed")}:</span> {t("ceremonyRequirements")}
             </p>
             <button
               type="button"
-              onClick={() => setOpen("plenary")}
-              className="mt-8 flex w-full items-center justify-between rounded-sm bg-surface border border-line px-6 py-4 text-[15px] font-semibold text-fg transition-colors hover:bg-line"
+              onClick={() => setOpen("ceremony")}
+              className="mt-8 flex w-full items-center justify-between rounded-sm bg-red px-6 py-4 text-[15px] font-semibold text-white transition-colors hover:bg-red-dark"
             >
-              {t("registerForPlenary")}
+              {t("registerForCeremony")}
               <span aria-hidden="true" className="inline-block rtl:-scale-x-100">→</span>
             </button>
           </div>
@@ -84,7 +109,7 @@ export default function RegisterPage() {
             <button
               type="button"
               onClick={() => setOpen("training")}
-              className="mt-8 flex w-full items-center justify-between rounded-sm bg-red px-6 py-4 text-[15px] font-semibold text-white transition-colors hover:bg-red-dark"
+              className="mt-8 flex w-full items-center justify-between rounded-sm border border-line bg-surface px-6 py-4 text-[15px] font-semibold text-fg transition-colors hover:bg-line"
             >
               {t("applyForTraining")}
               <span aria-hidden="true" className="inline-block rtl:-scale-x-100">→</span>
@@ -95,12 +120,20 @@ export default function RegisterPage() {
 
       {open && (
         <Modal
-          title={open === "plenary" ? t("registerForPlenary") : t("applyForTraining")}
+          title={open === "ceremony" ? t("registerForCeremony") : t("applyForTraining")}
           onClose={() => setOpen(null)}
         >
           <RegisterForm type={open} onClose={() => setOpen(null)} />
         </Modal>
       )}
     </>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={null}>
+      <RegisterPageInner />
+    </Suspense>
   );
 }

@@ -1,0 +1,52 @@
+/**
+ * Single source of truth for the Mountaliq 2026 closing ceremony details.
+ * The site copy, the registration form, and the confirmation email all read
+ * from here so the date and venue can never drift apart between them.
+ */
+
+export const SUMMIT = {
+  dateISO: "2026-11-29",
+  /** Sunday 29 November 2026 */
+  weekdayEn: "Sunday",
+  dateEn: "29 November 2026",
+  dateShortEn: "Sun, Nov 29",
+  weekdayAr: "الأحد",
+  dateAr: "٢٩ تشرين الثاني ٢٠٢٦",
+  dateShortAr: "الأحد ٢٩ تشرين الثاني",
+  startTime: "10:00",
+  endTime: "13:00",
+  timeRangeEn: "10:00 – 13:00",
+  timeRangeAr: "١٠:٠٠ – ١٣:٠٠",
+  venueEn: "Hilton Amman Hotel",
+  venueAr: "فندق هيلتون عمّان",
+  cityEn: "Amman, Jordan",
+  cityAr: "عمّان، الأردن",
+} as const;
+
+export function siteUrl(): string {
+  const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (configured) return configured.replace(/\/$/, "");
+  return "https://mountaliq.com";
+}
+
+/** The public registration link a sharer hands to their network. */
+export function referralUrl(shareToken: string, locale: string = "en"): string {
+  return `${siteUrl()}/${locale}/register?ref=${encodeURIComponent(shareToken)}`;
+}
+
+/**
+ * LinkedIn share link that opens the composer with the post text already
+ * filled in. LinkedIn dropped the old `summary`/`title` parameters from
+ * `shareArticle`; `/feed/?shareActive=true&text=` is the form that still
+ * pre-fills text, so we put the registration URL inside the text itself.
+ */
+export function linkedInShareUrl(shareToken: string, locale: string = "en"): string {
+  const url = referralUrl(shareToken, locale);
+
+  const text =
+    locale === "ar"
+      ? `سأحضر الحفل الختامي وجلسة الحوار الوطني حول الذكاء الاصطناعي لخلق فرص العمل في الأردن — منطلق ٢٠٢٦، ${SUMMIT.dateShortAr}، ${SUMMIT.venueAr}.\n\nسجّل حضورك هنا: ${url}`
+      : `I will be attending the closing ceremony and national dialogue session on AI for job creation in Jordan — Mountaliq 2026, ${SUMMIT.weekdayEn} ${SUMMIT.dateEn}, ${SUMMIT.venueEn}.\n\nRegister to join here: ${url}`;
+
+  return `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(text)}`;
+}

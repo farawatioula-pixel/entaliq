@@ -45,26 +45,26 @@ export default async function SummitPage() {
             <p className="mt-1 text-sm text-neutral-600">{t("roomsSub")}</p>
           </div>
           <div className="bg-surface px-6 py-6">
-            <p className="font-display text-2xl font-bold text-fg">{t("daysLabel")}</p>
-            <p className="mt-1 text-sm text-neutral-600">{t("daysSub")}</p>
+            <p className="font-display text-2xl font-bold text-fg">{t("timeValue")}</p>
+            <p className="mt-1 text-sm text-neutral-600">{t("timeSub")}</p>
           </div>
         </div>
 
         <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div className="rounded-sm border border-line bg-surface px-8 py-8">
             <p className="text-xs font-semibold uppercase tracking-widest text-cyan-deep">
-              {t("day1")}
+              {t("programme1")}
             </p>
             <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
-              {t("day1Body")}
+              {t("programme1Body")}
             </p>
           </div>
           <div className="rounded-sm border border-line bg-surface px-8 py-8">
             <p className="text-xs font-semibold uppercase tracking-widest text-red-dark">
-              {t("day2")}
+              {t("programme2")}
             </p>
             <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
-              {t("day2Body")}
+              {t("programme2Body")}
             </p>
           </div>
         </div>
