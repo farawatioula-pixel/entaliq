@@ -35,6 +35,9 @@ export default function RegisterForm({
     if (type === "ceremony" && !String(payload.organisation || "").trim()) {
       nextErrors.organisation = t("errors.organisation");
     }
+    if (type === "ceremony" && !String(payload.phone || "").trim()) {
+      nextErrors.phone = t("errors.phone");
+    }
     if (type === "training") {
       if (!String(payload.phone || "").trim()) nextErrors.phone = t("errors.phone");
       const age = Number(payload.age);
@@ -122,13 +125,23 @@ export default function RegisterForm({
       />
 
       {type === "ceremony" && (
-        <Field
-          label={t("organisation")}
-          name="organisation"
-          error={errors.organisation}
-          required
-          autoComplete="organization"
-        />
+        <>
+          <Field
+            label={t("organisation")}
+            name="organisation"
+            error={errors.organisation}
+            required
+            autoComplete="organization"
+          />
+          <Field
+            label={t("phoneNumber")}
+            name="phone"
+            type="tel"
+            error={errors.phone}
+            required
+            autoComplete="tel"
+          />
+        </>
       )}
 
       {type === "training" && (
