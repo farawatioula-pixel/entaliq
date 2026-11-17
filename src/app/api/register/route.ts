@@ -44,6 +44,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
   }
 
+  if (rawType === "ceremony" && (!str(body.organisation) || !str(body.phone))) {
+    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+  }
+
   const type: RegistrationType = rawType;
   const locale = str(body.locale) === "ar" ? "ar" : "en";
   const shareToken = randomBytes(8).toString("hex");
