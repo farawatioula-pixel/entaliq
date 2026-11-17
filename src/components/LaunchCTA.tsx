@@ -1,11 +1,8 @@
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import Logo from "./Logo";
-import { nextSteps, type Locale } from "@/lib/data";
 
 export default function LaunchCTA() {
   const t = useTranslations("launchCta");
-  const locale = useLocale() as Locale;
 
   return (
     <section className="relative overflow-hidden border-t-4 border-red bg-ink text-white">
@@ -29,50 +26,6 @@ export default function LaunchCTA() {
           </Link>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-10 border-t border-white/10 pt-12 sm:grid-cols-3">
-          <div>
-            <Logo className="h-10 w-10" />
-            <p className="mt-4 text-[15px] leading-relaxed text-neutral-300">
-              {t("tagline1")}
-              <br />
-              {t("tagline2")}
-            </p>
-            <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-red">
-              {t("sellCreateBuild")}
-            </p>
-          </div>
-
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">
-              {t("nextSteps")}
-            </p>
-            <ol className="mt-4 space-y-3">
-              {nextSteps.map((step, i) => (
-                <li key={step.en} className="flex items-baseline gap-3 text-[15px]">
-                  <span className="font-display text-sm font-bold text-red">
-                    0{i + 1}
-                  </span>
-                  <span>{step[locale]}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">
-              {t("partnership")}
-            </p>
-            <p className="mt-4 text-[15px] leading-relaxed text-neutral-300">
-              {t("partnershipBody")}
-            </p>
-            <Link
-              href="/partners#partner-with-us"
-              className="mt-3 inline-block text-[15px] font-semibold text-red hover:underline"
-            >
-              {t("partnerWithUs")}
-            </Link>
-          </div>
-        </div>
       </div>
     </section>
   );
