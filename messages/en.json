@@ -121,7 +121,7 @@
     "forSectorBody": "A tested, repeatable model that can be scaled to other cities and governorates once proven.",
     "waysToJoin": "Two ways to join",
     "plenary": "Closing ceremony",
-    "plenaryBody": "The Mountaliq closing ceremony in Amman, with a national dialogue session on AI for job creation in Jordan: government, sponsors, and digital economy practitioners in one room.",
+    "plenaryBody": "The Mountaliq closing ceremony in Amman, with a national dialogue session on AI for job creation in Jordan.",
     "registerForPlenary": "Register for the ceremony",
     "training": "Training",
     "trainingBody": "A hands-on training week in Amman, in partnership with Jordan Bromine Company, across seven digital income tracks.",
@@ -234,12 +234,12 @@
   },
   "registerPage": {
     "eyebrow": "Mountaliq 2026",
-    "heroTitle": "Attend the Mountaliq 2026 closing",
+    "heroTitle": "Register for the closing session of the Arab Summit for Digital Economy Skills and Freelance Opportunities",
     "heroBody": "The closing ceremony and national dialogue session on AI for job creation in Jordan. Reserve your seat below.",
     "chooseYourPath": "The summit",
     "option01": "Open now",
     "closingCeremony": "Closing Ceremony & National Dialogue",
-    "ceremonyBody": "The Mountaliq 2026 closing ceremony, followed by a national dialogue session on AI for job creation in Jordan. Practitioners, government, and partners in one room.",
+    "ceremonyBody": "The Mountaliq 2026 closing ceremony, followed by a national dialogue session on AI for job creation in Jordan.",
     "ceremonyPoints": [
       "Closing ceremony and certificate handover",
       "National dialogue on AI for job creation",
@@ -251,10 +251,9 @@
     "registerForCeremony": "Register for the Ceremony",
     "option02": "Closed",
     "trainingProgram": "Training days",
-    "trainingBody": "Two full days of hands-on training, seminars and activities across the digital income tracks, in partnership with Jordan Bromine Company, on Friday 20 and Saturday 21 November.",
+    "trainingBody": "Two full days of hands-on training, seminars and activities across the digital income tracks, on Friday 20 and Saturday 21 November.",
     "trainingPoints": [
       "Friday 20 & Saturday 21 November",
-      "In partnership with Jordan Bromine Company",
       "Seven digital income tracks",
       "Hands-on, project-based learning"
     ],
@@ -264,9 +263,9 @@
     "timeLabel": "Time",
     "venueLabel": "Venue",
     "ogTitle": "Mountaliq 2026 — Closing Ceremony & National Dialogue on AI for Job Creation",
-    "ogDescription": "Sunday 29 November 2026, 10:00–13:00 at the Hilton Amman Hotel. Register to attend the Mountaliq 2026 closing ceremony and national dialogue session on AI for job creation in Jordan.",
+    "ogDescription": "Sunday 29 November 2026, 10:00 AM – 1:00 PM at the Hilton Amman Hotel. Register to attend the Mountaliq 2026 closing ceremony and national dialogue session on AI for job creation in Jordan.",
     "trainingClosedTitle": "Registration for the training days has closed",
-    "trainingClosedBody": "Places for 20 and 21 November are full. Those two days run as planned, and everyone is welcome to join the closing ceremony on Sunday 29 November."
+    "trainingClosedBody": "Places for 20 and 21 November are full."
   },
   "registerForm": {
     "backgrounds": [
@@ -781,7 +780,7 @@
     "programme1Date": "Friday 20 November",
     "programme2Date": "Saturday 21 November",
     "programme3": "Closing ceremony & national dialogue",
-    "programme3Date": "Sunday 29 November · 10:00 – 13:00",
+    "programme3Date": "Sunday 29 November · 10:00 AM – 1:00 PM",
     "programme3Body": "The closing ceremony with certificate handover and sponsor recognition, followed by a national dialogue session on AI for job creation in Jordan.",
     "registrationClosed": "Registration closed",
     "registrationOpen": "Registration open"

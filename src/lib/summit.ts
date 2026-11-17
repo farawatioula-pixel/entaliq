@@ -36,8 +36,8 @@ export const SUMMIT = {
   dateShortAr: "الأحد ٢٩ تشرين الثاني",
   startTime: "10:00",
   endTime: "13:00",
-  timeRangeEn: "10:00 – 13:00",
-  timeRangeAr: "١٠:٠٠ – ١٣:٠٠",
+  timeRangeEn: "10:00 AM – 1:00 PM",
+  timeRangeAr: "١٠:٠٠ صباحاً – الواحدة ظهراً",
 
   venueEn: "Hilton Amman Hotel",
   venueAr: "فندق هيلتون عمّان",
