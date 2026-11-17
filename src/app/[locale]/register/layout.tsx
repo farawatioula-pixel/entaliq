@@ -17,6 +17,15 @@ export async function generateMetadata({
   const title = t("ogTitle");
   const description = t("ogDescription");
 
+  // 1200x627 branded card carrying the summit details and the partner logos,
+  // so a shared link renders as a proper campaign card on LinkedIn.
+  const image = {
+    url: locale === "ar" ? "/og/summit-share-ar.png" : "/og/summit-share-en.png",
+    width: 1200,
+    height: 627,
+    alt: title,
+  };
+
   return {
     title,
     description,
@@ -25,11 +34,13 @@ export async function generateMetadata({
       description,
       type: "website",
       locale,
+      images: [image],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [image.url],
     },
   };
 }

@@ -47,6 +47,21 @@ export async function generateMetadata({
       title: t("title"),
       description: t("ogDescription"),
       type: "website",
+      locale,
+      images: [
+        {
+          url: locale === "ar" ? "/og/summit-share-ar.png" : "/og/summit-share-en.png",
+          width: 1200,
+          height: 627,
+          alt: t("title"),
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("ogDescription"),
+      images: [locale === "ar" ? "/og/summit-share-ar.png" : "/og/summit-share-en.png"],
     },
   };
 }
