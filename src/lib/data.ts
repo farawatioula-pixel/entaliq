@@ -116,6 +116,24 @@ export type Trainer = {
 export const trainers: Trainer[] = [
   {
     number: "01",
+    name: "Dr. Oula Farawati",
+    focus: { en: "International Business & Sales", ar: "الأعمال الدولية والمبيعات" },
+    bio: {
+      en: "Mountaliq founder with 20+ years in strategy and communications, teaching trainees to spot opportunities, pitch with confidence and close their first deals.",
+      ar: "مؤسِّسة منطلق بخبرة تتجاوز 20 عاماً في الاستراتيجية والاتصال، تعلّم المتدربين كيف يكتشفون الفرص ويعرضون أفكارهم بثقة ويغلقون أولى صفقاتهم.",
+    },
+  },
+  {
+    number: "02",
+    name: "Shaker Amayreh",
+    focus: { en: "Building with AI on Replit", ar: "البناء بالذكاء الاصطناعي مع Replit" },
+    bio: {
+      en: "Replit Partnership Lead for MENA and co-founder of three startups, helping trainees turn ideas into working websites and products at speed with AI.",
+      ar: "مسؤول شراكات Replit في منطقة الشرق الأوسط وشمال أفريقيا ومؤسس مشارك لثلاث شركات ناشئة، يساعد المتدربين على تحويل أفكارهم إلى مواقع ومنتجات حقيقية بسرعة باستخدام الذكاء الاصطناعي.",
+    },
+  },
+  {
+    number: "03",
     name: "Abdallah Battah",
     focus: { en: "Marketing Strategy & Sales", ar: "استراتيجية التسويق والمبيعات" },
     bio: {
@@ -124,7 +142,7 @@ export const trainers: Trainer[] = [
     },
   },
   {
-    number: "02",
+    number: "04",
     name: "Othman Hato",
     focus: { en: "Affiliate Marketing", ar: "التسويق بالعمولة" },
     bio: {
@@ -133,7 +151,7 @@ export const trainers: Trainer[] = [
     },
   },
   {
-    number: "03",
+    number: "05",
     name: "Karam Judeh",
     focus: {
       en: "Vibe Coding & AI Business Automation",
@@ -145,7 +163,7 @@ export const trainers: Trainer[] = [
     },
   },
   {
-    number: "04",
+    number: "06",
     name: "Diaa Abu Shamlah",
     focus: { en: "E-commerce, eBay & Amazon", ar: "التجارة الإلكترونية, إيباي وأمازون" },
     bio: {

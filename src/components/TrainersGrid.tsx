@@ -5,7 +5,7 @@ export default function TrainersGrid({ showBio = false }: { showBio?: boolean })
   const locale = useLocale() as Locale;
 
   return (
-    <div className="grid grid-cols-1 gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
       {trainers.map((trainer) => (
         <div key={trainer.number} className="relative overflow-hidden bg-paper px-8 py-10">
           <span className="absolute end-4 top-2 font-display text-6xl font-bold text-ink/5">
