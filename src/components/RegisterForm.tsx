@@ -158,6 +158,9 @@ export default function RegisterForm({
           <div>
             <label className="mb-1.5 block text-sm font-semibold" htmlFor="background">
               {t("background")}
+              <span className="ms-1 text-orange-500" aria-hidden="true">
+                *
+              </span>
             </label>
             <select
               id="background"
@@ -230,6 +233,11 @@ function Field({
     <div>
       <label className="mb-1.5 block text-sm font-semibold" htmlFor={name}>
         {label}
+        {required && (
+          <span className="ms-1 text-orange-500" aria-hidden="true">
+            *
+          </span>
+        )}
       </label>
       <input
         id={name}
