@@ -251,7 +251,7 @@
       "Open to all backgrounds"
     ],
     "whatYouNeed": "What you need",
-    "ceremonyRequirements": "Name, email, organisation",
+    "ceremonyRequirements": "Name, email, organisation, phone",
     "registerForCeremony": "Register for the Ceremony",
     "option02": "Closed",
     "trainingProgram": "Training days",
@@ -922,6 +922,7 @@
     "previewTitle": "I'm taking part in Mountaliq 2026",
     "previewTitleNamed": "{name} is taking part in Mountaliq 2026",
     "previewBody": "The Arab Summit for Digital Economy Skills, closing ceremony at the Hilton Amman on Sunday 29 November 2026. Register to join.",
-    "previewCta": "Register to attend"
+    "previewCta": "Register to attend",
+    "lowResPhoto": "Your LinkedIn photo is low resolution, so it may look blurry. For a sharper card, upload a high-quality photo."
   }
 }
