@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import AttendeeCard from "./AttendeeCard";
 import { useSearchParams } from "next/navigation";
 
 type FormType = "ceremony" | "training";
@@ -14,12 +15,14 @@ export default function RegisterForm({
   onClose: () => void;
 }) {
   const t = useTranslations("registerForm");
+  const tc = useTranslations("attendeeCard");
   const locale = useLocale();
   const searchParams = useSearchParams();
   const trainingBackgrounds = t.raw("backgrounds") as string[];
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [shareUrl, setShareUrl] = useState<string | null>(null);
+  const [registeredName, setRegisteredName] = useState("");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -63,6 +66,7 @@ export default function RegisterForm({
       if (!res.ok) throw new Error("Request failed");
       const data = (await res.json().catch(() => ({}))) as { shareUrl?: string | null };
       setShareUrl(data.shareUrl ?? null);
+      setRegisteredName(String(payload.name || ""));
       setStatus("success");
       form.reset();
     } catch {
@@ -77,6 +81,12 @@ export default function RegisterForm({
         <p className="mt-2 text-[15px] text-neutral-600">
           {type === "ceremony" ? t("successCeremony") : t("successTraining")}
         </p>
+
+        <div className="mt-6 rounded-sm border border-line bg-surface px-5 py-5 text-start">
+          <p className="text-sm font-semibold text-fg">{tc("makeCard")}</p>
+          <p className="mt-1.5 mb-4 text-sm text-neutral-600">{tc("makeCardBody")}</p>
+          <AttendeeCard defaultName={registeredName} />
+        </div>
 
         {shareUrl && (
           <div className="mt-6 rounded-sm border border-cyan-deep bg-cyan/5 px-5 py-5">

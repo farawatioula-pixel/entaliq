@@ -885,5 +885,24 @@
     "submitError": "Something went wrong sending your application. Please try again.",
     "successTitle": "Application received.",
     "successBody": "Thanks for applying to train with Mountaliq. We'll contact you on WhatsApp or email."
+  },
+  "attendeeCard": {
+    "metaTitle": "Make your Mountaliq 2026 card",
+    "heroEyebrow": "Mountaliq 2026",
+    "heroTitle": "Tell LinkedIn you're taking part",
+    "heroBody": "Add your name and photo, download your card, and post it on LinkedIn.",
+    "cardEyebrow": "I'M TAKING PART IN",
+    "cardEvent": "Mountaliq 2026 · Arab Summit for Digital Economy Skills",
+    "nameLabel": "Your name",
+    "namePlaceholder": "Your name",
+    "photoLabel": "Your photo",
+    "photoPlaceholder": "Add your photo",
+    "previewLabel": "Preview of your card",
+    "download": "Download card",
+    "shareImage": "Share image",
+    "shareText": "I'm taking part in Mountaliq 2026, the Arab Summit for Digital Economy Skills. #Mountaliq2026",
+    "howTo": "On LinkedIn, start a post, attach the card you downloaded, and tag Mountaliq.",
+    "makeCard": "Make your LinkedIn card",
+    "makeCardBody": "Add your photo and get a card to post that you're taking part."
   }
 }
