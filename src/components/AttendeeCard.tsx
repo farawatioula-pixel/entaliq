@@ -35,6 +35,51 @@ function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: numbe
   ctx.closePath();
 }
 
+/** The Mountaliq screen mascot, drawn as line art. (x, y) is the screen's top-left corner. */
+function mascot(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, alpha: number) {
+  const h = w * 0.68;
+  const line = w * 0.07;
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.strokeStyle = CYAN;
+  ctx.lineWidth = line;
+  roundRect(ctx, x, y, w, h, w * 0.1);
+  ctx.stroke();
+  // eyes: two corner brackets and a pink dot
+  ctx.lineWidth = line * 0.7;
+  const bx = x + w * 0.22;
+  const by = y + h * 0.28;
+  const s = w * 0.12;
+  ctx.beginPath();
+  ctx.moveTo(bx, by);
+  ctx.lineTo(bx + s, by);
+  ctx.lineTo(bx + s, by + s);
+  ctx.stroke();
+  const ex = x + w * 0.66;
+  const ey = y + h * 0.5;
+  ctx.beginPath();
+  ctx.moveTo(ex, ey);
+  ctx.lineTo(ex, ey + s);
+  ctx.lineTo(ex + s, ey + s);
+  ctx.stroke();
+  ctx.fillStyle = MAGENTA;
+  ctx.beginPath();
+  ctx.arc(x + w * 0.5, y + h * 0.52, w * 0.065, 0, Math.PI * 2);
+  ctx.fill();
+  // legs
+  const legW = w * 0.1;
+  const legH = w * 0.2;
+  ctx.fillStyle = VIOLET;
+  roundRect(ctx, x + w * 0.3, y + h + line * 0.9, legW, legH, legW * 0.2);
+  ctx.fill();
+  ctx.fillStyle = MAGENTA;
+  roundRect(ctx, x + w * 0.6, y + h + line * 0.9, legW, legH, legW * 0.2);
+  ctx.fill();
+  ctx.restore();
+}
+
 const LOGOS = [
   "/partners/mixed-sources.png",
   "/partners/bromine-jordan.png",
@@ -150,16 +195,15 @@ export default function AttendeeCard({
     if (top2) cover(ctx, top2, X(gx, 365), 500, 365, bandTop - 500, 0.35);
     if (bottom2) cover(ctx, bottom2, X(gx + 365, SIZE - gx - 365), 500, SIZE - gx - 365, bandTop - 500, 0.35);
     ctx.fillStyle = INK;
-    ctx.fillRect(X(gx, 0) - (isAr ? 6 : 0), 0, 6, bandTop);
-    ctx.fillRect(X(gx, SIZE - gx), 497, SIZE - gx, 6);
-    ctx.fillRect(X(gx + 362, 6), 500, 6, bandTop - 500);
 
     // 2. Brand wash: solid ink behind the text, fading into a magenta-violet tint over the photos.
+    ctx.fillStyle = "rgba(5,7,13,0.45)";
+    ctx.fillRect(0, 0, SIZE, bandTop);
     const wash = ctx.createLinearGradient(X(0), 0, X(SIZE), 0);
     wash.addColorStop(0, "rgba(5,7,13,1)");
-    wash.addColorStop(0.36, "rgba(5,7,13,0.97)");
-    wash.addColorStop(0.62, "rgba(60,20,90,0.55)");
-    wash.addColorStop(1, "rgba(255,61,154,0.18)");
+    wash.addColorStop(0.38, "rgba(5,7,13,0.97)");
+    wash.addColorStop(0.6, "rgba(40,16,70,0.72)");
+    wash.addColorStop(1, "rgba(120,30,110,0.5)");
     ctx.fillStyle = wash;
     ctx.fillRect(0, 0, SIZE, bandTop);
     const bottomFade = ctx.createLinearGradient(0, 560, 0, bandTop);
@@ -167,6 +211,34 @@ export default function AttendeeCard({
     bottomFade.addColorStop(1, "rgba(5,7,13,0.85)");
     ctx.fillStyle = bottomFade;
     ctx.fillRect(0, 560, SIZE, bandTop - 560);
+
+    // Brand elements over the photos: a large mascot, the roll-up colour stripe and a few accents.
+    mascot(ctx, X(880, 250), 340, 250, 0.6);
+    const stripe = [CYAN, VIOLET, MAGENTA, CYAN, VIOLET, MAGENTA, VOLT];
+    const segW = SIZE / stripe.length;
+    stripe.forEach((c, i) => {
+      ctx.fillStyle = c;
+      ctx.fillRect(i * segW, 0, segW + 1, 12);
+    });
+    ctx.save();
+    ctx.globalAlpha = 0.85;
+    const accents: [number, number, number, string][] = [
+      [1110, 210, 26, VOLT],
+      [1040, 160, 14, CYAN],
+      [640, 940, 18, MAGENTA],
+      [1130, 900, 20, VIOLET],
+    ];
+    accents.forEach(([ax, ay, size, color]) => {
+      ctx.fillStyle = color;
+      roundRect(ctx, X(ax, size), ay, size, size, size * 0.25);
+      ctx.fill();
+    });
+    ctx.strokeStyle = "rgba(34,211,238,0.35)";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(X(1005), 450, 190, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
 
     // 3. Brand mark and date.
     const pad = 64;
