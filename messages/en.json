@@ -906,6 +906,9 @@
     "makeCardBody": "Add your photo and get a card to post that you're taking part.",
     "connectLinkedin": "Share on LinkedIn",
     "joinText": "Join here:",
-    "attachHint": "LinkedIn asks to use your name and photo, your card is made and downloaded, and LinkedIn opens with the post ready. Just attach the card and post."
+    "attachHint": "LinkedIn asks to use your name and photo, your card is made and downloaded, and LinkedIn opens with the post ready. Just attach the card and post.",
+    "registerFirstTitle": "Register first to get your card",
+    "registerFirstBody": "Your LinkedIn card comes right after you register for the Mountaliq 2026 closing ceremony.",
+    "registerFirstCta": "Register now"
   }
 }

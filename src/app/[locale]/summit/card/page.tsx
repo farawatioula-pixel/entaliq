@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import AttendeeCard from "@/components/AttendeeCard";
+import SummitCardFlow from "@/components/SummitCardFlow";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -17,7 +17,7 @@ export default async function AttendeeCardPage() {
         <h1 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-5xl">{t("heroTitle")}</h1>
         <p className="mt-4 text-[15px] leading-relaxed text-neutral-600">{t("heroBody")}</p>
         <div className="mt-10">
-          <AttendeeCard />
+          <SummitCardFlow />
         </div>
       </div>
     </section>
