@@ -21,16 +21,6 @@ export const speakers: Speaker[] = [
     photo: "/speakers/sami-smeirat.jpg",
   },
   {
-    id: "samer-asfour",
-    name: { en: "Mr. Samer Asfour", ar: "السيد سامر عصفور" },
-    title: { en: "General Manager, Jordan Bromine", ar: "المدير العام، شركة برومين الأردن" },
-    bio: {
-      en: "Former Regional Director of Tesla Middle East and Director General of the Jordan Investment Board, with several senior roles at the Royal Hashemite Court. Member of YPO and the Forum of Young Global Leaders.",
-      ar: "شغل سابقاً منصب المدير الإقليمي لتسلا الشرق الأوسط، ومدير عام مؤسسة تشجيع الاستثمار، وعدة مواقع في الديوان الملكي الهاشمي. عضو في منظمة الرؤساء التنفيذيين الشباب (YPO) ومجلس القيادات العالمية الشابة.",
-    },
-    photo: "/speakers/samer-asfour.jpg",
-  },
-  {
     id: "odeh-haddadin",
     name: { en: "Mr. Odeh Haddadin", ar: "السيد عودة حدادين" },
     title: {
@@ -97,7 +87,6 @@ export const agenda: AgendaItem[] = [
   {
     time: { en: "10:20 – 10:30", ar: "١٠:٢٠ – ١٠:٣٠" },
     title: { en: "Address by Jordan Bromine", ar: "كلمة شركة برومين الأردن" },
-    who: { en: "Mr. Samer Asfour, General Manager", ar: "السيد سامر عصفور، المدير العام" },
   },
   {
     time: { en: "10:30 – 10:40", ar: "١٠:٣٠ – ١٠:٤٠" },
@@ -117,7 +106,7 @@ export const agenda: AgendaItem[] = [
   {
     time: { en: "11:45 – 12:15", ar: "١١:٤٥ – ١٢:١٥" },
     title: { en: "Certificate ceremony for the 100 graduates", ar: "تسليم الشهادات للخريجين المئة" },
-    who: { en: "H.E. the Minister and Mr. Samer Asfour", ar: "معالي الوزير والسيد سامر عصفور" },
+    who: { en: "H.E. the Minister", ar: "معالي الوزير" },
   },
   { time: { en: "12:15 – 12:25", ar: "١٢:١٥ – ١٢:٢٥" }, title: { en: "Group photo", ar: "الصورة الجماعية" } },
   { time: { en: "12:25", ar: "١٢:٢٥" }, title: { en: "Closing and networking", ar: "الختام وبوفيه التواصل" } },
