@@ -135,6 +135,7 @@ export default function AttendeeCard({
   const [sharing, setSharing] = useState<"idle" | "working">("idle");
   const [ready, setReady] = useState(false);
   const [preparedLink, setPreparedLink] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
   const autoShareRef = useRef(false);
   // Link to this person's card page (its preview picture is the card), prepared before they tap Share.
   const cardLinkRef = useRef<{ key: string; link: Promise<string | null> } | null>(null);
@@ -523,18 +524,36 @@ export default function AttendeeCard({
     return !!touch && navigator.canShare({ files: [new File([""], "x.png", { type: "image/png" })] });
   }
 
-  /** Share the card's link; LinkedIn shows the card as the link's big preview picture, and it opens registration. */
+  /**
+   * Phones: hand LinkedIn the card image itself, with the registration link in
+   * the caption.
+   *
+   * Sharing a URL instead leaves LinkedIn to build its own link preview, and on
+   * a card page created seconds earlier its crawler has not fetched the image
+   * yet — the post goes out as a bare link with no picture, which is the one
+   * thing this card exists to avoid. An image post also travels further on
+   * LinkedIn than a link post.
+   *
+   * iOS hands the caption to LinkedIn as the post body, but does not guarantee
+   * it, so the same text goes to the clipboard first: if the composer opens
+   * empty, one paste restores it.
+   */
   function shareToApp() {
-    if (preparedLink) {
-      navigator.share({ text: t("shareText"), url: preparedLink }).catch(() => {});
-      return;
-    }
-    // Link not ready (upload failed or still running): share the image with the caption.
     canvasRef.current?.toBlob(async (blob) => {
       if (!blob) return;
       const file = new File([blob], fileName(), { type: "image/png" });
+      const link = preparedLink ?? (await cardLink()) ?? joinUrl;
+      const text = `${t("shareText")}\n\n${t("joinText")} ${link}`;
+
       try {
-        await navigator.share({ files: [file], text: t("shareText") });
+        await navigator.clipboard?.writeText(text);
+        setCopied(true);
+      } catch {
+        /* clipboard blocked: the caption usually still rides along below */
+      }
+
+      try {
+        await navigator.share({ files: [file], text });
       } catch {
         /* closed the share sheet */
       }
@@ -593,6 +612,7 @@ export default function AttendeeCard({
             {sharing === "working" ? t("preparing") : t("connectLinkedin")}
           </button>
           {ready && <p className="mt-3 text-sm font-semibold text-fg">{t("readyMobile")}</p>}
+          {copied && <p className="mt-3 text-sm font-semibold text-cyan-deep">{t("captionCopied")}</p>}
           <p className="mt-2 text-sm text-neutral-600">{t(canShareFile ? "attachHintMobile" : "attachHint")}</p>
         </div>
       ) : (

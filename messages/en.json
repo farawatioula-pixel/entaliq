@@ -925,8 +925,9 @@
     "previewCta": "Register to attend",
     "lowResPhoto": "Your LinkedIn photo is low resolution, so it may look blurry. For a sharper card, upload a high-quality photo.",
     "readyMobile": "Your card is ready with your LinkedIn photo. Tap Share on LinkedIn, then choose LinkedIn.",
-    "attachHintMobile": "On your phone, Share on LinkedIn opens your share menu with the card attached. Choose LinkedIn and post.",
+    "attachHintMobile": "Share on LinkedIn opens your share menu with the card attached. Choose LinkedIn, then post.",
     "saveToPhotos": "Save to Photos",
-    "saveHint": "Choose “Save Image” to add it to your Photos."
+    "saveHint": "Choose “Save Image” to add it to your Photos.",
+    "captionCopied": "Your caption and link are copied. If LinkedIn opens with an empty box, just paste."
   }
 }
