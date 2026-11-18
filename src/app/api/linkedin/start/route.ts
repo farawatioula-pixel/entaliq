@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     client_id: process.env.LINKEDIN_CLIENT_ID!,
     redirect_uri: redirectUri(),
     state,
-    scope: "openid profile w_member_social",
+    scope: "openid profile",
   });
   const res = NextResponse.redirect(`https://www.linkedin.com/oauth/v2/authorization?${params}`);
   res.cookies.set(LI_STATE_COOKIE, state, { httpOnly: true, secure: true, sameSite: "lax", maxAge: 600, path: "/" });

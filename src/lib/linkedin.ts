@@ -3,7 +3,6 @@ import { siteUrl } from "@/lib/summit";
 
 export const LI_TOKEN_COOKIE = "li_token";
 export const LI_STATE_COOKIE = "li_state";
-export const LI_VERSION = "202510";
 
 export function linkedInConfigured(): boolean {
   return !!process.env.LINKEDIN_CLIENT_ID && !!process.env.LINKEDIN_CLIENT_SECRET;
