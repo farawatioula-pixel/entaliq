@@ -282,8 +282,8 @@ export default function AttendeeCard({
     }
 
     // 5. Photo circle bleeding off the edge, like a badge.
-    const r = 190;
-    const cx = X(200);
+    const r = 160;
+    const cx = X(210);
     const cy = 790;
     ctx.save();
     ctx.beginPath();
@@ -311,7 +311,7 @@ export default function AttendeeCard({
     ctx.restore();
 
     // 6. Name and call to action beside the photo.
-    const nx = 430;
+    const nx = 410;
     const nameMax = 520;
     ctx.textAlign = start;
     ctx.textBaseline = "alphabetic";
