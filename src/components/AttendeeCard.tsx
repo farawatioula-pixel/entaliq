@@ -386,6 +386,19 @@ export default function AttendeeCard({
     }, "image/png");
   }
 
+  /** On phones, open the share sheet with just the image so "Save Image" puts it in Photos. */
+  function saveCard() {
+    if (!isMobileShare()) return download();
+    canvasRef.current?.toBlob(async (blob) => {
+      if (!blob) return;
+      try {
+        await navigator.share({ files: [new File([blob], fileName(), { type: "image/png" })] });
+      } catch {
+        /* closed the share sheet */
+      }
+    }, "image/png");
+  }
+
   function shareImage() {
     canvasRef.current?.toBlob(async (blob) => {
       if (!blob) return;
@@ -517,10 +530,10 @@ export default function AttendeeCard({
       <div className="mt-5 flex flex-wrap gap-3">
         <button
           type="button"
-          onClick={download}
+          onClick={saveCard}
           className="inline-flex items-center rounded-sm bg-red px-5 py-2.5 text-sm font-semibold text-white hover:bg-red-dark"
         >
-          {t("download")}
+          {t(canShareFile ? "saveToPhotos" : "download")}
         </button>
         {canShareFile && (
           <button
@@ -532,6 +545,7 @@ export default function AttendeeCard({
           </button>
         )}
       </div>
+      {canShareFile && <p className="mt-2 text-sm text-neutral-600">{t("saveHint")}</p>}
       {li.enabled ? (
         <div className="mt-6 rounded-sm border border-cyan-deep bg-cyan/5 p-5">
           <button
