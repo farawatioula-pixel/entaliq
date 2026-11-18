@@ -787,7 +787,13 @@
     "programme3Date": "Sunday 29 November · 10:00 AM – 1:00 PM",
     "programme3Body": "The closing ceremony with certificate handover and sponsor recognition, followed by a national dialogue session on AI for job creation in Jordan.",
     "registrationClosed": "Registration closed",
-    "registrationOpen": "Registration open"
+    "registrationOpen": "Registration open",
+    "agendaEyebrow": "Sunday 29 November 2026 · Hilton Amman",
+    "agendaTitle": "Closing ceremony agenda",
+    "mainSession": "Main session",
+    "speakersEyebrow": "On stage",
+    "speakersTitle": "Speakers",
+    "moderator": "Moderator"
   },
   "forgotPasswordPage": {
     "eyebrow": "Reset your password",

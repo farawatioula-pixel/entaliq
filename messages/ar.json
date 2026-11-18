@@ -787,7 +787,13 @@
     "programme3Date": "الأحد ٢٩ تشرين الثاني · ١٠:٠٠ صباحاً – الواحدة ظهراً",
     "programme3Body": "الحفل الختامي مع تسليم الشهادات وتكريم الرعاة، تليه جلسة حوار وطني حول الذكاء الاصطناعي لخلق فرص العمل في الأردن.",
     "registrationClosed": "التسجيل مغلق",
-    "registrationOpen": "التسجيل مفتوح"
+    "registrationOpen": "التسجيل مفتوح",
+    "agendaEyebrow": "الأحد ٢٩ تشرين الثاني ٢٠٢٦ · فندق هيلتون عمّان",
+    "agendaTitle": "أجندة الحفل الختامي",
+    "mainSession": "الجلسة الرئيسية",
+    "speakersEyebrow": "على المنصة",
+    "speakersTitle": "المتحدثون",
+    "moderator": "إدارة الجلسة"
   },
   "forgotPasswordPage": {
     "eyebrow": "إعادة تعيين كلمة المرور",

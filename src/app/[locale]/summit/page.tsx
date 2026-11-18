@@ -1,6 +1,9 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { getLocale } from "next-intl/server";
+import { agenda, speakers } from "@/lib/summitProgramme";
+import type { Locale } from "@/lib/data";
 
 export async function generateMetadata() {
   const t = await getTranslations("summitPage");
@@ -14,8 +17,10 @@ export default async function SummitPage() {
     data: { user },
   } = await supabase.auth.getUser();
   const registerHref = user ? "/register" : "/signup?next=/register";
+  const locale = (await getLocale()) as Locale;
 
   return (
+    <>
     <section className="border-b-4 border-red bg-paper">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-24">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">
@@ -104,5 +109,81 @@ export default async function SummitPage() {
         </div>
       </div>
     </section>
+
+    <section className="bg-surface py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">{t("agendaEyebrow")}</p>
+        <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-fg sm:text-4xl">{t("agendaTitle")}</h2>
+        <ol className="mt-10 divide-y divide-line overflow-hidden rounded-sm border border-line bg-paper">
+          {agenda.map((item) => (
+            <li
+              key={item.time.en}
+              className={`grid grid-cols-1 gap-2 px-6 py-5 sm:grid-cols-[180px_1fr] sm:gap-8 sm:px-8 ${
+                item.highlight ? "bg-ink text-white" : ""
+              }`}
+            >
+              <p className={`font-display text-base font-bold ${item.highlight ? "text-cyan" : "text-red-dark"}`}>
+                {item.time[locale]}
+              </p>
+              <div>
+                {item.highlight && (
+                  <p className="mb-2 inline-flex rounded-sm bg-[#D4F547] px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-ink">
+                    {t("mainSession")}
+                  </p>
+                )}
+                <p className={`font-display text-lg font-bold ${item.highlight ? "text-white" : "text-fg"}`}>
+                  {item.title[locale]}
+                </p>
+                {item.who && (
+                  <p className={`mt-1 text-[15px] ${item.highlight ? "text-neutral-300" : "text-neutral-600"}`}>
+                    {item.who[locale]}
+                  </p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section className="border-t border-line bg-paper py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">{t("speakersEyebrow")}</p>
+        <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-fg sm:text-4xl">{t("speakersTitle")}</h2>
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {speakers.map((sp) => (
+            <article key={sp.id} className="flex flex-col overflow-hidden rounded-sm border border-line bg-surface">
+              {sp.photo ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={sp.photo} alt={sp.name[locale]} className="aspect-square w-full object-cover object-top" />
+              ) : (
+                <div className="flex aspect-square w-full items-center justify-center bg-ink">
+                  <span className="font-display text-6xl font-bold text-cyan">
+                    {sp.name.en.split(" ").map((w) => w[0]).join("")}
+                  </span>
+                </div>
+              )}
+              <div className="flex flex-1 flex-col p-6">
+                {sp.role === "moderator" && (
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-red-dark">{t("moderator")}</p>
+                )}
+                <h3 className="font-display text-xl font-bold text-fg">{sp.name[locale]}</h3>
+                <p className="mt-1 text-sm font-semibold text-cyan-deep">{sp.title[locale]}</p>
+                <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">{sp.bio[locale]}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="mt-12">
+          <Link
+            href={registerHref}
+            className="inline-flex items-center rounded-sm bg-red px-7 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-red-dark"
+          >
+            {t("registerCta")}
+          </Link>
+        </div>
+      </div>
+    </section>
+    </>
   );
 }
