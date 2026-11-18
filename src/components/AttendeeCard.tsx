@@ -133,6 +133,7 @@ export default function AttendeeCard({
   const [li, setLi] = useState<{ enabled: boolean; connected: boolean }>({ enabled: false, connected: false });
   const joinUrl = `https://mountaliq.com/${locale}/register${shareToken ? `?ref=${encodeURIComponent(shareToken)}` : ""}`;
   const [sharing, setSharing] = useState<"idle" | "working">("idle");
+  const [ready, setReady] = useState(false);
   const autoShareRef = useRef(false);
 
   useEffect(() => {
@@ -157,7 +158,11 @@ export default function AttendeeCard({
         photoReady.then(() => {
           if (!autoShareRef.current) return;
           autoShareRef.current = false;
-          // Give the card a moment to redraw with the LinkedIn photo, then share.
+          if (isMobileShare()) {
+            setReady(true);
+            return;
+          }
+          // Desktop: give the card a moment to redraw with the LinkedIn photo, then share.
           setTimeout(() => goToLinkedIn(), 1200);
         });
       })
@@ -435,8 +440,15 @@ export default function AttendeeCard({
     });
   }
 
+  useEffect(() => {
+    const reset = () => setSharing("idle");
+    window.addEventListener("pageshow", reset);
+    return () => window.removeEventListener("pageshow", reset);
+  }, []);
+
   async function goToLinkedIn() {
     setSharing("working");
+    setTimeout(() => setSharing("idle"), 8000);
     let link = joinUrl;
     try {
       const blob = await previewBlob();
@@ -464,9 +476,32 @@ export default function AttendeeCard({
     window.location.href = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(text)}`;
   }
 
+  /** Phones and tablets: the system share sheet can hand the card image straight to the LinkedIn app. */
+  function isMobileShare() {
+    if (typeof navigator === "undefined" || !navigator.canShare) return false;
+    const touch = window.matchMedia?.("(pointer: coarse)").matches;
+    return !!touch && navigator.canShare({ files: [new File([""], "x.png", { type: "image/png" })] });
+  }
+
+  function shareToApp() {
+    canvasRef.current?.toBlob(async (blob) => {
+      if (!blob) return;
+      const file = new File([blob], fileName(), { type: "image/png" });
+      try {
+        await navigator.share({ files: [file], text: `${t("shareText")}\n\n${t("joinText")} ${joinUrl}` });
+      } catch {
+        /* closed the share sheet */
+      }
+    }, "image/png");
+  }
+
   function shareOnLinkedIn() {
-    if (li.connected) goToLinkedIn();
-    else window.location.href = `/api/linkedin/start?locale=${locale}&share=1`;
+    if (!li.connected) {
+      window.location.href = `/api/linkedin/start?locale=${locale}&share=1`;
+      return;
+    }
+    if (isMobileShare()) shareToApp();
+    else goToLinkedIn();
   }
 
   return (
@@ -510,7 +545,8 @@ export default function AttendeeCard({
             </svg>
             {sharing === "working" ? t("preparing") : t("connectLinkedin")}
           </button>
-          <p className="mt-2 text-sm text-neutral-600">{t("attachHint")}</p>
+          {ready && <p className="mt-3 text-sm font-semibold text-fg">{t("readyMobile")}</p>}
+          <p className="mt-2 text-sm text-neutral-600">{t(canShareFile ? "attachHintMobile" : "attachHint")}</p>
         </div>
       ) : (
         <p className="mt-3 text-sm text-neutral-600">{t("howTo")}</p>
