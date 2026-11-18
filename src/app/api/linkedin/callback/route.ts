@@ -11,6 +11,8 @@ export async function GET(req: NextRequest) {
 
   const expected = req.cookies.get(LI_STATE_COOKIE)?.value;
   if (!linkedInConfigured() || !code || !expected || expected !== state) {
+    // A repeat or stale callback while already connected is not an error for the guest.
+    if (req.cookies.get(LI_TOKEN_COOKIE)?.value) return NextResponse.redirect(back("1"));
     return NextResponse.redirect(back("error"));
   }
 

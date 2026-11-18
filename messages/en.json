@@ -906,9 +906,16 @@
     "makeCardBody": "Add your photo and get a card to post that you're taking part.",
     "connectLinkedin": "Share on LinkedIn",
     "joinText": "Join here:",
-    "attachHint": "LinkedIn asks to use your name and photo, your card is made and downloaded, and LinkedIn opens with the post ready. Just attach the card and post.",
+    "attachHint": "LinkedIn asks to use your name and photo, then opens with your post and card ready. Just press Post.",
     "registerFirstTitle": "Register first to get your card",
     "registerFirstBody": "Your LinkedIn card comes right after you register for the Mountaliq 2026 closing ceremony.",
-    "registerFirstCta": "Register now"
+    "registerFirstCta": "Register now",
+    "preparing": "Preparing your post…",
+    "previewEyebrow": "JOIN ME AT",
+    "previewLine": "Arab Summit for Digital Economy Skills",
+    "previewTitle": "I'm taking part in Mountaliq 2026",
+    "previewTitleNamed": "{name} is taking part in Mountaliq 2026",
+    "previewBody": "The Arab Summit for Digital Economy Skills, closing ceremony at the Hilton Amman on Sunday 29 November 2026. Register to join.",
+    "previewCta": "Register to attend"
   }
 }
