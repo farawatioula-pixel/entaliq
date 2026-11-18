@@ -52,6 +52,24 @@ export default function AttendeeCard({ defaultName = "" }: { defaultName?: strin
   const [photo, setPhoto] = useState<HTMLImageElement | null>(null);
   const [assets, setAssets] = useState<{ icon: HTMLImageElement | null; logos: (HTMLImageElement | null)[] } | null>(null);
   const [canShareFile, setCanShareFile] = useState(false);
+  const [li, setLi] = useState<{ enabled: boolean; connected: boolean }>({ enabled: false, connected: false });
+  const [postText, setPostText] = useState(
+    () => `${t("shareText")}\n\n${t("joinText")} https://mountaliq.com/${locale}/register`,
+  );
+  const [posting, setPosting] = useState<"idle" | "posting" | "done" | "error">("idle");
+  const [postUrl, setPostUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("/api/linkedin/me")
+      .then((r) => r.json())
+      .then((data: { enabled: boolean; connected: boolean; name?: string; hasPhoto?: boolean }) => {
+        setLi({ enabled: data.enabled, connected: data.connected });
+        if (!data.connected) return;
+        if (data.name) setName((current) => current || data.name || "");
+        if (data.hasPhoto) loadImage("/api/linkedin/photo").then((img) => img && setPhoto(img));
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     Promise.all([loadImage("/logo-icon.png"), Promise.all(LOGOS.map(loadImage))]).then(([icon, logos]) =>
@@ -211,8 +229,43 @@ export default function AttendeeCard({ defaultName = "" }: { defaultName?: strin
     }, "image/png");
   }
 
+  function connectLinkedIn() {
+    window.location.href = `/api/linkedin/start?locale=${locale}`;
+  }
+
+  function postToLinkedIn() {
+    setPosting("posting");
+    canvasRef.current?.toBlob(async (blob) => {
+      if (!blob) return setPosting("error");
+      const body = new FormData();
+      body.append("image", blob, fileName());
+      body.append("text", postText);
+      try {
+        const res = await fetch("/api/linkedin/post", { method: "POST", body });
+        const data = (await res.json()) as { ok?: boolean; url?: string | null };
+        if (!res.ok || !data.ok) throw new Error("post failed");
+        setPostUrl(data.url ?? null);
+        setPosting("done");
+      } catch {
+        setPosting("error");
+      }
+    }, "image/png");
+  }
+
   return (
     <div className="text-start">
+      {li.enabled && !li.connected && (
+        <div className="mb-6 rounded-sm border border-cyan-deep bg-cyan/5 p-5">
+          <p className="text-sm text-neutral-600">{t("linkedinIntro")}</p>
+          <button
+            type="button"
+            onClick={connectLinkedIn}
+            className="mt-3 inline-flex items-center rounded-sm bg-[#0A66C2] px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90"
+          >
+            {t("connectLinkedin")}
+          </button>
+        </div>
+      )}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label className="mb-1.5 block text-sm font-semibold text-fg" htmlFor="card-name">
@@ -265,7 +318,42 @@ export default function AttendeeCard({ defaultName = "" }: { defaultName?: strin
           </button>
         )}
       </div>
-      <p className="mt-3 text-sm text-neutral-600">{t("howTo")}</p>
+      {li.connected ? (
+        <div className="mt-6 rounded-sm border border-cyan-deep bg-cyan/5 p-5">
+          <label className="mb-1.5 block text-sm font-semibold text-fg" htmlFor="card-post">
+            {t("postLabel")}
+          </label>
+          <textarea
+            id="card-post"
+            rows={4}
+            value={postText}
+            onChange={(e) => setPostText(e.target.value)}
+            className="w-full rounded-sm border border-line bg-surface px-4 py-3 text-[15px] text-fg focus:border-red"
+          />
+          {posting === "done" ? (
+            <p className="mt-3 text-sm font-semibold text-fg">
+              {t("posted")}{" "}
+              {postUrl && (
+                <a href={postUrl} target="_blank" rel="noreferrer" className="text-[#0A66C2] underline">
+                  {t("viewPost")}
+                </a>
+              )}
+            </p>
+          ) : (
+            <button
+              type="button"
+              onClick={postToLinkedIn}
+              disabled={posting === "posting"}
+              className="mt-3 inline-flex items-center rounded-sm bg-[#0A66C2] px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-60"
+            >
+              {posting === "posting" ? t("posting") : t("postLinkedin")}
+            </button>
+          )}
+          {posting === "error" && <p className="mt-2 text-sm text-red-dark">{t("postError")}</p>}
+        </div>
+      ) : (
+        <p className="mt-3 text-sm text-neutral-600">{t("howTo")}</p>
+      )}
     </div>
   );
 }

@@ -903,6 +903,15 @@
     "shareText": "I'm taking part in Mountaliq 2026, the Arab Summit for Digital Economy Skills. #Mountaliq2026",
     "howTo": "On LinkedIn, start a post, attach the card you downloaded, and tag Mountaliq.",
     "makeCard": "Make your LinkedIn card",
-    "makeCardBody": "Add your photo and get a card to post that you're taking part."
+    "makeCardBody": "Add your photo and get a card to post that you're taking part.",
+    "linkedinIntro": "Connect LinkedIn to use your profile photo and post your card in one click.",
+    "connectLinkedin": "Share on LinkedIn",
+    "postLabel": "Your post",
+    "postLinkedin": "Post to LinkedIn",
+    "posting": "Posting…",
+    "posted": "Posted to your LinkedIn.",
+    "viewPost": "View post",
+    "postError": "LinkedIn didn't accept the post. Download the card and post it yourself.",
+    "joinText": "Join here:"
   }
 }
