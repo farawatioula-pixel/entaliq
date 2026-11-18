@@ -43,7 +43,13 @@ function fitText(ctx: CanvasRenderingContext2D, text: string, weight: number, st
   } while (ctx.measureText(text).width > maxWidth && size > 20);
 }
 
-export default function AttendeeCard({ defaultName = "" }: { defaultName?: string }) {
+export default function AttendeeCard({
+  defaultName = "",
+  shareToken = null,
+}: {
+  defaultName?: string;
+  shareToken?: string | null;
+}) {
   const t = useTranslations("attendeeCard");
   const locale = useLocale();
   const isAr = locale === "ar";
@@ -53,7 +59,8 @@ export default function AttendeeCard({ defaultName = "" }: { defaultName?: strin
   const [assets, setAssets] = useState<{ icon: HTMLImageElement | null; logos: (HTMLImageElement | null)[] } | null>(null);
   const [canShareFile, setCanShareFile] = useState(false);
   const [li, setLi] = useState<{ enabled: boolean; connected: boolean }>({ enabled: false, connected: false });
-  const postText = `${t("shareText")}\n\n${t("joinText")} https://mountaliq.com/${locale}/register`;
+  const joinUrl = `https://mountaliq.com/${locale}/register${shareToken ? `?ref=${encodeURIComponent(shareToken)}` : ""}`;
+  const postText = `${t("shareText")}\n\n${t("joinText")} ${joinUrl}`;
   const autoShareRef = useRef(false);
 
   useEffect(() => {

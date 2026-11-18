@@ -124,5 +124,6 @@ export async function POST(req: NextRequest) {
     ok: true,
     emailSent,
     shareUrl: type === "ceremony" ? linkedInShareUrl(shareToken, locale) : null,
+    shareToken: type === "ceremony" ? shareToken : null,
   });
 }
