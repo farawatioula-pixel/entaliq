@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { SUMMIT } from "@/lib/summit";
 
@@ -362,12 +362,7 @@ export default function AttendeeCard({
     }
   }, [draw]);
 
-  function onPhoto(e: ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const url = URL.createObjectURL(file);
-    loadImage(url).then((img) => setPhoto(img));
-  }
+
 
   function fileName() {
     const slug = name.trim().replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "");
@@ -476,40 +471,11 @@ export default function AttendeeCard({
 
   return (
     <div className="text-start">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div>
-          <label className="mb-1.5 block text-sm font-semibold text-fg" htmlFor="card-name">
-            {t("nameLabel")}
-          </label>
-          <input
-            id="card-name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-sm border border-line bg-surface px-4 py-3 text-[15px] text-fg focus:border-red"
-          />
-        </div>
-        <div>
-          <label className="mb-1.5 block text-sm font-semibold text-fg" htmlFor="card-photo">
-            {t("photoLabel")}
-          </label>
-          <input
-            id="card-photo"
-            type="file"
-            accept="image/*"
-            onChange={onPhoto}
-            className="block w-full text-sm text-neutral-600 file:me-3 file:rounded-sm file:border file:border-line file:bg-surface file:px-4 file:py-2.5 file:text-sm file:font-semibold file:text-fg"
-          />
-          {photo && Math.min(photo.width, photo.height) < 400 && (
-            <p className="mt-2 text-sm text-red-dark">{t("lowResPhoto")}</p>
-          )}
-        </div>
-      </div>
-
       <canvas
         ref={canvasRef}
         width={SIZE}
         height={SIZE}
-        className="mt-6 aspect-square w-full max-w-md rounded-sm border border-line"
+        className="aspect-square w-full max-w-md rounded-sm border border-line"
         aria-label={t("previewLabel")}
       />
 

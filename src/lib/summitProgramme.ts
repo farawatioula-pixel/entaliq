@@ -65,7 +65,7 @@ export const speakers: Speaker[] = [
   },
   {
     id: "shorouq-hilal",
-    name: { en: "Ms. Shorouq Hilal", ar: "السيدة شروق هلال" },
+    name: { en: "Ms. Shorouq Hilal", ar: "الأستاذة شروق هلال" },
     title: {
       en: "Spokesperson and Head of Communication, Outreach and Social Media, Ministry of Digital Economy and Entrepreneurship",
       ar: "الناطق الإعلامي ورئيسة قسم الاتصال والتواصل والإعلام الاجتماعي، وزارة الاقتصاد الرقمي والريادة",
@@ -109,7 +109,7 @@ export const agenda: AgendaItem[] = [
     title: { en: "National dialogue: Job creation in the AI economy", ar: "الجلسة الحوارية: خلق فرص العمل في اقتصاد الذكاء الاصطناعي" },
     who: {
       en: "Mr. Odeh Haddadin · Mr. Shaker Amayreh · Mr. Faisal Hakki. Moderated by Ms. Shorouq Hilal",
-      ar: "السيد عودة حدادين · السيد شاكر العمايرة · السيد فيصل حقي. تدير الجلسة السيدة شروق هلال",
+      ar: "السيد عودة حدادين · السيد شاكر العمايرة · السيد فيصل حقي. تدير الجلسة الأستاذة شروق هلال",
     },
     highlight: true,
   },
