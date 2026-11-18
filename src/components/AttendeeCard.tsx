@@ -12,6 +12,29 @@ const VIOLET = "#8B5CF6";
 const WHITE = "#F4F6FB";
 const FOG = "#8B93A7";
 
+const VOLT = "#D4F547";
+const COLLAGE = ["/card/photo-3.jpg", "/card/photo-1.jpg", "/card/photo-2.jpg"];
+
+/** Draws an image cropped to fill the box (like CSS object-fit: cover). */
+function cover(ctx: CanvasRenderingContext2D, img: HTMLImageElement, x: number, y: number, w: number, h: number, focusY = 0.4) {
+  const scale = Math.max(w / img.width, h / img.height);
+  const sw = w / scale;
+  const sh = h / scale;
+  const sx = (img.width - sw) / 2;
+  const sy = Math.max(0, (img.height - sh) * focusY);
+  ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+}
+
+function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
 const LOGOS = [
   "/partners/mixed-sources.png",
   "/partners/bromine-jordan.png",
@@ -56,7 +79,11 @@ export default function AttendeeCard({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [name, setName] = useState(defaultName);
   const [photo, setPhoto] = useState<HTMLImageElement | null>(null);
-  const [assets, setAssets] = useState<{ icon: HTMLImageElement | null; logos: (HTMLImageElement | null)[] } | null>(null);
+  const [assets, setAssets] = useState<{
+    icon: HTMLImageElement | null;
+    logos: (HTMLImageElement | null)[];
+    collage: (HTMLImageElement | null)[];
+  } | null>(null);
   const [canShareFile, setCanShareFile] = useState(false);
   const [li, setLi] = useState<{ enabled: boolean; connected: boolean }>({ enabled: false, connected: false });
   const joinUrl = `https://mountaliq.com/${locale}/register${shareToken ? `?ref=${encodeURIComponent(shareToken)}` : ""}`;
@@ -93,9 +120,11 @@ export default function AttendeeCard({
   }, []);
 
   useEffect(() => {
-    Promise.all([loadImage("/logo-icon.png"), Promise.all(LOGOS.map(loadImage))]).then(([icon, logos]) =>
-      setAssets({ icon, logos }),
-    );
+    Promise.all([
+      loadImage("/logo-icon.png"),
+      Promise.all(LOGOS.map(loadImage)),
+      Promise.all(COLLAGE.map(loadImage)),
+    ]).then(([icon, logos, collage]) => setAssets({ icon, logos, collage }));
   }, []);
 
   const draw = useCallback(() => {
@@ -107,45 +136,87 @@ export default function AttendeeCard({
     const display = isAr ? cssFont("--font-arabic", "Tahoma, sans-serif") : cssFont("--font-display", "Arial, sans-serif");
     const body = isAr ? display : cssFont("--font-body", "Arial, sans-serif");
     ctx.direction = isAr ? "rtl" : "ltr";
+    // Mirror horizontal positions for Arabic so the layout reads right to left.
+    const X = (x: number, w = 0) => (isAr ? SIZE - x - w : x);
+    const start = isAr ? "right" : "left";
+    const bandTop = 1000;
 
-    // Background with the site's diagonal lines.
+    // 1. Photo collage on the far side.
     ctx.fillStyle = INK;
     ctx.fillRect(0, 0, SIZE, SIZE);
-    ctx.strokeStyle = "rgba(255,255,255,0.04)";
-    ctx.lineWidth = 2;
-    for (let x = -SIZE; x < SIZE * 2; x += 46) {
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x + SIZE * 0.45, SIZE);
-      ctx.stroke();
+    const [big, top2, bottom2] = assets.collage;
+    const gx = 470;
+    if (big) cover(ctx, big, X(gx, SIZE - gx), 0, SIZE - gx, 500, 0.45);
+    if (top2) cover(ctx, top2, X(gx, 365), 500, 365, bandTop - 500, 0.35);
+    if (bottom2) cover(ctx, bottom2, X(gx + 365, SIZE - gx - 365), 500, SIZE - gx - 365, bandTop - 500, 0.35);
+    ctx.fillStyle = INK;
+    ctx.fillRect(X(gx, 0) - (isAr ? 6 : 0), 0, 6, bandTop);
+    ctx.fillRect(X(gx, SIZE - gx), 497, SIZE - gx, 6);
+    ctx.fillRect(X(gx + 362, 6), 500, 6, bandTop - 500);
+
+    // 2. Brand wash: solid ink behind the text, fading into a magenta-violet tint over the photos.
+    const wash = ctx.createLinearGradient(X(0), 0, X(SIZE), 0);
+    wash.addColorStop(0, "rgba(5,7,13,1)");
+    wash.addColorStop(0.36, "rgba(5,7,13,0.97)");
+    wash.addColorStop(0.62, "rgba(60,20,90,0.55)");
+    wash.addColorStop(1, "rgba(255,61,154,0.18)");
+    ctx.fillStyle = wash;
+    ctx.fillRect(0, 0, SIZE, bandTop);
+    const bottomFade = ctx.createLinearGradient(0, 560, 0, bandTop);
+    bottomFade.addColorStop(0, "rgba(5,7,13,0)");
+    bottomFade.addColorStop(1, "rgba(5,7,13,0.85)");
+    ctx.fillStyle = bottomFade;
+    ctx.fillRect(0, 560, SIZE, bandTop - 560);
+
+    // 3. Brand mark and date.
+    const pad = 64;
+    if (assets.icon) ctx.drawImage(assets.icon, X(pad, 84), 56, 84, 84);
+    ctx.textAlign = start;
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = WHITE;
+    ctx.font = `800 40px ${display}`;
+    ctx.fillText(isAr ? "منطلق ٢٠٢٦" : "MOUNTALIQ 2026", X(pad + 104), 86);
+    ctx.fillStyle = FOG;
+    ctx.font = `600 24px ${body}`;
+    ctx.fillText(
+      isAr ? `${SUMMIT.dateShortAr} · ${SUMMIT.venueAr}` : `SUN 29 NOV 2026 · HILTON AMMAN`,
+      X(pad + 104),
+      124,
+    );
+
+    // 4. Highlighted eyebrow, then the headline.
+    const colW = 600;
+    ctx.font = `800 ${isAr ? 40 : 34}px ${display}`;
+    const eyebrow = t("cardEyebrow");
+    const ew = ctx.measureText(eyebrow).width + 40;
+    ctx.fillStyle = VOLT;
+    roundRect(ctx, X(pad, ew), 196, ew, 62, 6);
+    ctx.fill();
+    ctx.fillStyle = INK;
+    ctx.fillText(eyebrow, X(pad + 20), 228);
+
+    ctx.textBaseline = "alphabetic";
+    const lines: [string, string][] = isAr
+      ? [["القمة العربية", WHITE], ["لمهارات", WHITE], ["الاقتصاد الرقمي", VOLT]]
+      : [["THE ARAB SUMMIT", WHITE], ["FOR DIGITAL", WHITE], ["ECONOMY SKILLS", VOLT]];
+    let y = 340;
+    for (const [line, color] of lines) {
+      ctx.fillStyle = color;
+      fitText(ctx, line, 800, isAr ? 84 : 76, display, colW - pad);
+      ctx.fillText(line, X(pad), y);
+      y += isAr ? 96 : 84;
     }
 
-    // Brand mark, top corner.
-    const iconSize = 92;
-    const iconX = isAr ? SIZE - 60 - iconSize : 60;
-    if (assets.icon) ctx.drawImage(assets.icon, iconX, 56, iconSize, iconSize);
-    ctx.fillStyle = WHITE;
-    ctx.textAlign = isAr ? "right" : "left";
-    ctx.textBaseline = "middle";
-    ctx.font = `700 40px ${display}`;
-    ctx.fillText(isAr ? "منطلق ٢٠٢٦" : "Mountaliq 2026", isAr ? iconX - 24 : iconX + iconSize + 24, 102);
-
-    // Eyebrow.
-    ctx.textAlign = "center";
-    ctx.fillStyle = MAGENTA;
-    ctx.font = `700 ${isAr ? 46 : 38}px ${display}`;
-    ctx.fillText(t("cardEyebrow"), SIZE / 2, 228);
-
-    // Photo circle.
-    const cx = SIZE / 2;
-    const cy = 470;
+    // 5. Photo circle bleeding off the edge, like a badge.
     const r = 190;
+    const cx = X(200);
+    const cy = 790;
     ctx.save();
     ctx.beginPath();
-    ctx.arc(cx, cy, r + 16, 0, Math.PI * 2);
+    ctx.arc(cx, cy, r + 14, 0, Math.PI * 2);
     const ring = ctx.createLinearGradient(cx - r, cy - r, cx + r, cy + r);
     ring.addColorStop(0, CYAN);
-    ring.addColorStop(0.55, VIOLET);
+    ring.addColorStop(0.5, VIOLET);
     ring.addColorStop(1, MAGENTA);
     ctx.fillStyle = ring;
     ctx.fill();
@@ -153,38 +224,41 @@ export default function AttendeeCard({
     ctx.arc(cx, cy, r, 0, Math.PI * 2);
     ctx.clip();
     if (photo) {
-      const s = Math.min(photo.width, photo.height);
-      const sx = (photo.width - s) / 2;
-      const sy = Math.max(0, (photo.height - s) * 0.3);
-      ctx.drawImage(photo, sx, sy, s, s, cx - r, cy - r, r * 2, r * 2);
+      cover(ctx, photo, cx - r, cy - r, r * 2, r * 2, 0.3);
     } else {
-      ctx.fillStyle = "#0D1220";
+      ctx.fillStyle = "#1A2236";
       ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
       ctx.fillStyle = FOG;
-      ctx.font = `500 30px ${body}`;
-      ctx.fillText(t("photoPlaceholder"), cx, cy);
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.font = `600 28px ${body}`;
+      ctx.fillText(t("photoPlaceholder"), cx + (isAr ? -40 : 40), cy);
     }
     ctx.restore();
 
-    // Name and event details.
-    ctx.textAlign = "center";
+    // 6. Name and call to action beside the photo.
+    const nx = 430;
+    const nameMax = 520;
+    ctx.textAlign = start;
+    ctx.textBaseline = "alphabetic";
     ctx.fillStyle = WHITE;
-    fitText(ctx, name.trim() || t("namePlaceholder"), 800, 68, display, SIZE - 160);
-    ctx.fillText(name.trim() || t("namePlaceholder"), SIZE / 2, 742);
-
+    const shownName = name.trim() || t("namePlaceholder");
+    fitText(ctx, shownName, 800, 58, display, nameMax);
+    ctx.fillText(shownName, X(nx), 770);
     ctx.fillStyle = CYAN;
-    fitText(ctx, t("cardEvent"), 600, 36, display, SIZE - 160);
-    ctx.fillText(t("cardEvent"), SIZE / 2, 818);
+    ctx.font = `600 26px ${body}`;
+    ctx.fillText(isAr ? "مشارك في منطلق ٢٠٢٦" : "Taking part in Mountaliq 2026", X(nx), 812);
+    ctx.font = `800 30px ${display}`;
+    const cta = isAr ? "انضم إلينا  ‹" : "JOIN US  ›";
+    const cw = ctx.measureText(cta).width + 56;
+    ctx.fillStyle = VOLT;
+    roundRect(ctx, X(nx, cw), 846, cw, 64, 32);
+    ctx.fill();
+    ctx.fillStyle = INK;
+    ctx.textBaseline = "middle";
+    ctx.fillText(cta, X(nx + 28), 879);
 
-    ctx.fillStyle = FOG;
-    ctx.font = `500 32px ${body}`;
-    const details = isAr
-      ? `${SUMMIT.dateShortAr} · ${SUMMIT.venueAr}`
-      : `${SUMMIT.dateShortEn} 2026 · ${SUMMIT.venueEn}`;
-    ctx.fillText(details, SIZE / 2, 872);
-
-    // Partner strip.
-    const bandTop = 960;
+    // 7. Partner strip.
     ctx.fillStyle = "#FFFFFF";
     ctx.fillRect(0, bandTop, SIZE, SIZE - bandTop);
     const logos = assets.logos.filter((l): l is HTMLImageElement => !!l);
@@ -192,7 +266,7 @@ export default function AttendeeCard({
     const ordered = isAr ? [...logos].reverse() : logos;
     ordered.forEach((logo, i) => {
       const maxW = slot - 70;
-      const maxH = 150;
+      const maxH = 130;
       const scale = Math.min(maxW / logo.width, maxH / logo.height);
       const w = logo.width * scale;
       const h = logo.height * scale;
