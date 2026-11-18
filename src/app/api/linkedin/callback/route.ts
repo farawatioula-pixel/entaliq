@@ -4,8 +4,10 @@ import { LI_STATE_COOKIE, LI_TOKEN_COOKIE, linkedInConfigured, redirectUri } fro
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get("code");
   const state = req.nextUrl.searchParams.get("state") ?? "";
-  const locale = state.endsWith(".ar") ? "ar" : "en";
-  const back = (flag: string) => new URL(`/${locale}/summit/card?li=${flag}`, req.url);
+  const [, stateLocale, stateShare] = state.split(".");
+  const locale = stateLocale === "ar" ? "ar" : "en";
+  const share = stateShare === "s" ? "&share=1" : "";
+  const back = (flag: string) => new URL(`/${locale}/summit/card?li=${flag}${flag === "1" ? share : ""}`, req.url);
 
   const expected = req.cookies.get(LI_STATE_COOKIE)?.value;
   if (!linkedInConfigured() || !code || !expected || expected !== state) {
