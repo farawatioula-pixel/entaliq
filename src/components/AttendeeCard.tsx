@@ -134,7 +134,10 @@ export default function AttendeeCard({
   const joinUrl = `https://mountaliq.com/${locale}/register${shareToken ? `?ref=${encodeURIComponent(shareToken)}` : ""}`;
   const [sharing, setSharing] = useState<"idle" | "working">("idle");
   const [ready, setReady] = useState(false);
+  const [preparedLink, setPreparedLink] = useState<string | null>(null);
   const autoShareRef = useRef(false);
+  // Link to this person's card page (its preview picture is the card), prepared before they tap Share.
+  const cardLinkRef = useRef<{ key: string; link: Promise<string | null> } | null>(null);
 
   useEffect(() => {
     fetch("/api/linkedin/me")
@@ -459,28 +462,52 @@ export default function AttendeeCard({
     return () => window.removeEventListener("pageshow", reset);
   }, []);
 
+  /** Uploads the card and returns its public page link, or null if that fails. */
+  async function uploadCardLink(): Promise<string | null> {
+    try {
+      const blob = await previewBlob();
+      if (!blob) return null;
+      const body = new FormData();
+      body.append("image", blob, "card.png");
+      const res = await fetch("/api/card", { method: "POST", body });
+      const data = (await res.json()) as { id?: string };
+      if (!res.ok || !data.id) return null;
+      const qs = new URLSearchParams();
+      if (name.trim()) qs.set("n", name.trim());
+      if (shareToken) qs.set("r", shareToken);
+      return `https://www.mountaliq.com/${locale}/c/${data.id}${qs.toString() ? `?${qs}` : ""}`;
+    } catch {
+      return null;
+    }
+  }
+
+  function cardLink(): Promise<string | null> {
+    const key = `${name}|${photo?.src ?? ""}|${locale}`;
+    if (!cardLinkRef.current || cardLinkRef.current.key !== key) {
+      cardLinkRef.current = { key, link: uploadCardLink() };
+    }
+    return cardLinkRef.current.link;
+  }
+
+  // Once the card is finished, prepare its link so a tap on Share opens straight away.
+  useEffect(() => {
+    if (!li.connected || !assets) return;
+    const timer = setTimeout(() => {
+      const key = `${name}|${photo?.src ?? ""}|${locale}`;
+      if (!cardLinkRef.current || cardLinkRef.current.key !== key) {
+        cardLinkRef.current = { key, link: uploadCardLink() };
+        cardLinkRef.current.link.then((l) => setPreparedLink(l));
+      }
+    }, 1500);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [li.connected, assets, name, photo, locale]);
+
   async function goToLinkedIn() {
     setSharing("working");
     setTimeout(() => setSharing("idle"), 8000);
-    let link = joinUrl;
-    try {
-      const blob = await previewBlob();
-      if (blob) {
-        const body = new FormData();
-        body.append("image", blob, "card.png");
-        const res = await fetch("/api/card", { method: "POST", body });
-        const data = (await res.json()) as { id?: string };
-        if (res.ok && data.id) {
-          const qs = new URLSearchParams();
-          if (name.trim()) qs.set("n", name.trim());
-          if (shareToken) qs.set("r", shareToken);
-          link = `https://mountaliq.com/${locale}/c/${data.id}${qs.toString() ? `?${qs}` : ""}`;
-        }
-      }
-    } catch {
-      /* fall back to the plain registration link */
-    }
-    // No hosted preview (storage not set up yet): give them the card file to attach instead.
+    const link = (await cardLink()) ?? joinUrl;
+    // No hosted preview: give them the card file to attach instead.
     if (link === joinUrl) {
       download();
       await new Promise((r) => setTimeout(r, 800));
@@ -496,12 +523,17 @@ export default function AttendeeCard({
     return !!touch && navigator.canShare({ files: [new File([""], "x.png", { type: "image/png" })] });
   }
 
+  /** Share the card's link; LinkedIn shows the card as the link's big preview picture, and it opens registration. */
   function shareToApp() {
+    if (preparedLink) {
+      navigator.share({ text: t("shareText"), url: preparedLink }).catch(() => {});
+      return;
+    }
+    // Link not ready (upload failed or still running): share the image with the caption.
     canvasRef.current?.toBlob(async (blob) => {
       if (!blob) return;
       const file = new File([blob], fileName(), { type: "image/png" });
       try {
-        // No link in the text: the LinkedIn app turns a link into a preview and drops the image.
         await navigator.share({ files: [file], text: t("shareText") });
       } catch {
         /* closed the share sheet */
