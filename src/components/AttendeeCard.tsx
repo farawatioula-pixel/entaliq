@@ -458,6 +458,11 @@ export default function AttendeeCard({
     } catch {
       /* fall back to the plain registration link */
     }
+    // No hosted preview (storage not set up yet): give them the card file to attach instead.
+    if (link === joinUrl) {
+      download();
+      await new Promise((r) => setTimeout(r, 800));
+    }
     const text = `${t("shareText")}\n\n${t("joinText")} ${link}`;
     window.location.href = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(text)}`;
   }
