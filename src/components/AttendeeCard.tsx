@@ -501,7 +501,8 @@ export default function AttendeeCard({
       if (!blob) return;
       const file = new File([blob], fileName(), { type: "image/png" });
       try {
-        await navigator.share({ files: [file], text: `${t("shareText")}\n\n${t("joinText")} ${joinUrl}` });
+        // No link in the text: the LinkedIn app turns a link into a preview and drops the image.
+        await navigator.share({ files: [file], text: t("shareText") });
       } catch {
         /* closed the share sheet */
       }
