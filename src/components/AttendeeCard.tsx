@@ -181,6 +181,8 @@ export default function AttendeeCard({
     const display = isAr ? cssFont("--font-arabic", "Tahoma, sans-serif") : cssFont("--font-display", "Arial, sans-serif");
     const body = isAr ? display : cssFont("--font-body", "Arial, sans-serif");
     ctx.direction = isAr ? "rtl" : "ltr";
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
     // Mirror horizontal positions for Arabic so the layout reads right to left.
     const X = (x: number, w = 0) => (isAr ? SIZE - x - w : x);
     const start = isAr ? "right" : "left";
@@ -497,6 +499,9 @@ export default function AttendeeCard({
             onChange={onPhoto}
             className="block w-full text-sm text-neutral-600 file:me-3 file:rounded-sm file:border file:border-line file:bg-surface file:px-4 file:py-2.5 file:text-sm file:font-semibold file:text-fg"
           />
+          {photo && Math.min(photo.width, photo.height) < 400 && (
+            <p className="mt-2 text-sm text-red-dark">{t("lowResPhoto")}</p>
+          )}
         </div>
       </div>
 
