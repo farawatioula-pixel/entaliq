@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { createClient } from "@/lib/supabase/server";
 import { getLocale } from "next-intl/server";
 import { agenda, speakers } from "@/lib/summitProgramme";
 import type { Locale } from "@/lib/data";
@@ -12,11 +11,7 @@ export async function generateMetadata() {
 
 export default async function SummitPage() {
   const t = await getTranslations("summitPage");
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  const registerHref = user ? "/register" : "/signup?next=/register";
+  const registerHref = "/register";
   const locale = (await getLocale()) as Locale;
 
   return (

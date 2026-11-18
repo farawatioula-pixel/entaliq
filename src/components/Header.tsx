@@ -82,7 +82,7 @@ export default function Header() {
   const sellHref = isLoggedIn
     ? "/dashboard"
     : `/signup?next=${encodeURIComponent("/profile?next=/dashboard/listings/new")}`;
-  const registerHref = isLoggedIn ? "/register" : "/signup?next=/register";
+  const registerHref = "/register";
   const isSummitPage = pathname === "/summit";
 
   return (
