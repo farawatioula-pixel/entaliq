@@ -56,8 +56,6 @@ export default function AttendeeCard({ defaultName = "" }: { defaultName?: strin
   const [postText, setPostText] = useState(
     () => `${t("shareText")}\n\n${t("joinText")} https://mountaliq.com/${locale}/register`,
   );
-  const [posting, setPosting] = useState<"idle" | "posting" | "done" | "error">("idle");
-  const [postUrl, setPostUrl] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/linkedin/me")
@@ -233,23 +231,10 @@ export default function AttendeeCard({ defaultName = "" }: { defaultName?: strin
     window.location.href = `/api/linkedin/start?locale=${locale}`;
   }
 
-  function postToLinkedIn() {
-    setPosting("posting");
-    canvasRef.current?.toBlob(async (blob) => {
-      if (!blob) return setPosting("error");
-      const body = new FormData();
-      body.append("image", blob, fileName());
-      body.append("text", postText);
-      try {
-        const res = await fetch("/api/linkedin/post", { method: "POST", body });
-        const data = (await res.json()) as { ok?: boolean; url?: string | null };
-        if (!res.ok || !data.ok) throw new Error("post failed");
-        setPostUrl(data.url ?? null);
-        setPosting("done");
-      } catch {
-        setPosting("error");
-      }
-    }, "image/png");
+  function openLinkedInPost() {
+    download();
+    const url = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(postText)}`;
+    window.open(url, "_blank", "noopener");
   }
 
   return (
@@ -330,26 +315,14 @@ export default function AttendeeCard({ defaultName = "" }: { defaultName?: strin
             onChange={(e) => setPostText(e.target.value)}
             className="w-full rounded-sm border border-line bg-surface px-4 py-3 text-[15px] text-fg focus:border-red"
           />
-          {posting === "done" ? (
-            <p className="mt-3 text-sm font-semibold text-fg">
-              {t("posted")}{" "}
-              {postUrl && (
-                <a href={postUrl} target="_blank" rel="noreferrer" className="text-[#0A66C2] underline">
-                  {t("viewPost")}
-                </a>
-              )}
-            </p>
-          ) : (
-            <button
-              type="button"
-              onClick={postToLinkedIn}
-              disabled={posting === "posting"}
-              className="mt-3 inline-flex items-center rounded-sm bg-[#0A66C2] px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-60"
-            >
-              {posting === "posting" ? t("posting") : t("postLinkedin")}
-            </button>
-          )}
-          {posting === "error" && <p className="mt-2 text-sm text-red-dark">{t("postError")}</p>}
+          <button
+            type="button"
+            onClick={openLinkedInPost}
+            className="mt-3 inline-flex items-center rounded-sm bg-[#0A66C2] px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90"
+          >
+            {t("postLinkedin")}
+          </button>
+          <p className="mt-2 text-sm text-neutral-600">{t("attachHint")}</p>
         </div>
       ) : (
         <p className="mt-3 text-sm text-neutral-600">{t("howTo")}</p>

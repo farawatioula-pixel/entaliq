@@ -904,14 +904,11 @@
     "howTo": "On LinkedIn, start a post, attach the card you downloaded, and tag Mountaliq.",
     "makeCard": "Make your LinkedIn card",
     "makeCardBody": "Add your photo and get a card to post that you're taking part.",
-    "linkedinIntro": "Connect LinkedIn to use your profile photo and post your card in one click.",
+    "linkedinIntro": "Use your LinkedIn name and photo on your card.",
     "connectLinkedin": "Share on LinkedIn",
     "postLabel": "Your post",
-    "postLinkedin": "Post to LinkedIn",
-    "posting": "Posting…",
-    "posted": "Posted to your LinkedIn.",
-    "viewPost": "View post",
-    "postError": "LinkedIn didn't accept the post. Download the card and post it yourself.",
-    "joinText": "Join here:"
+    "postLinkedin": "Download card and open LinkedIn",
+    "joinText": "Join here:",
+    "attachHint": "Your card downloads and LinkedIn opens with the post ready. Attach the card image and post."
   }
 }
