@@ -34,8 +34,8 @@ export const speakers: Speaker[] = [
     id: "odeh-haddadin",
     name: { en: "Mr. Odeh Haddadin", ar: "السيد عودة حدادين" },
     title: {
-      en: "Digital Business Sector Manager, Ministry of Digital Economy and Entrepreneurship",
-      ar: "مدير تطوير القطاع الرقمي، مشروع الشباب والتكنولوجيا والوظائف، وزارة الاقتصاد الرقمي والريادة",
+      en: "Digital Business Sector Development Manager, Ministry of Digital Economy and Entrepreneurship",
+      ar: "مدير تطوير قطاع الأعمال الرقمية، وزارة الاقتصاد الرقمي والريادة",
     },
     bio: {
       en: "An ecosystem and community builder at the meeting point of government, entrepreneurship and innovation, supporting startups, SMEs and the growth of Jordan's digital economy. Founder of Open Circles.",
