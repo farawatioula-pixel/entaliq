@@ -7,7 +7,8 @@ export async function GET(req: NextRequest) {
   if (!linkedInConfigured()) {
     return NextResponse.redirect(new URL(`/${locale}/summit/card`, req.url));
   }
-  const state = `${randomBytes(16).toString("hex")}.${locale}`;
+  const share = req.nextUrl.searchParams.get("share") === "1" ? "s" : "n";
+  const state = `${randomBytes(16).toString("hex")}.${locale}.${share}`;
   const params = new URLSearchParams({
     response_type: "code",
     client_id: process.env.LINKEDIN_CLIENT_ID!,

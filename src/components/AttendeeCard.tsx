@@ -53,9 +53,8 @@ export default function AttendeeCard({ defaultName = "" }: { defaultName?: strin
   const [assets, setAssets] = useState<{ icon: HTMLImageElement | null; logos: (HTMLImageElement | null)[] } | null>(null);
   const [canShareFile, setCanShareFile] = useState(false);
   const [li, setLi] = useState<{ enabled: boolean; connected: boolean }>({ enabled: false, connected: false });
-  const [postText, setPostText] = useState(
-    () => `${t("shareText")}\n\n${t("joinText")} https://mountaliq.com/${locale}/register`,
-  );
+  const postText = `${t("shareText")}\n\n${t("joinText")} https://mountaliq.com/${locale}/register`;
+  const autoShareRef = useRef(false);
 
   useEffect(() => {
     fetch("/api/linkedin/me")
@@ -64,7 +63,24 @@ export default function AttendeeCard({ defaultName = "" }: { defaultName?: strin
         setLi({ enabled: data.enabled, connected: data.connected });
         if (!data.connected) return;
         if (data.name) setName((current) => current || data.name || "");
-        if (data.hasPhoto) loadImage("/api/linkedin/photo").then((img) => img && setPhoto(img));
+        const params = new URLSearchParams(window.location.search);
+        autoShareRef.current = params.get("share") === "1";
+        if (autoShareRef.current) {
+          params.delete("share");
+          const qs = params.toString();
+          window.history.replaceState(null, "", `${window.location.pathname}${qs ? `?${qs}` : ""}`);
+        }
+        const photoReady = data.hasPhoto
+          ? loadImage("/api/linkedin/photo").then((img) => {
+              if (img) setPhoto(img);
+            })
+          : Promise.resolve();
+        photoReady.then(() => {
+          if (!autoShareRef.current) return;
+          autoShareRef.current = false;
+          // Give the card a moment to redraw with the LinkedIn photo, then share.
+          setTimeout(() => goToLinkedIn(true), 1200);
+        });
       })
       .catch(() => {});
   }, []);
@@ -227,30 +243,21 @@ export default function AttendeeCard({ defaultName = "" }: { defaultName?: strin
     }, "image/png");
   }
 
-  function connectLinkedIn() {
-    window.location.href = `/api/linkedin/start?locale=${locale}`;
-  }
-
-  function openLinkedInPost() {
+  function goToLinkedIn(sameTab: boolean) {
     download();
     const url = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(postText)}`;
-    window.open(url, "_blank", "noopener");
+    // Let the download start before leaving the page.
+    if (sameTab) setTimeout(() => (window.location.href = url), 800);
+    else window.open(url, "_blank", "noopener");
+  }
+
+  function shareOnLinkedIn() {
+    if (li.connected) goToLinkedIn(false);
+    else window.location.href = `/api/linkedin/start?locale=${locale}&share=1`;
   }
 
   return (
     <div className="text-start">
-      {li.enabled && !li.connected && (
-        <div className="mb-6 rounded-sm border border-cyan-deep bg-cyan/5 p-5">
-          <p className="text-sm text-neutral-600">{t("linkedinIntro")}</p>
-          <button
-            type="button"
-            onClick={connectLinkedIn}
-            className="mt-3 inline-flex items-center rounded-sm bg-[#0A66C2] px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90"
-          >
-            {t("connectLinkedin")}
-          </button>
-        </div>
-      )}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label className="mb-1.5 block text-sm font-semibold text-fg" htmlFor="card-name">
@@ -303,24 +310,17 @@ export default function AttendeeCard({ defaultName = "" }: { defaultName?: strin
           </button>
         )}
       </div>
-      {li.connected ? (
+      {li.enabled ? (
         <div className="mt-6 rounded-sm border border-cyan-deep bg-cyan/5 p-5">
-          <label className="mb-1.5 block text-sm font-semibold text-fg" htmlFor="card-post">
-            {t("postLabel")}
-          </label>
-          <textarea
-            id="card-post"
-            rows={4}
-            value={postText}
-            onChange={(e) => setPostText(e.target.value)}
-            className="w-full rounded-sm border border-line bg-surface px-4 py-3 text-[15px] text-fg focus:border-red"
-          />
           <button
             type="button"
-            onClick={openLinkedInPost}
-            className="mt-3 inline-flex items-center rounded-sm bg-[#0A66C2] px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90"
+            onClick={shareOnLinkedIn}
+            className="inline-flex items-center gap-2 rounded-sm bg-[#0A66C2] px-6 py-3 text-[15px] font-semibold text-white hover:opacity-90"
           >
-            {t("postLinkedin")}
+            <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4" fill="currentColor">
+              <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+            </svg>
+            {t("connectLinkedin")}
           </button>
           <p className="mt-2 text-sm text-neutral-600">{t("attachHint")}</p>
         </div>
