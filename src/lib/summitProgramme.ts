@@ -67,10 +67,14 @@ export const speakers: Speaker[] = [
     id: "shorouq-hilal",
     name: { en: "Shorouq Hilal", ar: "شروق هلال" },
     title: {
-      en: "Spokesperson and Head of Communication, Ministry of Digital Economy and Entrepreneurship",
-      ar: "الناطق الإعلامي ورئيسة قسم الاتصال والتواصل، وزارة الاقتصاد الرقمي والريادة",
+      en: "Spokesperson and Head of Communication, Outreach and Social Media, Ministry of Digital Economy and Entrepreneurship",
+      ar: "الناطق الإعلامي ورئيسة قسم الاتصال والتواصل والإعلام الاجتماعي، وزارة الاقتصاد الرقمي والريادة",
     },
-    bio: { en: "Moderates the panel on job creation in the AI economy.", ar: "تدير الجلسة الحوارية حول خلق فرص العمل في اقتصاد الذكاء الاصطناعي." },
+    bio: {
+      en: "Nearly two decades at the Ministry, leading strategic communications for national digital transformation programmes such as Sanad, Jordan Source and Youth, Technology and Jobs. She developed Jordan's Government Social Media Guidelines and moderates the panel.",
+      ar: "تمتد خبرتها في الوزارة قرابة عقدين، تقود خلالها الاتصال الاستراتيجي لبرامج التحول الرقمي الوطنية مثل «سند» و«Jordan Source» ومشروع الشباب والتكنولوجيا والوظائف. أعدّت الدليل الحكومي لاستخدام وسائل التواصل الاجتماعي، وتدير الجلسة الحوارية.",
+    },
+    photo: "/speakers/shorouq-hilal.jpg",
     role: "moderator",
   },
 ];
