@@ -154,7 +154,7 @@ export default async function SummitPage() {
               ) : (
                 <div className="flex aspect-square w-full items-center justify-center bg-ink">
                   <span className="font-display text-6xl font-bold text-cyan">
-                    {sp.name.en.split(" ").map((w) => w[0]).join("")}
+                    {sp.name.en.replace(/^(Mr|Ms|H\.E\.)\.? /, "").split(" ").map((w) => w[0]).join("")}
                   </span>
                 </div>
               )}

@@ -22,7 +22,7 @@ export const speakers: Speaker[] = [
   },
   {
     id: "samer-asfour",
-    name: { en: "Samer Asfour", ar: "سامر عصفور" },
+    name: { en: "Mr. Samer Asfour", ar: "السيد سامر عصفور" },
     title: { en: "General Manager, Jordan Bromine", ar: "المدير العام، شركة برومين الأردن" },
     bio: {
       en: "Former Regional Director of Tesla Middle East and Director General of the Jordan Investment Board, with several senior roles at the Royal Hashemite Court. Member of YPO and the Forum of Young Global Leaders.",
@@ -32,7 +32,7 @@ export const speakers: Speaker[] = [
   },
   {
     id: "odeh-haddadin",
-    name: { en: "Odeh Haddadin", ar: "عودة حدادين" },
+    name: { en: "Mr. Odeh Haddadin", ar: "السيد عودة حدادين" },
     title: {
       en: "Digital Business Sector Manager, Ministry of Digital Economy and Entrepreneurship",
       ar: "مدير تطوير القطاع الرقمي، مشروع الشباب والتكنولوجيا والوظائف، وزارة الاقتصاد الرقمي والريادة",
@@ -45,7 +45,7 @@ export const speakers: Speaker[] = [
   },
   {
     id: "shaker-amayreh",
-    name: { en: "Shaker Amayreh", ar: "شاكر العمايرة" },
+    name: { en: "Mr. Shaker Amayreh", ar: "السيد شاكر العمايرة" },
     title: { en: "Partnership Lead, MENA, Replit", ar: "مسؤول الشراكات في الشرق الأوسط وشمال أفريقيا، Replit" },
     bio: {
       en: "Nearly two decades in brand architecture, regional market expansion and startups. Leads Replit's partnerships across MENA, bringing AI-powered development tools to the next generation of builders, and has co-founded three startups.",
@@ -55,7 +55,7 @@ export const speakers: Speaker[] = [
   },
   {
     id: "faisal-hakki",
-    name: { en: "Faisal Hakki", ar: "فيصل حقي" },
+    name: { en: "Mr. Faisal Hakki", ar: "السيد فيصل حقي" },
     title: { en: "Managing Director, AB Ventures LP", ar: "المدير العام، AB Ventures LP" },
     bio: {
       en: "Investor and board observer at HyperPay. Former CEO of Oasis500, the Middle East's go-to tech startup accelerator, and former trustee of the Crown Prince Foundation.",
@@ -65,7 +65,7 @@ export const speakers: Speaker[] = [
   },
   {
     id: "shorouq-hilal",
-    name: { en: "Shorouq Hilal", ar: "شروق هلال" },
+    name: { en: "Ms. Shorouq Hilal", ar: "السيدة شروق هلال" },
     title: {
       en: "Spokesperson and Head of Communication, Outreach and Social Media, Ministry of Digital Economy and Entrepreneurship",
       ar: "الناطق الإعلامي ورئيسة قسم الاتصال والتواصل والإعلام الاجتماعي، وزارة الاقتصاد الرقمي والريادة",
@@ -97,7 +97,7 @@ export const agenda: AgendaItem[] = [
   {
     time: { en: "10:20 – 10:30", ar: "١٠:٢٠ – ١٠:٣٠" },
     title: { en: "Address by Jordan Bromine", ar: "كلمة شركة برومين الأردن" },
-    who: { en: "Samer Asfour, General Manager", ar: "سامر عصفور، المدير العام" },
+    who: { en: "Mr. Samer Asfour, General Manager", ar: "السيد سامر عصفور، المدير العام" },
   },
   {
     time: { en: "10:30 – 10:40", ar: "١٠:٣٠ – ١٠:٤٠" },
@@ -108,8 +108,8 @@ export const agenda: AgendaItem[] = [
     time: { en: "10:40 – 11:40", ar: "١٠:٤٠ – ١١:٤٠" },
     title: { en: "National dialogue: Job creation in the AI economy", ar: "الجلسة الحوارية: خلق فرص العمل في اقتصاد الذكاء الاصطناعي" },
     who: {
-      en: "Odeh Haddadin · Shaker Amayreh · Faisal Hakki. Moderated by Shorouq Hilal",
-      ar: "عودة حدادين · شاكر العمايرة · فيصل حقي. تدير الجلسة شروق هلال",
+      en: "Mr. Odeh Haddadin · Mr. Shaker Amayreh · Mr. Faisal Hakki. Moderated by Ms. Shorouq Hilal",
+      ar: "السيد عودة حدادين · السيد شاكر العمايرة · السيد فيصل حقي. تدير الجلسة السيدة شروق هلال",
     },
     highlight: true,
   },
@@ -117,7 +117,7 @@ export const agenda: AgendaItem[] = [
   {
     time: { en: "11:45 – 12:15", ar: "١١:٤٥ – ١٢:١٥" },
     title: { en: "Certificate ceremony for the 100 graduates", ar: "تسليم الشهادات للخريجين المئة" },
-    who: { en: "H.E. the Minister and Samer Asfour", ar: "معالي الوزير وسامر عصفور" },
+    who: { en: "H.E. the Minister and Mr. Samer Asfour", ar: "معالي الوزير والسيد سامر عصفور" },
   },
   { time: { en: "12:15 – 12:25", ar: "١٢:١٥ – ١٢:٢٥" }, title: { en: "Group photo", ar: "الصورة الجماعية" } },
   { time: { en: "12:25", ar: "١٢:٢٥" }, title: { en: "Closing and networking", ar: "الختام وبوفيه التواصل" } },
