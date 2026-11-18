@@ -14,7 +14,6 @@ export async function generateMetadata({
 
 export default async function PartnersPage() {
   const t = await getTranslations("partnersPage");
-  const tiers = t.raw("tiers") as { name: string; body: string }[];
 
   return (
     <>
@@ -34,17 +33,6 @@ export default async function PartnersPage() {
 
       <section className="mx-auto max-w-7xl px-5 py-16 sm:py-24 sm:px-8">
         <PartnerLogos />
-
-        <div className="mt-20 grid grid-cols-1 gap-px overflow-hidden border border-line bg-line sm:grid-cols-3">
-          {tiers.map((tier) => (
-            <div key={tier.name} className="bg-surface px-8 py-10">
-              <h2 className="font-display text-xl font-bold">{tier.name}</h2>
-              <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
-                {tier.body}
-              </p>
-            </div>
-          ))}
-        </div>
       </section>
 
       <section id="partner-with-us" className="scroll-mt-20 bg-paper py-16 sm:py-24">
