@@ -60,7 +60,7 @@ export default function AttendeeCard({
   const [canShareFile, setCanShareFile] = useState(false);
   const [li, setLi] = useState<{ enabled: boolean; connected: boolean }>({ enabled: false, connected: false });
   const joinUrl = `https://mountaliq.com/${locale}/register${shareToken ? `?ref=${encodeURIComponent(shareToken)}` : ""}`;
-  const postText = `${t("shareText")}\n\n${t("joinText")} ${joinUrl}`;
+  const [sharing, setSharing] = useState<"idle" | "working">("idle");
   const autoShareRef = useRef(false);
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export default function AttendeeCard({
           if (!autoShareRef.current) return;
           autoShareRef.current = false;
           // Give the card a moment to redraw with the LinkedIn photo, then share.
-          setTimeout(() => goToLinkedIn(true), 1200);
+          setTimeout(() => goToLinkedIn(), 1200);
         });
       })
       .catch(() => {});
@@ -250,16 +250,74 @@ export default function AttendeeCard({
     }, "image/png");
   }
 
-  function goToLinkedIn(sameTab: boolean) {
-    download();
-    const url = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(postText)}`;
-    // Let the download start before leaving the page.
-    if (sameTab) setTimeout(() => (window.location.href = url), 800);
-    else window.open(url, "_blank", "noopener");
+  /** A 1200x627 version of the card: the size LinkedIn shows for link previews. */
+  function previewBlob(): Promise<Blob | null> {
+    return new Promise((resolve) => {
+      const card = canvasRef.current;
+      if (!card) return resolve(null);
+      const W = 1200;
+      const H = 627;
+      const c = document.createElement("canvas");
+      c.width = W;
+      c.height = H;
+      const ctx = c.getContext("2d");
+      if (!ctx) return resolve(null);
+      const display = isAr ? cssFont("--font-arabic", "Tahoma, sans-serif") : cssFont("--font-display", "Arial, sans-serif");
+      ctx.fillStyle = INK;
+      ctx.fillRect(0, 0, W, H);
+      const cardX = isAr ? W - H : 0;
+      ctx.drawImage(card, cardX, 0, H, H);
+      const textX = isAr ? W - H - 48 : H + 48;
+      const maxW = W - H - 96;
+      ctx.direction = isAr ? "rtl" : "ltr";
+      ctx.textAlign = isAr ? "right" : "left";
+      ctx.textBaseline = "alphabetic";
+      ctx.fillStyle = MAGENTA;
+      ctx.font = `700 ${isAr ? 34 : 28}px ${display}`;
+      ctx.fillText(t("previewEyebrow"), textX, 190);
+      ctx.fillStyle = WHITE;
+      fitText(ctx, isAr ? "منطلق ٢٠٢٦" : "Mountaliq 2026", 800, 64, display, maxW);
+      ctx.fillText(isAr ? "منطلق ٢٠٢٦" : "Mountaliq 2026", textX, 262);
+      ctx.fillStyle = CYAN;
+      fitText(ctx, t("previewLine"), 600, 30, display, maxW);
+      ctx.fillText(t("previewLine"), textX, 314);
+      ctx.fillStyle = FOG;
+      ctx.font = `500 26px ${display}`;
+      ctx.fillText(isAr ? SUMMIT.dateShortAr : `${SUMMIT.dateShortEn} 2026`, textX, 380);
+      ctx.fillText(isAr ? SUMMIT.venueAr : SUMMIT.venueEn, textX, 418);
+      ctx.fillStyle = MAGENTA;
+      ctx.font = `700 28px ${display}`;
+      ctx.fillText("mountaliq.com", textX, 500);
+      c.toBlob((b) => resolve(b), "image/png");
+    });
+  }
+
+  async function goToLinkedIn() {
+    setSharing("working");
+    let link = joinUrl;
+    try {
+      const blob = await previewBlob();
+      if (blob) {
+        const body = new FormData();
+        body.append("image", blob, "card.png");
+        const res = await fetch("/api/card", { method: "POST", body });
+        const data = (await res.json()) as { id?: string };
+        if (res.ok && data.id) {
+          const qs = new URLSearchParams();
+          if (name.trim()) qs.set("n", name.trim());
+          if (shareToken) qs.set("r", shareToken);
+          link = `https://mountaliq.com/${locale}/c/${data.id}${qs.toString() ? `?${qs}` : ""}`;
+        }
+      }
+    } catch {
+      /* fall back to the plain registration link */
+    }
+    const text = `${t("shareText")}\n\n${t("joinText")} ${link}`;
+    window.location.href = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(text)}`;
   }
 
   function shareOnLinkedIn() {
-    if (li.connected) goToLinkedIn(false);
+    if (li.connected) goToLinkedIn();
     else window.location.href = `/api/linkedin/start?locale=${locale}&share=1`;
   }
 
@@ -322,12 +380,13 @@ export default function AttendeeCard({
           <button
             type="button"
             onClick={shareOnLinkedIn}
-            className="inline-flex items-center gap-2 rounded-sm bg-[#0A66C2] px-6 py-3 text-[15px] font-semibold text-white hover:opacity-90"
+            disabled={sharing === "working"}
+            className="disabled:opacity-60 inline-flex items-center gap-2 rounded-sm bg-[#0A66C2] px-6 py-3 text-[15px] font-semibold text-white hover:opacity-90"
           >
             <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4" fill="currentColor">
               <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
             </svg>
-            {t("connectLinkedin")}
+            {sharing === "working" ? t("preparing") : t("connectLinkedin")}
           </button>
           <p className="mt-2 text-sm text-neutral-600">{t("attachHint")}</p>
         </div>
