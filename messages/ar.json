@@ -929,5 +929,22 @@
     "saveToPhotos": "احفظ في الصور",
     "saveHint": "اختر «حفظ الصورة» لإضافتها إلى الصور.",
     "captionCopied": "تم نسخ النص والرابط. إذا فتح لينكدإن بصندوق فارغ، الصقه فقط."
+  },
+  "adminRegistrationsPage": {
+    "eyebrow": "منطلق ٢٠٢٦",
+    "title": "تسجيلات الحفل الختامي",
+    "refreshHint": "مباشر. أعد تحميل الصفحة لأحدث الأرقام.",
+    "totalLabel": "المسجّلون",
+    "last24hLabel": "آخر ٢٤ ساعة",
+    "referredLabel": "عبر بطاقة مشاركة",
+    "empty": "لا توجد تسجيلات بعد.",
+    "colName": "الاسم",
+    "colOrg": "جهة العمل",
+    "colPhone": "الهاتف",
+    "colEmail": "البريد الإلكتروني",
+    "colWhen": "وقت التسجيل",
+    "colSource": "المصدر",
+    "sourceShared": "بطاقة مشاركة",
+    "sourceDirect": "مباشر"
   }
 }
