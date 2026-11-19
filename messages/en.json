@@ -945,6 +945,8 @@
     "colWhen": "Registered",
     "colSource": "Source",
     "sourceShared": "Shared card",
-    "sourceDirect": "Direct"
+    "sourceDirect": "Direct / app",
+    "sourcesHeading": "Where they came from",
+    "sourcesHint": "Based on the referring site. WhatsApp and most phone apps hide this, so those show as direct — use a tagged link to tell them apart."
   }
 }

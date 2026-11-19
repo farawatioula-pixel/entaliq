@@ -3,10 +3,13 @@ import { Space_Grotesk, Tajawal, Inter } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { routing } from "@/i18n/routing";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import SourceCapture from "@/components/SourceCapture";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 
 const spaceGrotesk = Space_Grotesk({
@@ -76,10 +79,13 @@ export default async function LocaleLayout({
       >
         <NextIntlClientProvider>
           <ServiceWorkerRegister />
+          <SourceCapture />
           <Header />
           <main>{children}</main>
           <Footer />
         </NextIntlClientProvider>
+        <GoogleAnalytics />
+        <Analytics />
       </body>
     </html>
   );
