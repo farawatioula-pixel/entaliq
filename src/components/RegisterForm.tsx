@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { saveRegistration } from "@/lib/registration";
+import { captureSource, readSource } from "@/lib/source";
 import { useSearchParams } from "next/navigation";
 
 type FormType = "ceremony" | "training";
@@ -52,6 +53,8 @@ export default function RegisterForm({
     if (Object.keys(nextErrors).length > 0) return;
 
     setStatus("submitting");
+    // Where this visitor came from, recorded when they first landed on the site.
+    const source = readSource() ?? captureSource();
     try {
       const res = await fetch("/api/register", {
         method: "POST",
@@ -61,6 +64,11 @@ export default function RegisterForm({
           locale,
           ref: searchParams.get("ref") ?? undefined,
           ...payload,
+          referrer: source.referrer,
+          utm_source: source.utm_source,
+          utm_medium: source.utm_medium,
+          utm_campaign: source.utm_campaign,
+          landing_path: source.landing_path,
         }),
       });
       if (!res.ok) throw new Error("Request failed");

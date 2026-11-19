@@ -73,6 +73,13 @@ export async function POST(req: NextRequest) {
     referred_by: str(body.ref),
     message: str(body.message),
     links: str(body.links),
+    // Captured in the browser on first landing. WhatsApp and most native apps
+    // strip the referrer, so a tagged link (utm_source) is the reliable signal.
+    referrer: str(body.referrer),
+    utm_source: str(body.utm_source),
+    utm_medium: str(body.utm_medium),
+    utm_campaign: str(body.utm_campaign),
+    landing_path: str(body.landing_path),
   };
 
   // Always log, so a submission is never lost even if the database write fails.
