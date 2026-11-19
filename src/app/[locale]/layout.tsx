@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { routing } from "@/i18n/routing";
+import { siteUrl } from "@/lib/summit";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
@@ -45,11 +46,16 @@ export async function generateMetadata({
   return {
     title: t("title"),
     description: t("description"),
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://mountaliq.com"),
+    metadataBase: new URL(siteUrl()),
+    // "./" resolves against metadataBase plus the current route, so each page
+    // declares itself canonical on the www host. Without this there is no
+    // canonical tag at all and the www and bare hosts compete as duplicates.
+    alternates: { canonical: "./" },
     openGraph: {
       title: t("title"),
       description: t("ogDescription"),
       type: "website",
+      url: "./",
     },
   };
 }

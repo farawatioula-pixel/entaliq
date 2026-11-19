@@ -45,10 +45,16 @@ export const SUMMIT = {
   cityAr: "عمّان، الأردن",
 } as const;
 
+/**
+ * The canonical origin, which is the www host: mountaliq.com redirects there,
+ * and that is the form Google has indexed. Links built on the bare host still
+ * work, but they cost a redirect and split the ranking signals between two
+ * spellings of the same page, so everything we generate uses www.
+ */
 export function siteUrl(): string {
   const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (configured) return configured.replace(/\/$/, "");
-  return "https://mountaliq.com";
+  const base = (configured || "https://mountaliq.com").replace(/\/$/, "");
+  return base.replace(/^(https?:\/\/)mountaliq\.com/i, "$1www.mountaliq.com");
 }
 
 /** The public registration link a sharer hands to their network. */
