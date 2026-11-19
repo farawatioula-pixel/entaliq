@@ -1,14 +1,17 @@
 import Script from "next/script";
 
 /**
- * Google Analytics 4.
+ * Google Analytics 4 for the mountaliq.com property.
  *
- * Renders nothing until NEXT_PUBLIC_GA_ID is set in the Vercel environment, so
- * the site is safe to deploy before the Measurement ID exists. Set it to the
- * G-XXXXXXXXXX value from the GA4 property and redeploy to switch it on.
+ * A Measurement ID is not a secret: it is served to every visitor in the page
+ * source of any GA site, so it lives here rather than in a secret store, the
+ * same way the canonical site URL does in the layout. NEXT_PUBLIC_GA_ID still
+ * overrides it, which is what a separate staging property would use.
  */
+const DEFAULT_GA_ID = "G-3J4H3GDRHT";
+
 export default function GoogleAnalytics() {
-  const id = process.env.NEXT_PUBLIC_GA_ID?.trim();
+  const id = process.env.NEXT_PUBLIC_GA_ID?.trim() || DEFAULT_GA_ID;
   if (!id) return null;
 
   return (
