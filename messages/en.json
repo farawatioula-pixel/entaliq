@@ -929,5 +929,22 @@
     "saveToPhotos": "Save to Photos",
     "saveHint": "Choose “Save Image” to add it to your Photos.",
     "captionCopied": "Your caption and link are copied. If LinkedIn opens with an empty box, just paste."
+  },
+  "adminRegistrationsPage": {
+    "eyebrow": "MOUNTALIQ 2026",
+    "title": "Closing ceremony registrations",
+    "refreshHint": "Live. Reload the page for the latest numbers.",
+    "totalLabel": "Registered",
+    "last24hLabel": "Last 24 hours",
+    "referredLabel": "Via a shared card",
+    "empty": "No registrations yet.",
+    "colName": "Name",
+    "colOrg": "Organisation",
+    "colPhone": "Phone",
+    "colEmail": "Email",
+    "colWhen": "Registered",
+    "colSource": "Source",
+    "sourceShared": "Shared card",
+    "sourceDirect": "Direct"
   }
 }
