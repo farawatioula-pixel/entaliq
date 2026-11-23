@@ -45,9 +45,14 @@ export default async function Home({
         <div className="absolute inset-0 bg-ink/60" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-32">
-          <h1 className="max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl sm:leading-[0.98] lg:text-6xl">
-            {t("heroHeadline")}
+          {/* The H1 carries the brand name (منطلق / Mountaliq) so search engines
+              tie the page to it; the marketplace line stays as the big visual headline. */}
+          <h1 className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/80 sm:text-sm">
+            {t("heroBrand")}
           </h1>
+          <p className="max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl sm:leading-[0.98] lg:text-6xl">
+            {t("heroHeadline")}
+          </p>
 
           <HeroSearch placeholder={t("heroSearchPlaceholder")} ctaLabel={t("heroSearchCta")} />
 
