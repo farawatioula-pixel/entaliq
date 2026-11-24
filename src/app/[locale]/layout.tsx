@@ -83,6 +83,31 @@ export default async function LocaleLayout({
           locale === "ar" ? "font-arabic" : ""
         }`}
       >
+        <script
+          type="application/ld+json"
+          // Tells Google that "منطلق" and the Latin spellings are one organisation.
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "منطلق",
+              alternateName: ["Mountaliq", "Muntaliq", "Muntalaq", "Montaliq", "منطلق 2026"],
+              url: `${siteUrl()}/ar`,
+              logo: `${siteUrl()}/logo-icon.png`,
+              description:
+                "منطلق: القمة العربية لمهارات الاقتصاد الرقمي، وسوق للعمل الحر وتدريب عملي في عمّان، الأردن.",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Amman",
+                addressCountry: "JO",
+              },
+              parentOrganization: {
+                "@type": "Organization",
+                name: "Mixed Sources Impact Strategy & Communications",
+              },
+            }),
+          }}
+        />
         <NextIntlClientProvider>
           <ServiceWorkerRegister />
           <SourceCapture />
