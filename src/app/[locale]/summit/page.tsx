@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { getLocale } from "next-intl/server";
 import { agenda, speakers } from "@/lib/summitProgramme";
 import type { Locale } from "@/lib/data";
+import { CEREMONY_REGISTRATION_OPEN } from "@/lib/summit";
 
 export async function generateMetadata() {
   const t = await getTranslations("summitPage");
@@ -70,8 +71,10 @@ export default async function SummitPage() {
               key: "programme3",
               date: t("programme3Date"),
               accent: "text-red-dark",
-              status: t("registrationOpen"),
-              statusClass: "border-red bg-red/5 text-red-dark",
+              status: CEREMONY_REGISTRATION_OPEN ? t("registrationOpen") : t("registrationClosed"),
+              statusClass: CEREMONY_REGISTRATION_OPEN
+                ? "border-red bg-red/5 text-red-dark"
+                : "border-line bg-paper text-neutral-600",
             },
           ].map((item) => (
             <div

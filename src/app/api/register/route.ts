@@ -2,7 +2,7 @@ import { randomBytes } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { sendMail } from "@/lib/email";
-import { linkedInShareUrl } from "@/lib/summit";
+import { CEREMONY_REGISTRATION_OPEN, linkedInShareUrl } from "@/lib/summit";
 import {
   ceremonyConfirmationHtml,
   ceremonyConfirmationSubject,
@@ -32,6 +32,10 @@ export async function POST(req: NextRequest) {
   // "plenary" was the old name for what is now the closing ceremony; accept it
   // so any cached page still in someone's browser keeps working.
   const rawType = body.type === "plenary" ? "ceremony" : body.type;
+
+  if (rawType === "ceremony" && !CEREMONY_REGISTRATION_OPEN) {
+    return NextResponse.json({ error: "Registration is closed" }, { status: 403 });
+  }
 
   const name = str(body.name);
   const email = str(body.email);
