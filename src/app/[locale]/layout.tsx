@@ -51,6 +51,10 @@ export async function generateMetadata({
     // declares itself canonical on the www host. Without this there is no
     // canonical tag at all and the www and bare hosts compete as duplicates.
     alternates: { canonical: "./" },
+    icons: {
+      icon: [{ url: "/favicon.ico", sizes: "any" }, { url: "/icon.svg", type: "image/svg+xml" }],
+      apple: "/apple-icon.png",
+    },
     openGraph: {
       title: t("title"),
       description: t("ogDescription"),
