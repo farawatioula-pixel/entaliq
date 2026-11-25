@@ -52,8 +52,13 @@ export async function generateMetadata({
     // canonical tag at all and the www and bare hosts compete as duplicates.
     alternates: { canonical: "./" },
     icons: {
-      icon: [{ url: "/favicon.ico", sizes: "any" }, { url: "/icon.svg", type: "image/svg+xml" }],
-      apple: "/apple-icon.png",
+      // ?v= forces browsers (Safari especially) to drop a cached old icon.
+      icon: [
+        { url: "/icon-32.png?v=2", type: "image/png", sizes: "32x32" },
+        { url: "/icon.svg?v=2", type: "image/svg+xml" },
+        { url: "/favicon.ico?v=2", sizes: "any" },
+      ],
+      apple: "/apple-icon.png?v=2",
     },
     openGraph: {
       title: t("title"),
