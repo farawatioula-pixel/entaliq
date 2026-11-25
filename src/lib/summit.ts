@@ -9,8 +9,11 @@
  *   Fri 20 + Sat 21 November — full-day training, seminars and activities.
  *                              Registration for these has closed.
  *   Sun 29 November          — closing ceremony and national dialogue.
- *                              This is the one still open for registration.
+ *                              Registration closed on 25 November (capacity reached).
  */
+/** Set to true to reopen closing-ceremony registration on the site and API. */
+export const CEREMONY_REGISTRATION_OPEN = false;
+
 export const SUMMIT = {
   /** The two training days, registration closed. */
   training: {
@@ -26,7 +29,7 @@ export const SUMMIT = {
     day2Ar: "السبت ٢١ تشرين الثاني",
   },
 
-  /** The closing ceremony, open for registration. */
+  /** The closing ceremony. */
   dateISO: "2026-11-29",
   weekdayEn: "Sunday",
   dateEn: "29 November 2026",

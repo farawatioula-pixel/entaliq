@@ -4,7 +4,7 @@ import { Suspense, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import Modal from "@/components/Modal";
 import RegisterForm from "@/components/RegisterForm";
-import { SUMMIT } from "@/lib/summit";
+import { CEREMONY_REGISTRATION_OPEN, SUMMIT } from "@/lib/summit";
 
 function RegisterPageInner() {
   const t = useTranslations("registerPage");
@@ -50,16 +50,25 @@ function RegisterPageInner() {
             ))}
           </dl>
 
-          <button
-            type="button"
-            onClick={() => setOpen("ceremony")}
-            className="mt-8 inline-flex items-center gap-2 rounded-sm bg-red px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-red-dark"
-          >
-            {t("registerForCeremony")}
-            <span aria-hidden="true" className="inline-block rtl:-scale-x-100">
-              →
-            </span>
-          </button>
+          {CEREMONY_REGISTRATION_OPEN ? (
+            <button
+              type="button"
+              onClick={() => setOpen("ceremony")}
+              className="mt-8 inline-flex items-center gap-2 rounded-sm bg-red px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-red-dark"
+            >
+              {t("registerForCeremony")}
+              <span aria-hidden="true" className="inline-block rtl:-scale-x-100">
+                →
+              </span>
+            </button>
+          ) : (
+            <div className="mt-8 max-w-xl rounded-sm border border-line bg-surface px-6 py-5">
+              <p className="text-sm font-semibold text-fg">{t("ceremonyClosedTitle")}</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">
+                {t("ceremonyClosedBody")}
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -88,14 +97,23 @@ function RegisterPageInner() {
             <p className="mt-6 text-sm">
               <span className="font-semibold">{t("whatYouNeed")}:</span> {t("ceremonyRequirements")}
             </p>
-            <button
-              type="button"
-              onClick={() => setOpen("ceremony")}
-              className="mt-8 flex w-full items-center justify-between rounded-sm bg-red px-6 py-4 text-[15px] font-semibold text-white transition-colors hover:bg-red-dark"
-            >
-              {t("registerForCeremony")}
-              <span aria-hidden="true" className="inline-block rtl:-scale-x-100">→</span>
-            </button>
+            {CEREMONY_REGISTRATION_OPEN ? (
+              <button
+                type="button"
+                onClick={() => setOpen("ceremony")}
+                className="mt-8 flex w-full items-center justify-between rounded-sm bg-red px-6 py-4 text-[15px] font-semibold text-white transition-colors hover:bg-red-dark"
+              >
+                {t("registerForCeremony")}
+                <span aria-hidden="true" className="inline-block rtl:-scale-x-100">→</span>
+              </button>
+            ) : (
+              <div className="mt-8 rounded-sm border border-line bg-paper px-6 py-5">
+                <p className="text-sm font-semibold text-fg">{t("ceremonyClosedTitle")}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">
+                  {t("ceremonyClosedBody")}
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="bg-paper px-8 py-10 sm:px-12 sm:py-14">
@@ -124,7 +142,7 @@ function RegisterPageInner() {
         </div>
       </section>
 
-      {open && (
+      {CEREMONY_REGISTRATION_OPEN && open && (
         <Modal title={t("registerForCeremony")} onClose={() => setOpen(null)}>
           <RegisterForm type={open} onClose={() => setOpen(null)} />
         </Modal>

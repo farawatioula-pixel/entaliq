@@ -242,7 +242,7 @@
     "heroTitle": "Register for the closing session of the Arab Summit for Digital Economy Skills and Freelance Opportunities",
     "heroBody": "The closing ceremony and national dialogue session on AI for job creation in Jordan. Reserve your seat below.",
     "chooseYourPath": "The summit",
-    "option01": "Open now",
+    "option01": "Closed",
     "closingCeremony": "Closing Ceremony & National Dialogue",
     "ceremonyBody": "The Mountaliq 2026 closing ceremony, followed by a national dialogue session on AI for job creation in Jordan.",
     "ceremonyPoints": [
@@ -270,7 +270,9 @@
     "ogTitle": "Mountaliq 2026 — Closing Ceremony & National Dialogue on AI for Job Creation",
     "ogDescription": "Sunday 29 November 2026, 10:00 AM – 1:00 PM at the Hilton Amman Hotel. Register to attend the Mountaliq 2026 closing ceremony and national dialogue session on AI for job creation in Jordan.",
     "trainingClosedTitle": "Registration for the training days has closed",
-    "trainingClosedBody": "Places for 20 and 21 November are full."
+    "trainingClosedBody": "Places for 20 and 21 November are full.",
+    "ceremonyClosedTitle": "Registration has closed",
+    "ceremonyClosedBody": "We have reached full capacity for the closing ceremony on 29 November. Thank you for your interest."
   },
   "registerForm": {
     "backgrounds": [
