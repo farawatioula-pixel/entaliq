@@ -8,6 +8,7 @@ import LaunchCTA from "@/components/LaunchCTA";
 import SummitBanner from "@/components/SummitBanner";
 import HeroVideo from "@/components/HeroVideo";
 import HeroSearch from "@/components/HeroSearch";
+import { GhorSafiStrip } from "@/components/GhorSafiGallery";
 import { CategoryIcon, categoryOrder, categoryAccent } from "@/components/CategoryIcon";
 import type { ProfileCategory } from "@/lib/types";
 import { getListings } from "@/lib/marketplace";
@@ -73,6 +74,9 @@ export default async function Home({
 
       {/* Summit closing ceremony registration */}
       <SummitBanner />
+
+      {/* Ghor Al-Safi photos */}
+      <GhorSafiStrip locale={locale} />
 
       {/* Browse by category */}
       <section className="border-b border-line bg-paper py-16 sm:py-20">
