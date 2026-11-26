@@ -32,7 +32,7 @@ export const speakers: Speaker[] = [
   {
     id: "ayman-omoush",
     name: { en: "Mr. Ayman Omoush", ar: "السيد أيمن العموش" },
-    title: { en: "On behalf of Jordan Bromine Company", ar: "ممثلاً عن شركة برومين الأردن" },
+    title: { en: "Administrative Director, Jordan Bromine Company", ar: "المدير الإداري، شركة برومين الأردن" },
   },
   {
     id: "odeh-haddadin",
@@ -151,7 +151,7 @@ export const agenda: AgendaItem[] = [
   {
     time: { en: "10:35 – 10:50", ar: "١٠:٣٥ – ١٠:٥٠" },
     title: { en: "Address by Jordan Bromine", ar: "كلمة شركة برومين الأردن" },
-    who: { en: "Mr. Ayman Omoush, on behalf of Jordan Bromine Company", ar: "السيد أيمن العموش، ممثلاً عن شركة برومين الأردن" },
+    who: { en: "Mr. Ayman Omoush, Administrative Director, Jordan Bromine Company", ar: "السيد أيمن العموش، المدير الإداري، شركة برومين الأردن" },
   },
   {
     time: { en: "10:50 – 11:30", ar: "١٠:٥٠ – ١١:٣٠" },
