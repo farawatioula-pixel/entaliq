@@ -3,6 +3,7 @@ import { redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getCategories } from "@/lib/marketplace";
 import ListingForm from "@/components/ListingForm";
+import { Link } from "@/i18n/navigation";
 
 export default async function NewListingPage({
   params,
@@ -36,6 +37,24 @@ export default async function NewListingPage({
         <p className="mt-2 text-[15px] text-neutral-600">
           {t("subtitle")}
         </p>
+
+        <Link
+          href="/dashboard/listings/assistant"
+          className="group mt-8 flex items-center gap-4 rounded-2xl bg-ink p-5 text-white shadow-lg transition-transform hover:-translate-y-0.5"
+        >
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-volt text-xl text-ink">✦</span>
+          <span className="flex-1">
+            <span className="block font-display text-lg font-bold">
+              {locale === "ar" ? "دع مساعد منطلق يعبّئها معك" : "Let the Mountaliq assistant fill this in with you"}
+            </span>
+            <span className="mt-0.5 block text-sm text-neutral-300">
+              {locale === "ar"
+                ? "أجب عن بضعة أسئلة قصيرة، وسيكتب ملفك وخدمتك وأسعارك."
+                : "Answer a few short questions and it writes your profile, service and prices."}
+            </span>
+          </span>
+          <span className="text-cyan rtl:-scale-x-100">→</span>
+        </Link>
 
         <div className="mt-10">
           <ListingForm sellerId={user.id} categories={categories} />
