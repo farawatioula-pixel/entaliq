@@ -74,7 +74,7 @@ export const speakers: Speaker[] = [
   {
     id: "amaal-saadi",
     photo: "/speakers/amaal-saadi.jpg",
-    name: { en: "Ms. Amal Al-Sadi", ar: "السيدة أمل السعدي" },
+    name: { en: "Ms. Amal Al-Sadi", ar: "السيدة أمال السعدي" },
     title: { en: "Chief Technology Officer, Jo Academy | ULA Group", ar: "الرئيسة التنفيذية للتكنولوجيا، Jo Academy | ULA Group" },
     bio: {
       en: "Technology executive with over 25 years in software engineering, digital transformation and innovation. She leads technology strategy at Jo Academy, previously spent 14 years at ESKADENIA Software, founded VineTechs, and was named Visionary Woman of the Year in Technology at the 2025 Fluxx Middle East Awards.",
@@ -145,7 +145,7 @@ export const agenda: AgendaItem[] = [
     },
     who: {
       en: "Dr. Abdullah Battah · Mr. Hamzeh Nasrallah · Ms. Amal Al-Sadi. Moderated by Mr. Abdul Fattah Darabseh",
-      ar: "د. عبد الله بطاح · السيد حمزة نصرالله · السيدة أمل السعدي. يدير الجلسة السيد عبد الفتاح الدرابسة",
+      ar: "د. عبد الله بطاح · السيد حمزة نصرالله · السيدة أمال السعدي. يدير الجلسة السيد عبد الفتاح الدرابسة",
     },
     highlight: true,
   },
