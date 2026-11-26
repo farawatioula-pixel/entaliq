@@ -278,36 +278,26 @@ export default function Header() {
           className="mx-auto flex max-w-7xl items-center gap-7 px-5 py-2.5 sm:px-8"
           aria-label={tAria("primaryNav")}
         >
-          {navGroups.map((group) => {
-            const active =
-              pathname === group.href || group.children.some((c) => c.href === pathname);
-            return (
-              <div key={group.href} className="group relative">
-                <Link
-                  href={group.href}
-                  className={`text-[14px] font-medium transition-colors hover:text-fg ${
-                    active ? "text-fg font-semibold" : "text-neutral-600"
-                  }`}
-                  aria-current={active ? "page" : undefined}
-                >
-                  {group.label}
-                </Link>
-                <div className="invisible absolute left-0 top-full z-10 mt-2 min-w-[160px] rounded-sm border border-line bg-surface py-1 opacity-0 shadow-lg transition-opacity group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                  {group.children.map((child) => (
-                    <Link
-                      key={child.href}
-                      href={child.href}
-                      className={`block px-4 py-2 text-sm font-medium transition-colors hover:bg-paper hover:text-fg ${
-                        pathname === child.href ? "text-red-dark" : "text-neutral-600"
-                      }`}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+          {navGroups.map((group, gi) => (
+            <div key={group.href} className="flex items-center gap-7">
+              {gi > 0 && <span aria-hidden className="h-4 w-px bg-line" />}
+              {[{ href: group.href, label: group.label }, ...group.children].map((item) => {
+                const active = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`text-[14px] font-medium transition-colors hover:text-fg ${
+                      active ? "text-fg font-semibold" : "text-neutral-600"
+                    }`}
+                    aria-current={active ? "page" : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </div>
+          ))}
         </nav>
       </div>
 
