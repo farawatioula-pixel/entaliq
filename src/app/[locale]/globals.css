@@ -11,6 +11,7 @@
   --color-cyan-deep: #0e7c90;
   --color-violet: #8b5cf6;
   --color-violet-deep: #6d28d9;
+  --color-volt: #d4f547;
   --color-muted: #667085;
   --color-fg: #05070d;
   --font-display: "Space Grotesk", sans-serif;
@@ -29,6 +30,7 @@
   --color-cyan-deep: var(--color-cyan-deep);
   --color-violet: var(--color-violet);
   --color-violet-deep: var(--color-violet-deep);
+  --color-volt: var(--color-volt);
   --color-muted: var(--color-muted);
   --color-fg: var(--color-fg);
   --font-display: var(--font-display);

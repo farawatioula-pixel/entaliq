@@ -19,14 +19,24 @@ export const ghorSafiPhotos: { src: string; alt: L }[] = [
 ];
 
 const text = {
-  eyebrow: { en: "Where it started", ar: "من هنا بدأنا" },
+  eyebrow: { en: "From Ghor Al-Safi to Amman", ar: "من غور الصافي إلى عمّان" },
   title: { en: "Ghor Al-Safi digital skills camp", ar: "معسكر المهارات الرقمية في غور الصافي" },
   body: {
     en: "Mountaliq's first training ran in Ghor Al-Safi with Jordan Bromine: hands-on sessions in e-commerce, content and selling online, right where young people live.",
     ar: "انطلق أول تدريب لمنطلق في غور الصافي بالشراكة مع برومين الأردن: جلسات عملية في التجارة الإلكترونية وصناعة المحتوى والبيع عبر الإنترنت، في المكان الذي يعيش فيه الشباب.",
   },
   more: { en: "Our story", ar: "قصتنا" },
+  ammanTitle: { en: "Then Amman: the Khalda training", ar: "ثم عمّان: تدريب خلدا" },
+  ammanBody: {
+    en: "In November 2026 the training came to Amman: two hands-on days in Khalda, with participants from across the capital.",
+    ar: "في تشرين الثاني ٢٠٢٦ وصل التدريب إلى عمّان: يومان عمليان في خلدا بمشاركة شباب وشابات من مختلف مناطق العاصمة.",
+  },
 };
+
+export const ammanPhotos: { src: string; alt: L }[] = [
+  { src: "/photos/amman/participants.jpg", alt: { en: "Participants at the Amman training in Khalda", ar: "المشاركون في تدريب عمّان في خلدا" } },
+  { src: "/photos/amman/training-room.jpg", alt: { en: "The training room in Khalda", ar: "قاعة التدريب في خلدا" } },
+];
 
 function Img({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
   return (
@@ -55,6 +65,22 @@ export function GhorSafiGallery({ locale }: { locale: Loc }) {
               <Img src={ph.src} alt={ph.alt[locale]} />
             </div>
           ))}
+        </div>
+
+        <div className="mt-16 grid items-center gap-8 lg:grid-cols-[1fr_1.6fr]">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-red">Amman · 2026</p>
+            <h3 className="mt-3 font-display text-2xl font-bold tracking-tight sm:text-3xl">{text.ammanTitle[locale]}</h3>
+            <p className="mt-3 text-[15px] leading-relaxed text-neutral-300">{text.ammanBody[locale]}</p>
+          </div>
+          <div className="grid grid-cols-5 gap-3">
+            <div className="col-span-2 aspect-[4/5] overflow-hidden rounded-2xl ring-4 ring-red">
+              <Img src={ammanPhotos[0].src} alt={ammanPhotos[0].alt[locale]} className="object-[50%_60%]" />
+            </div>
+            <div className="col-span-3 overflow-hidden rounded-2xl ring-4 ring-cyan">
+              <Img src={ammanPhotos[1].src} alt={ammanPhotos[1].alt[locale]} />
+            </div>
+          </div>
         </div>
       </div>
     </section>

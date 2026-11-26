@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { getGuide, guides } from "@/lib/guides";
 import { GuideCard } from "@/components/GuideCard";
 import { CategoryIcon, categoryAccent } from "@/components/CategoryIcon";
+import { guidePhotoByCategory, lookFor, pexels } from "@/lib/photos";
 import type { Locale } from "@/lib/data";
 
 export const revalidate = 0;
@@ -40,6 +41,15 @@ export default async function GuideDetailPage({
         {guide.title[locale]}
       </h1>
       <p className="mt-4 text-lg leading-relaxed text-neutral-600">{guide.excerpt[locale]}</p>
+
+      <div className="mt-8 aspect-[16/8] overflow-hidden rounded-2xl">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={pexels(guidePhotoByCategory[guide.category] ?? lookFor(guide.category).photo, 1200)}
+          alt=""
+          className="h-full w-full object-cover"
+        />
+      </div>
 
       <div className="mt-10 space-y-5 border-t border-line pt-10">
         {guide.body.map((paragraph, i) => (

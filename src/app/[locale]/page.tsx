@@ -10,6 +10,7 @@ import HeroVideo from "@/components/HeroVideo";
 import HeroSearch from "@/components/HeroSearch";
 import { GhorSafiStrip } from "@/components/GhorSafiGallery";
 import { CategoryIcon, categoryOrder, categoryAccent } from "@/components/CategoryIcon";
+import { lookFor, pexels } from "@/lib/photos";
 import type { ProfileCategory } from "@/lib/types";
 import { getListings } from "@/lib/marketplace";
 import { ListingCard } from "@/components/ListingCard";
@@ -89,22 +90,31 @@ export default async function Home({
           </h2>
           <p className="mt-3 max-w-md text-[15px] text-neutral-600">{t("browseBody")}</p>
 
-          <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-4">
-            {categoryOrder.map((category) => (
-              <Link
-                key={category}
-                href={`/marketplace?category=${category}`}
-                className="group flex flex-col items-start gap-4 bg-surface px-6 py-7 transition-colors hover:bg-paper"
-              >
-                <CategoryIcon
-                  category={category}
-                  className={`h-7 w-7 ${categoryAccent[category]}`}
-                />
-                <span className="font-display text-[15px] font-bold leading-snug text-fg">
-                  {tCat(category)}
-                </span>
-              </Link>
-            ))}
+          <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
+            {categoryOrder.map((category) => {
+              const look = lookFor(category);
+              return (
+                <Link
+                  key={category}
+                  href={`/marketplace?category=${category}`}
+                  style={{ backgroundColor: look.color }}
+                  className="group flex flex-col rounded-2xl p-3 pt-5 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-4 sm:pt-6"
+                >
+                  <span className="px-2 font-display text-[17px] font-bold leading-snug text-white sm:text-xl">
+                    {tCat(category)}
+                  </span>
+                  <div className="mt-4 aspect-[4/3] overflow-hidden rounded-xl bg-white/10">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={pexels(look.photo, 600)}
+                      alt=""
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
