@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { GhorSafiFeature } from "@/components/GhorSafiGallery";
 import { Link } from "@/i18n/navigation";
 import { stats, gaps, promise, type Locale } from "@/lib/data";
 import LaunchCTA from "@/components/LaunchCTA";
@@ -37,6 +38,8 @@ export default async function AboutPage({
           </p>
         </div>
       </section>
+
+      <GhorSafiFeature locale={loc} />
 
       <section className="mx-auto max-w-7xl px-5 py-16 sm:py-24 sm:px-8">
         <div className="grid grid-cols-1 gap-px overflow-hidden border border-line bg-line sm:grid-cols-3">

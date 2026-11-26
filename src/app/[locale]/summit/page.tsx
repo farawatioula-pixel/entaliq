@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getLocale } from "next-intl/server";
 import { agenda, speakers } from "@/lib/summitProgramme";
+import { GhorSafiGallery } from "@/components/GhorSafiGallery";
 import type { Locale } from "@/lib/data";
 import { CEREMONY_REGISTRATION_OPEN } from "@/lib/summit";
 
@@ -107,6 +108,8 @@ export default async function SummitPage() {
         </div>
       </div>
     </section>
+
+    <GhorSafiGallery locale={locale} />
 
     <section className="bg-surface py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
