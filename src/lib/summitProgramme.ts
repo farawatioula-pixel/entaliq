@@ -23,7 +23,7 @@ export const speakers: Speaker[] = [
   {
     id: "sinan-kamal",
     photo: "/speakers/sinan-kamal.jpg",
-    name: { en: "Mr. Sinan Kamal", ar: "السيد سنان كمال" },
+    name: { en: "Mr. Sinan Kamal", ar: "الأستاذ سنان كمال" },
     title: {
       en: "Chief Technology and Digital Transformation Officer (CTO), Ministry of Digital Economy and Entrepreneurship, on behalf of H.E. the Minister",
       ar: "المدير التنفيذي للتكنولوجيا والتحول الرقمي (CTO) في وزارة الاقتصاد الرقمي والريادة، مندوباً عن معالي الوزير",
@@ -31,12 +31,12 @@ export const speakers: Speaker[] = [
   },
   {
     id: "ayman-omoush",
-    name: { en: "Mr. Ayman Omoush", ar: "السيد أيمن العموش" },
+    name: { en: "Mr. Ayman Omoush", ar: "الأستاذ أيمن العموش" },
     title: { en: "Administrative Director, Jordan Bromine Company", ar: "المدير الإداري، شركة برومين الأردن" },
   },
   {
     id: "odeh-haddadin",
-    name: { en: "Mr. Odeh Haddadin", ar: "السيد عودة حدادين" },
+    name: { en: "Mr. Odeh Haddadin", ar: "الأستاذ عودة حدادين" },
     title: {
       en: "Digital Business Sector Development Manager, Youth, Technology and Jobs Project, Ministry of Digital Economy and Entrepreneurship",
       ar: "مدير تطوير قطاع الأعمال الرقمية، مشروع الشباب والتكنولوجيا والوظائف، وزارة الاقتصاد الرقمي والريادة",
@@ -49,7 +49,7 @@ export const speakers: Speaker[] = [
   },
   {
     id: "shaker-amayreh",
-    name: { en: "Mr. Shaker Amayreh", ar: "السيد شاكر العمايرة" },
+    name: { en: "Mr. Shaker Amayreh", ar: "الأستاذ شاكر العمايرة" },
     title: { en: "Partnership Lead, MENA, Replit", ar: "مسؤول الشراكات في الشرق الأوسط وشمال أفريقيا، Replit" },
     bio: {
       en: "Nearly two decades in brand architecture, regional market expansion and startups. Leads Replit's partnerships across MENA, bringing AI-powered development tools to the next generation of builders, and has co-founded three startups.",
@@ -59,7 +59,7 @@ export const speakers: Speaker[] = [
   },
   {
     id: "faisal-hakki",
-    name: { en: "Mr. Faisal Hakki", ar: "السيد فيصل حقي" },
+    name: { en: "Mr. Faisal Hakki", ar: "الأستاذ فيصل حقي" },
     title: { en: "Managing Director, AB Ventures LP", ar: "المدير العام، AB Ventures LP" },
     bio: {
       en: "Leads AB Ventures, Arab Bank's early-stage venture capital arm focused on financial technology. Former CEO of Oasis500, Jordan's leading seed-stage fund and accelerator, former board member of Intaj and TechWorks, former trustee of the Crown Prince Foundation, and a 2018 Innovation Eisenhower Fellow.",
@@ -69,7 +69,7 @@ export const speakers: Speaker[] = [
   },
   {
     id: "sinamis-bayouq",
-    name: { en: "Ms. Sinamis Bayouq, PCC", ar: "الأستاذة سناميس بيوق" },
+    name: { en: "Ms. Sinamis Bayouq, PCC", ar: "الأستاذة سيناميس بايوق" },
     title: {
       en: "Executive Leadership & Transition Coach; Head of Coaching, Learning & Development, Teapot Consultancy",
       ar: "مدرّبة قيادة تنفيذية معتمدة (PCC)، رئيسة التدريب والتعلّم والتطوير، Teapot Consultancy",
@@ -90,8 +90,8 @@ export const speakers: Speaker[] = [
   {
     id: "hamzeh-nasrallah",
     photo: "/speakers/hamzeh-nasrallah.jpg",
-    name: { en: "Mr. Hamzeh Nasrallah", ar: "السيد حمزة نصرالله" },
-    title: { en: "Bridge, a Jordanian health-tech startup", ar: "Bridge، شركة أردنية ناشئة في التكنولوجيا الصحية" },
+    name: { en: "Mr. Hamzeh Nasrallah", ar: "الأستاذ حمزة نصرالله" },
+    title: { en: "Founder & CEO, Bridge Pharma Tech", ar: "المؤسس والرئيس التنفيذي، Bridge Pharma Tech" },
   },
   {
     id: "amaal-saadi",
@@ -106,7 +106,7 @@ export const speakers: Speaker[] = [
   {
     id: "abdul-fattah-darabseh",
     photo: "/speakers/abdul-fattah-darabseh.jpg",
-    name: { en: "Mr. Abdul Fattah Darabseh", ar: "السيد عبد الفتاح الدرابسة" },
+    name: { en: "Mr. Abdul Fattah Darabseh", ar: "الأستاذ عبد الفتاح الدرابسة" },
     title: { en: "Commercial Excellence Director, Axantia Group; Founder, Jordan Trainers Club", ar: "مدير التميّز التجاري، مجموعة Axantia، ومؤسس نادي المدربين الأردني (JTC)" },
     bio: {
       en: "A pharmacist with more than 20 years in commercial excellence and leadership at Hikma, AstraZeneca and Axantia. A Korn Ferry certified assessor and ATD certified trainer with a diploma in Blue Ocean Strategy from INSEAD, he founded the Jordan Trainers Club and moderates the second panel.",
@@ -149,20 +149,20 @@ export const agenda: AgendaItem[] = [
     title: { en: "Address by the Ministry of Digital Economy and Entrepreneurship", ar: "كلمة وزارة الاقتصاد الرقمي والريادة" },
     who: {
       en: "Mr. Sinan Kamal, Chief Technology and Digital Transformation Officer (CTO), on behalf of H.E. the Minister",
-      ar: "السيد سنان كمال، المدير التنفيذي للتكنولوجيا والتحول الرقمي (CTO)، مندوباً عن معالي الوزير",
+      ar: "الأستاذ سنان كمال، المدير التنفيذي للتكنولوجيا والتحول الرقمي (CTO)، مندوباً عن معالي الوزير",
     },
   },
   {
     time: { en: "10:35 – 10:50", ar: "١٠:٣٥ – ١٠:٥٠" },
     title: { en: "Address by Jordan Bromine", ar: "كلمة شركة برومين الأردن" },
-    who: { en: "Mr. Ayman Omoush, Administrative Director, Jordan Bromine Company", ar: "السيد أيمن العموش، المدير الإداري، شركة برومين الأردن" },
+    who: { en: "Mr. Ayman Omoush, Administrative Director, Jordan Bromine Company", ar: "الأستاذ أيمن العموش، المدير الإداري، شركة برومين الأردن" },
   },
   {
     time: { en: "10:50 – 11:30", ar: "١٠:٥٠ – ١١:٣٠" },
     title: { en: "First panel: Job creation in the AI economy", ar: "الجلسة الحوارية الأولى: خلق فرص العمل في اقتصاد الذكاء الاصطناعي" },
     who: {
       en: "Mr. Odeh Haddadin · Mr. Shaker Amayreh · Mr. Faisal Hakki. Moderated by Ms. Sinamis Bayouq",
-      ar: "السيد عودة حدادين · السيد شاكر العمايرة · السيد فيصل حقي. تدير الجلسة الأستاذة سناميس بيوق",
+      ar: "الأستاذ عودة حدادين · الأستاذ شاكر العمايرة · الأستاذ فيصل حقي. تدير الجلسة الأستاذة سيناميس بايوق",
     },
     highlight: true,
   },
@@ -174,11 +174,11 @@ export const agenda: AgendaItem[] = [
     },
     who: {
       en: "Dr. Abdullah Battah · Mr. Hamzeh Nasrallah · Ms. Amal Al-Sadi. Moderated by Mr. Abdul Fattah Darabseh",
-      ar: "د. عبد الله بطاح · السيد حمزة نصرالله · الأستاذة أمال السعدي. يدير الجلسة السيد عبد الفتاح الدرابسة",
+      ar: "د. عبد الله بطاح · الأستاذ حمزة نصرالله · الأستاذة أمال السعدي. يدير الجلسة الأستاذ عبد الفتاح الدرابسة",
     },
     highlight: true,
   },
-  { time: { en: "12:10 – 12:15", ar: "١٢:١٠ – ١٢:١٥" }, title: { en: "A word from a graduate", ar: "كلمة أحد الخريجين" } },
+  { time: { en: "12:10 – 12:15", ar: "١٢:١٠ – ١٢:١٥" }, title: { en: "A word from a graduate", ar: "كلمة أحد الخريجين" }, who: { en: "Mr. Saeed Al-Qaffaf, on behalf of the graduates", ar: "الأستاذ سعيد القفاف، ممثل الخريجين" } },
   {
     time: { en: "12:15 – 12:45", ar: "١٢:١٥ – ١٢:٤٥" },
     title: { en: "Certificate ceremony for the graduates", ar: "تسليم الشهادات للخريجين" },
