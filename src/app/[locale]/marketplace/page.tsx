@@ -1,4 +1,5 @@
 import { getTranslations, getLocale } from "next-intl/server";
+import { lookFor, marketplaceHeroPhotos, pexels } from "@/lib/photos";
 import { getCategories, getListings, type ListingFilters } from "@/lib/marketplace";
 import type { Category } from "@/lib/marketplace-types";
 import { ListingCard } from "@/components/ListingCard";
@@ -43,15 +44,18 @@ export default async function MarketplacePage({
 
   return (
     <main className="bg-paper">
-      <section className="border-t-4 border-cyan px-5 py-16 sm:px-8">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-deep">
+      <section className="relative overflow-hidden bg-ink px-5 py-16 text-white sm:px-8 sm:py-20">
+        <div aria-hidden className="pointer-events-none absolute -start-40 -top-40 h-[28rem] w-[28rem] rounded-full bg-violet opacity-30 blur-3xl" />
+        <div aria-hidden className="pointer-events-none absolute -bottom-40 end-0 h-[26rem] w-[26rem] rounded-full bg-red opacity-25 blur-3xl" />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
+          <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan">
             {t("eyebrow")}
           </p>
-          <h1 className="mt-3 max-w-2xl font-display text-3xl font-bold text-fg sm:text-4xl">
+          <h1 className="mt-3 max-w-2xl font-display text-4xl font-bold leading-tight text-white sm:text-5xl">
             {t("heroTitle")}
           </h1>
-          <p className="mt-3 max-w-xl text-[15px] text-neutral-600">{t("heroBody")}</p>
+          <p className="mt-3 max-w-xl text-base text-neutral-300">{t("heroBody")}</p>
 
           <form action="/marketplace" method="get" className="mt-8 flex max-w-xl gap-2">
             {category && <input type="hidden" name="category" value={category} />}
@@ -60,38 +64,62 @@ export default async function MarketplacePage({
               name="q"
               defaultValue={q}
               placeholder={t("searchPlaceholder")}
-              className="flex-1 rounded-sm border border-line bg-surface px-4 py-3 text-sm text-fg placeholder:text-neutral-400 focus:border-cyan-deep focus:outline-none"
+              className="flex-1 rounded-lg border border-white/10 bg-white px-4 py-3.5 text-sm text-fg placeholder:text-neutral-400 focus:border-cyan-deep focus:outline-none"
             />
             <button
               type="submit"
-              className="rounded-sm bg-red px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-dark"
+              className="rounded-lg bg-red px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-red-dark"
             >
               {t("search")}
             </button>
           </form>
+          </div>
+          <div className="hidden grid-cols-2 gap-3 lg:grid" aria-hidden>
+            {marketplaceHeroPhotos.map((id, i) => (
+              <div
+                key={id}
+                className={`overflow-hidden rounded-2xl ${i % 2 === 1 ? "translate-y-6" : ""} ${
+                  ["ring-cyan", "ring-red", "ring-volt", "ring-violet"][i]
+                } aspect-[4/5] ring-4 ring-offset-0`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={pexels(id, 500)} alt="" className="h-full w-full object-cover" />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="border-t border-line px-5 py-12 sm:px-8">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-4">
+          <div className="flex gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:overflow-visible lg:grid-cols-5">
             <Link
               href="/marketplace"
-              className={`px-5 py-5 transition-colors ${!category ? "bg-paper" : "bg-surface hover:bg-paper"}`}
+              className={`flex shrink-0 items-center gap-3 rounded-2xl border-2 bg-surface p-2 pe-4 transition-all hover:-translate-y-0.5 hover:shadow-lg ${
+                !category ? "border-fg" : "border-transparent"
+              }`}
             >
-              <p className="font-display text-base font-bold text-fg">{t("allCategories")}</p>
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-ink text-lg text-volt">✦</span>
+              <span className="font-display text-sm font-bold text-fg">{t("allCategories")}</span>
             </Link>
-            {topLevel.map((c) => (
-              <Link
-                key={c.id}
-                href={`/marketplace?category=${c.slug}`}
-                className={`px-5 py-5 transition-colors ${
-                  category === c.slug ? "bg-paper" : "bg-surface hover:bg-paper"
-                }`}
-              >
-                <p className="font-display text-base font-bold text-fg">{categoryName(c)}</p>
-              </Link>
-            ))}
+            {topLevel.map((c) => {
+              const look = lookFor(c.slug);
+              const active = category === c.slug;
+              return (
+                <Link
+                  key={c.id}
+                  href={`/marketplace?category=${c.slug}`}
+                  style={active ? { backgroundColor: look.color, borderColor: look.color } : undefined}
+                  className={`flex shrink-0 items-center gap-3 rounded-2xl border-2 p-2 pe-4 transition-all hover:-translate-y-0.5 hover:shadow-lg ${
+                    active ? "text-white" : "border-transparent bg-surface text-fg"
+                  }`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={pexels(look.photo, 200)} alt="" className="h-12 w-12 shrink-0 rounded-xl object-cover" />
+                  <span className="font-display text-sm font-bold leading-tight">{categoryName(c)}</span>
+                </Link>
+              );
+            })}
           </div>
 
           {subcategories.length > 0 && (

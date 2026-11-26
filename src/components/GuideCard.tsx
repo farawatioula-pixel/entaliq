@@ -1,18 +1,8 @@
 import { Link } from "@/i18n/navigation";
-import { CategoryIcon, categoryAccent } from "@/components/CategoryIcon";
+import { CategoryIcon } from "@/components/CategoryIcon";
+import { guidePhotoByCategory, lookFor, pexels } from "@/lib/photos";
 import type { Guide } from "@/lib/guides";
 import type { Locale } from "@/lib/data";
-
-const categoryTint: Record<string, string> = {
-  "graphics-design": "bg-violet-deep/10",
-  "programming-tech": "bg-cyan-deep/10",
-  "digital-marketing": "bg-red-dark/10",
-  "writing-translation": "bg-violet-deep/10",
-  "video-animation": "bg-red-dark/10",
-  "ai-services": "bg-cyan-deep/10",
-  "business-consulting": "bg-violet-deep/10",
-  ecommerce: "bg-cyan-deep/10",
-};
 
 export function GuideCard({
   guide,
@@ -26,17 +16,25 @@ export function GuideCard({
   return (
     <Link
       href={`/guides/${guide.slug}`}
-      className="group flex flex-col overflow-hidden rounded-sm border border-line bg-surface transition-colors hover:border-cyan-deep"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
     >
-      <div
-        className={`flex h-36 items-center justify-center ${categoryTint[guide.category]}`}
-      >
-        <CategoryIcon category={guide.category} className={`h-12 w-12 ${categoryAccent[guide.category]}`} />
-      </div>
-      <div className="flex flex-1 flex-col gap-2 px-5 py-5">
-        <span className={`text-xs font-semibold uppercase tracking-widest ${categoryAccent[guide.category]}`}>
+      <div className="relative h-44 overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={pexels(guidePhotoByCategory[guide.category] ?? lookFor(guide.category).photo, 700)}
+          alt=""
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <span
+          style={{ backgroundColor: lookFor(guide.category).color }}
+          className="absolute bottom-3 start-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-white shadow"
+        >
+          <CategoryIcon category={guide.category} className="h-3.5 w-3.5 text-white" />
           {categoryLabel}
         </span>
+      </div>
+      <div className="flex flex-1 flex-col gap-2 px-5 py-5">
         <h3 className="font-display text-lg font-bold leading-snug text-fg group-hover:text-cyan-deep">
           {guide.title[locale]}
         </h3>
