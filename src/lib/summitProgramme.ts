@@ -61,21 +61,25 @@ export const speakers: Speaker[] = [
   },
   {
     id: "abdullah-battah",
+    photo: "/speakers/abdullah-battah.jpg",
     name: { en: "Dr. Abdullah Battah", ar: "د. عبد الله بطاح" },
     title: { en: "Independent expert in marketing and AI content creation", ar: "خبير مستقل في التسويق وصناعة المحتوى بالذكاء الاصطناعي" },
   },
   {
     id: "hamzeh-nasrallah",
+    photo: "/speakers/hamzeh-nasrallah.jpg",
     name: { en: "Mr. Hamzeh Nasrallah", ar: "السيد حمزة نصرالله" },
     title: { en: "Bridge, a Jordanian health-tech startup", ar: "Bridge، شركة أردنية ناشئة في التكنولوجيا الصحية" },
   },
   {
     id: "amaal-saadi",
+    photo: "/speakers/amaal-saadi.jpg",
     name: { en: "Ms. Amaal Saadi", ar: "السيدة آمال السعدي" },
     title: { en: "JoAcademy, a Jordanian e-learning platform", ar: "JoAcademy، منصة تعليم إلكتروني أردنية" },
   },
   {
     id: "abdul-fattah-darabseh",
+    photo: "/speakers/abdul-fattah-darabseh.jpg",
     name: { en: "Mr. Abdul Fattah Darabseh", ar: "السيد عبد الفتاح الدرابسة" },
     title: { en: "Moderator, second panel", ar: "مدير الجلسة الحوارية الثانية" },
     role: "moderator",
@@ -83,6 +87,7 @@ export const speakers: Speaker[] = [
   },
   {
     id: "farah-batarneh",
+    photo: "/speakers/farah-batarneh.jpg",
     name: { en: "Ms. Farah Batarneh", ar: "السيدة فرح البطارنة" },
     title: { en: "Master of ceremonies, Hamsa", ar: "عريفة الحفل، Hamsa" },
     role: "moderator",
