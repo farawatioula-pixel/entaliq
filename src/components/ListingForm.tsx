@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ASSISTANT_DRAFT_KEY, type AssistantDraft } from "@/components/ListingAssistant";
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -54,6 +55,50 @@ export default function ListingForm({
   const [error, setError] = useState<string | null>(null);
 
   const subcategories = categoryId ? categories.filter((c) => c.parent_id === categoryId) : [];
+
+  // Prefill from the onboarding assistant (new listings only).
+  const [fromAssistant, setFromAssistant] = useState(false);
+  useEffect(() => {
+    if (listing) return;
+    let raw: string | null = null;
+    try {
+      raw = sessionStorage.getItem(ASSISTANT_DRAFT_KEY);
+    } catch {
+      return;
+    }
+    if (!raw) return;
+    try {
+      const d = JSON.parse(raw) as AssistantDraft["listing"];
+      setTitle(d.title ?? "");
+      setDescription(d.description ?? "");
+      const cat = topLevel.find((c) => c.slug === d.category);
+      if (cat) setCategoryId(cat.id);
+      setTags((d.tags ?? []).join(", "));
+      setRequirements(d.requirements ?? "");
+      setFaq((d.faq ?? []).filter((f) => f.question && f.answer));
+      setPackages(
+        allTiers.map((tier) => {
+          const p = d.packages?.find((x) => x.tier === tier);
+          return p
+            ? {
+                tier,
+                name: p.name ?? "",
+                description: p.description ?? "",
+                price: Number(p.price_jod) || 0,
+                delivery_days: Math.max(1, Number(p.delivery_days) || 1),
+                revisions: Math.max(0, Number(p.revisions) || 0),
+                features: p.features ?? [],
+              }
+            : emptyPackage(tier);
+        })
+      );
+      setFromAssistant(true);
+      sessionStorage.removeItem(ASSISTANT_DRAFT_KEY);
+    } catch {
+      /* ignore a broken draft */
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function updateFaq(i: number, field: keyof FaqItem, value: string) {
     setFaq((prev) => prev.map((f, idx) => (idx === i ? { ...f, [field]: value } : f)));
@@ -160,6 +205,18 @@ export default function ListingForm({
 
   return (
     <div className="space-y-10">
+      {fromAssistant && (
+        <div className="rounded-2xl border-2 border-volt bg-volt/10 px-5 py-4 text-sm text-fg">
+          <p className="font-semibold">
+            {locale === "ar" ? "✦ جهّز المساعد هذه الخدمة لك" : "✦ Your assistant filled this in for you"}
+          </p>
+          <p className="mt-1 text-neutral-700">
+            {locale === "ar"
+              ? "أضف صورة واحدة على الأقل من أعمالك، راجع النص والأسعار، ثم اضغط نشر."
+              : "Add at least one photo of your work, check the text and prices, then press Publish."}
+          </p>
+        </div>
+      )}
       {error && (
         <div className="rounded-sm border border-red-dark/30 bg-red/5 px-4 py-3 text-sm text-red-dark">
           {error}

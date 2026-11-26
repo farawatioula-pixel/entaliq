@@ -27,7 +27,7 @@ export default async function DashboardPage({
   const stats = await getSellerStats(user.id);
 
   if (stats.totalListings === 0) {
-    redirect({ href: "/dashboard/listings/new", locale });
+    redirect({ href: "/dashboard/listings/assistant", locale });
     return;
   }
 
