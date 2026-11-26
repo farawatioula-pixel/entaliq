@@ -46,17 +46,17 @@ export const speakers: Speaker[] = [
     photo: "/speakers/faisal-hakki.jpg",
   },
   {
-    id: "shorouq-hilal",
-    name: { en: "Ms. Shorouq Hilal", ar: "الأستاذة شروق هلال" },
+    id: "sinamis-bayouq",
+    name: { en: "Ms. Sinamis Bayouq, PCC", ar: "الأستاذة سناميس بيوق" },
     title: {
-      en: "Spokesperson and Head of Communication, Outreach and Social Media, Ministry of Digital Economy and Entrepreneurship",
-      ar: "الناطق الإعلامي ورئيسة قسم الاتصال والتواصل والإعلام الاجتماعي، وزارة الاقتصاد الرقمي والريادة",
+      en: "Executive Leadership & Transition Coach; Head of Coaching, Learning & Development, Teapot Consultancy",
+      ar: "مدرّبة قيادة تنفيذية معتمدة (PCC)، رئيسة التدريب والتعلّم والتطوير، Teapot Consultancy",
     },
     bio: {
-      en: "Nearly two decades at the Ministry, leading strategic communications for national digital transformation programmes such as Sanad, Jordan Source and Youth, Technology and Jobs. She developed Jordan's Government Social Media Guidelines and moderates the panel.",
-      ar: "تمتد خبرتها في الوزارة قرابة عقدين، تقود خلالها الاتصال الاستراتيجي لبرامج التحول الرقمي الوطنية مثل «سند» و«Jordan Source» ومشروع الشباب والتكنولوجيا والوظائف. أعدّت الدليل الحكومي لاستخدام وسائل التواصل الاجتماعي، وتدير الجلسة الحوارية.",
+      en: "An ICF Professional Certified Coach with over 21 years of experience across technology, education, entrepreneurship and organisational development. She has supported more than 2,000 people through coaching and training programmes across the Middle East, and moderates the panel.",
+      ar: "مدرّبة معتمدة من الاتحاد الدولي للكوتشينغ (PCC) بخبرة تزيد على ٢١ عاماً في التكنولوجيا والتعليم والريادة والتطوير المؤسسي. دعمت أكثر من ٢٠٠٠ شخص عبر برامج تدريب وكوتشينغ في الشرق الأوسط، وتدير الجلسة الحوارية.",
     },
-    photo: "/speakers/shorouq-hilal.jpg",
+    photo: "/speakers/sinamis-bayouq.jpg",
     role: "moderator",
   },
   {
@@ -128,8 +128,8 @@ export const agenda: AgendaItem[] = [
     time: { en: "10:50 – 11:30", ar: "١٠:٥٠ – ١١:٣٠" },
     title: { en: "First panel: Job creation in the AI economy", ar: "الجلسة الحوارية الأولى: خلق فرص العمل في اقتصاد الذكاء الاصطناعي" },
     who: {
-      en: "Mr. Odeh Haddadin · Mr. Shaker Amayreh · Mr. Faisal Hakki. Moderated by Ms. Shorouq Hilal",
-      ar: "السيد عودة حدادين · السيد شاكر العمايرة · السيد فيصل حقي. تدير الجلسة الأستاذة شروق هلال",
+      en: "Mr. Odeh Haddadin · Mr. Shaker Amayreh · Mr. Faisal Hakki. Moderated by Ms. Sinamis Bayouq",
+      ar: "السيد عودة حدادين · السيد شاكر العمايرة · السيد فيصل حقي. تدير الجلسة الأستاذة سناميس بيوق",
     },
     highlight: true,
   },
