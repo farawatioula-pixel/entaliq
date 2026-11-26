@@ -40,8 +40,8 @@ export const speakers: Speaker[] = [
     name: { en: "Mr. Faisal Hakki", ar: "السيد فيصل حقي" },
     title: { en: "Managing Director, AB Ventures LP", ar: "المدير العام، AB Ventures LP" },
     bio: {
-      en: "Investor and board observer at HyperPay. Former CEO of Oasis500, the Middle East's go-to tech startup accelerator, and former trustee of the Crown Prince Foundation.",
-      ar: "مستثمر ومراقب في مجلس إدارة HyperPay. شغل سابقاً منصب الرئيس التنفيذي لشركة Oasis500، أبرز مسرّعات الشركات التقنية الناشئة في المنطقة، وعضوية مجلس أمناء مؤسسة ولي العهد.",
+      en: "Leads AB Ventures, Arab Bank's early-stage venture capital arm focused on financial technology. Former CEO of Oasis500, Jordan's leading seed-stage fund and accelerator, former board member of Intaj and TechWorks, former trustee of the Crown Prince Foundation, and a 2018 Innovation Eisenhower Fellow.",
+      ar: "يدير AB Ventures، ذراع الاستثمار الجريء المبكر للبنك العربي والمتخصص في التكنولوجيا المالية. شغل سابقاً منصب الرئيس التنفيذي لـ Oasis500، صندوق الاستثمار التأسيسي والمسرّعة الرائدة في الأردن، وكان عضواً في مجالس إدارة «إنتاج» وTechWorks ومجلس أمناء مؤسسة ولي العهد، وهو زميل آيزنهاور للابتكار لعام ٢٠١٨.",
     },
     photo: "/speakers/faisal-hakki.jpg",
   },
@@ -74,8 +74,12 @@ export const speakers: Speaker[] = [
   {
     id: "amaal-saadi",
     photo: "/speakers/amaal-saadi.jpg",
-    name: { en: "Ms. Amaal Saadi", ar: "السيدة آمال السعدي" },
-    title: { en: "JoAcademy, a Jordanian e-learning platform", ar: "JoAcademy، منصة تعليم إلكتروني أردنية" },
+    name: { en: "Ms. Amal Al-Sadi", ar: "السيدة أمل السعدي" },
+    title: { en: "Chief Technology Officer, Jo Academy | ULA Group", ar: "الرئيسة التنفيذية للتكنولوجيا، Jo Academy | ULA Group" },
+    bio: {
+      en: "Technology executive with over 25 years in software engineering, digital transformation and innovation. She leads technology strategy at Jo Academy, previously spent 14 years at ESKADENIA Software, founded VineTechs, and was named Visionary Woman of the Year in Technology at the 2025 Fluxx Middle East Awards.",
+      ar: "قيادية في التكنولوجيا بخبرة تزيد على ٢٥ عاماً في هندسة البرمجيات والتحول الرقمي والابتكار. تقود الاستراتيجية التقنية في Jo Academy، وعملت ١٤ عاماً في ESKADENIA Software، وأسست شركة VineTechs، ونالت لقب المرأة الملهمة للعام في التكنولوجيا ضمن جوائز Fluxx Middle East لعام ٢٠٢٥.",
+    },
   },
   {
     id: "abdul-fattah-darabseh",
@@ -140,8 +144,8 @@ export const agenda: AgendaItem[] = [
       ar: "الجلسة الحوارية الثانية: قصص ريادية في اقتصاد الذكاء الاصطناعي: فن صناعة الفرص",
     },
     who: {
-      en: "Dr. Abdullah Battah · Mr. Hamzeh Nasrallah · Ms. Amaal Saadi. Moderated by Mr. Abdul Fattah Darabseh",
-      ar: "د. عبد الله بطاح · السيد حمزة نصرالله · السيدة آمال السعدي. يدير الجلسة السيد عبد الفتاح الدرابسة",
+      en: "Dr. Abdullah Battah · Mr. Hamzeh Nasrallah · Ms. Amal Al-Sadi. Moderated by Mr. Abdul Fattah Darabseh",
+      ar: "د. عبد الله بطاح · السيد حمزة نصرالله · السيدة أمل السعدي. يدير الجلسة السيد عبد الفتاح الدرابسة",
     },
     highlight: true,
   },
