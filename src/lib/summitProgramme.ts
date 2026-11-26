@@ -13,6 +13,28 @@ export type Speaker = {
 
 export const speakers: Speaker[] = [
   {
+    id: "oula-farawati",
+    photo: "/speakers/oula-farawati.jpg",
+    name: { en: "Dr. Oula Farawati", ar: "د. علا الفرواتي" },
+    title: { en: "Mountaliq Founder", ar: "مؤسِّسة منطلق" },
+    role: "moderator",
+    roleLabel: { en: "Host", ar: "المضيفة" },
+  },
+  {
+    id: "sinan-kamal",
+    photo: "/speakers/sinan-kamal.jpg",
+    name: { en: "Mr. Sinan Kamal", ar: "السيد سنان كمال" },
+    title: {
+      en: "Chief Technology and Digital Transformation Officer (CTO), Ministry of Digital Economy and Entrepreneurship, on behalf of H.E. the Minister",
+      ar: "المدير التنفيذي للتكنولوجيا والتحول الرقمي (CTO) في وزارة الاقتصاد الرقمي والريادة، مندوباً عن معالي الوزير",
+    },
+  },
+  {
+    id: "ayman-omoush",
+    name: { en: "Mr. Ayman Omoush", ar: "السيد أيمن العموش" },
+    title: { en: "On behalf of Jordan Bromine Company", ar: "ممثلاً عن شركة برومين الأردن" },
+  },
+  {
     id: "odeh-haddadin",
     name: { en: "Mr. Odeh Haddadin", ar: "السيد عودة حدادين" },
     title: {
@@ -74,7 +96,7 @@ export const speakers: Speaker[] = [
   {
     id: "amaal-saadi",
     photo: "/speakers/amaal-saadi.jpg",
-    name: { en: "Ms. Amal Al-Sadi", ar: "السيدة أمال السعدي" },
+    name: { en: "Ms. Amal Al-Sadi", ar: "الأستاذة أمال السعدي" },
     title: { en: "Chief Technology Officer, Jo Academy | ULA Group", ar: "الرئيسة التنفيذية للتكنولوجيا، Jo Academy | ULA Group" },
     bio: {
       en: "Technology executive with over 25 years in software engineering, digital transformation and innovation. She leads technology strategy at Jo Academy, previously spent 14 years at ESKADENIA Software, founded VineTechs, and was named Visionary Woman of the Year in Technology at the 2025 Fluxx Middle East Awards.",
@@ -92,7 +114,7 @@ export const speakers: Speaker[] = [
   {
     id: "farah-batarneh",
     photo: "/speakers/farah-batarneh.jpg",
-    name: { en: "Ms. Farah Batarneh", ar: "السيدة فرح البطارنة" },
+    name: { en: "Ms. Farah Batarneh", ar: "الأستاذة فرح البطارنة" },
     title: { en: "Master of ceremonies, Hamsa", ar: "عريفة الحفل، Hamsa" },
     role: "moderator",
     roleLabel: { en: "Master of ceremonies", ar: "عريفة الحفل" },
@@ -111,7 +133,7 @@ export const agenda: AgendaItem[] = [
   {
     time: { en: "10:00 – 10:05", ar: "١٠:٠٠ – ١٠:٠٥" },
     title: { en: "Royal anthem and opening", ar: "السلام الملكي وافتتاح الحفل" },
-    who: { en: "Master of ceremonies: Ms. Farah Batarneh, Hamsa", ar: "عريفة الحفل: السيدة فرح البطارنة، Hamsa" },
+    who: { en: "Master of ceremonies: Ms. Farah Batarneh, Hamsa", ar: "عريفة الحفل: الأستاذة فرح البطارنة، Hamsa" },
   },
   {
     time: { en: "10:05 – 10:20", ar: "١٠:٠٥ – ١٠:٢٠" },
@@ -121,12 +143,15 @@ export const agenda: AgendaItem[] = [
   {
     time: { en: "10:20 – 10:35", ar: "١٠:٢٠ – ١٠:٣٥" },
     title: { en: "Address by the Ministry of Digital Economy and Entrepreneurship", ar: "كلمة وزارة الاقتصاد الرقمي والريادة" },
-    who: { en: "Ministry of Digital Economy and Entrepreneurship", ar: "وزارة الاقتصاد الرقمي والريادة" },
+    who: {
+      en: "Mr. Sinan Kamal, Chief Technology and Digital Transformation Officer (CTO), on behalf of H.E. the Minister",
+      ar: "السيد سنان كمال، المدير التنفيذي للتكنولوجيا والتحول الرقمي (CTO)، مندوباً عن معالي الوزير",
+    },
   },
   {
     time: { en: "10:35 – 10:50", ar: "١٠:٣٥ – ١٠:٥٠" },
     title: { en: "Address by Jordan Bromine", ar: "كلمة شركة برومين الأردن" },
-    who: { en: "Jordan Bromine Company", ar: "شركة برومين الأردن" },
+    who: { en: "Mr. Ayman Omoush, on behalf of Jordan Bromine Company", ar: "السيد أيمن العموش، ممثلاً عن شركة برومين الأردن" },
   },
   {
     time: { en: "10:50 – 11:30", ar: "١٠:٥٠ – ١١:٣٠" },
@@ -145,7 +170,7 @@ export const agenda: AgendaItem[] = [
     },
     who: {
       en: "Dr. Abdullah Battah · Mr. Hamzeh Nasrallah · Ms. Amal Al-Sadi. Moderated by Mr. Abdul Fattah Darabseh",
-      ar: "د. عبد الله بطاح · السيد حمزة نصرالله · السيدة أمال السعدي. يدير الجلسة السيد عبد الفتاح الدرابسة",
+      ar: "د. عبد الله بطاح · السيد حمزة نصرالله · الأستاذة أمال السعدي. يدير الجلسة السيد عبد الفتاح الدرابسة",
     },
     highlight: true,
   },
