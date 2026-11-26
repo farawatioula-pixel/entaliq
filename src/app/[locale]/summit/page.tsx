@@ -157,17 +157,17 @@ export default async function SummitPage() {
               ) : (
                 <div className="flex aspect-square w-full items-center justify-center bg-ink">
                   <span className="font-display text-6xl font-bold text-cyan">
-                    {sp.name.en.replace(/^(Mr|Ms|H\.E\.)\.? /, "").split(" ").map((w) => w[0]).join("")}
+                    {sp.name.en.replace(/^(Mr|Ms|Dr|H\.E\.)\.? /, "").split(" ").map((w) => w[0]).join("")}
                   </span>
                 </div>
               )}
               <div className="flex flex-1 flex-col p-6">
                 {sp.role === "moderator" && (
-                  <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-red-dark">{t("moderator")}</p>
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-red-dark">{sp.roleLabel ? sp.roleLabel[locale] : t("moderator")}</p>
                 )}
                 <h3 className="font-display text-xl font-bold text-fg">{sp.name[locale]}</h3>
                 <p className="mt-1 text-sm font-semibold text-cyan-deep">{sp.title[locale]}</p>
-                <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">{sp.bio[locale]}</p>
+                {sp.bio && <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">{sp.bio[locale]}</p>}
               </div>
             </article>
           ))}
