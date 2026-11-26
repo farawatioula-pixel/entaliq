@@ -13,6 +13,24 @@ export type Speaker = {
 
 export const speakers: Speaker[] = [
   {
+    id: "oula-farawati",
+    photo: "/speakers/oula-farawati.jpg",
+    name: { en: "Dr. Oula Farawati", ar: "د. علا الفرواتي" },
+    title: { en: "Mountaliq Director, host of the summit", ar: "مديرة منطلق، مضيفة القمة" },
+    role: "moderator",
+    roleLabel: { en: "Host", ar: "المضيفة" },
+  },
+  {
+    id: "sinan-kamal",
+    name: { en: "Mr. Sinan Kamal", ar: "الأستاذ سنان كمال" },
+    title: {
+      en: "Chief Technology and Digital Transformation Officer, Ministry of Digital Economy and Entrepreneurship",
+      ar: "المدير التنفيذي للتكنولوجيا والتحول الرقمي، وزارة الاقتصاد الرقمي والريادة",
+    },
+    roleLabel: { en: "On behalf of H.E. the Minister", ar: "نيابةً عن معالي الوزير" },
+    role: "moderator",
+  },
+  {
     id: "odeh-haddadin",
     name: { en: "Mr. Odeh Haddadin", ar: "السيد عودة حدادين" },
     title: {
@@ -116,12 +134,15 @@ export const agenda: AgendaItem[] = [
   {
     time: { en: "10:05 – 10:20", ar: "١٠:٠٥ – ١٠:٢٠" },
     title: { en: "Opening: Mountaliq, from Ghor Al-Safi to the region", ar: "العرض الافتتاحي: منطلق، من غور الصافي إلى المنطقة" },
-    who: { en: "Dr. Oula Farawati, Mountaliq Founder", ar: "د. علا الفرواتي، مؤسِّسة منطلق" },
+    who: { en: "Dr. Oula Farawati, Mountaliq Director and host of the summit", ar: "د. علا الفرواتي، مديرة منطلق ومضيفة القمة" },
   },
   {
     time: { en: "10:20 – 10:35", ar: "١٠:٢٠ – ١٠:٣٥" },
     title: { en: "Address by the Ministry of Digital Economy and Entrepreneurship", ar: "كلمة وزارة الاقتصاد الرقمي والريادة" },
-    who: { en: "Ministry of Digital Economy and Entrepreneurship", ar: "وزارة الاقتصاد الرقمي والريادة" },
+    who: {
+      en: "Mr. Sinan Kamal, Chief Technology and Digital Transformation Officer, on behalf of H.E. the Minister",
+      ar: "الأستاذ سنان كمال، المدير التنفيذي للتكنولوجيا والتحول الرقمي، نيابةً عن معالي الوزير",
+    },
   },
   {
     time: { en: "10:35 – 10:50", ar: "١٠:٣٥ – ١٠:٥٠" },
