@@ -178,7 +178,7 @@ export const agenda: AgendaItem[] = [
     },
     highlight: true,
   },
-  { time: { en: "12:10 – 12:15", ar: "١٢:١٠ – ١٢:١٥" }, title: { en: "A word from a graduate", ar: "كلمة أحد الخريجين" }, who: { en: "Mr. Saeed Al-Qaffaf, on behalf of the graduates", ar: "الأستاذ سعيد القفاف، ممثل الخريجين" } },
+  { time: { en: "12:10 – 12:15", ar: "١٢:١٠ – ١٢:١٥" }, title: { en: "A word from the graduates", ar: "كلمة الخريجين" }, who: { en: "Mr. Saeed Al-Qaffaf, on behalf of the graduates", ar: "الأستاذ سعيد القفاف، ممثل الخريجين" } },
   {
     time: { en: "12:15 – 12:45", ar: "١٢:١٥ – ١٢:٤٥" },
     title: { en: "Certificate ceremony for the graduates", ar: "تسليم الشهادات للخريجين" },
