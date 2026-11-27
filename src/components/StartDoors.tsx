@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import ListingAssistant from "@/components/ListingAssistant";
-import { pexels } from "@/lib/photos";
+import { doorPhotos, photo, photoFocus } from "@/lib/photos";
 
 type Loc = "en" | "ar";
 
@@ -79,7 +79,7 @@ export default function StartDoors(props: {
         >
           <div className="aspect-[16/9] overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={pexels(16313504, 800)} alt="" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img src={photo(doorPhotos.sell)} alt="" style={{ objectPosition: photoFocus(doorPhotos.sell) }} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div className="flex flex-1 flex-col p-6">
             <span className="font-display text-2xl font-bold">{T.sell[locale]}</span>
@@ -95,7 +95,7 @@ export default function StartDoors(props: {
         >
           <div className="aspect-[16/9] overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={pexels(8133809, 800)} alt="" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img src={photo(doorPhotos.buy)} alt="" style={{ objectPosition: photoFocus(doorPhotos.buy) }} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div className="flex flex-1 flex-col p-6">
             <span className="font-display text-2xl font-bold">{T.buy[locale]}</span>

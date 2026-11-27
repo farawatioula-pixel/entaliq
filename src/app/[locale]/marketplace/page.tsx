@@ -1,5 +1,5 @@
 import { getTranslations, getLocale } from "next-intl/server";
-import { lookFor, marketplaceHeroPhotos, pexels } from "@/lib/photos";
+import { lookFor, marketplaceHeroPhotos, photo, photoFocus } from "@/lib/photos";
 import { getCategories, getListings, type ListingFilters } from "@/lib/marketplace";
 import type { Category } from "@/lib/marketplace-types";
 import { ListingCard } from "@/components/ListingCard";
@@ -83,7 +83,7 @@ export default async function MarketplacePage({
                 } aspect-[4/5] ring-4 ring-offset-0`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={pexels(id, 500)} alt="" className="h-full w-full object-cover" />
+                <img src={photo(id)} alt="" style={{ objectPosition: photoFocus(id) }} className="h-full w-full object-cover" />
               </div>
             ))}
           </div>
@@ -115,7 +115,7 @@ export default async function MarketplacePage({
                   }`}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={pexels(look.photo, 200)} alt="" className="h-12 w-12 shrink-0 rounded-xl object-cover" />
+                  <img src={photo(look.photo, "sm")} alt="" style={{ objectPosition: photoFocus(look.photo) }} className="h-12 w-12 shrink-0 rounded-xl object-cover" />
                   <span className="font-display text-sm font-bold leading-tight">{categoryName(c)}</span>
                 </Link>
               );
