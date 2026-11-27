@@ -39,7 +39,7 @@ export default async function StartPage({
       <div className="relative mx-auto max-w-3xl">
         <StartDoors
           locale={loc}
-          initialDoor={door === "sell" ? "sell" : null}
+          initialDoor={door === "sell" || door === "buy" ? door : null}
           userId={user?.id ?? null}
           knownName={profile?.name ?? ""}
           knownAvatar={profile?.avatar_url ?? ""}

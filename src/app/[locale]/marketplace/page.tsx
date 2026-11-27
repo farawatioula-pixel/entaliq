@@ -73,6 +73,12 @@ export default async function MarketplacePage({
               {t("search")}
             </button>
           </form>
+          <Link
+            href="/start?door=buy"
+            className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-cyan hover:underline"
+          >
+            📣 {t("postRequest")}
+          </Link>
           </div>
           <div className="hidden grid-cols-2 gap-3 lg:grid" aria-hidden>
             {marketplaceHeroPhotos.map((id, i) => (

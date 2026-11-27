@@ -481,7 +481,8 @@
     "newOrder": "لقد تلقيت طلبًا جديدًا",
     "orderStatusChanged": "تغيرت حالة الطلب إلى {status}",
     "newMessage": "رسالة جديدة",
-    "generic": "إشعار"
+    "generic": "إشعار",
+    "newOpportunity": "طلب جديد يناسب مهاراتك: {title}"
   },
   "orderStatusLabels": {
     "pending": "قيد الانتظار",
@@ -687,7 +688,8 @@
     "sortTopRated": "الأعلى تقييمًا",
     "serviceCount": "{count, plural, one {# خدمة} other {# خدمات}}",
     "noServicesMatch": "لا توجد خدمات مطابقة بعد.",
-    "listFirstOne": "أضف أول واحدة."
+    "listFirstOne": "أضف أول واحدة.",
+    "postRequest": "لم تجد ما تريد؟ اطلب خدمة ويرسل لك المستقلون عروضهم"
   },
   "messagesPage": {
     "eyebrow": "الرسائل",

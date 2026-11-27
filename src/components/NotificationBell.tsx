@@ -31,6 +31,11 @@ export function NotificationBell() {
         };
       case "new_message":
         return { text: t("newMessage"), href: `/messages/${payload.conversation_id}` };
+      case "new_opportunity":
+        return {
+          text: t("newOpportunity", { title: payload.title ?? "" }),
+          href: `/messages/${payload.conversation_id}`,
+        };
       default:
         return { text: t("generic"), href: "/orders" };
     }

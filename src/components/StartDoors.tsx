@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import ListingAssistant from "@/components/ListingAssistant";
+import RequestAssistant from "@/components/RequestAssistant";
 import { doorPhotos, photo, photoFocus } from "@/lib/photos";
 
 type Loc = "en" | "ar";
@@ -17,11 +18,12 @@ const T = {
   },
   buy: { en: "I need a service", ar: "أحتاج خدمة" },
   buyBody: {
-    en: "Browse services from Mountaliq-trained freelancers: design, content, websites, e-commerce, AI and more.",
-    ar: "تصفّح خدمات مستقلين دربهم منطلق: تصميم، محتوى، مواقع، تجارة إلكترونية، ذكاء اصطناعي والمزيد.",
+    en: "Tell us what you need in 4 quick questions. Mountaliq-trained freelancers who do this work send you their offers.",
+    ar: "أخبرنا بما تحتاجه في ٤ أسئلة سريعة، ويرسل لك مستقلو منطلق المتخصصون عروضهم.",
   },
   go: { en: "Let's go", ar: "هيا بنا" },
-  browse: { en: "Browse services", ar: "تصفّح الخدمات" },
+  browse: { en: "Post a request", ar: "اطلب خدمة" },
+  orBrowse: { en: "or browse ready-made services", ar: "أو تصفّح الخدمات الجاهزة" },
   back: { en: "← Back", ar: "→ رجوع" },
 };
 
@@ -29,7 +31,7 @@ const SAVE_KEY = "mountaliq.assistant.v1";
 
 export default function StartDoors(props: {
   locale: Loc;
-  initialDoor: "sell" | null;
+  initialDoor: "sell" | "buy" | null;
   userId: string | null;
   knownName: string;
   knownAvatar: string;
@@ -37,18 +39,40 @@ export default function StartDoors(props: {
   oauthProviders: string[];
 }) {
   const { locale } = props;
-  const [door, setDoor] = useState<"sell" | null>(props.initialDoor);
+  const [door, setDoor] = useState<"sell" | "buy" | null>(props.initialDoor);
 
   // A conversation already in progress opens straight into the assistant.
   useEffect(() => {
     try {
       // Browser storage is only readable after mount.
+      if (props.initialDoor) return;
+      const saved = localStorage.getItem(SAVE_KEY)
+        ? "sell"
+        : localStorage.getItem("mountaliq.request.v1")
+          ? "buy"
+          : null;
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (localStorage.getItem(SAVE_KEY)) setDoor("sell");
+      if (saved) setDoor(saved);
     } catch {
       /* ignore */
     }
-  }, []);
+  }, [props.initialDoor]);
+
+  if (door === "buy") {
+    return (
+      <div>
+        <button onClick={() => setDoor(null)} className="mb-4 text-sm font-semibold text-muted hover:text-fg">
+          {T.back[locale]}
+        </button>
+        <RequestAssistant locale={locale} userId={props.userId} categories={props.categories} />
+        <p className="mt-4 text-center text-sm">
+          <Link href="/marketplace" className="font-semibold text-cyan-deep hover:underline">
+            {T.orBrowse[locale]}
+          </Link>
+        </p>
+      </div>
+    );
+  }
 
   if (door === "sell") {
     return (
@@ -89,8 +113,8 @@ export default function StartDoors(props: {
             </span>
           </div>
         </button>
-        <Link
-          href="/marketplace"
+        <button
+          onClick={() => setDoor("buy")}
           className="group flex flex-col overflow-hidden rounded-3xl bg-ink text-white shadow-lg transition-transform hover:-translate-y-1 hover:shadow-2xl"
         >
           <div className="aspect-[16/9] overflow-hidden">
@@ -104,7 +128,7 @@ export default function StartDoors(props: {
               {T.browse[locale]}
             </span>
           </div>
-        </Link>
+        </button>
       </div>
     </div>
   );

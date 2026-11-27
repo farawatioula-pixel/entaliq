@@ -481,7 +481,8 @@
     "newOrder": "You received a new order",
     "orderStatusChanged": "Order status changed to {status}",
     "newMessage": "New message",
-    "generic": "Notification"
+    "generic": "Notification",
+    "newOpportunity": "New request matching your skills: {title}"
   },
   "orderStatusLabels": {
     "pending": "Pending",
@@ -687,7 +688,8 @@
     "sortTopRated": "Top Rated",
     "serviceCount": "{count, plural, one {# service} other {# services}}",
     "noServicesMatch": "No services match yet.",
-    "listFirstOne": "List the first one."
+    "listFirstOne": "List the first one.",
+    "postRequest": "Can't find it? Post a request and freelancers send you offers"
   },
   "messagesPage": {
     "eyebrow": "Messages",

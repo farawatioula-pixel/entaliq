@@ -165,7 +165,8 @@ export type Favorite = {
 export type NotificationType =
   | "new_order"
   | "order_status_changed"
-  | "new_message";
+  | "new_message"
+  | "new_opportunity";
 
 export type AppNotification = {
   id: string;
