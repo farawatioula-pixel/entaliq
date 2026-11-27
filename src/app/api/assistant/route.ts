@@ -25,7 +25,11 @@ const tools = [
           description: "1 = about you, 2 = your service, 3 = packages and prices, 4 = final details",
         },
         question: { type: "string", description: "The question, in the trainee's language. Friendly, max 2 sentences." },
-        options: { type: "array", items: { type: "string" }, maxItems: 4 },
+        options: { type: "array", items: { type: "string" }, maxItems: 5 },
+        multiple: {
+          type: "boolean",
+          description: "true when more than one option can apply (skills, tools, types of clients). The trainee can then tick several, or all of them.",
+        },
       },
       required: ["step", "question"],
     },
@@ -96,7 +100,7 @@ Your job: help a trainee publish their profile and FIRST service listing by inte
 
 Rules:
 - Write in ${lang}. If the trainee writes in another language, switch to theirs.
-- ALWAYS respond by calling a tool. Ask exactly ONE question per turn with ask_question. Keep it short, warm and encouraging. Offer 2-4 options they can tap whenever possible.
+- ALWAYS respond by calling a tool. Ask exactly ONE question per turn with ask_question. Keep it short, warm and encouraging. Offer 2-5 options they can tap whenever possible. When several options can be true at once, set multiple: true (do not add an "all of the above" option yourself; the app adds it).
 - Move through the steps in order:
   1. About you: what they do, their experience level, any past work or tools they use.
   2. Your service: the ONE service to sell first (help them narrow it down), who it is for, what the buyer receives.
@@ -176,11 +180,12 @@ export async function POST(req: Request) {
     return NextResponse.json({ kind: "draft", draft: call.input });
   }
 
-  const input = call.input as { step?: number; question?: string; options?: string[] };
+  const input = call.input as { step?: number; question?: string; options?: string[]; multiple?: boolean };
   return NextResponse.json({
     kind: "question",
     step: Math.min(4, Math.max(1, Number(input.step) || 1)),
     question: String(input.question ?? ""),
-    options: Array.isArray(input.options) ? input.options.slice(0, 4).map(String) : [],
+    options: Array.isArray(input.options) ? input.options.slice(0, 5).map(String) : [],
+    multiple: Boolean(input.multiple),
   });
 }
