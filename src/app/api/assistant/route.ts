@@ -152,7 +152,7 @@ export async function POST(req: Request) {
       max_tokens: 4000,
       system: systemPrompt(locale, categories),
       tools,
-      tool_choice: { type: "any" },
+      tool_choice: { type: "auto" },
       messages,
     }),
   });
