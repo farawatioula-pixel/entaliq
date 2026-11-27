@@ -78,7 +78,7 @@ export default function Header() {
   }
 
   const isLoggedIn = !!userId;
-  const buyHref = isLoggedIn ? "/marketplace" : "/signup?next=/marketplace";
+  const buyHref = "/start?door=buy";
   const sellHref = isLoggedIn
     ? "/dashboard"
     : "/start?door=sell";

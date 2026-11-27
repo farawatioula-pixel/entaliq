@@ -88,7 +88,7 @@ export default async function Home({
             {locale === "ar" ? "أريد أن أبيع مهاراتي" : "I want to sell my skills"}
           </Link>
           <Link
-            href="/marketplace"
+            href="/start?door=buy"
             className="flex items-center justify-center rounded-full bg-ink px-6 py-3.5 text-[15px] font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5"
           >
             {locale === "ar" ? "أحتاج خدمة" : "I need a service"}
