@@ -7,7 +7,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 export default function AssistantLauncher() {
   const pathname = usePathname();
   const locale = useLocale();
-  if (/^\/(start|dashboard|admin|messages|orders|c)(\/|$)/.test(pathname)) return null;
+  if (pathname === "/" || /^\/(start|dashboard|admin|messages|orders|c)(\/|$)/.test(pathname)) return null;
   return (
     <Link
       href="/start"
