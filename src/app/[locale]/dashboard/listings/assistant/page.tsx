@@ -20,16 +20,26 @@ export default async function ListingAssistantPage({
     return;
   }
 
-  const categories = (await getCategories())
+  const [cats, { data: profile }] = await Promise.all([
+    getCategories(),
+    supabase.from("profiles").select("name, avatar_url").eq("id", user.id).maybeSingle(),
+  ]);
+  const categories = cats
     .filter((c) => !c.parent_id)
-    .map((c) => ({ slug: c.slug, name: loc === "ar" && c.name_ar ? c.name_ar : c.name }));
+    .map((c) => ({ id: c.id, slug: c.slug, name: loc === "ar" && c.name_ar ? c.name_ar : c.name }));
 
   return (
     <main className="relative overflow-hidden bg-paper px-5 py-12 sm:px-8 sm:py-16">
       <div aria-hidden className="pointer-events-none absolute -start-40 top-0 h-96 w-96 rounded-full bg-cyan opacity-20 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute -end-40 bottom-0 h-96 w-96 rounded-full bg-red opacity-15 blur-3xl" />
       <div className="relative mx-auto max-w-2xl">
-        <ListingAssistant locale={loc} userId={user.id} categories={categories} />
+        <ListingAssistant
+          locale={loc}
+          userId={user.id}
+          knownName={profile?.name ?? ""}
+          knownAvatar={profile?.avatar_url ?? ""}
+          categories={categories}
+        />
         <p className="mt-5 text-center text-sm text-neutral-600">
           <Link href="/dashboard/listings/new" className="font-semibold text-cyan-deep hover:underline">
             {loc === "ar" ? "أفضّل تعبئة النموذج بنفسي" : "I'd rather fill in the form myself"}
