@@ -10,7 +10,7 @@ import HeroVideo from "@/components/HeroVideo";
 import HeroSearch from "@/components/HeroSearch";
 import { GhorSafiStrip } from "@/components/GhorSafiGallery";
 import { CategoryIcon, categoryOrder, categoryAccent } from "@/components/CategoryIcon";
-import { lookFor, pexels } from "@/lib/photos";
+import { lookFor, photo, photoFocus } from "@/lib/photos";
 import type { ProfileCategory } from "@/lib/types";
 import { getListings } from "@/lib/marketplace";
 import { ListingCard } from "@/components/ListingCard";
@@ -128,7 +128,8 @@ export default async function Home({
                   <div className="mt-4 aspect-[4/3] overflow-hidden rounded-xl bg-white/10">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={pexels(look.photo, 600)}
+                      src={photo(look.photo)}
+                      style={{ objectPosition: photoFocus(look.photo) }}
                       alt=""
                       loading="lazy"
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

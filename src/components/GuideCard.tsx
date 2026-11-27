@@ -1,6 +1,6 @@
 import { Link } from "@/i18n/navigation";
 import { CategoryIcon } from "@/components/CategoryIcon";
-import { guidePhotoByCategory, lookFor, pexels } from "@/lib/photos";
+import { guidePhotoByCategory, lookFor, photo, photoFocus } from "@/lib/photos";
 import type { Guide } from "@/lib/guides";
 import type { Locale } from "@/lib/data";
 
@@ -21,7 +21,8 @@ export function GuideCard({
       <div className="relative h-44 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={pexels(guidePhotoByCategory[guide.category] ?? lookFor(guide.category).photo, 700)}
+          src={photo(guidePhotoByCategory[guide.category] ?? lookFor(guide.category).photo)}
+          style={{ objectPosition: photoFocus(guidePhotoByCategory[guide.category] ?? lookFor(guide.category).photo) }}
           alt=""
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
