@@ -1,5 +1,5 @@
 import { getTranslations, getLocale } from "next-intl/server";
-import { lookFor, marketplaceHeroPhotos, photo, photoFocus } from "@/lib/photos";
+import { chipStockPhotos, lookFor, marketplaceHeroPhotos, pexels, photo, photoFocus } from "@/lib/photos";
 import { getCategories, getListings, type ListingFilters } from "@/lib/marketplace";
 import type { Category } from "@/lib/marketplace-types";
 import { ListingCard } from "@/components/ListingCard";
@@ -115,7 +115,12 @@ export default async function MarketplacePage({
                   }`}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={photo(look.photo, "sm")} alt="" style={{ objectPosition: photoFocus(look.photo) }} className="h-12 w-12 shrink-0 rounded-xl object-cover" />
+                  <img
+                    src={chipStockPhotos[c.slug] ? pexels(chipStockPhotos[c.slug], 200) : photo(look.photo, "sm")}
+                    alt=""
+                    style={chipStockPhotos[c.slug] ? undefined : { objectPosition: photoFocus(look.photo) }}
+                    className="h-12 w-12 shrink-0 rounded-xl object-cover"
+                  />
                   <span className="font-display text-sm font-bold leading-tight">{categoryName(c)}</span>
                 </Link>
               );
@@ -150,8 +155,7 @@ export default async function MarketplacePage({
             </div>
           )}
 
-          <div className="mt-6 flex items-center justify-between">
-            <p className="text-sm text-neutral-600">{t("serviceCount", { count: listings.length })}</p>
+          <div className="mt-6 flex items-center justify-end">
             <div className="flex gap-1">
               {sortOptions.map((opt) => {
                 const params = new URLSearchParams();

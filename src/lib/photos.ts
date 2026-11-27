@@ -75,3 +75,19 @@ export const marketplaceHeroPhotos: WorkPhoto[] = ["sketching", "whiteboard", "g
 
 /** The two doors on /start. */
 export const doorPhotos = { sell: "sketching", buy: "phones-hands" } as const satisfies Record<string, WorkPhoto>;
+
+/** Marketplace category chips keep their original colourful stock photos (Pexels, free licence). */
+export const chipStockPhotos: Record<string, number> = {
+  "graphics-design": 16313504,
+  "programming-tech": 12899156,
+  "digital-marketing": 33384205,
+  "writing-translation": 6893832,
+  "video-animation": 9040539,
+  "ai-services": 8386440,
+  "business-consulting": 8133809,
+  ecommerce: 7289727,
+};
+
+export function pexels(id: number, w = 800) {
+  return `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
+}
