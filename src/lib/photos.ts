@@ -9,31 +9,25 @@
 
 export type WorkPhoto =
   | "sketching"
-  | "client-chat"
-  | "phones"
-  | "teamwork"
-  | "huddle"
+  | "green-phone"
+  | "phones-hands"
+  | "lab-desk"
   | "computer-lab"
   | "whiteboard"
   | "ecommerce"
   | "screen-demo"
-  | "consulting"
-  | "classroom"
-  | "listening";
+  | "consulting";
 
 /** Where the eye should land when the photo is cropped (CSS object-position). */
 const focus: Partial<Record<WorkPhoto, string>> = {
   sketching: "60% 40%",
-  "client-chat": "70% 35%",
-  phones: "55% 40%",
-  teamwork: "45% 35%",
-  huddle: "45% 40%",
+  "green-phone": "50% 30%",
+  "phones-hands": "55% 65%",
+  "lab-desk": "50% 50%",
   whiteboard: "70% 40%",
   ecommerce: "65% 40%",
-  "screen-demo": "50% 40%",
+  "screen-demo": "45% 40%",
   consulting: "40% 35%",
-  classroom: "60% 50%",
-  listening: "40% 70%",
 };
 
 export function photo(name: WorkPhoto, size: "lg" | "sm" = "lg") {
@@ -48,17 +42,17 @@ type Look = { photo: WorkPhoto; color: string };
 
 /** One strong colour + one photo per marketplace category (Fiverr-style cards). */
 export const categoryLook: Record<string, Look> = {
-  "graphics-design": { photo: "sketching", color: "#7C3AED" },
+  "graphics-design": { photo: "screen-demo", color: "#7C3AED" },
   "programming-tech": { photo: "computer-lab", color: "#0E7490" },
-  "digital-marketing": { photo: "phones", color: "#DB2777" },
-  "writing-translation": { photo: "client-chat", color: "#4338CA" },
-  "video-animation": { photo: "screen-demo", color: "#BE185D" },
+  "digital-marketing": { photo: "phones-hands", color: "#DB2777" },
+  "writing-translation": { photo: "sketching", color: "#4338CA" },
+  "video-animation": { photo: "green-phone", color: "#BE185D" },
   "ai-services": { photo: "whiteboard", color: "#0369A1" },
   "business-consulting": { photo: "consulting", color: "#1E293B" },
-  ecommerce: { photo: "huddle", color: "#4D7C0F" },
+  ecommerce: { photo: "lab-desk", color: "#4D7C0F" },
 };
 
-const fallback: Look = { photo: "teamwork", color: "#0D1220" };
+const fallback: Look = { photo: "sketching", color: "#0D1220" };
 
 export function lookFor(category: string | null | undefined): Look {
   return (category && categoryLook[category]) || fallback;
@@ -66,18 +60,18 @@ export function lookFor(category: string | null | undefined): Look {
 
 /** A second photo per category, used on guide cards so they don't repeat the category tiles. */
 export const guidePhotoByCategory: Record<string, WorkPhoto> = {
-  "graphics-design": "teamwork",
-  "programming-tech": "classroom",
+  "graphics-design": "green-phone",
+  "programming-tech": "lab-desk",
   "digital-marketing": "ecommerce",
-  "writing-translation": "sketching",
-  "video-animation": "listening",
+  "writing-translation": "screen-demo",
+  "video-animation": "phones-hands",
   "ai-services": "computer-lab",
-  "business-consulting": "client-chat",
-  ecommerce: "phones",
+  "business-consulting": "whiteboard",
+  ecommerce: "phones-hands",
 };
 
-/** Marketplace hero collage: people at work. */
-export const marketplaceHeroPhotos: WorkPhoto[] = ["sketching", "client-chat", "phones", "teamwork"];
+/** Marketplace hero collage: four different people, all mid-task. */
+export const marketplaceHeroPhotos: WorkPhoto[] = ["sketching", "whiteboard", "green-phone", "screen-demo"];
 
 /** The two doors on /start. */
-export const doorPhotos = { sell: "sketching", buy: "client-chat" } as const satisfies Record<string, WorkPhoto>;
+export const doorPhotos = { sell: "sketching", buy: "phones-hands" } as const satisfies Record<string, WorkPhoto>;
