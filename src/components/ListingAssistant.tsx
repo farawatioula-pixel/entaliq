@@ -144,6 +144,8 @@ export default function ListingAssistant({
     setSaving(true);
     const supabase = createClient();
     const validCategory = categories.some((c) => c.slug === draft.profile.category) ? draft.profile.category : undefined;
+    // Create the profile row first if this (older) account doesn't have one yet.
+    await supabase.from("profiles").upsert({ id: userId }, { onConflict: "id", ignoreDuplicates: true });
     await supabase
       .from("profiles")
       .update({
