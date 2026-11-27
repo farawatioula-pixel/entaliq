@@ -215,9 +215,9 @@ export default async function Home({
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
             {stats.map((stat) => (
-              <div key={stat.value} className="flex items-baseline gap-3">
+              <div key={stat.label.en} className="flex items-baseline gap-3">
                 <p className="font-display text-3xl font-bold text-red-dark">
-                  {stat.value}
+                  {typeof stat.value === "string" ? stat.value : stat.value[locale]}
                 </p>
                 <p className="text-sm leading-snug text-neutral-600">{stat.label[locale]}</p>
               </div>

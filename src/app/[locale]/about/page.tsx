@@ -44,8 +44,8 @@ export default async function AboutPage({
       <section className="mx-auto max-w-7xl px-5 py-16 sm:py-24 sm:px-8">
         <div className="grid grid-cols-1 gap-px overflow-hidden border border-line bg-line sm:grid-cols-3">
           {stats.map((stat) => (
-            <div key={stat.value} className="bg-surface px-8 py-10">
-              <p className="font-display text-6xl font-bold text-red-dark">{stat.value}</p>
+            <div key={stat.label.en} className="bg-surface px-8 py-10">
+              <p className="font-display text-6xl font-bold text-red-dark">{typeof stat.value === "string" ? stat.value : stat.value[loc]}</p>
               <p className="mt-4 text-[15px] leading-relaxed text-neutral-600">
                 {stat.label[loc]}
               </p>

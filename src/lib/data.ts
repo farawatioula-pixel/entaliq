@@ -193,7 +193,7 @@ export const partners: { name: string; logo?: string; wide?: boolean; role: Loca
   },
 ];
 
-export const stats: { value: string; label: LocalizedText }[] = [
+export const stats: { value: string | LocalizedText; label: LocalizedText }[] = [
   {
     value: "4",
     label: {
@@ -209,10 +209,10 @@ export const stats: { value: string; label: LocalizedText }[] = [
     },
   },
   {
-    value: "100+",
+    value: { en: "Hundreds", ar: "مئات" },
     label: {
-      en: "Participants trained per cohort",
-      ar: "مشارك في كل دفعة",
+      en: "of trainees across our cohorts",
+      ar: "المتدربين والمتدربات عبر دفعاتنا",
     },
   },
 ];
