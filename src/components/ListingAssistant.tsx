@@ -55,6 +55,9 @@ const T = {
   continue: { en: "Save to my profile and continue", ar: "احفظ في ملفي وتابع" },
   restart: { en: "Start over", ar: "ابدأ من جديد" },
   keepTalking: { en: "Change something", ar: "أريد تعديل شيء" },
+  all: { en: "All of the above", ar: "كل ما سبق" },
+  done: { en: "Done", ar: "تم" },
+  pickHint: { en: "Tap all that apply", ar: "اختر كل ما ينطبق" },
   notConfigured: {
     en: "The assistant isn't switched on yet. You can still fill in the form yourself.",
     ar: "المساعد غير مفعّل بعد. يمكنك تعبئة النموذج بنفسك.",
@@ -83,16 +86,22 @@ export default function ListingAssistant({
   const [error, setError] = useState<string | null>(null);
   const [draft, setDraft] = useState<AssistantDraft | null>(null);
   const [saving, setSaving] = useState(false);
-  const endRef = useRef<HTMLDivElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [multiple, setMultiple] = useState(false);
+  const [picked, setPicked] = useState<string[]>([]);
   const rtl = locale === "ar";
 
+  // Scroll only inside the chat box, never the whole page.
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    const box = boxRef.current;
+    if (box) box.scrollTo({ top: box.scrollHeight, behavior: "smooth" });
   }, [turns, busy, draft]);
 
   async function send(next: Turn[]) {
     setTurns(next);
     setOptions([]);
+    setPicked([]);
+    setMultiple(false);
     setInput("");
     setBusy(true);
     setError(null);
@@ -114,6 +123,7 @@ export default function ListingAssistant({
       } else {
         setTurns([...next, { role: "assistant", text: data.question }]);
         setOptions(data.options ?? []);
+        setMultiple(Boolean(data.multiple));
         setStep(data.step ?? 1);
       }
     } catch {
@@ -179,7 +189,7 @@ export default function ListingAssistant({
         </ol>
       </div>
 
-      <div className="max-h-[60vh] min-h-[320px] space-y-4 overflow-y-auto bg-paper px-5 py-6 sm:px-8">
+      <div ref={boxRef} className="max-h-[60vh] min-h-[320px] space-y-4 overflow-y-auto overscroll-contain bg-paper px-5 py-6 sm:px-8">
         {!started && (
           <div className="py-6 text-center">
             <p className="mx-auto max-w-md text-[15px] leading-relaxed text-neutral-700">{T.intro[locale]}</p>
@@ -267,12 +277,11 @@ export default function ListingAssistant({
             </a>
           </div>
         )}
-        <div ref={endRef} />
       </div>
 
       {started && !draft && (
         <div className="border-t border-line bg-surface px-5 py-4 sm:px-8">
-          {options.length > 0 && !busy && (
+          {options.length > 0 && !busy && !multiple && (
             <div className="mb-3 flex flex-wrap gap-2">
               {options.map((o) => (
                 <button
@@ -283,6 +292,50 @@ export default function ListingAssistant({
                   {o}
                 </button>
               ))}
+            </div>
+          )}
+          {options.length > 0 && !busy && multiple && (
+            <div className="mb-3">
+              <p className="mb-2 text-xs font-semibold text-muted">{T.pickHint[locale]}</p>
+              <div className="flex flex-wrap gap-2">
+                {options.map((o) => {
+                  const on = picked.includes(o);
+                  return (
+                    <button
+                      key={o}
+                      aria-pressed={on}
+                      onClick={() => setPicked((p) => (on ? p.filter((x) => x !== o) : [...p, o]))}
+                      className={`rounded-full border-2 px-4 py-1.5 text-sm font-semibold transition-colors ${
+                        on ? "border-cyan bg-cyan text-ink" : "border-cyan bg-cyan/5 text-cyan-deep hover:bg-cyan/20"
+                      }`}
+                    >
+                      {on ? "✓ " : ""}
+                      {o}
+                    </button>
+                  );
+                })}
+                <button
+                  aria-pressed={picked.length === options.length}
+                  onClick={() => setPicked(picked.length === options.length ? [] : [...options])}
+                  className={`rounded-full border-2 px-4 py-1.5 text-sm font-semibold transition-colors ${
+                    picked.length === options.length
+                      ? "border-violet bg-violet text-white"
+                      : "border-violet bg-violet/5 text-violet-deep hover:bg-violet/15"
+                  }`}
+                >
+                  {T.all[locale]}
+                </button>
+                <button
+                  disabled={picked.length === 0}
+                  onClick={() => {
+                    const sep = rtl ? "، " : ", ";
+                    answer(picked.length === options.length ? `${T.all[locale]}: ${picked.join(sep)}` : picked.join(sep));
+                  }}
+                  className="rounded-full bg-red px-5 py-1.5 text-sm font-semibold text-white disabled:opacity-40"
+                >
+                  {T.done[locale]} {picked.length > 0 ? `(${picked.length})` : ""}
+                </button>
+              </div>
             </div>
           )}
           <form
