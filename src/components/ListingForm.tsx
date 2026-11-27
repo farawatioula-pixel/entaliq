@@ -163,6 +163,9 @@ export default function ListingForm({
       updated_at: new Date().toISOString(),
     };
 
+    // Older accounts may have no profile row yet; listings need one (seller_id -> profiles.id).
+    await supabase.from("profiles").upsert({ id: sellerId }, { onConflict: "id", ignoreDuplicates: true });
+
     let listingId = listing?.id;
 
     if (listingId) {
