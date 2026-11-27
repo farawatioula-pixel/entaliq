@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { categoryMatches, expandSearch, relevance, searchOrFilter } from "@/lib/search";
 import type { Category, Listing, ListingPackage } from "@/lib/marketplace-types";
 
 export type ListingWithSeller = Listing & {
@@ -49,10 +50,16 @@ export async function getListings(filters: ListingFilters = {}) {
     if (subcat) query = query.eq("subcategory_id", subcat.id);
   }
 
+  let searchCtx: { terms: string[]; catIds: string[] } | null = null;
   if (filters.search) {
-    query = query.or(
-      `title.ilike.%${filters.search}%,description.ilike.%${filters.search}%`
-    );
+    const terms = expandSearch(filters.search);
+    if (terms.length) {
+      // Also return listings from categories whose name matches (e.g. "graphic design").
+      const { data: cats } = await supabase.from("categories").select("id, name, name_ar, slug");
+      const catIds = (cats ?? []).filter((c) => categoryMatches(c, terms)).map((c) => c.id);
+      searchCtx = { terms, catIds };
+      query = query.or(searchOrFilter(terms, catIds));
+    }
   }
 
   if (filters.minPrice !== undefined) query = query.gte("starting_price", filters.minPrice);
@@ -73,7 +80,23 @@ export async function getListings(filters: ListingFilters = {}) {
   }
 
   const { data } = await query;
-  return (data ?? []) as unknown as ListingWithSeller[];
+  const rows = (data ?? []) as unknown as ListingWithSeller[];
+  // With a search and no explicit sort, show the most relevant matches first.
+  if (searchCtx && (!filters.sort || filters.sort === "newest")) {
+    const { terms, catIds } = searchCtx;
+    const score = (l: ListingWithSeller) =>
+      relevance(
+        {
+          title: l.title,
+          description: l.description,
+          tags: l.tags,
+          inCategory: catIds.includes(l.category_id ?? "") || catIds.includes(l.subcategory_id ?? ""),
+        },
+        terms
+      );
+    return rows.map((l) => ({ l, s: score(l) })).sort((a, b) => b.s - a.s).map((x) => x.l);
+  }
+  return rows;
 }
 
 export async function getListingById(id: string) {
