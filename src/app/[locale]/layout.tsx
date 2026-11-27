@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AssistantLauncher from "@/components/AssistantLauncher";
 import { Space_Grotesk, Tajawal, Inter } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -119,6 +120,7 @@ export default async function LocaleLayout({
         />
         <NextIntlClientProvider>
           <ServiceWorkerRegister />
+          <AssistantLauncher />
           <SourceCapture />
           <Header />
           <main>{children}</main>

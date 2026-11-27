@@ -74,6 +74,28 @@ export default async function Home({
       </section>
 
       {/* Summit closing ceremony registration */}
+      {/* Two doors: sell (assistant) or buy (marketplace) */}
+      <section className="border-b border-line bg-surface px-5 py-8 sm:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-stretch gap-4 sm:flex-row sm:items-center">
+          <p className="font-display text-xl font-bold text-fg sm:flex-1 sm:text-2xl">
+            {locale === "ar" ? "ما الذي جاء بك إلى منطلق؟" : "What brings you to Mountaliq?"}
+          </p>
+          <Link
+            href="/start?door=sell"
+            className="flex items-center justify-center gap-2 rounded-full bg-violet px-6 py-3.5 text-[15px] font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5"
+          >
+            <span className="text-volt">✦</span>
+            {locale === "ar" ? "أريد أن أبيع مهاراتي" : "I want to sell my skills"}
+          </Link>
+          <Link
+            href="/marketplace"
+            className="flex items-center justify-center rounded-full bg-ink px-6 py-3.5 text-[15px] font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5"
+          >
+            {locale === "ar" ? "أحتاج خدمة" : "I need a service"}
+          </Link>
+        </div>
+      </section>
+
       <SummitBanner />
 
       {/* Ghor Al-Safi photos */}

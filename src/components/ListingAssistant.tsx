@@ -32,7 +32,10 @@ export type AssistantDraft = {
 
 export const ASSISTANT_DRAFT_KEY = "mountaliq.assistantDraft";
 
-type Phase = "chat" | "review" | "photos" | "done";
+type Phase = "chat" | "signup" | "review" | "photos" | "done";
+
+const SAVE_KEY = "mountaliq.assistant.v1";
+const RESUME_PATH = "/dashboard/listings/assistant";
 
 const T = {
   title: { en: "Your Mountaliq assistant", ar: "مساعد منطلق" },
@@ -95,7 +98,26 @@ const T = {
   all: { en: "All of the above", ar: "كل ما سبق" },
   done: { en: "Done", ar: "تم" },
   pickHint: { en: "Tap all that apply", ar: "اختر كل ما ينطبق" },
+  gateTitle: { en: "Great start! Create your free account to continue", ar: "بداية رائعة! أنشئ حسابك المجاني لنكمل" },
+  gateBody: {
+    en: "Your answers are saved. Once you're in, we'll pick up exactly where we left off.",
+    ar: "إجاباتك محفوظة. بعد تسجيلك سنكمل من حيث توقفنا تماماً.",
+  },
+  fullName: { en: "Full name", ar: "الاسم الكامل" },
+  email: { en: "Email", ar: "البريد الإلكتروني" },
+  password: { en: "Password (at least 6 characters)", ar: "كلمة المرور (٦ أحرف على الأقل)" },
+  createAccount: { en: "Create my account", ar: "أنشئ حسابي" },
+  creating: { en: "Creating…", ar: "جارٍ الإنشاء…" },
+  haveAccount: { en: "Already have an account? Log in", ar: "لديك حساب؟ سجّل الدخول" },
+  orWith: { en: "or continue with", ar: "أو تابع باستخدام" },
+  checkEmail: { en: "Check your email 📬", ar: "تفقّد بريدك الإلكتروني 📬" },
+  checkEmailBody: {
+    en: "We sent a confirmation link to {email}. Click it, log in, and the assistant will continue from where you stopped.",
+    ar: "أرسلنا رابط تأكيد إلى {email}. اضغط عليه، سجّل الدخول، وسيكمل المساعد من حيث توقفت.",
+  },
 };
+
+type Saved = { phase: Phase; turns: Turn[]; step: number; draft: AssistantDraft | null };
 
 export default function ListingAssistant({
   locale,
@@ -103,12 +125,14 @@ export default function ListingAssistant({
   knownName,
   knownAvatar,
   categories,
+  oauthProviders = [],
 }: {
   locale: Loc;
-  userId: string;
+  userId: string | null;
   knownName: string;
   knownAvatar: string;
   categories: { id: string; slug: string; name: string }[];
+  oauthProviders?: string[];
 }) {
   const rtl = locale === "ar";
   const [phase, setPhase] = useState<Phase>("chat");
@@ -126,6 +150,84 @@ export default function ListingAssistant({
   const [listingId, setListingId] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
+  const restored = useRef(false);
+  const [suName, setSuName] = useState("");
+  const [suEmail, setSuEmail] = useState("");
+  const [suPassword, setSuPassword] = useState("");
+  const [sentTo, setSentTo] = useState<string | null>(null);
+
+  // Restore a saved conversation (e.g. after signing up), and resume it.
+  useEffect(() => {
+    if (restored.current) return;
+    restored.current = true;
+    let saved: Saved | null = null;
+    try {
+      saved = JSON.parse(localStorage.getItem(SAVE_KEY) || "null");
+    } catch {
+      saved = null;
+    }
+    if (!saved || !saved.turns?.length || saved.phase === "done") return;
+    // Restoring from browser storage has to happen after mount (not during SSR).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setTurns(saved.turns);
+    setStep(saved.step || 1);
+    if (saved.draft) setDraft(saved.draft);
+    if (saved.phase === "signup" && userId) {
+      // Signed in now: continue the interview.
+      setPhase("chat");
+      void send(saved.turns);
+    } else if (saved.phase === "photos" || saved.phase === "review") {
+      setPhase(userId ? saved.phase : "review");
+    } else {
+      setPhase(saved.phase);
+      if (saved.phase === "chat" && saved.turns[saved.turns.length - 1]?.role === "user") void send(saved.turns);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Keep the conversation in this browser until it's published.
+  useEffect(() => {
+    if (!restored.current) return;
+    try {
+      if (phase === "done" || turns.length === 0) localStorage.removeItem(SAVE_KEY);
+      else localStorage.setItem(SAVE_KEY, JSON.stringify({ phase, turns, step, draft } satisfies Saved));
+    } catch {
+      /* storage unavailable */
+    }
+  }, [phase, turns, step, draft]);
+
+  async function signUp(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    setError(null);
+    const supabase = createClient();
+    const { data, error: err } = await supabase.auth.signUp({
+      email: suEmail.trim(),
+      password: suPassword,
+      options: {
+        data: { name: suName.trim() },
+        emailRedirectTo: `${window.location.origin}/${locale}/login?next=${encodeURIComponent(RESUME_PATH)}`,
+      },
+    });
+    setBusy(false);
+    if (err) {
+      setError(err.message);
+      return;
+    }
+    if (data.session) {
+      window.location.href = `/${locale}${RESUME_PATH}`;
+    } else {
+      setSentTo(suEmail.trim());
+    }
+  }
+
+  async function oauth(provider: string) {
+    const supabase = createClient();
+    await supabase.auth.signInWithOAuth({
+      provider: provider as "google",
+      options: { redirectTo: `${window.location.origin}/api/auth/callback?next=${encodeURIComponent(`/${locale}${RESUME_PATH}`)}` },
+    });
+  }
 
   // Scroll only inside the chat box, never the whole page.
   useEffect(() => {
@@ -158,6 +260,13 @@ export default function ListingAssistant({
       }
       if (!res.ok) throw new Error(String(res.status));
       const data = await res.json();
+      if (data.kind === "signup") {
+        // The first answer is the trainee's name: reuse it in the sign-up form.
+        const firstAnswer = next.find((t) => t.role === "user")?.text ?? "";
+        if (firstAnswer && firstAnswer.length <= 60) setSuName((v) => v || firstAnswer);
+        setPhase("signup");
+        return;
+      }
       if (data.kind === "draft") {
         setDraft(data.draft as AssistantDraft);
         setPhase("review");
@@ -181,7 +290,7 @@ export default function ListingAssistant({
   }
 
   async function publish() {
-    if (!draft) return;
+    if (!draft || !userId) return;
     const pics = images.map((i) => i.trim()).filter(Boolean);
     if (pics.length === 0) {
       setError(T.needPhoto[locale]);
@@ -302,7 +411,7 @@ export default function ListingAssistant({
       </div>
 
       {/* PHOTOS */}
-      {phase === "photos" && draft && (
+      {phase === "photos" && draft && userId && (
         <div className="space-y-8 bg-paper px-5 py-7 sm:px-8">
           <h3 className="font-display text-xl font-bold text-fg">{T.photosTitle[locale]}</h3>
           <section>
@@ -374,7 +483,7 @@ export default function ListingAssistant({
       )}
 
       {/* CHAT + REVIEW */}
-      {(phase === "chat" || phase === "review") && (
+      {(phase === "chat" || phase === "review" || phase === "signup") && (
         <>
           <div
             ref={boxRef}
@@ -409,6 +518,83 @@ export default function ListingAssistant({
                 <div className="rounded-2xl border border-line bg-surface px-4 py-3 text-sm text-neutral-500">
                   {T.thinking[locale]}
                 </div>
+              </div>
+            )}
+
+            {phase === "signup" && (
+              <div className="rounded-2xl border-2 border-cyan bg-surface p-5">
+                {sentTo ? (
+                  <>
+                    <p className="font-display text-lg font-bold text-fg">{T.checkEmail[locale]}</p>
+                    <p className="mt-2 text-sm text-neutral-700">{T.checkEmailBody[locale].replace("{email}", sentTo)}</p>
+                  </>
+                ) : (
+                  <>
+                    <p className="font-display text-lg font-bold text-fg">✦ {T.gateTitle[locale]}</p>
+                    <p className="mt-1 text-sm text-neutral-600">{T.gateBody[locale]}</p>
+                    <form onSubmit={signUp} className="mt-4 space-y-3">
+                      <input
+                        required
+                        value={suName}
+                        onChange={(e) => setSuName(e.target.value)}
+                        placeholder={T.fullName[locale]}
+                        autoComplete="name"
+                        className="w-full rounded-xl border border-line bg-paper px-4 py-3 text-[15px] text-fg focus:border-cyan-deep focus:outline-none"
+                      />
+                      <input
+                        required
+                        type="email"
+                        value={suEmail}
+                        onChange={(e) => setSuEmail(e.target.value)}
+                        placeholder={T.email[locale]}
+                        autoComplete="email"
+                        dir="ltr"
+                        className="w-full rounded-xl border border-line bg-paper px-4 py-3 text-[15px] text-fg focus:border-cyan-deep focus:outline-none"
+                      />
+                      <input
+                        required
+                        type="password"
+                        minLength={6}
+                        value={suPassword}
+                        onChange={(e) => setSuPassword(e.target.value)}
+                        placeholder={T.password[locale]}
+                        autoComplete="new-password"
+                        dir="ltr"
+                        className="w-full rounded-xl border border-line bg-paper px-4 py-3 text-[15px] text-fg focus:border-cyan-deep focus:outline-none"
+                      />
+                      {error && <p className="text-sm text-red-dark">{error}</p>}
+                      <button
+                        type="submit"
+                        disabled={busy}
+                        className="w-full rounded-full bg-red px-6 py-3 text-sm font-bold text-white disabled:opacity-60"
+                      >
+                        {busy ? T.creating[locale] : T.createAccount[locale]}
+                      </button>
+                    </form>
+                    {oauthProviders.length > 0 && (
+                      <div className="mt-4">
+                        <p className="text-center text-xs font-semibold text-muted">{T.orWith[locale]}</p>
+                        <div className="mt-2 flex gap-2">
+                          {oauthProviders.map((p) => (
+                            <button
+                              key={p}
+                              onClick={() => oauth(p)}
+                              className="flex-1 rounded-full border border-line bg-paper px-4 py-2.5 text-sm font-semibold capitalize text-fg hover:border-fg"
+                            >
+                              {p === "linkedin_oidc" ? "LinkedIn" : p}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    <Link
+                      href={`/login?next=${encodeURIComponent(RESUME_PATH)}`}
+                      className="mt-4 block text-center text-sm font-semibold text-cyan-deep hover:underline"
+                    >
+                      {T.haveAccount[locale]}
+                    </Link>
+                  </>
+                )}
               </div>
             )}
 
@@ -453,7 +639,7 @@ export default function ListingAssistant({
                 <div className="mt-5 flex flex-wrap items-center gap-2">
                   <button
                     onClick={() => {
-                      setPhase("photos");
+                      setPhase(userId ? "photos" : "signup");
                       setError(null);
                     }}
                     className="rounded-full bg-red px-6 py-2.5 text-sm font-semibold text-white"
@@ -576,6 +762,12 @@ export default function ListingAssistant({
                   setStep(0);
                   setOptions([]);
                   setError(null);
+                  setDraft(null);
+                  try {
+                    localStorage.removeItem(SAVE_KEY);
+                  } catch {
+                    /* ignore */
+                  }
                 }}
                 className="mt-3 text-xs font-semibold text-muted hover:text-fg"
               >

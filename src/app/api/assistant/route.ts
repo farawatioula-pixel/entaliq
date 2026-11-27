@@ -10,6 +10,21 @@ import { createClient } from "@/lib/supabase/server";
 type ChatTurn = { role: "user" | "assistant"; text: string };
 
 const MAX_TURNS = 40;
+const GUEST_ANSWERS = 4;
+
+// Soft per-instance limit on anonymous requests per IP (best effort on serverless).
+const guestHits = new Map<string, { n: number; t: number }>();
+function guestLimited(req: Request) {
+  const ip = (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "unknown";
+  const now = Date.now();
+  const rec = guestHits.get(ip);
+  if (!rec || now - rec.t > 60 * 60 * 1000) {
+    guestHits.set(ip, { n: 1, t: now });
+    return false;
+  }
+  rec.n += 1;
+  return rec.n > 30;
+}
 
 const tools = [
   {
@@ -125,7 +140,6 @@ export async function POST(req: Request) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
   let body: { turns?: ChatTurn[]; locale?: string; categories?: { slug: string; name: string }[]; knownName?: string };
   try {
@@ -139,6 +153,15 @@ export async function POST(req: Request) {
     .slice(-MAX_TURNS)
     .map((t) => ({ role: t.role, content: t.text.slice(0, 4000) }));
   const locale = body.locale === "ar" ? "ar" : "en";
+
+  // Visitors without an account get a few questions, then are asked to sign up
+  // (keeps AI costs bounded). Their conversation is kept in the browser.
+  if (!user) {
+    const answers = turns.filter((t) => t.role === "user").length;
+    if (answers >= GUEST_ANSWERS || guestLimited(req)) {
+      return NextResponse.json({ kind: "signup" });
+    }
+  }
   const categories = (body.categories ?? []).slice(0, 20);
 
   // The conversation must start with the user.
