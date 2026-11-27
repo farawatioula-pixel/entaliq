@@ -22,7 +22,7 @@ const tools = [
         step: {
           type: "integer",
           enum: [1, 2, 3, 4],
-          description: "1 = about you, 2 = your service, 3 = packages and prices, 4 = final details",
+          description: "1 = about you (name, city, skills), 2 = your service, 3 = packages and prices, 4 = final details",
         },
         question: { type: "string", description: "The question, in the trainee's language. Friendly, max 2 sentences." },
         options: { type: "array", items: { type: "string" }, maxItems: 5 },
@@ -43,11 +43,13 @@ const tools = [
         profile: {
           type: "object",
           properties: {
+            name: { type: "string", description: "Full name exactly as the trainee gave it" },
+            location: { type: "string", description: "City or governorate, e.g. 'Amman, Jordan'" },
             headline: { type: "string", description: "Max 80 characters, e.g. 'Graphic designer for small businesses'" },
             bio: { type: "string", description: "3-4 sentences in first person" },
             category: { type: "string", description: "One of the category slugs provided" },
           },
-          required: ["headline", "bio", "category"],
+          required: ["name", "location", "headline", "bio", "category"],
         },
         listing: {
           type: "object",
@@ -93,7 +95,7 @@ const tools = [
   },
 ];
 
-function systemPrompt(locale: string, categories: { slug: string; name: string }[]) {
+function systemPrompt(locale: string, categories: { slug: string; name: string }[], knownName: string) {
   const lang = locale === "ar" ? "Arabic (clear Jordanian-friendly Modern Standard Arabic)" : "English";
   return `You are مساعد منطلق (the Mountaliq assistant) on mountaliq.com, a freelance marketplace for young people in Jordan trained by Mountaliq.
 Your job: help a trainee publish their profile and FIRST service listing by interviewing them, so they never face a long empty form.
@@ -102,12 +104,13 @@ Rules:
 - Write in ${lang}. If the trainee writes in another language, switch to theirs.
 - ALWAYS respond by calling a tool. Ask exactly ONE question per turn with ask_question. Keep it short, warm and encouraging. Offer 2-5 options they can tap whenever possible. When several options can be true at once, set multiple: true (do not add an "all of the above" option yourself; the app adds it).
 - Move through the steps in order:
-  1. About you: what they do, their experience level, any past work or tools they use.
+  1. About you, in this order: (a) their full name as it should appear on their profile${knownName ? ` (their account says "${knownName}": ask them to confirm it, with options "Yes, that's right" and "Change it")` : ""}; (b) their city or governorate (options: Amman, Irbid, Zarqa, Other); (c) what they do; (d) their experience level, past work or tools they use.
   2. Your service: the ONE service to sell first (help them narrow it down), who it is for, what the buyer receives.
   3. Packages and prices: suggest a basic/standard/premium structure with realistic Jordanian dinar prices for a beginner (basic is usually 5-25 JOD), delivery days and revisions; ask them to confirm or adjust.
   4. Final details: what they need from the buyer to start.
 - Aim for 6-9 questions in total. Do not ask for things you can sensibly write yourself (tags, FAQ, polished descriptions).
 - Never invent experience, clients or results they did not mention. If they are a beginner, write honestly and positively about their training with Mountaliq.
+- After submit_draft the app walks them through adding photos and publishing, so do not ask for photos yourself.
 - When you have enough, call submit_draft with a complete, polished profile and listing written in ${lang}.
 - Category slugs you may use: ${categories.map((c) => `${c.slug} (${c.name})`).join(", ")}.`;
 }
@@ -124,7 +127,7 @@ export async function POST(req: Request) {
   } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
-  let body: { turns?: ChatTurn[]; locale?: string; categories?: { slug: string; name: string }[] };
+  let body: { turns?: ChatTurn[]; locale?: string; categories?: { slug: string; name: string }[]; knownName?: string };
   try {
     body = await req.json();
   } catch {
@@ -154,7 +157,7 @@ export async function POST(req: Request) {
     body: JSON.stringify({
       model: process.env.ANTHROPIC_MODEL || "claude-sonnet-5-5",
       max_tokens: 4000,
-      system: systemPrompt(locale, categories),
+      system: systemPrompt(locale, categories, String(body.knownName ?? "").slice(0, 80)),
       tools,
       tool_choice: { type: "auto" },
       messages,
