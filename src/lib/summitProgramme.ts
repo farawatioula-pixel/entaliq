@@ -32,6 +32,14 @@ export const speakers: Speaker[] = [
     role: "moderator",
   },
   {
+    id: "ayman-omoush",
+    photo: "/speakers/ayman-omoush.jpg",
+    name: { en: "Eng. Ayman Omoush", ar: "المهندس أيمن العموش" },
+    title: { en: "Managing Director, Jordan Bromine Company", ar: "المدير الإداري، شركة برومين الأردن" },
+    role: "moderator",
+    roleLabel: { en: "Address by Jordan Bromine", ar: "كلمة شركة برومين الأردن" },
+  },
+  {
     id: "odeh-haddadin",
     name: { en: "Mr. Odeh Haddadin", ar: "الأستاذ عودة حدادين" },
     title: {
@@ -148,7 +156,7 @@ export const agenda: AgendaItem[] = [
   {
     time: { en: "10:35 – 10:50", ar: "١٠:٣٥ – ١٠:٥٠" },
     title: { en: "Address by Jordan Bromine", ar: "كلمة شركة برومين الأردن" },
-    who: { en: "Mr. Ayman Omoush, Managing Director, Jordan Bromine Company", ar: "الأستاذ أيمن العموش، المدير الإداري، شركة برومين الأردن" },
+    who: { en: "Eng. Ayman Omoush, Managing Director, Jordan Bromine Company", ar: "المهندس أيمن العموش، المدير الإداري، شركة برومين الأردن" },
   },
   {
     time: { en: "10:50 – 11:30", ar: "١٠:٥٠ – ١١:٣٠" },
