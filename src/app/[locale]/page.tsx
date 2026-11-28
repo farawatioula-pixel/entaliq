@@ -10,7 +10,7 @@ import HeroVideo from "@/components/HeroVideo";
 import HeroSearch from "@/components/HeroSearch";
 import { GhorSafiStrip } from "@/components/GhorSafiGallery";
 import { CategoryIcon, categoryOrder, categoryAccent } from "@/components/CategoryIcon";
-import { lookFor, photo, photoFocus } from "@/lib/photos";
+import { chipStockPhotos, lookFor, pexels, photo, photoFocus } from "@/lib/photos";
 import type { ProfileCategory } from "@/lib/types";
 import { getListings } from "@/lib/marketplace";
 import { ListingCard } from "@/components/ListingCard";
@@ -119,17 +119,22 @@ export default async function Home({
                 <Link
                   key={category}
                   href={`/marketplace?category=${category}`}
-                  style={{ backgroundColor: look.color }}
-                  className="group flex flex-col rounded-2xl p-3 pt-5 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-4 sm:pt-6"
+                  style={{ borderTopColor: look.color }}
+                  className="group flex flex-col rounded-2xl border border-t-4 border-line bg-white p-3 pt-4 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-4 sm:pt-5"
                 >
-                  <span className="px-2 font-display text-[17px] font-bold leading-snug text-white sm:text-xl">
+                  <span className="flex items-center gap-2 px-1 font-display text-[17px] font-bold leading-snug text-fg sm:text-xl">
+                    <span
+                      aria-hidden
+                      className="h-2.5 w-2.5 shrink-0 rounded-full"
+                      style={{ backgroundColor: look.color }}
+                    />
                     {tCat(category)}
                   </span>
-                  <div className="mt-4 aspect-[4/3] overflow-hidden rounded-xl bg-white/10">
+                  <div className="mt-4 aspect-[4/3] overflow-hidden rounded-xl bg-neutral-100">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={photo(look.photo)}
-                      style={{ objectPosition: photoFocus(look.photo) }}
+                      src={chipStockPhotos[category] ? pexels(chipStockPhotos[category], 800) : photo(look.photo)}
+                      style={chipStockPhotos[category] ? undefined : { objectPosition: photoFocus(look.photo) }}
                       alt=""
                       loading="lazy"
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
